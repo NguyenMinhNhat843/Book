@@ -47,14 +47,14 @@ public class Panel_anylist extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(258, 258, 258)
                 .addComponent(jLabel2)
-                .addContainerGap(529, Short.MAX_VALUE))
+                .addContainerGap(556, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(jLabel2)
-                .addContainerGap(379, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống kê doanh thu", jPanel1);
@@ -68,14 +68,14 @@ public class Panel_anylist extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(331, 331, 331)
                 .addComponent(jLabel3)
-                .addContainerGap(416, Short.MAX_VALUE))
+                .addContainerGap(443, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(168, 168, 168)
                 .addComponent(jLabel3)
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống kê sản phẩm bán chạy", jPanel2);
@@ -89,14 +89,14 @@ public class Panel_anylist extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(321, 321, 321)
                 .addComponent(jLabel4)
-                .addContainerGap(442, Short.MAX_VALUE))
+                .addContainerGap(469, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(185, 185, 185)
                 .addComponent(jLabel4)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống kê nhân viên", jPanel3);
@@ -110,14 +110,14 @@ public class Panel_anylist extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(380, 380, 380)
                 .addComponent(jLabel5)
-                .addContainerGap(399, Short.MAX_VALUE))
+                .addContainerGap(426, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(179, 179, 179)
                 .addComponent(jLabel5)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống kê theo ca làm", jPanel4);

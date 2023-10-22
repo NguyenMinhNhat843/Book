@@ -7,7 +7,9 @@ import java.awt.Graphics;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -102,8 +104,10 @@ public class Panel_Login extends javax.swing.JPanel {
     private void btn_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_loginMouseClicked
         // TODO add your handling code here:
         if(txt_username.getText().equals("admin") && txt_password.getText().equals("admin")) {
+            JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(Panel_Login.this);
             new GUI_home().setVisible(true);
-            this.setVisible(false);
+            frame.setVisible(false);
+//            this.setVisible(false);
         } else {
            JOptionPane.showMessageDialog(null, "Username or password incorrect!!!");
         }

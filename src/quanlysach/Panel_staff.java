@@ -26,30 +26,54 @@ public class Panel_staff extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnl_ThongTinNhanVien = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        pnl_BangThongTin = new javax.swing.JPanel();
 
-        jLabel1.setText("Panel staff");
+        setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(148, 148, 148)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+        pnl_ThongTinNhanVien.setPreferredSize(new java.awt.Dimension(500, 200));
+        pnl_ThongTinNhanVien.setRequestFocusEnabled(false);
+        pnl_ThongTinNhanVien.setLayout(new javax.swing.BoxLayout(pnl_ThongTinNhanVien, javax.swing.BoxLayout.Y_AXIS));
+
+        jLabel1.setText("jLabel1");
+        pnl_ThongTinNhanVien.add(jLabel1);
+
+        jLabel2.setText("jLabel2");
+        pnl_ThongTinNhanVien.add(jLabel2);
+
+        jLabel3.setText("jLabel3");
+        pnl_ThongTinNhanVien.add(jLabel3);
+
+        jLabel4.setText("jLabel4");
+        pnl_ThongTinNhanVien.add(jLabel4);
+
+        add(pnl_ThongTinNhanVien, java.awt.BorderLayout.PAGE_START);
+
+        javax.swing.GroupLayout pnl_BangThongTinLayout = new javax.swing.GroupLayout(pnl_BangThongTin);
+        pnl_BangThongTin.setLayout(pnl_BangThongTinLayout);
+        pnl_BangThongTinLayout.setHorizontalGroup(
+            pnl_BangThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 805, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+        pnl_BangThongTinLayout.setVerticalGroup(
+            pnl_BangThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 202, Short.MAX_VALUE)
         );
+
+        add(pnl_BangThongTin, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel pnl_BangThongTin;
+    private javax.swing.JPanel pnl_ThongTinNhanVien;
     // End of variables declaration//GEN-END:variables
 }

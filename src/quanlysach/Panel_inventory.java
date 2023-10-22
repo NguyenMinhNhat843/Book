@@ -26,30 +26,157 @@ public class Panel_inventory extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        Tabbed_NhapHang = new javax.swing.JTabbedPane();
+        pnl_TaoPhieuNhap = new javax.swing.JPanel();
+        pnl_DanhSachSP = new javax.swing.JPanel();
+        scroll_DanhSachSP = new javax.swing.JScrollPane();
+        table_DanhSachSP = new javax.swing.JTable();
+        pnl_ThongTinNCC = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        pnl_TimKiem = new javax.swing.JPanel();
+        txt_TimKiem = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        pnl_HoaDonNhapHang = new javax.swing.JPanel();
+        pnl_Top = new javax.swing.JPanel();
+        pnl_HDNH_TimKiem = new javax.swing.JPanel();
+        pnl_DanhSachSHDNH = new javax.swing.JPanel();
+        pnl_Center = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setText("-----------------------------------------------------Tạo phiếu nhập");
-        jTabbedPane2.addTab("Tạo phiếu nhập hàng", jLabel1);
+        pnl_TaoPhieuNhap.setLayout(new java.awt.BorderLayout());
 
-        jLabel2.setText("----------------------------------------------------------------Hóa đơn nhập");
-        jTabbedPane2.addTab("Hóa đơn nhập", jLabel2);
+        pnl_DanhSachSP.setLayout(new java.awt.BorderLayout());
 
-        jLabel3.setText("---------------------------------------------------------------- NCC");
-        jTabbedPane2.addTab("Danh sách nhà cung cấp", jLabel3);
+        table_DanhSachSP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"SP001", "Sách vật lý", "200", "40.000", "8.000.000"},
+                {"SP003", "Sách tiếng anh", "100", "50.000", "5.000.000"},
+                {"SP016", "Giấy ghi chú", "60", "10.000", "600.000"}
+            },
+            new String [] {
+                "Mã SP", "Tên sản phẩm", "Số lượng nhập", "Đơn giá nhập", "Thành tiền"
+            }
+        ));
+        scroll_DanhSachSP.setViewportView(table_DanhSachSP);
 
-        add(jTabbedPane2, java.awt.BorderLayout.CENTER);
+        pnl_DanhSachSP.add(scroll_DanhSachSP, java.awt.BorderLayout.CENTER);
+
+        pnl_TaoPhieuNhap.add(pnl_DanhSachSP, java.awt.BorderLayout.CENTER);
+
+        pnl_ThongTinNCC.setBorder(javax.swing.BorderFactory.createTitledBorder("Nhà cung cấp"));
+        pnl_ThongTinNCC.setPreferredSize(new java.awt.Dimension(400, 10));
+        pnl_ThongTinNCC.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Tổng tiền:");
+        pnl_ThongTinNCC.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NCC 1", "NCC 2", "NCC 3", "NCC 4" }));
+        pnl_ThongTinNCC.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 260, 40));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Nhà cung cấp:");
+        pnl_ThongTinNCC.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        pnl_ThongTinNCC.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 260, 110));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Ghi chú:");
+        pnl_ThongTinNCC.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jTextField1.setText("13.600.000");
+        pnl_ThongTinNCC.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 260, 50));
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton2.setText("Tạo yêu cầu nhập hàng");
+        pnl_ThongTinNCC.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 340, 70));
+
+        jRadioButton1.setText("Đã nhận");
+        pnl_ThongTinNCC.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
+
+        jRadioButton2.setText("Chưa nhận");
+        pnl_ThongTinNCC.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+
+        pnl_TaoPhieuNhap.add(pnl_ThongTinNCC, java.awt.BorderLayout.EAST);
+
+        pnl_TimKiem.setPreferredSize(new java.awt.Dimension(200, 70));
+        pnl_TimKiem.setLayout(new java.awt.BorderLayout());
+
+        txt_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_TimKiem.setText("Nhập mã SP...");
+        pnl_TimKiem.add(txt_TimKiem, java.awt.BorderLayout.CENTER);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton1.setText("Tìm kiếm");
+        jButton1.setPreferredSize(new java.awt.Dimension(150, 27));
+        pnl_TimKiem.add(jButton1, java.awt.BorderLayout.EAST);
+
+        pnl_TaoPhieuNhap.add(pnl_TimKiem, java.awt.BorderLayout.NORTH);
+
+        Tabbed_NhapHang.addTab("Tạo phiếu nhập hàng", pnl_TaoPhieuNhap);
+
+        pnl_HoaDonNhapHang.setLayout(new java.awt.BorderLayout());
+
+        pnl_Top.setPreferredSize(new java.awt.Dimension(0, 200));
+        pnl_Top.setLayout(new java.awt.BorderLayout());
+
+        pnl_HDNH_TimKiem.setPreferredSize(new java.awt.Dimension(10, 70));
+        pnl_Top.add(pnl_HDNH_TimKiem, java.awt.BorderLayout.NORTH);
+        pnl_Top.add(pnl_DanhSachSHDNH, java.awt.BorderLayout.CENTER);
+
+        pnl_HoaDonNhapHang.add(pnl_Top, java.awt.BorderLayout.NORTH);
+        pnl_HoaDonNhapHang.add(pnl_Center, java.awt.BorderLayout.CENTER);
+
+        Tabbed_NhapHang.addTab("Hóa đơn nhập hàng", pnl_HoaDonNhapHang);
+        Tabbed_NhapHang.addTab("Danh sách NCC", jPanel3);
+
+        add(Tabbed_NhapHang, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane Tabbed_NhapHang;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel pnl_Center;
+    private javax.swing.JPanel pnl_DanhSachSHDNH;
+    private javax.swing.JPanel pnl_DanhSachSP;
+    private javax.swing.JPanel pnl_HDNH_TimKiem;
+    private javax.swing.JPanel pnl_HoaDonNhapHang;
+    private javax.swing.JPanel pnl_TaoPhieuNhap;
+    private javax.swing.JPanel pnl_ThongTinNCC;
+    private javax.swing.JPanel pnl_TimKiem;
+    private javax.swing.JPanel pnl_Top;
+    private javax.swing.JScrollPane scroll_DanhSachSP;
+    private javax.swing.JTable table_DanhSachSP;
+    private javax.swing.JTextField txt_TimKiem;
     // End of variables declaration//GEN-END:variables
 }
