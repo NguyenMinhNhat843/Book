@@ -26,224 +26,332 @@ public class Panel_cart extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnl_product = new javax.swing.JPanel();
-        scroll_table = new javax.swing.JScrollPane();
-        tabel_product = new javax.swing.JTable();
-        pnl_bill = new javax.swing.JPanel();
-        scroll_bill = new javax.swing.JScrollPane();
-        tabel_bill = new javax.swing.JTable();
-        pnl_thanhToan = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
+        pnl_thongTin = new javax.swing.JPanel();
+        pnl_thongTin_KH = new javax.swing.JPanel();
+        pnl_timKH = new javax.swing.JPanel();
+        txt_TimKH = new javax.swing.JTextField();
+        lb_TimKH = new javax.swing.JLabel();
+        pnl_TimKH_row1 = new javax.swing.JPanel();
+        lb_DiemTichLuy = new javax.swing.JLabel();
+        txt_DiemTichLuy = new javax.swing.JTextField();
+        lb_DiaChi = new javax.swing.JLabel();
+        lb_TenKH = new javax.swing.JLabel();
+        txt_Rank = new javax.swing.JTextField();
+        txt_Email = new javax.swing.JTextField();
+        lb_Rank = new javax.swing.JLabel();
+        txt_TenKH = new javax.swing.JTextField();
+        txt_DiaChi1 = new javax.swing.JTextField();
+        lb_Email1 = new javax.swing.JLabel();
+        pnl_ThongTin_HD = new javax.swing.JPanel();
+        txt_TongThuCa = new javax.swing.JTextField();
+        lb_MaHD = new javax.swing.JLabel();
+        txt_MaHD = new javax.swing.JTextField();
+        lb_Ca = new javax.swing.JLabel();
+        txt_Ca = new javax.swing.JTextField();
+        lb_TongThuCa2 = new javax.swing.JLabel();
+        pnl_center = new javax.swing.JPanel();
+        pnl_TimSP = new javax.swing.JPanel();
+        scroll_TimSP = new javax.swing.JScrollPane();
+        table_TimSP = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        pnl_DanhSachSP = new javax.swing.JPanel();
+        scroll_DanhSachSP = new javax.swing.JScrollPane();
+        table_DanhSachSP = new javax.swing.JTable();
+        pnl_thanhToan = new javax.swing.JPanel();
+        lb_TongThuCa1 = new javax.swing.JLabel();
+        lb_TongThuCa3 = new javax.swing.JLabel();
+        txt_DiaChi = new javax.swing.JTextField();
+        txt_DiaChi2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        pnl_search_product = new javax.swing.JPanel();
-        txt_search_MáP = new javax.swing.JTextField();
-        btn_search = new javax.swing.JButton();
+        lb_TongThuCa5 = new javax.swing.JLabel();
+        txt_DiaChi3 = new javax.swing.JTextField();
+        txt_DiaChi4 = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
 
-        pnl_product.setLayout(new java.awt.BorderLayout());
+        pnl_thongTin.setPreferredSize(new java.awt.Dimension(10, 170));
+        pnl_thongTin.setLayout(new java.awt.BorderLayout());
 
-        tabel_product.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"SP001", "Sách tiếng việt", "Sách", "25000", "0", "125", "500", "NCC001"}
-            },
-            new String [] {
-                "Mã SP", "Tên", "Loại", "Đơn giá", "Thuế VAT", "số lượng bày bán", "tồn kho", "được nhập từ"
-            }
-        ));
-        scroll_table.setViewportView(tabel_product);
+        pnl_thongTin_KH.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        pnl_thongTin_KH.setPreferredSize(new java.awt.Dimension(659, 300));
+        pnl_thongTin_KH.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnl_product.add(scroll_table, java.awt.BorderLayout.CENTER);
+        pnl_timKH.setBackground(new java.awt.Color(255, 0, 0));
+        pnl_timKH.setLayout(new java.awt.BorderLayout());
 
-        add(pnl_product, java.awt.BorderLayout.CENTER);
+        txt_TimKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_TimKH.setText("Nhập số điện thoại KH...");
+        pnl_timKH.add(txt_TimKH, java.awt.BorderLayout.CENTER);
 
-        pnl_bill.setPreferredSize(new java.awt.Dimension(550, 100));
-        pnl_bill.setLayout(new java.awt.BorderLayout());
+        lb_TimKH.setBackground(new java.awt.Color(255, 0, 0));
+        lb_TimKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_TimKH.setText("Khách Hàng");
+        lb_TimKH.setPreferredSize(new java.awt.Dimension(100, 16));
+        pnl_timKH.add(lb_TimKH, java.awt.BorderLayout.WEST);
 
-        tabel_bill.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"Sách tiếng việt", "25000", "5", "125000"}
-            },
-            new String [] {
-                "Tên SP", "Đơn giá(Có VAT)", "Số lượng", " Thành tiền"
-            }
-        ));
-        scroll_bill.setViewportView(tabel_bill);
+        pnl_thongTin_KH.add(pnl_timKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 7, 790, 50));
 
-        pnl_bill.add(scroll_bill, java.awt.BorderLayout.CENTER);
+        pnl_TimKH_row1.setPreferredSize(new java.awt.Dimension(20, 50));
+        pnl_TimKH_row1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnl_thanhToan.setPreferredSize(new java.awt.Dimension(100, 400));
-        pnl_thanhToan.setLayout(new javax.swing.BoxLayout(pnl_thanhToan, javax.swing.BoxLayout.Y_AXIS));
+        lb_DiemTichLuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_DiemTichLuy.setText("Điểm tích lũy:");
+        pnl_TimKH_row1.add(lb_DiemTichLuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(0, 0));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Tổng tiền: ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 400, 40));
-
-        pnl_thanhToan.add(jPanel1);
-
-        jPanel2.setPreferredSize(new java.awt.Dimension(0, 0));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("Số điện thoại:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Số điện thoại:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-        jPanel2.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 400, 40));
-
-        pnl_thanhToan.add(jPanel2);
-
-        jPanel3.setPreferredSize(new java.awt.Dimension(490, 0));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 140, 40));
-        jPanel3.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 230, 40));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Khách hàng:");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-        pnl_thanhToan.add(jPanel3);
-
-        jPanel4.setPreferredSize(new java.awt.Dimension(490, 0));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tiền mặt", "Chuyển khoản", "Quét QR" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        txt_DiemTichLuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_DiemTichLuy.setText("15.468");
+        txt_DiemTichLuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                txt_DiemTichLuyActionPerformed(evt);
             }
         });
-        jPanel4.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 400, 40));
+        pnl_TimKH_row1.add(txt_DiemTichLuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 10, 100, 40));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Thanh Toán:");
-        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        lb_DiaChi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_DiaChi.setText("Địa chỉ:");
+        pnl_TimKH_row1.add(lb_DiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, -1));
 
-        pnl_thanhToan.add(jPanel4);
+        lb_TenKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_TenKH.setText("Tên: ");
+        pnl_TimKH_row1.add(lb_TenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
-        jPanel5.setPreferredSize(new java.awt.Dimension(490, 0));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        txt_Rank.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_Rank.setText("Vàng");
+        txt_Rank.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_RankActionPerformed(evt);
+            }
+        });
+        pnl_TimKH_row1.add(txt_Rank, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 100, 40));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setText("Tiền nhận: ");
-        jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-        jPanel5.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 400, 40));
+        txt_Email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_Email.setText("abc@gmail.com");
+        pnl_TimKH_row1.add(txt_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 220, 40));
 
-        pnl_thanhToan.add(jPanel5);
+        lb_Rank.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_Rank.setText("Rank: ");
+        pnl_TimKH_row1.add(lb_Rank, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
 
-        jPanel6.setMinimumSize(new java.awt.Dimension(490, 0));
-        jPanel6.setPreferredSize(new java.awt.Dimension(490, 0));
-        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        txt_TenKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_TenKH.setText("Nguyễn Văn A");
+        pnl_TimKH_row1.add(txt_TenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 230, 40));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Tiền thừa:");
-        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-        jPanel6.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 400, 40));
+        txt_DiaChi1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_DiaChi1.setText("abc, quận Gò Vấp");
+        pnl_TimKH_row1.add(txt_DiaChi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 350, 40));
 
-        pnl_thanhToan.add(jPanel6);
+        lb_Email1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_Email1.setText("Email:");
+        pnl_TimKH_row1.add(lb_Email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
-        jPanel7.setPreferredSize(new java.awt.Dimension(130, 0));
-        jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnl_thongTin_KH.add(pnl_TimKH_row1, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 57, 790, 110));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("Tạo thẻ ");
-        jPanel7.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 120, 40));
+        pnl_thongTin.add(pnl_thongTin_KH, java.awt.BorderLayout.CENTER);
 
+        pnl_ThongTin_HD.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        pnl_ThongTin_HD.setPreferredSize(new java.awt.Dimension(500, 10));
+        pnl_ThongTin_HD.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txt_TongThuCa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_TongThuCa.setText("756.000");
+        txt_TongThuCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_TongThuCaActionPerformed(evt);
+            }
+        });
+        pnl_ThongTin_HD.add(txt_TongThuCa, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 160, 40));
+
+        lb_MaHD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_MaHD.setText("Mã HD:");
+        pnl_ThongTin_HD.add(lb_MaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        txt_MaHD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_MaHD.setText("HD006");
+        txt_MaHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_MaHDActionPerformed(evt);
+            }
+        });
+        pnl_ThongTin_HD.add(txt_MaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 370, 40));
+
+        lb_Ca.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_Ca.setText("Ca:");
+        pnl_ThongTin_HD.add(lb_Ca, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
+
+        txt_Ca.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_Ca.setText("1");
+        txt_Ca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_CaActionPerformed(evt);
+            }
+        });
+        pnl_ThongTin_HD.add(txt_Ca, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 120, 40));
+
+        lb_TongThuCa2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_TongThuCa2.setText("Tổng thu ca:");
+        pnl_ThongTin_HD.add(lb_TongThuCa2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        pnl_thongTin.add(pnl_ThongTin_HD, java.awt.BorderLayout.EAST);
+
+        add(pnl_thongTin, java.awt.BorderLayout.NORTH);
+
+        pnl_center.setPreferredSize(new java.awt.Dimension(456, 300));
+        pnl_center.setLayout(new java.awt.BorderLayout());
+
+        pnl_TimSP.setLayout(new java.awt.BorderLayout());
+
+        scroll_TimSP.setPreferredSize(new java.awt.Dimension(456, 70));
+
+        table_TimSP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"001", "Sách toán lớp 1", "Sách Giáo dục", "Quyển", "5", "37.000"}
+            },
+            new String [] {
+                "Mã SP", "Tên mặt hàng", "Loại ", "Đơn vị tính", "Số lượng", " Đơn giá (có thuế)"
+            }
+        ));
+        table_TimSP.setRowHeight(40);
+        scroll_TimSP.setViewportView(table_TimSP);
+
+        pnl_TimSP.add(scroll_TimSP, java.awt.BorderLayout.CENTER);
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jButton1.setText("Thêm");
+        jButton1.setPreferredSize(new java.awt.Dimension(150, 43));
+        pnl_TimSP.add(jButton1, java.awt.BorderLayout.EAST);
+
+        pnl_center.add(pnl_TimSP, java.awt.BorderLayout.NORTH);
+
+        pnl_DanhSachSP.setPreferredSize(new java.awt.Dimension(456, 300));
+        pnl_DanhSachSP.setLayout(new java.awt.BorderLayout());
+
+        scroll_DanhSachSP.setPreferredSize(new java.awt.Dimension(456, 300));
+
+        table_DanhSachSP.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"SP001", "Sách Toán", "Sách giáo dục", "Quyển", "5", "37.000", "185.000"},
+                {"SP016", "Truyện Conan", "Truyện", "Quyển", "1", "20.000", "20.000"},
+                {"SP056", "Bút bi thiên long", "Bút", "Cây", "10", "5.000", "50.000"}
+            },
+            new String [] {
+                "Mã SP", "Tên mặt hàng", "Loại", "Đơn vị tính", "Số lượng", "Đơn giá (có thuế)", "Thành tiền"
+            }
+        ));
+        scroll_DanhSachSP.setViewportView(table_DanhSachSP);
+
+        pnl_DanhSachSP.add(scroll_DanhSachSP, java.awt.BorderLayout.CENTER);
+
+        pnl_thanhToan.setPreferredSize(new java.awt.Dimension(10, 150));
+        pnl_thanhToan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lb_TongThuCa1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_TongThuCa1.setText("Tiền thối:");
+        pnl_thanhToan.add(lb_TongThuCa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 30, 70, 20));
+
+        lb_TongThuCa3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_TongThuCa3.setText("Sử dụng tích điểm:");
+        pnl_thanhToan.add(lb_TongThuCa3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 30));
+
+        txt_DiaChi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_DiaChi.setForeground(new java.awt.Color(255, 51, 51));
+        txt_DiaChi.setText("250.000");
+        pnl_thanhToan.add(txt_DiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 390, 60));
+
+        txt_DiaChi2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_DiaChi2.setText("5.000");
+        pnl_thanhToan.add(txt_DiaChi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 20, 230, 40));
+
+        jButton2.setBackground(new java.awt.Color(255, 51, 51));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setText("Thanh toán");
-        jPanel7.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 40));
+        pnl_thanhToan.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 170, 60));
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Xuất hóa đơn");
-        jPanel7.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 160, 40));
+        jButton3.setText("Tạo thẻ thành viên");
+        pnl_thanhToan.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, 660, 60));
 
-        pnl_thanhToan.add(jPanel7);
+        lb_TongThuCa5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_TongThuCa5.setText("Tiền nhận: ");
+        pnl_thanhToan.add(lb_TongThuCa5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 80, 20));
 
-        pnl_bill.add(pnl_thanhToan, java.awt.BorderLayout.PAGE_END);
+        txt_DiaChi3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_DiaChi3.setText("5.000");
+        pnl_thanhToan.add(txt_DiaChi3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 390, 40));
 
-        add(pnl_bill, java.awt.BorderLayout.LINE_END);
+        txt_DiaChi4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_DiaChi4.setText("5.000");
+        pnl_thanhToan.add(txt_DiaChi4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 230, 40));
 
-        pnl_search_product.setPreferredSize(new java.awt.Dimension(10, 50));
-        pnl_search_product.setLayout(new java.awt.BorderLayout());
+        pnl_DanhSachSP.add(pnl_thanhToan, java.awt.BorderLayout.PAGE_END);
 
-        txt_search_MáP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pnl_search_product.add(txt_search_MáP, java.awt.BorderLayout.CENTER);
+        pnl_center.add(pnl_DanhSachSP, java.awt.BorderLayout.CENTER);
 
-        btn_search.setText("TÌm kiếm");
-        btn_search.setPreferredSize(new java.awt.Dimension(150, 27));
-        pnl_search_product.add(btn_search, java.awt.BorderLayout.EAST);
-
-        add(pnl_search_product, java.awt.BorderLayout.PAGE_START);
+        add(pnl_center, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void txt_DiemTichLuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_DiemTichLuyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_txt_DiemTichLuyActionPerformed
+
+    private void txt_RankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_RankActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_RankActionPerformed
+
+    private void txt_TongThuCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TongThuCaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TongThuCaActionPerformed
+
+    private void txt_MaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_MaHDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_MaHDActionPerformed
+
+    private void txt_CaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_CaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_CaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_search;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JPanel pnl_bill;
-    private javax.swing.JPanel pnl_product;
-    private javax.swing.JPanel pnl_search_product;
+    private javax.swing.JLabel lb_Ca;
+    private javax.swing.JLabel lb_DiaChi;
+    private javax.swing.JLabel lb_DiemTichLuy;
+    private javax.swing.JLabel lb_Email1;
+    private javax.swing.JLabel lb_MaHD;
+    private javax.swing.JLabel lb_Rank;
+    private javax.swing.JLabel lb_TenKH;
+    private javax.swing.JLabel lb_TimKH;
+    private javax.swing.JLabel lb_TongThuCa1;
+    private javax.swing.JLabel lb_TongThuCa2;
+    private javax.swing.JLabel lb_TongThuCa3;
+    private javax.swing.JLabel lb_TongThuCa5;
+    private javax.swing.JPanel pnl_DanhSachSP;
+    private javax.swing.JPanel pnl_ThongTin_HD;
+    private javax.swing.JPanel pnl_TimKH_row1;
+    private javax.swing.JPanel pnl_TimSP;
+    private javax.swing.JPanel pnl_center;
     private javax.swing.JPanel pnl_thanhToan;
-    private javax.swing.JScrollPane scroll_bill;
-    private javax.swing.JScrollPane scroll_table;
-    private javax.swing.JTable tabel_bill;
-    private javax.swing.JTable tabel_product;
-    private javax.swing.JTextField txt_search_MáP;
+    private javax.swing.JPanel pnl_thongTin;
+    private javax.swing.JPanel pnl_thongTin_KH;
+    private javax.swing.JPanel pnl_timKH;
+    private javax.swing.JScrollPane scroll_DanhSachSP;
+    private javax.swing.JScrollPane scroll_TimSP;
+    private javax.swing.JTable table_DanhSachSP;
+    private javax.swing.JTable table_TimSP;
+    private javax.swing.JTextField txt_Ca;
+    private javax.swing.JTextField txt_DiaChi;
+    private javax.swing.JTextField txt_DiaChi1;
+    private javax.swing.JTextField txt_DiaChi2;
+    private javax.swing.JTextField txt_DiaChi3;
+    private javax.swing.JTextField txt_DiaChi4;
+    private javax.swing.JTextField txt_DiemTichLuy;
+    private javax.swing.JTextField txt_Email;
+    private javax.swing.JTextField txt_MaHD;
+    private javax.swing.JTextField txt_Rank;
+    private javax.swing.JTextField txt_TenKH;
+    private javax.swing.JTextField txt_TimKH;
+    private javax.swing.JTextField txt_TongThuCa;
     // End of variables declaration//GEN-END:variables
 }
