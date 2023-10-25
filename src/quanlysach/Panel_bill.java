@@ -26,18 +26,281 @@ public class Panel_bill extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        pnl_thongTin = new javax.swing.JPanel();
+        lbmaHD = new javax.swing.JLabel();
+        txtMaHD = new javax.swing.JTextField();
+        lbNgayTao = new javax.swing.JLabel();
+        txtNgayTao = new javax.swing.JTextField();
+        lbNhanVien = new javax.swing.JLabel();
+        txtNhanVien = new javax.swing.JTextField();
+        lbKhachHang = new javax.swing.JLabel();
+        txtKhachHang = new javax.swing.JTextField();
+        pnl_LocThongTin = new javax.swing.JPanel();
+        btn_TimKiem = new javax.swing.JButton();
+        txt_NhapMaHD = new javax.swing.JTextField();
+        pnl_LocTheoNhanVien = new javax.swing.JPanel();
+        lb_LocTheoNhanVien = new javax.swing.JLabel();
+        txt_LocTheoNhanVien = new javax.swing.JTextField();
+        pnl_LocTheoNgay = new javax.swing.JPanel();
+        lb_LocTheoNgay = new javax.swing.JLabel();
+        ch_LocTheoNgay = new java.awt.Choice();
+        pnl_LocTheoKhachHang = new javax.swing.JPanel();
+        lb_LocTheoKhachHang = new javax.swing.JLabel();
+        txt_LocTheoKhachHang = new javax.swing.JTextField();
+        pnl_table = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btn_XuatHoaDon = new javax.swing.JButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setMinimumSize(new java.awt.Dimension(1280, 362));
+        setPreferredSize(new java.awt.Dimension(476, 450));
+        setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
-        jLabel1.setText("Panel Bill");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 834, -1));
+        pnl_thongTin.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnl_thongTin.setPreferredSize(new java.awt.Dimension(100, 130));
+        pnl_thongTin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbmaHD.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lbmaHD.setText("Mã HD:");
+        lbmaHD.setMaximumSize(new java.awt.Dimension(20, 16));
+        lbmaHD.setMinimumSize(new java.awt.Dimension(20, 16));
+        lbmaHD.setPreferredSize(new java.awt.Dimension(20, 16));
+        lbmaHD.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        pnl_thongTin.add(lbmaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 110, 20));
+
+        txtMaHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMaHDActionPerformed(evt);
+            }
+        });
+        pnl_thongTin.add(txtMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 25, 620, 30));
+
+        lbNgayTao.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lbNgayTao.setText("Ngày Tạo:");
+        lbNgayTao.setMaximumSize(new java.awt.Dimension(20, 16));
+        lbNgayTao.setMinimumSize(new java.awt.Dimension(20, 16));
+        lbNgayTao.setPreferredSize(new java.awt.Dimension(20, 16));
+        pnl_thongTin.add(lbNgayTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 30, 110, 20));
+
+        txtNgayTao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNgayTaoActionPerformed(evt);
+            }
+        });
+        pnl_thongTin.add(txtNgayTao, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 25, 620, 30));
+
+        lbNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lbNhanVien.setText("Nhân Viên:");
+        pnl_thongTin.add(lbNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 110, 20));
+
+        txtNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNhanVienActionPerformed(evt);
+            }
+        });
+        pnl_thongTin.add(txtNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 75, 620, 30));
+
+        lbKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lbKhachHang.setText("Khách Hàng:");
+        pnl_thongTin.add(lbKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 80, 110, 20));
+
+        txtKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKhachHangActionPerformed(evt);
+            }
+        });
+        pnl_thongTin.add(txtKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 75, 620, 30));
+
+        add(pnl_thongTin, java.awt.BorderLayout.PAGE_START);
+
+        pnl_LocThongTin.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
+        pnl_LocThongTin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_TimKiem.setBackground(new java.awt.Color(255, 0, 51));
+        btn_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        btn_TimKiem.setForeground(new java.awt.Color(255, 255, 255));
+        btn_TimKiem.setText("Tìm kiếm");
+        btn_TimKiem.setActionCommand("");
+        btn_TimKiem.setMaximumSize(new java.awt.Dimension(80, 80));
+        btn_TimKiem.setMinimumSize(new java.awt.Dimension(80, 80));
+        btn_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_TimKiemActionPerformed(evt);
+            }
+        });
+        pnl_LocThongTin.add(btn_TimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 1700, 40));
+        btn_TimKiem.getAccessibleContext().setAccessibleName("Tìm Kiếm");
+
+        txt_NhapMaHD.setText("Nhập mã hóa đơn...");
+        txt_NhapMaHD.setToolTipText("");
+        txt_NhapMaHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_NhapMaHDActionPerformed(evt);
+            }
+        });
+        pnl_LocThongTin.add(txt_NhapMaHD, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1700, 30));
+
+        pnl_LocTheoNhanVien.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_LocTheoNhanVien.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
+        pnl_LocTheoNhanVien.setForeground(new java.awt.Color(204, 204, 204));
+        pnl_LocTheoNhanVien.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lb_LocTheoNhanVien.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lb_LocTheoNhanVien.setText("Lọc theo nhân viên");
+        pnl_LocTheoNhanVien.add(lb_LocTheoNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, 30));
+
+        txt_LocTheoNhanVien.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txt_LocTheoNhanVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_LocTheoNhanVienActionPerformed(evt);
+            }
+        });
+        pnl_LocTheoNhanVien.add(txt_LocTheoNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 230, 30));
+
+        pnl_LocThongTin.add(pnl_LocTheoNhanVien, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 120, 340, 170));
+
+        pnl_LocTheoNgay.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_LocTheoNgay.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
+        pnl_LocTheoNgay.setForeground(new java.awt.Color(204, 204, 204));
+        pnl_LocTheoNgay.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lb_LocTheoNgay.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lb_LocTheoNgay.setText("Lọc theo ngày");
+        pnl_LocTheoNgay.add(lb_LocTheoNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, 30));
+
+        ch_LocTheoNgay.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ch_LocTheoNgayItemStateChanged(evt);
+            }
+        });
+        pnl_LocTheoNgay.add(ch_LocTheoNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 250, 40));
+
+        pnl_LocThongTin.add(pnl_LocTheoNgay, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 340, 170));
+
+        pnl_LocTheoKhachHang.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_LocTheoKhachHang.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
+        pnl_LocTheoKhachHang.setForeground(new java.awt.Color(204, 204, 204));
+        pnl_LocTheoKhachHang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lb_LocTheoKhachHang.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lb_LocTheoKhachHang.setText("Lọc theo khách hàng");
+        pnl_LocTheoKhachHang.add(lb_LocTheoKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, 30));
+
+        txt_LocTheoKhachHang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txt_LocTheoKhachHang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_LocTheoKhachHangActionPerformed(evt);
+            }
+        });
+        pnl_LocTheoKhachHang.add(txt_LocTheoKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 230, 30));
+
+        pnl_LocThongTin.add(pnl_LocTheoKhachHang, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 340, 170));
+
+        add(pnl_LocThongTin, java.awt.BorderLayout.CENTER);
+
+        pnl_table.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Mã HD", "Nhân Viên", "Khách Hàng", "Ngày Tạo Hóa Đơn", "Tổng Tiền"
+            }
+        ));
+        jTable1.setPreferredSize(new java.awt.Dimension(1700, 80));
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setHeaderValue("Mã HD");
+            jTable1.getColumnModel().getColumn(1).setHeaderValue("Nhân Viên");
+            jTable1.getColumnModel().getColumn(2).setHeaderValue("Khách Hàng");
+            jTable1.getColumnModel().getColumn(3).setHeaderValue("Ngày Tạo Hóa Đơn");
+            jTable1.getColumnModel().getColumn(4).setHeaderValue("Tổng Tiền");
+        }
+
+        pnl_table.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 1700, -1));
+
+        btn_XuatHoaDon.setText("Xuất hóa đơn");
+        btn_XuatHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XuatHoaDonActionPerformed(evt);
+            }
+        });
+        pnl_table.add(btn_XuatHoaDon, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, 300, 40));
+
+        add(pnl_table, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKhachHangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKhachHangActionPerformed
+
+    private void txtNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNhanVienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNhanVienActionPerformed
+
+    private void txtNgayTaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayTaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgayTaoActionPerformed
+
+    private void txtMaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaHDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMaHDActionPerformed
+
+    private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_TimKiemActionPerformed
+
+    private void txt_NhapMaHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_NhapMaHDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_NhapMaHDActionPerformed
+
+    private void ch_LocTheoNgayItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ch_LocTheoNgayItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ch_LocTheoNgayItemStateChanged
+
+    private void txt_LocTheoKhachHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_LocTheoKhachHangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_LocTheoKhachHangActionPerformed
+
+    private void txt_LocTheoNhanVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_LocTheoNhanVienActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_LocTheoNhanVienActionPerformed
+
+    private void btn_XuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XuatHoaDonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_XuatHoaDonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btn_TimKiem;
+    private javax.swing.JButton btn_XuatHoaDon;
+    private java.awt.Choice ch_LocTheoNgay;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbKhachHang;
+    private javax.swing.JLabel lbNgayTao;
+    private javax.swing.JLabel lbNhanVien;
+    private javax.swing.JLabel lb_LocTheoKhachHang;
+    private javax.swing.JLabel lb_LocTheoNgay;
+    private javax.swing.JLabel lb_LocTheoNhanVien;
+    private javax.swing.JLabel lbmaHD;
+    private javax.swing.JPanel pnl_LocTheoKhachHang;
+    private javax.swing.JPanel pnl_LocTheoNgay;
+    private javax.swing.JPanel pnl_LocTheoNhanVien;
+    private javax.swing.JPanel pnl_LocThongTin;
+    private javax.swing.JPanel pnl_table;
+    private javax.swing.JPanel pnl_thongTin;
+    private javax.swing.JTextField txtKhachHang;
+    private javax.swing.JTextField txtMaHD;
+    private javax.swing.JTextField txtNgayTao;
+    private javax.swing.JTextField txtNhanVien;
+    private javax.swing.JTextField txt_LocTheoKhachHang;
+    private javax.swing.JTextField txt_LocTheoNhanVien;
+    private javax.swing.JTextField txt_NhapMaHD;
     // End of variables declaration//GEN-END:variables
 }
