@@ -26,15 +26,47 @@ public class Panel_anylist extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        pnl_TimNV = new javax.swing.JPanel();
+        pnl_North = new javax.swing.JPanel();
+        lbl_TimSDT = new javax.swing.JLabel();
+        txt_Timsdt = new javax.swing.JTextField();
+        pnl_Center = new javax.swing.JPanel();
+        pnl_Bang = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_NV = new javax.swing.JTable();
+        pnl_ThongKe = new javax.swing.JPanel();
+        pnl_North2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt_TongHD = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txt_TongDoanhThu = new javax.swing.JTextArea();
+        pnl_Center2 = new javax.swing.JPanel();
+        chk_TatCa = new javax.swing.JCheckBox();
+        chk_TheoThang = new javax.swing.JCheckBox();
+        chk_TheoNam = new javax.swing.JCheckBox();
+        cbo_ChonThang = new javax.swing.JComboBox<>();
+        pnl_HoaDon = new javax.swing.JPanel();
+        pnl_BangHoaDon = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tbl_BangHoaDon = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        pnl_NorthTheoCa = new javax.swing.JPanel();
+        pnl_Top = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtArea_TongDoanhThu = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        txtArea_TongHD = new javax.swing.JTextArea();
+        pnl_CenterTheoCa = new javax.swing.JPanel();
+        pnl_BangHD = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tbl_HoaDon = new javax.swing.JTable();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -47,14 +79,14 @@ public class Panel_anylist extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(258, 258, 258)
                 .addComponent(jLabel2)
-                .addContainerGap(556, Short.MAX_VALUE))
+                .addContainerGap(364, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(75, 75, 75)
                 .addComponent(jLabel2)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(476, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống kê doanh thu", jPanel1);
@@ -68,73 +100,303 @@ public class Panel_anylist extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(331, 331, 331)
                 .addComponent(jLabel3)
-                .addContainerGap(443, Short.MAX_VALUE))
+                .addContainerGap(251, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(168, 168, 168)
                 .addComponent(jLabel3)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Thống kê sản phẩm bán chạy", jPanel2);
 
-        jLabel4.setText("Thống kê theo nhân viên");
+        jPanel3.setPreferredSize(new java.awt.Dimension(940, 567));
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(321, 321, 321)
-                .addComponent(jLabel4)
-                .addContainerGap(469, Short.MAX_VALUE))
+        pnl_TimNV.setPreferredSize(new java.awt.Dimension(939, 120));
+        pnl_TimNV.setLayout(new java.awt.BorderLayout());
+
+        pnl_North.setPreferredSize(new java.awt.Dimension(939, 50));
+        pnl_North.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_TimSDT.setText("Nhập số điện thoại: ");
+        pnl_North.add(lbl_TimSDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        txt_Timsdt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_TimsdtActionPerformed(evt);
+            }
+        });
+        pnl_North.add(txt_Timsdt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 190, -1));
+
+        pnl_TimNV.add(pnl_North, java.awt.BorderLayout.NORTH);
+
+        pnl_Center.setLayout(new java.awt.BorderLayout());
+
+        tbl_NV.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã NV", "Tên NV", "Giới tính", "Số điện thoại"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_NV);
+
+        javax.swing.GroupLayout pnl_BangLayout = new javax.swing.GroupLayout(pnl_Bang);
+        pnl_Bang.setLayout(pnl_BangLayout);
+        pnl_BangLayout.setHorizontalGroup(
+            pnl_BangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(jLabel4)
-                .addContainerGap(64, Short.MAX_VALUE))
+        pnl_BangLayout.setVerticalGroup(
+            pnl_BangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
         );
+
+        pnl_Center.add(pnl_Bang, java.awt.BorderLayout.CENTER);
+
+        pnl_TimNV.add(pnl_Center, java.awt.BorderLayout.CENTER);
+
+        jPanel3.add(pnl_TimNV, java.awt.BorderLayout.NORTH);
+
+        pnl_ThongKe.setPreferredSize(new java.awt.Dimension(940, 150));
+        pnl_ThongKe.setLayout(new java.awt.BorderLayout());
+
+        pnl_North2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txt_TongHD.setBackground(new java.awt.Color(255, 255, 0));
+        txt_TongHD.setColumns(20);
+        txt_TongHD.setRows(5);
+        txt_TongHD.setText("                  Tổng doanh thu\n\t20000000000");
+        jScrollPane2.setViewportView(txt_TongHD);
+
+        pnl_North2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 20, -1, 80));
+
+        txt_TongDoanhThu.setBackground(new java.awt.Color(255, 255, 0));
+        txt_TongDoanhThu.setColumns(20);
+        txt_TongDoanhThu.setRows(5);
+        txt_TongDoanhThu.setText("             Tổng hóa đơn bán\n\t15");
+        jScrollPane3.setViewportView(txt_TongDoanhThu);
+
+        pnl_North2.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, 80));
+
+        pnl_ThongKe.add(pnl_North2, java.awt.BorderLayout.NORTH);
+
+        pnl_Center2.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_Center2.setPreferredSize(new java.awt.Dimension(940, 50));
+        pnl_Center2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        chk_TatCa.setText("Tất cả");
+        chk_TatCa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chk_TatCaActionPerformed(evt);
+            }
+        });
+        pnl_Center2.add(chk_TatCa, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        chk_TheoThang.setText("Theo tháng");
+        pnl_Center2.add(chk_TheoThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
+
+        chk_TheoNam.setText("Theo năm");
+        pnl_Center2.add(chk_TheoNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
+
+        cbo_ChonThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbo_ChonThang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_ChonThangActionPerformed(evt);
+            }
+        });
+        pnl_Center2.add(cbo_ChonThang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, 30));
+
+        pnl_ThongKe.add(pnl_Center2, java.awt.BorderLayout.CENTER);
+
+        jPanel3.add(pnl_ThongKe, java.awt.BorderLayout.CENTER);
+
+        pnl_HoaDon.setPreferredSize(new java.awt.Dimension(940, 250));
+        pnl_HoaDon.setLayout(new java.awt.BorderLayout());
+
+        pnl_BangHoaDon.setLayout(new java.awt.BorderLayout());
+
+        tbl_BangHoaDon.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"HD001", "Nguyễn Minh Nhật", "13/06/2023", "136.000đ"},
+                {"HD002", "Vũ Quốc Huy", "11/03/2023", "181.000đ"},
+                {"HD003", "Trần Bảo Xuyên", "24/10/2023", "100.000đ"},
+                {"HD004", "Nguyễn Thanh Tùng", "22/8/2023", "150.000đ"},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã HD", "Nhân viên", "Ngày tạo hóa đơn", "Thành tiền"
+            }
+        ));
+        jScrollPane4.setViewportView(tbl_BangHoaDon);
+
+        pnl_BangHoaDon.add(jScrollPane4, java.awt.BorderLayout.CENTER);
+
+        pnl_HoaDon.add(pnl_BangHoaDon, java.awt.BorderLayout.CENTER);
+
+        jPanel3.add(pnl_HoaDon, java.awt.BorderLayout.SOUTH);
 
         jTabbedPane1.addTab("Thống kê nhân viên", jPanel3);
 
-        jLabel5.setText("Thống kê theo ca làm");
+        jPanel4.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(380, 380, 380)
-                .addComponent(jLabel5)
-                .addContainerGap(426, Short.MAX_VALUE))
+        pnl_NorthTheoCa.setPreferredSize(new java.awt.Dimension(728, 200));
+        pnl_NorthTheoCa.setLayout(new java.awt.BorderLayout());
+
+        pnl_Top.setPreferredSize(new java.awt.Dimension(728, 200));
+        pnl_Top.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtArea_TongDoanhThu.setBackground(new java.awt.Color(255, 255, 0));
+        txtArea_TongDoanhThu.setColumns(20);
+        txtArea_TongDoanhThu.setRows(5);
+        txtArea_TongDoanhThu.setText("                 Tổng doanh thu\n\t200000000");
+        jScrollPane5.setViewportView(txtArea_TongDoanhThu);
+
+        pnl_Top.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 40, -1, -1));
+
+        txtArea_TongHD.setBackground(new java.awt.Color(255, 255, 0));
+        txtArea_TongHD.setColumns(20);
+        txtArea_TongHD.setRows(5);
+        txtArea_TongHD.setText("            Tổng hóa đơn bán\n\t15");
+        jScrollPane6.setViewportView(txtArea_TongHD);
+
+        pnl_Top.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, -1, -1));
+
+        pnl_NorthTheoCa.add(pnl_Top, java.awt.BorderLayout.CENTER);
+
+        jPanel4.add(pnl_NorthTheoCa, java.awt.BorderLayout.NORTH);
+
+        pnl_CenterTheoCa.setLayout(new java.awt.BorderLayout());
+
+        tbl_HoaDon.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"HD001", "Nguyễn Minh Nhật", "13/06/2023", "136.000đ"},
+                {"HD002", "Vũ Quốc Huy", "11/03/2022", "378.000đ"},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Mã hóa đơn", "Nhân viên", "Ngày tạo hóa đơn", "Thành tiền"
+            }
+        ));
+        jScrollPane7.setViewportView(tbl_HoaDon);
+
+        javax.swing.GroupLayout pnl_BangHDLayout = new javax.swing.GroupLayout(pnl_BangHD);
+        pnl_BangHD.setLayout(pnl_BangHDLayout);
+        pnl_BangHDLayout.setHorizontalGroup(
+            pnl_BangHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_BangHDLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(179, 179, 179)
-                .addComponent(jLabel5)
-                .addContainerGap(70, Short.MAX_VALUE))
+        pnl_BangHDLayout.setVerticalGroup(
+            pnl_BangHDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_BangHDLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
         );
+
+        pnl_CenterTheoCa.add(pnl_BangHD, java.awt.BorderLayout.CENTER);
+
+        jPanel4.add(pnl_CenterTheoCa, java.awt.BorderLayout.CENTER);
 
         jTabbedPane1.addTab("Thống kê theo ca làm", jPanel4);
 
         add(jTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txt_TimsdtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TimsdtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_TimsdtActionPerformed
+
+    private void chk_TatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chk_TatCaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chk_TatCaActionPerformed
+
+    private void cbo_ChonThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_ChonThangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbo_ChonThangActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbo_ChonThang;
+    private javax.swing.JCheckBox chk_TatCa;
+    private javax.swing.JCheckBox chk_TheoNam;
+    private javax.swing.JCheckBox chk_TheoThang;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lbl_TimSDT;
+    private javax.swing.JPanel pnl_Bang;
+    private javax.swing.JPanel pnl_BangHD;
+    private javax.swing.JPanel pnl_BangHoaDon;
+    private javax.swing.JPanel pnl_Center;
+    private javax.swing.JPanel pnl_Center2;
+    private javax.swing.JPanel pnl_CenterTheoCa;
+    private javax.swing.JPanel pnl_HoaDon;
+    private javax.swing.JPanel pnl_North;
+    private javax.swing.JPanel pnl_North2;
+    private javax.swing.JPanel pnl_NorthTheoCa;
+    private javax.swing.JPanel pnl_ThongKe;
+    private javax.swing.JPanel pnl_TimNV;
+    private javax.swing.JPanel pnl_Top;
+    private javax.swing.JTable tbl_BangHoaDon;
+    private javax.swing.JTable tbl_HoaDon;
+    private javax.swing.JTable tbl_NV;
+    private javax.swing.JTextArea txtArea_TongDoanhThu;
+    private javax.swing.JTextArea txtArea_TongHD;
+    private javax.swing.JTextField txt_Timsdt;
+    private javax.swing.JTextArea txt_TongDoanhThu;
+    private javax.swing.JTextArea txt_TongHD;
     // End of variables declaration//GEN-END:variables
 }
