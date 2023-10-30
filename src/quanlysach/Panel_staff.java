@@ -28,32 +28,124 @@ public class Panel_staff extends javax.swing.JPanel {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pnl_NhanVien = new javax.swing.JPanel();
+        pnl_top = new javax.swing.JPanel();
+        pnl_info_NV = new javax.swing.JPanel();
+        pnl_image_NV = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        pnl_list_btn = new javax.swing.JPanel();
+        pnl_TimKiem = new javax.swing.JPanel();
+        pnl_center = new javax.swing.JPanel();
         pnl_TaiKhoan = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout pnl_NhanVienLayout = new javax.swing.GroupLayout(pnl_NhanVien);
-        pnl_NhanVien.setLayout(pnl_NhanVienLayout);
-        pnl_NhanVienLayout.setHorizontalGroup(
-            pnl_NhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 974, Short.MAX_VALUE)
+        pnl_NhanVien.setLayout(new java.awt.BorderLayout());
+
+        pnl_top.setPreferredSize(new java.awt.Dimension(0, 300));
+        pnl_top.setLayout(new java.awt.BorderLayout());
+
+        pnl_info_NV.setPreferredSize(new java.awt.Dimension(0, 200));
+        pnl_info_NV.setLayout(new java.awt.GridLayout(1, 3));
+
+        pnl_image_NV.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/image.png"))); // NOI18N
+        pnl_image_NV.add(jLabel1, java.awt.BorderLayout.CENTER);
+
+        pnl_info_NV.add(pnl_image_NV);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 323, Short.MAX_VALUE)
         );
-        pnl_NhanVienLayout.setVerticalGroup(
-            pnl_NhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 555, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
         );
 
+        pnl_info_NV.add(jPanel2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 323, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 200, Short.MAX_VALUE)
+        );
+
+        pnl_info_NV.add(jPanel3);
+
+        pnl_top.add(pnl_info_NV, java.awt.BorderLayout.NORTH);
+
+        javax.swing.GroupLayout pnl_list_btnLayout = new javax.swing.GroupLayout(pnl_list_btn);
+        pnl_list_btn.setLayout(pnl_list_btnLayout);
+        pnl_list_btnLayout.setHorizontalGroup(
+            pnl_list_btnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 971, Short.MAX_VALUE)
+        );
+        pnl_list_btnLayout.setVerticalGroup(
+            pnl_list_btnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        pnl_top.add(pnl_list_btn, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout pnl_TimKiemLayout = new javax.swing.GroupLayout(pnl_TimKiem);
+        pnl_TimKiem.setLayout(pnl_TimKiemLayout);
+        pnl_TimKiemLayout.setHorizontalGroup(
+            pnl_TimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 971, Short.MAX_VALUE)
+        );
+        pnl_TimKiemLayout.setVerticalGroup(
+            pnl_TimKiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        pnl_top.add(pnl_TimKiem, java.awt.BorderLayout.SOUTH);
+
+        pnl_NhanVien.add(pnl_top, java.awt.BorderLayout.NORTH);
+
+        javax.swing.GroupLayout pnl_centerLayout = new javax.swing.GroupLayout(pnl_center);
+        pnl_center.setLayout(pnl_centerLayout);
+        pnl_centerLayout.setHorizontalGroup(
+            pnl_centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 971, Short.MAX_VALUE)
+        );
+        pnl_centerLayout.setVerticalGroup(
+            pnl_centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 279, Short.MAX_VALUE)
+        );
+
+        pnl_NhanVien.add(pnl_center, java.awt.BorderLayout.CENTER);
+
         jTabbedPane1.addTab("Nhân viên", pnl_NhanVien);
+
+        jLabel2.setText("ádalskjdlaskjlkdjasldjlasd");
 
         javax.swing.GroupLayout pnl_TaiKhoanLayout = new javax.swing.GroupLayout(pnl_TaiKhoan);
         pnl_TaiKhoan.setLayout(pnl_TaiKhoanLayout);
         pnl_TaiKhoanLayout.setHorizontalGroup(
             pnl_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 974, Short.MAX_VALUE)
+            .addGroup(pnl_TaiKhoanLayout.createSequentialGroup()
+                .addGap(310, 310, 310)
+                .addComponent(jLabel2)
+                .addContainerGap(528, Short.MAX_VALUE))
         );
         pnl_TaiKhoanLayout.setVerticalGroup(
             pnl_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 555, Short.MAX_VALUE)
+            .addGroup(pnl_TaiKhoanLayout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(jLabel2)
+                .addContainerGap(399, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Quản Lý Tài Khoản", pnl_TaiKhoan);
@@ -63,8 +155,18 @@ public class Panel_staff extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel pnl_NhanVien;
     private javax.swing.JPanel pnl_TaiKhoan;
+    private javax.swing.JPanel pnl_TimKiem;
+    private javax.swing.JPanel pnl_center;
+    private javax.swing.JPanel pnl_image_NV;
+    private javax.swing.JPanel pnl_info_NV;
+    private javax.swing.JPanel pnl_list_btn;
+    private javax.swing.JPanel pnl_top;
     // End of variables declaration//GEN-END:variables
 }
