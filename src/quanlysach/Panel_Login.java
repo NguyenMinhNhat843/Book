@@ -105,7 +105,7 @@ public class Panel_Login extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(txt_username.getText().equals("admin") && txt_password.getText().equals("admin")) {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(Panel_Login.this);
-            new GUI_home().setVisible(true);
+            new MainView().setVisible(true);
             frame.setVisible(false);
 //            this.setVisible(false);
         } else {
