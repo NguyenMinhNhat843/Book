@@ -79,6 +79,8 @@ public class MainView extends javax.swing.JFrame {
         btn_staff = new javax.swing.JButton();
         btn_inventory = new javax.swing.JButton();
         btn_anylist = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        btn_help = new javax.swing.JButton();
         pnl_right = new javax.swing.JPanel();
         pnl_header = new javax.swing.JPanel();
         lbl_name_NV = new javax.swing.JLabel();
@@ -217,6 +219,24 @@ public class MainView extends javax.swing.JFrame {
             }
         });
         pnl_menu.add(btn_anylist);
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+        pnl_menu.add(jPanel1);
+
+        btn_help.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_help.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/help-web-button.png"))); // NOI18N
+        btn_help.setText("Trợ giúp");
+        btn_help.setIconTextGap(8);
+        btn_help.setMargin(new java.awt.Insets(10, 14, 10, 14));
+        btn_help.setMaximumSize(new java.awt.Dimension(200, 50));
+        btn_help.setPreferredSize(new java.awt.Dimension(200, 50));
+        btn_help.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_helpMouseClicked(evt);
+            }
+        });
+        pnl_menu.add(btn_help);
 
         getContentPane().add(pnl_menu, java.awt.BorderLayout.WEST);
 
@@ -365,6 +385,10 @@ public class MainView extends javax.swing.JFrame {
         card.show(pnl_main, "product");
     }//GEN-LAST:event_btn_productMouseClicked
 
+    private void btn_helpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_helpMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_helpMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -406,11 +430,13 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton btn_bill;
     private javax.swing.JButton btn_cart;
     private javax.swing.JButton btn_customer;
+    private javax.swing.JButton btn_help;
     private javax.swing.JButton btn_home;
     private javax.swing.JButton btn_inventory;
     private javax.swing.JButton btn_logout;
     private javax.swing.JButton btn_product;
     private javax.swing.JButton btn_staff;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbl_logo;
     private javax.swing.JLabel lbl_name_NV;
     private javax.swing.JLabel lbl_type_NV;

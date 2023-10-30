@@ -26,30 +26,45 @@ public class Panel_staff extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        pnl_NhanVien = new javax.swing.JPanel();
+        pnl_TaiKhoan = new javax.swing.JPanel();
 
-        jLabel1.setText("Staff");
+        setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(434, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(206, 206, 206))
+        javax.swing.GroupLayout pnl_NhanVienLayout = new javax.swing.GroupLayout(pnl_NhanVien);
+        pnl_NhanVien.setLayout(pnl_NhanVienLayout);
+        pnl_NhanVienLayout.setHorizontalGroup(
+            pnl_NhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 974, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(153, 153, 153)
-                .addComponent(jLabel1)
-                .addContainerGap(221, Short.MAX_VALUE))
+        pnl_NhanVienLayout.setVerticalGroup(
+            pnl_NhanVienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 555, Short.MAX_VALUE)
         );
+
+        jTabbedPane1.addTab("Nhân viên", pnl_NhanVien);
+
+        javax.swing.GroupLayout pnl_TaiKhoanLayout = new javax.swing.GroupLayout(pnl_TaiKhoan);
+        pnl_TaiKhoan.setLayout(pnl_TaiKhoanLayout);
+        pnl_TaiKhoanLayout.setHorizontalGroup(
+            pnl_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 974, Short.MAX_VALUE)
+        );
+        pnl_TaiKhoanLayout.setVerticalGroup(
+            pnl_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 555, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Quản Lý Tài Khoản", pnl_TaiKhoan);
+
+        add(jTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel pnl_NhanVien;
+    private javax.swing.JPanel pnl_TaiKhoan;
     // End of variables declaration//GEN-END:variables
 }
