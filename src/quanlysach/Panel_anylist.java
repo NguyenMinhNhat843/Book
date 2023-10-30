@@ -67,6 +67,25 @@ public class Panel_anylist extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         pnl_ThongKeSanPham = new javax.swing.JPanel();
+        pnl_top1 = new javax.swing.JPanel();
+        pnl_TKDT_info1 = new javax.swing.JPanel();
+        pnl_LoaiThoiGian1 = new javax.swing.JPanel();
+        lbl_LoaiThoiGian1 = new javax.swing.JLabel();
+        cb_LoaiThoiGian1 = new javax.swing.JComboBox<>();
+        pnl_NgayBatDau1 = new javax.swing.JPanel();
+        lbl_NgayBatDau1 = new javax.swing.JLabel();
+        date_NgayBatDau1 = new com.toedter.calendar.JDateChooser();
+        pnl_NgayKetThuc1 = new javax.swing.JPanel();
+        lbl_NgayKetThuc1 = new javax.swing.JLabel();
+        date_NgayKetThuc1 = new com.toedter.calendar.JDateChooser();
+        pnl_btn_TimKiem1 = new javax.swing.JPanel();
+        btn_TimKiem1 = new javax.swing.JButton();
+        pnl_center1 = new javax.swing.JPanel();
+        pnl_title = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        pnl_tabel_TKDT1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -255,18 +274,91 @@ public class Panel_anylist extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Thống kê doanh thu", pnl_ThongKeDoanhThu);
 
-        javax.swing.GroupLayout pnl_ThongKeSanPhamLayout = new javax.swing.GroupLayout(pnl_ThongKeSanPham);
-        pnl_ThongKeSanPham.setLayout(pnl_ThongKeSanPhamLayout);
-        pnl_ThongKeSanPhamLayout.setHorizontalGroup(
-            pnl_ThongKeSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1312, Short.MAX_VALUE)
-        );
-        pnl_ThongKeSanPhamLayout.setVerticalGroup(
-            pnl_ThongKeSanPhamLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 593, Short.MAX_VALUE)
-        );
+        pnl_ThongKeSanPham.setLayout(new java.awt.BorderLayout());
 
-        jTabbedPane1.addTab("Thống kê sản phẩm bán chạy", pnl_ThongKeSanPham);
+        pnl_top1.setBorder(javax.swing.BorderFactory.createTitledBorder("Bộ lọc"));
+        pnl_top1.setPreferredSize(new java.awt.Dimension(0, 170));
+        pnl_top1.setLayout(new java.awt.BorderLayout());
+
+        pnl_TKDT_info1.setPreferredSize(new java.awt.Dimension(0, 70));
+        pnl_TKDT_info1.setLayout(new java.awt.GridLayout(1, 3));
+
+        lbl_LoaiThoiGian1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_LoaiThoiGian1.setText("Loại Thời Gian:");
+        pnl_LoaiThoiGian1.add(lbl_LoaiThoiGian1);
+
+        cb_LoaiThoiGian1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cb_LoaiThoiGian1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Báo cáo theo ngày", "Báo cáo theo tháng", "Báo cáo theo năm" }));
+        cb_LoaiThoiGian1.setPreferredSize(new java.awt.Dimension(220, 40));
+        pnl_LoaiThoiGian1.add(cb_LoaiThoiGian1);
+
+        pnl_TKDT_info1.add(pnl_LoaiThoiGian1);
+
+        lbl_NgayBatDau1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_NgayBatDau1.setText("Ngày bắt đầu:");
+        pnl_NgayBatDau1.add(lbl_NgayBatDau1);
+
+        date_NgayBatDau1.setPreferredSize(new java.awt.Dimension(220, 40));
+        pnl_NgayBatDau1.add(date_NgayBatDau1);
+
+        pnl_TKDT_info1.add(pnl_NgayBatDau1);
+
+        lbl_NgayKetThuc1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_NgayKetThuc1.setText("Ngày kết thúc:");
+        pnl_NgayKetThuc1.add(lbl_NgayKetThuc1);
+
+        date_NgayKetThuc1.setPreferredSize(new java.awt.Dimension(220, 40));
+        pnl_NgayKetThuc1.add(date_NgayKetThuc1);
+
+        pnl_TKDT_info1.add(pnl_NgayKetThuc1);
+
+        pnl_top1.add(pnl_TKDT_info1, java.awt.BorderLayout.NORTH);
+
+        pnl_btn_TimKiem1.setPreferredSize(new java.awt.Dimension(1068, 80));
+
+        btn_TimKiem1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_TimKiem1.setText("Tìm kiếm");
+        btn_TimKiem1.setPreferredSize(new java.awt.Dimension(500, 50));
+        pnl_btn_TimKiem1.add(btn_TimKiem1);
+
+        pnl_top1.add(pnl_btn_TimKiem1, java.awt.BorderLayout.CENTER);
+
+        pnl_ThongKeSanPham.add(pnl_top1, java.awt.BorderLayout.NORTH);
+
+        pnl_center1.setLayout(new java.awt.BorderLayout());
+
+        pnl_title.setPreferredSize(new java.awt.Dimension(1312, 50));
+        pnl_title.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Bảng thống kê sản phẩm bán chạy");
+        pnl_title.add(jLabel1, java.awt.BorderLayout.CENTER);
+
+        pnl_center1.add(pnl_title, java.awt.BorderLayout.PAGE_START);
+
+        pnl_tabel_TKDT1.setLayout(new java.awt.BorderLayout());
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"SP001", "Sách tiếng viêt", "200", "20.000", "4.000.000", "2.000.000", " 2.000.000"},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã SP", "Tên Sản Phẩm", "Đã bán", "Đơn giá", "Tổng doanh thu", "Tiền Vốn", "Lợi Nhuận"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
+        pnl_tabel_TKDT1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        pnl_center1.add(pnl_tabel_TKDT1, java.awt.BorderLayout.CENTER);
+
+        pnl_ThongKeSanPham.add(pnl_center1, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane1.addTab("Thống kê sản phẩm", pnl_ThongKeSanPham);
 
         add(jTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -274,9 +366,14 @@ public class Panel_anylist extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_TimKiem;
+    private javax.swing.JButton btn_TimKiem1;
     private javax.swing.JComboBox<String> cb_LoaiThoiGian;
+    private javax.swing.JComboBox<String> cb_LoaiThoiGian1;
     private com.toedter.calendar.JDateChooser date_NgayBatDau;
+    private com.toedter.calendar.JDateChooser date_NgayBatDau1;
     private com.toedter.calendar.JDateChooser date_NgayKetThuc;
+    private com.toedter.calendar.JDateChooser date_NgayKetThuc1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -286,33 +383,47 @@ public class Panel_anylist extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lbl_DoanhThu;
     private javax.swing.JLabel lbl_DoanhThu_title1;
     private javax.swing.JLabel lbl_LoaiThoiGian;
+    private javax.swing.JLabel lbl_LoaiThoiGian1;
     private javax.swing.JLabel lbl_LoiNhuan;
     private javax.swing.JLabel lbl_LoiNhuan_title;
     private javax.swing.JLabel lbl_NgayBatDau;
+    private javax.swing.JLabel lbl_NgayBatDau1;
     private javax.swing.JLabel lbl_NgayKetThuc;
+    private javax.swing.JLabel lbl_NgayKetThuc1;
     private javax.swing.JLabel lbl_TongHD;
     private javax.swing.JLabel lbl_TongHD_title;
     private javax.swing.JLabel lbl_TongVon;
     private javax.swing.JLabel lbl_TongVon_title;
     private javax.swing.JPanel pnl_DoanhThu;
     private javax.swing.JPanel pnl_LoaiThoiGian;
+    private javax.swing.JPanel pnl_LoaiThoiGian1;
     private javax.swing.JPanel pnl_LoiNhuan;
     private javax.swing.JPanel pnl_NgayBatDau;
+    private javax.swing.JPanel pnl_NgayBatDau1;
     private javax.swing.JPanel pnl_NgayKetThuc;
+    private javax.swing.JPanel pnl_NgayKetThuc1;
     private javax.swing.JPanel pnl_SoLieu_TKDT;
     private javax.swing.JPanel pnl_TKDT_info;
+    private javax.swing.JPanel pnl_TKDT_info1;
     private javax.swing.JPanel pnl_ThongKeDoanhThu;
     private javax.swing.JPanel pnl_ThongKeSanPham;
     private javax.swing.JPanel pnl_TongHD;
     private javax.swing.JPanel pnl_TongVon;
     private javax.swing.JPanel pnl_btn_TimKiem;
+    private javax.swing.JPanel pnl_btn_TimKiem1;
     private javax.swing.JPanel pnl_center;
+    private javax.swing.JPanel pnl_center1;
     private javax.swing.JPanel pnl_tabel_TKDT;
+    private javax.swing.JPanel pnl_tabel_TKDT1;
+    private javax.swing.JPanel pnl_title;
     private javax.swing.JPanel pnl_top;
+    private javax.swing.JPanel pnl_top1;
     // End of variables declaration//GEN-END:variables
 }
