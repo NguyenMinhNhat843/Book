@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.event.*;
 import javax.swing.JOptionPane;
+import sql.connectDB;
 
 /**
  *
@@ -22,37 +23,24 @@ public class MainView extends javax.swing.JFrame {
      */
     
     public MainView() {
+        connect();
         initComponents();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         
         card = (CardLayout) pnl_main.getLayout();
         
-        
-//        resize_pnl_main();
-//        pnl_main.addComponentListener(new ComponentAdapter() {
-//            @Override
-//            public void componentResized(ComponentEvent e) {
-//                resize_pnl_main();
-//            }
-//        });
-        
         resize_lbl_logo();
-        
-        // cart
-        
-        
+    }
+    
+    public void connect() {
+        try {
+            connectDB.getInstance().connect();
+            System.out.println("connect successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
    
-    
-//    public void resize_pnl_main() {
-//        ImageIcon background_icon = new ImageIcon(getClass().getResource("/images/login_background.jpg"));
-//
-//        
-//        ImageIcon imageIcon = new ImageIcon(background_icon.getImage().getScaledInstance(pnl_main.getWidth(), pnl_main.getHeight(), Image.SCALE_SMOOTH));
-//        
-//        lbl_background_main.setIcon(imageIcon);
-//    }
-    
     public void resize_lbl_logo() {
         ImageIcon lbl_logo_icon = new ImageIcon(getClass().getResource("/images/logo_image.png"));
         

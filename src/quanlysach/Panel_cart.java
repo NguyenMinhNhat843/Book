@@ -4,11 +4,23 @@
  */
 package quanlysach;
 
+import java.awt.Component;
+import java.awt.FlowLayout;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JTextField;
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+
 /**
  *
  * @author Asus
  */
 public class Panel_cart extends javax.swing.JPanel {
+    private JTextField txt_TimKiem;
+    private JPanel pnl_TimKiem;
     /**
      * Creates new form Panel_product
      */
@@ -16,6 +28,8 @@ public class Panel_cart extends javax.swing.JPanel {
         initComponents();
         
     }
+    
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -205,7 +219,7 @@ public class Panel_cart extends javax.swing.JPanel {
 
         table_TimSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"001", "Sách toán lớp 1", "Sách Giáo dục", "Quyển", "5", "37.000"}
+                {"001", null, null, null, null, null}
             },
             new String [] {
                 "Mã SP", "Tên mặt hàng", "Loại ", "Đơn vị tính", "Số lượng", " Đơn giá (có thuế)"

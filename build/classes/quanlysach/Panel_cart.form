@@ -414,21 +414,11 @@
                         <Column editable="true" title="M&#xe3; SP" type="java.lang.Object">
                           <Data value="001"/>
                         </Column>
-                        <Column editable="true" title="T&#xea;n m&#x1eb7;t h&#xe0;ng" type="java.lang.Object">
-                          <Data value="S&#xe1;ch to&#xe1;n l&#x1edb;p 1"/>
-                        </Column>
-                        <Column editable="true" title="Lo&#x1ea1;i " type="java.lang.Object">
-                          <Data value="S&#xe1;ch Gi&#xe1;o d&#x1ee5;c"/>
-                        </Column>
-                        <Column editable="true" title="&#x110;&#x1a1;n v&#x1ecb; t&#xed;nh" type="java.lang.Object">
-                          <Data value="Quy&#x1ec3;n"/>
-                        </Column>
-                        <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object">
-                          <Data value="5"/>
-                        </Column>
-                        <Column editable="true" title=" &#x110;&#x1a1;n gi&#xe1; (c&#xf3; thu&#x1ebf;)" type="java.lang.Object">
-                          <Data value="37.000"/>
-                        </Column>
+                        <Column editable="true" title="T&#xea;n m&#x1eb7;t h&#xe0;ng" type="java.lang.Object"/>
+                        <Column editable="true" title="Lo&#x1ea1;i " type="java.lang.Object"/>
+                        <Column editable="true" title="&#x110;&#x1a1;n v&#x1ecb; t&#xed;nh" type="java.lang.Object"/>
+                        <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
+                        <Column editable="true" title=" &#x110;&#x1a1;n gi&#xe1; (c&#xf3; thu&#x1ebf;)" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
