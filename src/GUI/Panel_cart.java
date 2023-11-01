@@ -32,12 +32,6 @@ public class Panel_cart extends javax.swing.JPanel {
     public Panel_cart() {
         sp_dao = new SanPham_DAO();
         initComponents();
-        
-//        String cols_TimSP[] = {"Mã abc", "Tên", "Loại", "Đơn vị tính", "Số lượng", "Đơn giá"};
-//        model_TimSP = new DefaultTableModel(cols_TimSP, 0);
-//        table_TimSP.setModel(model_TimSP);
-//        
-//        model_TimSP.addRow(new Object[]{"SP001", "STV", "Sachs", "Quyen", "5", "600"});
     }
     
   
@@ -86,7 +80,7 @@ public class Panel_cart extends javax.swing.JPanel {
         lb_TongThuCa1 = new javax.swing.JLabel();
         lb_TongThuCa3 = new javax.swing.JLabel();
         txt_ThanhToan = new javax.swing.JTextField();
-        txt_DiaChi2 = new javax.swing.JTextField();
+        txt_TienThoi = new javax.swing.JTextField();
         btn_ThanhToan = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         lbl_TienNhan = new javax.swing.JLabel();
@@ -230,10 +224,10 @@ public class Panel_cart extends javax.swing.JPanel {
 
         table_TimSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"SP001", null, null, null, null, null}
+                {"SP001", null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên mặt hàng", "Loại ", "Đơn vị tính", "Số lượng", " Đơn giá (có thuế)"
+                "Mã SP", "Tên mặt hàng", "Loại ", "Số lượng", " Đơn giá (có thuế)"
             }
         ));
         table_TimSP.setRowHeight(40);
@@ -263,7 +257,7 @@ public class Panel_cart extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã SP", "Tên mặt hàng", "Loại", "Đơn vị tính", "Số lượng", "Đơn giá (có thuế)", "Thành tiền"
+                "Mã SP", "Tên mặt hàng", "Loại", "Số lượng", "Đơn giá (có thuế)", "Thành tiền"
             }
         ));
         scroll_DanhSachSP.setViewportView(table_DanhSachSP);
@@ -283,12 +277,12 @@ public class Panel_cart extends javax.swing.JPanel {
 
         txt_ThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txt_ThanhToan.setForeground(new java.awt.Color(255, 51, 51));
-        txt_ThanhToan.setText("250.000");
+        txt_ThanhToan.setText("0");
         pnl_thanhToan.add(txt_ThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 390, 60));
 
-        txt_DiaChi2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_DiaChi2.setText("5.000");
-        pnl_thanhToan.add(txt_DiaChi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 20, 230, 40));
+        txt_TienThoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_TienThoi.setText("0.00");
+        pnl_thanhToan.add(txt_TienThoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 20, 230, 40));
 
         btn_ThanhToan.setBackground(new java.awt.Color(255, 51, 51));
         btn_ThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -308,7 +302,7 @@ public class Panel_cart extends javax.swing.JPanel {
         pnl_thanhToan.add(txt_SuungTichDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 390, 40));
 
         txt_TienNhan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_TienNhan.setText("5.000");
+        txt_TienNhan.setText("0.00");
         pnl_thanhToan.add(txt_TienNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 230, 40));
 
         pnl_DanhSachSP.add(pnl_thanhToan, java.awt.BorderLayout.PAGE_END);
@@ -344,21 +338,33 @@ public class Panel_cart extends javax.swing.JPanel {
         SanPham sp = sp_dao.getSP_TheoMa(maSP);
         
         if(maSP.compareTo("") != 0 && sp != null) {
+            
+            // Nhập số lượng sản phẩm
+            int soLuong = Integer.parseInt(JOptionPane.showInputDialog(null, "Nhập số lượng", 0));
+            
+            // Tính tổng tiền thanh toán
+            tongTienThanhToan += sp.getGiaBan() * soLuong;
+            txt_ThanhToan.setText(tongTienThanhToan + "");
+            
+            // Lấy số lượng hàng đang có
             int n = table_DanhSachSP.getModel().getRowCount();
+            
+            // Kiểm tra sản phẩm trùng lặp: cộng dồn số lượng và thành tiền
             for(int i = 0; i < n; ++i) {
-                if(table_DanhSachSP.getModel().getValueAt(i, 0).toString().compareTo(maSP) == 0) {
-                    int soLuongHienTai = (Integer)table_DanhSachSP.getModel().getValueAt(i, 4);
-                    table_DanhSachSP.getModel().setValueAt(soLuongHienTai + 5, i, 4);
+                String maSP_Cheked = table_DanhSachSP.getModel().getValueAt(i, 0).toString();
+                if(maSP_Cheked.compareTo(maSP) == 0) {
+                    int soLuongHienTai = Integer.parseInt(table_DanhSachSP.getModel().getValueAt(i, 3).toString());
+                    int soLuongMoi = soLuongHienTai + soLuong;
+                    table_DanhSachSP.getModel().setValueAt(soLuongMoi, i, 3);
+                    table_DanhSachSP.getModel().setValueAt(sp.getGiaBan() * soLuongMoi, i, 5);
                     return;
                 }
             }
             
-            Object obj[] = {sp.getMaSP(), sp.getTenSP(), "Sach", "Quyeenr", 5, sp.getGiaBan() * 5};
+            // Them sp vao giao hang
+            Object obj[] = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), soLuong, sp.getGiaBan() ,sp.getGiaBan() * soLuong};
             model_DSSP = (DefaultTableModel)table_DanhSachSP.getModel();
             model_DSSP.addRow(obj);
-            
-            tongTienThanhToan += sp.getGiaBan() * 5;
-            txt_ThanhToan.setText(tongTienThanhToan + "");
         } else {
             JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm");
         }
@@ -397,7 +403,6 @@ public class Panel_cart extends javax.swing.JPanel {
     private javax.swing.JTable table_TimSP;
     private javax.swing.JTextField txt_Ca;
     private javax.swing.JTextField txt_DiaChi1;
-    private javax.swing.JTextField txt_DiaChi2;
     private javax.swing.JTextField txt_DiemTichLuy;
     private javax.swing.JTextField txt_Email;
     private javax.swing.JTextField txt_MaHD;
@@ -406,6 +411,7 @@ public class Panel_cart extends javax.swing.JPanel {
     private javax.swing.JTextField txt_TenKH;
     private javax.swing.JTextField txt_ThanhToan;
     private javax.swing.JTextField txt_TienNhan;
+    private javax.swing.JTextField txt_TienThoi;
     private javax.swing.JTextField txt_TimKH;
     private javax.swing.JTextField txt_TongThuCa;
     // End of variables declaration//GEN-END:variables
