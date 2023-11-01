@@ -28,6 +28,10 @@ public class KhuyenMai {
         this.ngayKetThuc = ngayKetThuc;
         this.giaTriHoaDonBatDauKM = giaTriHoaDonBatDauKM;
     }
+    
+    public KhuyenMai(String maKM) {
+        this.maKM = maKM;
+    }
 
     public KhuyenMai() {
     }

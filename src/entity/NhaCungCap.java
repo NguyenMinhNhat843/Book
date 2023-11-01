@@ -24,6 +24,10 @@ public class NhaCungCap {
         this.SDT = SDT;
         this.email = email;
     }
+    
+    public NhaCungCap(String maNCC) {
+        this.maNCC = maNCC;
+    }
 
     public NhaCungCap() {
     }

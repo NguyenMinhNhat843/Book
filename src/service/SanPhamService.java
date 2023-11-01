@@ -14,7 +14,7 @@ import java.util.*;
  */
 public interface SanPhamService {
     public String phatSinhMaTuDong();
-    public List<SanPham> getDSSP();
+    public ArrayList<SanPham> getDSSP();
     public SanPham getSP_TheoMa(String maSP);
     
 }
