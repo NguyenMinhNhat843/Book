@@ -105,8 +105,14 @@ public class Panel_cart extends javax.swing.JPanel {
 
         lb_TimKH.setBackground(new java.awt.Color(255, 0, 0));
         lb_TimKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_TimKH.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_TimKH.setText("Khách Hàng");
         lb_TimKH.setPreferredSize(new java.awt.Dimension(100, 16));
+        lb_TimKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_TimKHMouseClicked(evt);
+            }
+        });
         pnl_timKH.add(lb_TimKH, java.awt.BorderLayout.WEST);
 
         pnl_thongTin_KH.add(pnl_timKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 7, 790, 50));
@@ -302,7 +308,11 @@ public class Panel_cart extends javax.swing.JPanel {
         pnl_thanhToan.add(txt_SuungTichDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 390, 40));
 
         txt_TienNhan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_TienNhan.setText("0.00");
+        txt_TienNhan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_TienNhanKeyReleased(evt);
+            }
+        });
         pnl_thanhToan.add(txt_TienNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 230, 40));
 
         pnl_DanhSachSP.add(pnl_thanhToan, java.awt.BorderLayout.PAGE_END);
@@ -370,6 +380,22 @@ public class Panel_cart extends javax.swing.JPanel {
         }
          
     }//GEN-LAST:event_btn_ThemMouseClicked
+
+    private void txt_TienNhanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TienNhanKeyReleased
+        // TODO add your handling code here:
+        double tienNhan = Double.parseDouble(txt_TienNhan.getText());
+        double tienThanhToan = Double.parseDouble(txt_ThanhToan.getText());
+        
+        double tienThoi = tienNhan - tienThanhToan;
+        
+        txt_TienThoi.setText(tienThoi + "");
+    }//GEN-LAST:event_txt_TienNhanKeyReleased
+
+    private void lb_TimKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_TimKHMouseClicked
+        // TODO add your handling code here:
+        String maKM_searched = txt_TimKH.getText();
+        
+    }//GEN-LAST:event_lb_TimKHMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
