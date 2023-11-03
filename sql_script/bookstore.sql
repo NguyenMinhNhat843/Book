@@ -44,12 +44,21 @@ create table KhachHang (
 )
 go
 
+-- table loaiTK --
+create table LoaiTK (
+	maLoaiTK nvarchar(10) primary key not null,
+	tenLoaiTK nvarchar(30),
+)
+
 -- table TaiKhoan --
 create table TaiKhoan (
 	maTaiKhoan nvarchar(10) primary key not null,
+	tenNguoiDung nvarchar(30),
 	username nvarchar(30) not null,
 	password nvarchar(30) not null,
-	loaiTK nvarchar(20) check (loaiTK in ('NV', 'QL')) not null,
+	loaiTK nvarchar(10) references LoaiTK(maLoaiTK)
+		on update cascade
+		on delete cascade,
 )
 
 -- table NhanVien --
@@ -170,6 +179,20 @@ create table ChiTietHoaDonNhapHang (
 
 
 ------------------ add data ---------------
+-- LoaiTK --
+insert into LoaiTK(maLoaiTK, tenLoaiTK)
+values 
+	('LTK001', N'Tài khoản nhân viên bán hàng'),
+	('LTK002', N'Tài khoản quản lý');
+
+-- Tai Khoan --
+insert into TaiKhoan(maTaiKhoan, tenNguoiDung ,username, password, loaiTK)
+values 
+	('TK001', N'Nguyễn Minh Nhật', 'nhatminh', 'nhatminhpass', 'LTK002'),
+	('TK002', N'Vũ Quốc Huy', 'quochuy', 'quochuypass', 'LTK001'),
+	('TK003', N'Nguyễn Thanh Tùng', 'thanhtung', 'thanhtungpass', 'LTK001'),
+	('TK004', N'Trần Bảo Xuyên', 'baoxuyen', 'baoxuyenpass', 'LTK001');
+
 -- Rank --
 insert into Rank (maRank, tenRank, tiLeTichDiem)
 values
