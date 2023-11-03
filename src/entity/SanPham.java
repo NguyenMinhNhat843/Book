@@ -15,13 +15,13 @@ public class SanPham {
     private KhuyenMai kM;
     private NhaCungCap nCC;
     private String tenSP;
-    private Enum_class.enum_LoaiSP loaiSP;
+    private String loaiSP;
     private double giaNhapHang;
     private double giaBan;
     private int soLuongBayBan;
     private int soLuongTonKho;
 
-    public SanPham(String maSP, KhuyenMai kM, NhaCungCap nCC, String tenSP, Enum_class.enum_LoaiSP loaiSP, double giaNhapHang, double giaBan, int soLuongBayBan, int soLuongTonKho) {
+    public SanPham(String maSP, KhuyenMai kM, NhaCungCap nCC, String tenSP, String loaiSP, double giaNhapHang, double giaBan, int soLuongBayBan, int soLuongTonKho) {
         this.maSP = maSP;
         this.kM = kM;
         this.nCC = nCC;
@@ -52,9 +52,11 @@ public class SanPham {
         return tenSP;
     }
 
-    public Enum_class.enum_LoaiSP getLoaiSP() {
+    public String getLoaiSP() {
         return loaiSP;
     }
+
+    
 
     public double getGiaNhapHang() {
         return giaNhapHang;
@@ -88,9 +90,10 @@ public class SanPham {
         this.tenSP = tenSP;
     }
 
-    public void setLoaiSP(Enum_class.enum_LoaiSP loaiSP) {
+    public void setLoaiSP(String loaiSP) {
         this.loaiSP = loaiSP;
     }
+
 
     public void setGiaNhapHang(double giaNhapHang) {
         this.giaNhapHang = giaNhapHang;

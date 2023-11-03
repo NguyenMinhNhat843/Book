@@ -4,15 +4,10 @@
  */
 package entity;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Asus
  */
-public interface HoaDon {
-    public ArrayList<HoaDon> getAllHoaDon();
-    public HoaDon getHoaDon_TheoMa();
-    public void themHoaDonVaoCSDL();
-    public void CapNhatHoaDon(HoaDon hd_old ,HoaDon hd_new);
+public class ChiTietHoaDon {
+    
 }

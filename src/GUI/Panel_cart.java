@@ -4,8 +4,10 @@
  */
 package GUI;
 
+import dao.KhachHang_DAO;
 import dao.SanPham_DAO;
 import entity.SanPham;
+import entity.KhachHang;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import javax.swing.DefaultCellEditor;
@@ -24,6 +26,7 @@ public class Panel_cart extends javax.swing.JPanel {
     private JTextField txt_TimKiem;
     private JPanel pnl_TimKiem;
     private SanPham_DAO sp_dao;
+    private KhachHang_DAO kh_dao = new KhachHang_DAO();
     private DefaultTableModel model_DSSP;
     private double tongTienThanhToan = 0;
     /**
@@ -50,6 +53,7 @@ public class Panel_cart extends javax.swing.JPanel {
         pnl_timKH = new javax.swing.JPanel();
         txt_TimKH = new javax.swing.JTextField();
         lb_TimKH = new javax.swing.JLabel();
+        btn_TimKiem = new javax.swing.JButton();
         pnl_TimKH_row1 = new javax.swing.JPanel();
         lb_DiemTichLuy = new javax.swing.JLabel();
         txt_DiemTichLuy = new javax.swing.JTextField();
@@ -84,7 +88,7 @@ public class Panel_cart extends javax.swing.JPanel {
         btn_ThanhToan = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         lbl_TienNhan = new javax.swing.JLabel();
-        txt_SuungTichDiem = new javax.swing.JTextField();
+        txt_SudungTichDiem = new javax.swing.JTextField();
         txt_TienNhan = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
@@ -100,7 +104,6 @@ public class Panel_cart extends javax.swing.JPanel {
         pnl_timKH.setLayout(new java.awt.BorderLayout());
 
         txt_TimKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_TimKH.setText("Nhập số điện thoại KH...");
         pnl_timKH.add(txt_TimKH, java.awt.BorderLayout.CENTER);
 
         lb_TimKH.setBackground(new java.awt.Color(255, 0, 0));
@@ -115,6 +118,15 @@ public class Panel_cart extends javax.swing.JPanel {
         });
         pnl_timKH.add(lb_TimKH, java.awt.BorderLayout.WEST);
 
+        btn_TimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        btn_TimKiem.setPreferredSize(new java.awt.Dimension(50, 27));
+        btn_TimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseClicked(evt);
+            }
+        });
+        pnl_timKH.add(btn_TimKiem, java.awt.BorderLayout.EAST);
+
         pnl_thongTin_KH.add(pnl_timKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 7, 790, 50));
 
         pnl_TimKH_row1.setPreferredSize(new java.awt.Dimension(20, 50));
@@ -125,7 +137,6 @@ public class Panel_cart extends javax.swing.JPanel {
         pnl_TimKH_row1.add(lb_DiemTichLuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, -1, -1));
 
         txt_DiemTichLuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_DiemTichLuy.setText("15.468");
         txt_DiemTichLuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_DiemTichLuyActionPerformed(evt);
@@ -142,7 +153,7 @@ public class Panel_cart extends javax.swing.JPanel {
         pnl_TimKH_row1.add(lb_TenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
 
         txt_Rank.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_Rank.setText("Vàng");
+        txt_Rank.setText(" ");
         txt_Rank.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_RankActionPerformed(evt);
@@ -151,7 +162,6 @@ public class Panel_cart extends javax.swing.JPanel {
         pnl_TimKH_row1.add(txt_Rank, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 100, 40));
 
         txt_Email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_Email.setText("abc@gmail.com");
         pnl_TimKH_row1.add(txt_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 220, 40));
 
         lb_Rank.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -159,18 +169,17 @@ public class Panel_cart extends javax.swing.JPanel {
         pnl_TimKH_row1.add(lb_Rank, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, -1, -1));
 
         txt_TenKH.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_TenKH.setText("Nguyễn Văn A");
         pnl_TimKH_row1.add(txt_TenKH, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 230, 40));
 
         txt_DiaChi1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_DiaChi1.setText("abc, quận Gò Vấp");
+        txt_DiaChi1.setText(" ");
         pnl_TimKH_row1.add(txt_DiaChi1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 60, 350, 40));
 
         lb_Email1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lb_Email1.setText("Email:");
         pnl_TimKH_row1.add(lb_Email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
-        pnl_thongTin_KH.add(pnl_TimKH_row1, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 57, 790, 110));
+        pnl_thongTin_KH.add(pnl_TimKH_row1, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 57, 790, 100));
 
         pnl_thongTin.add(pnl_thongTin_KH, java.awt.BorderLayout.CENTER);
 
@@ -303,9 +312,13 @@ public class Panel_cart extends javax.swing.JPanel {
         lbl_TienNhan.setText("Tiền nhận: ");
         pnl_thanhToan.add(lbl_TienNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 80, 20));
 
-        txt_SuungTichDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_SuungTichDiem.setText("5.000");
-        pnl_thanhToan.add(txt_SuungTichDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 390, 40));
+        txt_SudungTichDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_SudungTichDiem.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_SudungTichDiemKeyReleased(evt);
+            }
+        });
+        pnl_thanhToan.add(txt_SudungTichDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 390, 40));
 
         txt_TienNhan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txt_TienNhan.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -386,21 +399,81 @@ public class Panel_cart extends javax.swing.JPanel {
         double tienNhan = Double.parseDouble(txt_TienNhan.getText());
         double tienThanhToan = Double.parseDouble(txt_ThanhToan.getText());
         
-        double tienThoi = tienNhan - tienThanhToan;
+        double suDungTichDiem = 0;
+        if(txt_SudungTichDiem.getText().compareTo("") != 0)
+        {
+            suDungTichDiem = Double.parseDouble(txt_SudungTichDiem.getText());
+        }
+        
+        double tienThoi = tienNhan + suDungTichDiem - tienThanhToan;
         
         txt_TienThoi.setText(tienThoi + "");
     }//GEN-LAST:event_txt_TienNhanKeyReleased
 
     private void lb_TimKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_TimKHMouseClicked
         // TODO add your handling code here:
+    }//GEN-LAST:event_lb_TimKHMouseClicked
+
+    private void btn_TimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseClicked
+        // TODO add your handling code here:
         String maKM_searched = txt_TimKH.getText();
         
-    }//GEN-LAST:event_lb_TimKHMouseClicked
+        KhachHang kh = kh_dao.getKH_TheoMa(maKM_searched);
+        if(kh != null) {
+            txt_TenKH.setText(kh.getTenKH());
+            txt_DiemTichLuy.setText(kh.getTieuPhiTichLuy() + "");
+            txt_Email.setText(kh.getEmail());
+            txt_DiaChi1.setText(kh.getDiaChi());
+            
+            String rank;
+            switch (kh.getRank().getMaRank()) {
+                case "R001":
+                {
+                    rank = "Đồng";
+                    break;
+                }
+                case "R002": {
+                    rank = "Bạc";
+                    break;
+                }   
+                case "R003": {
+                    rank = "Vàng";
+                    break;
+                }
+                case "R004": {
+                    rank = "Kim Cương";
+                    break;
+                }
+                default:
+                    throw new AssertionError();
+            }
+            txt_Rank.setText(rank);
+        } else {
+            JOptionPane.showMessageDialog(null, "Khách hàng chưa đăng ký thành viên!!!");
+        }
+    }//GEN-LAST:event_btn_TimKiemMouseClicked
+
+    private void txt_SudungTichDiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SudungTichDiemKeyReleased
+        // TODO add your handling code here:
+        double tienNhan = Double.parseDouble(txt_TienNhan.getText());
+        double tienThanhToan = Double.parseDouble(txt_ThanhToan.getText());
+        
+        double suDungTichDiem = 0;
+        if(txt_SudungTichDiem.getText().compareTo("") != 0)
+        {
+            suDungTichDiem = Double.parseDouble(txt_SudungTichDiem.getText());
+        }
+        
+        double tienThoi = tienNhan + suDungTichDiem - tienThanhToan;
+        
+        txt_TienThoi.setText(tienThoi + "");
+    }//GEN-LAST:event_txt_SudungTichDiemKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ThanhToan;
     private javax.swing.JButton btn_Them;
+    private javax.swing.JButton btn_TimKiem;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel lb_Ca;
     private javax.swing.JLabel lb_DiaChi;
@@ -433,7 +506,7 @@ public class Panel_cart extends javax.swing.JPanel {
     private javax.swing.JTextField txt_Email;
     private javax.swing.JTextField txt_MaHD;
     private javax.swing.JTextField txt_Rank;
-    private javax.swing.JTextField txt_SuungTichDiem;
+    private javax.swing.JTextField txt_SudungTichDiem;
     private javax.swing.JTextField txt_TenKH;
     private javax.swing.JTextField txt_ThanhToan;
     private javax.swing.JTextField txt_TienNhan;

@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/N14_BookStore/Book/src/service/SanPhamService.java</file>
-            <file>file:/D:/N14_BookStore/Book/src/dao/KhachHang_DAO.java</file>
-            <file>file:/D:/N14_BookStore/Book/src/GUI/Panel_cart.java</file>
-            <file>file:/D:/N14_BookStore/Book/src/dao/SanPham_DAO.java</file>
-            <file>file:/D:/N14_BookStore/Book/src/GUI/MainView.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
