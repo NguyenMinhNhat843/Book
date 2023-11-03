@@ -4,6 +4,7 @@
  */
 package service;
 
+import entity.TaiKhoan;
 import java.util.ArrayList;
 
 /**
@@ -12,7 +13,8 @@ import java.util.ArrayList;
  */
 public interface TaiKhoanService {
     public ArrayList<TaiKhoanService> getAllTK();
-    public TaiKhoanService getTK_TheoMa(String maTK);
+    public TaiKhoan getTK_TheoMa(String maTK);
+    public TaiKhoan getTK_Theousername(String username); 
     public void themTKVaoCSDL(TaiKhoanService tk);
     public void CapNhatTK(String maTK);
     public void XoaTK(String maTK);

@@ -302,6 +302,11 @@ public class Panel_cart extends javax.swing.JPanel {
         btn_ThanhToan.setBackground(new java.awt.Color(255, 51, 51));
         btn_ThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_ThanhToan.setText("Thanh Toán");
+        btn_ThanhToan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_ThanhToanMouseClicked(evt);
+            }
+        });
         pnl_thanhToan.add(btn_ThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 170, 60));
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -468,6 +473,11 @@ public class Panel_cart extends javax.swing.JPanel {
         
         txt_TienThoi.setText(tienThoi + "");
     }//GEN-LAST:event_txt_SudungTichDiemKeyReleased
+
+    private void btn_ThanhToanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThanhToanMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btn_ThanhToanMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

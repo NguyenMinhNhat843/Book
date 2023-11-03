@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package GUI;
+import dao.TaiKhoan_DAO;
+import entity.TaiKhoan;
 import java.awt.Graphics;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -10,6 +12,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import sql.connectDB;
 
 /**
  *
@@ -17,15 +20,30 @@ import javax.swing.SwingUtilities;
  */
 public class Panel_Login extends javax.swing.JPanel {
     private BufferedImage background;
+    private TaiKhoan_DAO tk_dao = new TaiKhoan_DAO();
     /**
      * Creates new form Panel_Login
      */
     public Panel_Login() {
+        connect();
         initComponents();
+        
+        txt_username.setText("nhatminh");
+        txt_password.setText("nhatminhpass");
         
         try {
             background = ImageIO.read(getClass().getResource("/images/login_background.jpg"));
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void connect() {
+        try {
+            connectDB.getInstance().connect();
+            System.out.println("connect successfully");
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(null, "Kết nối csdl thất bai!!!");
             e.printStackTrace();
         }
     }
@@ -103,13 +121,14 @@ public class Panel_Login extends javax.swing.JPanel {
 
     private void btn_loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_loginMouseClicked
         // TODO add your handling code here:
-        if(txt_username.getText().equals("admin") && txt_password.getText().equals("admin")) {
+        TaiKhoan tk = tk_dao.getTK_Theousername(txt_username.getText());
+        
+        if(tk != null && tk.getPassword().compareTo(txt_password.getText()) == 0) {
             JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(Panel_Login.this);
-            new MainView().setVisible(true);
+            new Panel_Main(tk).setVisible(true);
             frame.setVisible(false);
-//            this.setVisible(false);
         } else {
-           JOptionPane.showMessageDialog(null, "Username or password incorrect!!!");
+            JOptionPane.showMessageDialog(null, "Username or password incorrect!!!");
         }
     }//GEN-LAST:event_btn_loginMouseClicked
 

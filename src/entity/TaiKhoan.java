@@ -9,5 +9,62 @@ package entity;
  * @author Asus
  */
 public class TaiKhoan {
+    private String maTK;
+    private String tenNguoiDung;
+    private String username;
+    private String password;
+    private String loaiTK;
+
+    public TaiKhoan(String maTK, String tenNguoiDung, String username, String password, String loaiTK) {
+        this.maTK = maTK;
+        this.tenNguoiDung = tenNguoiDung;
+        this.username = username;
+        this.password = password;
+        this.loaiTK = loaiTK;
+    }
+
+    public TaiKhoan() {
+    }
+
+    public String getMaTK() {
+        return maTK;
+    }
+
+    public String getTenNguoiDung() {
+        return tenNguoiDung;
+    }
+    
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getLoaiTK() {
+        return loaiTK;
+    }
+
+    public void setMaTK(String maTK) {
+        this.maTK = maTK;
+    }
+
+    public void setTenNguoiDung(String tenNguoiDung) {
+        this.tenNguoiDung = tenNguoiDung;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setLoaiTK(String loaiTK) {
+        this.loaiTK = loaiTK;
+    }
+    
     
 }
