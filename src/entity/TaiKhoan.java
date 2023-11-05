@@ -10,13 +10,15 @@ package entity;
  */
 public class TaiKhoan {
     private String maTK;
+    private NhanVien maNV;
     private String tenNguoiDung;
     private String username;
     private String password;
     private String loaiTK;
 
-    public TaiKhoan(String maTK, String tenNguoiDung, String username, String password, String loaiTK) {
+    public TaiKhoan(String maTK, NhanVien maNV, String tenNguoiDung, String username, String password, String loaiTK) {
         this.maTK = maTK;
+        this.maNV = maNV;
         this.tenNguoiDung = tenNguoiDung;
         this.username = username;
         this.password = password;
@@ -28,6 +30,10 @@ public class TaiKhoan {
 
     public String getMaTK() {
         return maTK;
+    }
+
+    public NhanVien getMaNV() {
+        return maNV;
     }
 
     public String getTenNguoiDung() {
@@ -48,6 +54,10 @@ public class TaiKhoan {
 
     public void setMaTK(String maTK) {
         this.maTK = maTK;
+    }
+
+    public void setMaNV(NhanVien maNV) {
+        this.maNV = maNV;
     }
 
     public void setTenNguoiDung(String tenNguoiDung) {

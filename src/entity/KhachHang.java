@@ -31,6 +31,10 @@ public class KhachHang {
         this.rank = rank;
         this.tichDiem = tichDiem;
     }
+    
+    public KhachHang(String maKH) {
+        this.maKH = maKH;
+    }
 
     public KhachHang() {
     }

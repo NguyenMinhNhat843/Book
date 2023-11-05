@@ -12,8 +12,9 @@ import java.util.ArrayList;
  * @author Asus
  */
 public interface HoaDonService {
+    public String tuPhatSinhMaHD();
     public ArrayList<HoaDon> getAllHD();
     public HoaDon getHD_TheoMa(String maHD);
-    public void themHD(HoaDon hd);
+    public boolean themHD(HoaDon hd);
     public void CapNhatHD(HoaDon hd_old, HoaDon hd_new);
 }

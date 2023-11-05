@@ -44,6 +44,19 @@ create table KhachHang (
 )
 go
 
+-- table NhanVien --
+create table NhanVien (
+	maNV nvarchar(10) primary key not null,
+	--maTaiKhoan nvarchar(10) not null references TaiKhoan(maTaiKhoan)
+	--	on delete cascade
+	--	on update cascade,
+	tenNV nvarchar(50) not null,
+	sDT nvarchar(12) not null,
+	email nvarchar(30) not null,
+	diaChi nvarchar(100) not null,
+	trangThai nvarchar(10) not null check (trangThai in ('true', 'false')),
+)
+
 -- table loaiTK --
 create table LoaiTK (
 	maLoaiTK nvarchar(10) primary key not null,
@@ -53,25 +66,15 @@ create table LoaiTK (
 -- table TaiKhoan --
 create table TaiKhoan (
 	maTaiKhoan nvarchar(10) primary key not null,
+	maNV nvarchar(10) references NhanVien(maNV)
+		on update cascade
+		on delete cascade,
 	tenNguoiDung nvarchar(30),
 	username nvarchar(30) not null,
 	password nvarchar(30) not null,
 	loaiTK nvarchar(10) references LoaiTK(maLoaiTK)
 		on update cascade
 		on delete cascade,
-)
-
--- table NhanVien --
-create table NhanVien (
-	maNV nvarchar(10) primary key not null,
-	maTaiKhoan nvarchar(10) not null references TaiKhoan(maTaiKhoan)
-		on delete cascade
-		on update cascade,
-	tenNV nvarchar(50) not null,
-	sDT nvarchar(12) not null,
-	email nvarchar(30) not null,
-	diaChi nvarchar(100) not null,
-	trangThai nvarchar(10) not null check (trangThai in ('true', 'false')),
 )
 
 -- table LoaiKM --

@@ -4,6 +4,7 @@
  */
 package dao;
 
+import entity.NhanVien;
 import entity.TaiKhoan;
 import java.util.ArrayList;
 import service.TaiKhoanService;
@@ -57,12 +58,13 @@ public class TaiKhoan_DAO implements TaiKhoanService{
             
             while(rs.next()) {
                 String maTK = rs.getString("maTaiKhoan");
+                String maNV = rs.getString("maNV");
                 String tenNguoiDung = rs.getString("tenNguoiDung");
                 String _username = rs.getString("username");
                 String password = rs.getString("password");
                 String loaiTK = rs.getString("loaiTK");
                 
-                tk = new TaiKhoan(maTK, tenNguoiDung ,username, password, loaiTK);
+                tk = new TaiKhoan(maTK, new NhanVien(maNV) ,tenNguoiDung ,username, password, loaiTK);
             }
         } catch (Exception e) {
             e.printStackTrace();

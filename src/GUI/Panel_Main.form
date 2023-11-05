@@ -447,7 +447,7 @@
             </Container>
             <Container class="javax.swing.JPanel" name="pnl_cart">
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_LayoutCodePre" type="java.lang.String" value="pnl_cart = new GUI.Panel_cart();"/>
+                <AuxValue name="JavaCodeGenerator_LayoutCodePre" type="java.lang.String" value="pnl_cart = new Panel_cart(_this_tk.getMaNV().getMaNV());"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
