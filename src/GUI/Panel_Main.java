@@ -32,6 +32,7 @@ public class Panel_Main extends javax.swing.JFrame {
     public Panel_Main(TaiKhoan tk) {
         connect();
         _this_tk = tk;
+//        System.out.println("GUI.Panel_Main.<init>() " + _this_tk.getMaNV().getMaNV());
         initComponents();
         xuLyDangNhap();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -321,7 +322,7 @@ public class Panel_Main extends javax.swing.JFrame {
         pnl_main.add(pnl_anylist, "anylist");
 
         pnl_cart.setLayout(new java.awt.BorderLayout());
-        pnl_cart = new GUI.Panel_cart();
+        pnl_cart = new Panel_cart(_this_tk.getMaNV().getMaNV());
         pnl_main.add(pnl_cart, "cart");
 
         pnl_customer.setLayout(new java.awt.BorderLayout());

@@ -11,5 +11,5 @@ import entity.ChiTietHoaDon;
  * @author Asus
  */
 public interface ChiTietHoaDonService {
-    public void ThemCTHDVaoCSDL(ChiTietHoaDon cthd);
+    public boolean ThemCTHDVaoCSDL(ChiTietHoaDon cthd);
 }

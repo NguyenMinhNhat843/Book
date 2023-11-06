@@ -4,17 +4,37 @@
  */
 package GUI;
 
+import dao.HoaDon_DAO;
+import entity.HoaDon;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Asus
  */
 public class Panel_bill extends javax.swing.JPanel {
-
+    private HoaDon_DAO hd_dao = new HoaDon_DAO();
     /**
      * Creates new form Panel_bill
      */
     public Panel_bill() {
         initComponents();
+        
+        LoadDuLieuLenTable();
+    }
+    
+    public void LoadDuLieuLenTable() {
+        ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
+        dsHD = hd_dao.getAllHD();
+        
+        DefaultTableModel model_dsHD = (DefaultTableModel) table_DSHD.getModel();
+        
+        for(HoaDon hd : dsHD) {
+            Object[] obj = {hd.getMaHD(), hd.getNv().getTenNV(), hd.getKh().getTenKH(), hd.getNgayTao(), hd.getTongTien()};
+            
+            model_dsHD.addRow(obj);
+        }
     }
 
     /**
@@ -68,7 +88,7 @@ public class Panel_bill extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         pnl_Tabel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_DSHD = new javax.swing.JTable();
         pnl_XuatHoaDon = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         pnl_DoiTra = new javax.swing.JPanel();
@@ -232,18 +252,15 @@ public class Panel_bill extends javax.swing.JPanel {
 
         pnl_Tabel.setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_DSHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"HD001", "Nguyễn Minh Nhật", "Nguyễn Văn A", "30/10/2023", "100.000"},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Mã HD", "Nhân Viên", "Khách Hàng", "Ngày Tạo Hóa Đơn", "Tổng tiền"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table_DSHD);
 
         pnl_Tabel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -275,7 +292,6 @@ public class Panel_bill extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_KhachHang;
     private javax.swing.JLabel lbl_LocTheoKH_title;
@@ -309,6 +325,7 @@ public class Panel_bill extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_top;
     private javax.swing.JPanel pnl_txt_LocTheoKH;
     private javax.swing.JPanel pnl_txt_LocTheoNV;
+    private javax.swing.JTable table_DSHD;
     private javax.swing.JTextField txt_KhachHang;
     private javax.swing.JTextField txt_LocTheoKH;
     private javax.swing.JTextField txt_MaHD;

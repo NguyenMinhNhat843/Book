@@ -44,6 +44,19 @@ create table KhachHang (
 )
 go
 
+-- table NhanVien --
+create table NhanVien (
+	maNV nvarchar(10) primary key not null,
+	--maTaiKhoan nvarchar(10) not null references TaiKhoan(maTaiKhoan)
+	--	on delete cascade
+	--	on update cascade,
+	tenNV nvarchar(50) not null,
+	sDT nvarchar(12) not null,
+	email nvarchar(30) not null,
+	diaChi nvarchar(100) not null,
+	trangThai nvarchar(10) not null check (trangThai in ('true', 'false')),
+)
+
 -- table loaiTK --
 create table LoaiTK (
 	maLoaiTK nvarchar(10) primary key not null,
@@ -53,25 +66,15 @@ create table LoaiTK (
 -- table TaiKhoan --
 create table TaiKhoan (
 	maTaiKhoan nvarchar(10) primary key not null,
+	maNV nvarchar(10) references NhanVien(maNV)
+		on update cascade
+		on delete cascade,
 	tenNguoiDung nvarchar(30),
 	username nvarchar(30) not null,
 	password nvarchar(30) not null,
 	loaiTK nvarchar(10) references LoaiTK(maLoaiTK)
 		on update cascade
 		on delete cascade,
-)
-
--- table NhanVien --
-create table NhanVien (
-	maNV nvarchar(10) primary key not null,
-	maTaiKhoan nvarchar(10) not null references TaiKhoan(maTaiKhoan)
-		on delete cascade
-		on update cascade,
-	tenNV nvarchar(50) not null,
-	sDT nvarchar(12) not null,
-	email nvarchar(30) not null,
-	diaChi nvarchar(100) not null,
-	trangThai nvarchar(10) not null check (trangThai in ('true', 'false')),
 )
 
 -- table LoaiKM --
@@ -126,6 +129,7 @@ create table SanPham (
 	giaBan float not null,
 	soLuongBayBan int not null,
 	soLuongTonKho int not null,
+	VAT float
 )
 
 -- table HoaDon --
@@ -138,20 +142,23 @@ create table HoaDon (
 		on delete cascade
 		on update cascade,
 	ngayTao smalldatetime not null,
-	tienKhachDua float not null
+	tienKhachDua float not null,
+	tongTien float,
 )
 
 -- table ChiTietHoaDon --
 create table ChiTietHoaDon (
-	maHoaDon nvarchar(10) references HoaDon(maHD) 
+	maHoaDon nvarchar(10) not null references HoaDon(maHD) 
 		on delete cascade
 		on update cascade,
-	maSanPham nvarchar(10) references SanPham(maSP)
+	maSanPham nvarchar(10) not null references SanPham(maSP)
 		on delete cascade
 		on update cascade,
-	soLuong int not null,
-	VAT float not null
+	soLuong int not null
 )
+
+alter table ChiTietHoaDon
+add primary key (maHoaDon, maSanPham);
 
 
 -- table HoaDonNhapHang --
@@ -179,6 +186,11 @@ create table ChiTietHoaDonNhapHang (
 
 
 ------------------ add data ---------------
+-- NhanVien --
+insert into NhanVien(maNV, tenNV, sDT, email, diaChi, trangThai)
+values 
+	('NV001', N'Nguyễn Minh Nhật', '0235136987', 'nhat@gmail.com', N'abc, Gò Vấp', 'true')
+
 -- LoaiTK --
 insert into LoaiTK(maLoaiTK, tenLoaiTK)
 values 
@@ -186,12 +198,12 @@ values
 	('LTK002', N'Tài khoản quản lý');
 
 -- Tai Khoan --
-insert into TaiKhoan(maTaiKhoan, tenNguoiDung ,username, password, loaiTK)
+insert into TaiKhoan(maTaiKhoan, maNV, tenNguoiDung ,username, password, loaiTK)
 values 
-	('TK001', N'Nguyễn Minh Nhật', 'nhatminh', 'nhatminhpass', 'LTK002'),
-	('TK002', N'Vũ Quốc Huy', 'quochuy', 'quochuypass', 'LTK001'),
-	('TK003', N'Nguyễn Thanh Tùng', 'thanhtung', 'thanhtungpass', 'LTK001'),
-	('TK004', N'Trần Bảo Xuyên', 'baoxuyen', 'baoxuyenpass', 'LTK001');
+	('TK001','NV001', N'Nguyễn Minh Nhật', 'nhatminh', 'nhatminhpass', 'LTK002'),
+	('TK002','NV001', N'Vũ Quốc Huy', 'quochuy', 'quochuypass', 'LTK001'),
+	('TK003','NV001', N'Nguyễn Thanh Tùng', 'thanhtung', 'thanhtungpass', 'LTK001'),
+	('TK004','NV001', N'Trần Bảo Xuyên', 'baoxuyen', 'baoxuyenpass', 'LTK001');
 
 -- Rank --
 insert into Rank (maRank, tenRank, tiLeTichDiem)

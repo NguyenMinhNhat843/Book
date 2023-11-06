@@ -26,6 +26,15 @@ public class NhanVien {
         this.diaChi = diaChi;
         this.trangThai = trangThai;
     }
+    
+    public NhanVien(String maNV) {
+        this.maNV = maNV;
+    }
+    
+    public NhanVien(String maNV, String tenNV) {
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+    }
 
     public NhanVien() {
     }
