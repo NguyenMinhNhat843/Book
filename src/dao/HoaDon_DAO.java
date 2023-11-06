@@ -6,6 +6,8 @@ package dao;
 
 import com.sun.jdi.connect.spi.Connection;
 import entity.HoaDon;
+import entity.KhachHang;
+import entity.NhanVien;
 import java.util.ArrayList;
 import service.HoaDonService;
 import sql.connectDB;
@@ -21,7 +23,50 @@ public class HoaDon_DAO implements HoaDonService{
 
     @Override
     public ArrayList<HoaDon> getAllHD() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
+        connectDB.getInstance();
+        java.sql.Connection con = connectDB.getConnect();
+        Statement stm = null;
+        
+        ResultSet rs = null;
+        
+        try {
+            String sql = "select maHD, maNV, tenNV, maKH, tenKH, ngayTao, tienKhachDua, tongTien\n" +
+                            "from HoaDon hd left join NhanVien nv\n" +
+                            "on hd.maNhanVien = nv.maNV\n" +
+                            "left join KhachHang kh\n" +
+                            "on kh.maKH = hd.maKhachHang";
+            stm = con.createStatement();
+            rs = stm.executeQuery(sql);
+            
+            while(rs.next()) {
+                String maHD = rs.getString("maHD");
+                String maNV = rs.getString("maNV");
+                String tenNV = rs.getString("tenNV");
+                String maKH = rs.getString("maKH");
+                String tenKH = rs.getString("tenKH");
+                
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String ngayTao = rs.getString("ngayTao").substring(0, 19);
+//                System.out.println("dao.HoaDon_DAO.getAllHD() " + ngayTao);
+                LocalDateTime ngayTao_lcd = LocalDateTime.parse(ngayTao, dtf);
+                
+//                System.out.println("dao.HoaDon_DAO.getAllHD() " + ngayTao + " " +  ngayTao_lcd);
+                
+                double tienKhachDua = rs.getDouble("tienKhachDua");
+                double tongTien = rs.getDouble("tongTien");
+                
+                HoaDon hd = new HoaDon(maHD, new NhanVien(maNV, tenNV), new KhachHang(maKH, tenKH), 
+                        ngayTao_lcd, tienKhachDua, tongTien);
+                
+                dsHD.add(hd);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return dsHD;
     }
 
     @Override
@@ -38,16 +83,22 @@ public class HoaDon_DAO implements HoaDonService{
         int n = 0;
         
         try {
-            prstmt = con.prepareStatement("insert into HoaDon(maHD, maNhanVien,maKhachHang , ngayTao, tienKhachDua)"
-                                        + "values(?, ?, ?, ?, ?)");
+            prstmt = con.prepareStatement("insert into HoaDon(maHD, maNhanVien,maKhachHang , ngayTao, tienKhachDua, tongTien)"
+                                        + "values(?, ?, ?, ?, ?, ?)");
             prstmt.setString(1, hd.getMaHD());
             prstmt.setString(2, hd.getNv().getMaNV());
-            prstmt.setString(3, hd.getKh().getMaKH());
+            
+            if(hd.getKh() != null) {
+                prstmt.setString(3, hd.getKh().getMaKH());
+            } else {
+                prstmt.setNull(3, java.sql.Types.NULL);
+            }
             
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             prstmt.setString(4, dtf.format(hd.getNgayTao()));
             
             prstmt.setDouble(5, hd.getTienKhachDua());
+            prstmt.setDouble(6, hd.getTongTien());
             
             n = prstmt.executeUpdate();
             

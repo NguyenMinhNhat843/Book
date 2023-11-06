@@ -32,6 +32,10 @@ public class SanPham {
         this.soLuongBayBan = soLuongBayBan;
         this.soLuongTonKho = soLuongTonKho;
     }
+    
+    public SanPham(String maSP) {
+        this.maSP = maSP;
+    }
 
     public SanPham() {
     }

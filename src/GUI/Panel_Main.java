@@ -32,6 +32,7 @@ public class Panel_Main extends javax.swing.JFrame {
     public Panel_Main(TaiKhoan tk) {
         connect();
         _this_tk = tk;
+//        System.out.println("GUI.Panel_Main.<init>() " + _this_tk.getMaNV().getMaNV());
         initComponents();
         xuLyDangNhap();
         setExtendedState(JFrame.MAXIMIZED_BOTH);

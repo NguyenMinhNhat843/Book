@@ -4,9 +4,11 @@
  */
 package GUI;
 
+import dao.ChiTietHoaDon_DAO;
 import dao.HoaDon_DAO;
 import dao.KhachHang_DAO;
 import dao.SanPham_DAO;
+import entity.ChiTietHoaDon;
 import entity.HoaDon;
 import entity.SanPham;
 import entity.KhachHang;
@@ -33,6 +35,7 @@ public class Panel_cart extends javax.swing.JPanel {
     private SanPham_DAO sp_dao;
     private KhachHang_DAO kh_dao = new KhachHang_DAO();
     private HoaDon_DAO hd_dao;
+    private ChiTietHoaDon_DAO cthd_dao = new ChiTietHoaDon_DAO();
     private DefaultTableModel model_DSSP;
     private double tongTienThanhToan = 0;
     private String _this_maNV;
@@ -509,11 +512,24 @@ public class Panel_cart extends javax.swing.JPanel {
         // TODO add your handling code here:
         String maHD = txt_MaHD.getText();
         String maNV = _this_maNV;
-        String maKH = txt_MaKH.getText();
+//        System.out.println("GUI.Panel_cart.btn_ThanhToanMouseClicked() " + maNV);
+        String maKH = "";
+        if(!txt_MaKH.getText().equals("")) {
+            maKH = txt_MaKH.getText();
+        }
         LocalDateTime ngayTao = LocalDateTime.now();
         double tienKhachDua = txt_TienNhan.getText().equals("") ? 0 : Double.parseDouble(txt_TienNhan.getText());
         
-        HoaDon hd = new HoaDon(maHD, new NhanVien(maNV),new KhachHang(maKH), ngayTao, tienKhachDua);
+        HoaDon hd = null;
+        if(maKH.equals("")) {
+            hd = new HoaDon(maHD, new NhanVien(maNV),null, ngayTao, tienKhachDua, 
+                    Double.parseDouble(txt_ThanhToan.getText()));
+        } else {
+            hd = new HoaDon(maHD, new NhanVien(maNV),new KhachHang(maKH), ngayTao, 
+                    tienKhachDua, Double.parseDouble(txt_ThanhToan.getText()));
+        }
+        
+//        System.out.println("GUI.Panel_cart.btn_ThanhToanMouseClicked() " + hd.getTongTien());
         
         if(txt_TienNhan.getText().compareTo("") == 0) {
             JOptionPane.showMessageDialog(this, "Chưa nhận tiền của khách!!!");
@@ -522,6 +538,17 @@ public class Panel_cart extends javax.swing.JPanel {
         } else {
             if(hd_dao.themHD(hd)) {
                 JOptionPane.showMessageDialog(this, "Lưu hóa đơn thành công!!!");
+                
+                // Luu chi tiet hoa don
+                for(int i = 0; i < table_DanhSachSP.getRowCount(); ++i) {
+                    String maHD_CTHD = txt_MaHD.getText();
+                    String maSP_CTHD = table_DanhSachSP.getValueAt(i, 0).toString();
+                    int soLuong = Integer.parseInt(table_DanhSachSP.getValueAt(i, 3).toString());
+                    
+                    ChiTietHoaDon cthd = new ChiTietHoaDon(new HoaDon(maHD_CTHD), new SanPham(maSP_CTHD), soLuong);
+                    cthd_dao.ThemCTHDVaoCSDL(cthd);
+                }
+                
                 XoaTable_DSSP();
             } else {
                 JOptionPane.showMessageDialog(this, "Có lỗi xảy ra, vui lòng thử lại!!!");

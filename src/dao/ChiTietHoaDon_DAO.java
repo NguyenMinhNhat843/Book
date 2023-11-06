@@ -5,6 +5,8 @@
 package dao;
 
 import service.ChiTietHoaDonService;
+import sql.connectDB;
+import java.sql.*;
 
 /**
  *
@@ -13,8 +15,33 @@ import service.ChiTietHoaDonService;
 public class ChiTietHoaDon_DAO implements ChiTietHoaDonService{
 
     @Override
-    public void ThemCTHDVaoCSDL(entity.ChiTietHoaDon cthd) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean ThemCTHDVaoCSDL(entity.ChiTietHoaDon cthd) {
+        int n = 0;
+        
+        connectDB.getInstance();
+        java.sql.Connection con = connectDB.getConnect();
+        java.sql.PreparedStatement stmt = null;
+        
+        try {
+            String sql = "insert into ChiTietHoaDon(maHoaDon, maSanPham, soLuong) values(?, ?, ?)";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, cthd.getHoaDon().getMaHD());
+            stmt.setString(2, cthd.getSanPham().getMaSP());
+            stmt.setInt(3, cthd.getSoLuong());
+//            stmt.setDouble(4, cthd.getvAT());
+            
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return n > 0;
     }
     
 }

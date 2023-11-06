@@ -504,40 +504,15 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTable" name="jTable1">
+                        <Component class="javax.swing.JTable" name="table_DSHD">
                           <Properties>
                             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                              <Table columnCount="5" rowCount="4">
-                                <Column editable="true" title="M&#xe3; HD" type="java.lang.Object">
-                                  <Data value="HD001"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                </Column>
-                                <Column editable="true" title="Nh&#xe2;n Vi&#xea;n" type="java.lang.Object">
-                                  <Data value="Nguy&#x1ec5;n Minh Nh&#x1ead;t"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                </Column>
-                                <Column editable="true" title="Kh&#xe1;ch H&#xe0;ng" type="java.lang.Object">
-                                  <Data value="Nguy&#x1ec5;n V&#x103;n A"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                </Column>
-                                <Column editable="true" title="Ng&#xe0;y T&#x1ea1;o H&#xf3;a &#x110;&#x1a1;n" type="java.lang.Object">
-                                  <Data value="30/10/2023"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                </Column>
-                                <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n" type="java.lang.Object">
-                                  <Data value="100.000"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                  <Data value="null"/>
-                                </Column>
+                              <Table columnCount="5" rowCount="0">
+                                <Column editable="true" title="M&#xe3; HD" type="java.lang.Object"/>
+                                <Column editable="true" title="Nh&#xe2;n Vi&#xea;n" type="java.lang.Object"/>
+                                <Column editable="true" title="Kh&#xe1;ch H&#xe0;ng" type="java.lang.Object"/>
+                                <Column editable="true" title="Ng&#xe0;y T&#x1ea1;o H&#xf3;a &#x110;&#x1a1;n" type="java.lang.Object"/>
+                                <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n" type="java.lang.Object"/>
                               </Table>
                             </Property>
                             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
