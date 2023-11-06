@@ -4,9 +4,11 @@
  */
 package dao;
 
+import entity.ChiTietHoaDon;
 import service.ChiTietHoaDonService;
 import sql.connectDB;
 import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,6 +44,32 @@ public class ChiTietHoaDon_DAO implements ChiTietHoaDonService{
         }
         
         return n > 0;
+    }
+
+    @Override
+    public ArrayList<ChiTietHoaDon> getDSSP_TheoMaHD(String maHD) {
+        connectDB.getInstance();
+        java.sql.Connection con = connectDB.getConnect();
+        
+        java.sql.PreparedStatement stmt = null;
+        
+        try {
+            String sql = "select * ChiTietHoaDon where maHD = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, maHD);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                
+            }
+            
+        } catch (Exception e) {
+        } finally {
+        }
+        
+        
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

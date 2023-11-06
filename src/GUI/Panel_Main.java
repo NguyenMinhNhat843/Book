@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import sql.connectDB;
 
 /**
@@ -371,6 +372,8 @@ public class Panel_Main extends javax.swing.JFrame {
 
     private void btn_billMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_billMouseClicked
         // TODO add your handling code here:
+        pnl_bill = new Panel_bill();
+        pnl_main.add(pnl_bill, "bill");
         card.show(pnl_main, "bill");
     }//GEN-LAST:event_btn_billMouseClicked
 

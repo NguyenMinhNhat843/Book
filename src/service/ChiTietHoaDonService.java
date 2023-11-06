@@ -5,6 +5,7 @@
 package service;
 
 import entity.ChiTietHoaDon;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,4 +13,5 @@ import entity.ChiTietHoaDon;
  */
 public interface ChiTietHoaDonService {
     public boolean ThemCTHDVaoCSDL(ChiTietHoaDon cthd);
+    public ArrayList<ChiTietHoaDon> getDSSP_TheoMaHD(String maHD);
 }

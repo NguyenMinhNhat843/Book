@@ -8,6 +8,11 @@ import dao.HoaDon_DAO;
 import entity.HoaDon;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.text.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -90,7 +95,8 @@ public class Panel_bill extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         table_DSHD = new javax.swing.JTable();
         pnl_XuatHoaDon = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btn_InHD = new javax.swing.JButton();
+        btn_XemChiTiet = new javax.swing.JButton();
         pnl_DoiTra = new javax.swing.JPanel();
 
         setMinimumSize(new java.awt.Dimension(1280, 362));
@@ -104,7 +110,7 @@ public class Panel_bill extends javax.swing.JPanel {
         pnl_top.setLayout(new java.awt.BorderLayout());
 
         pnl_HD_info.setPreferredSize(new java.awt.Dimension(10, 100));
-        pnl_HD_info.setLayout(new java.awt.GridLayout(2, 2));
+        pnl_HD_info.setLayout(new java.awt.GridLayout(2, 4));
 
         lbl_MaHD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbl_MaHD.setText("Mã HD:");
@@ -260,6 +266,11 @@ public class Panel_bill extends javax.swing.JPanel {
                 "Mã HD", "Nhân Viên", "Khách Hàng", "Ngày Tạo Hóa Đơn", "Tổng tiền"
             }
         ));
+        table_DSHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_DSHDMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_DSHD);
 
         pnl_Tabel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -268,10 +279,25 @@ public class Panel_bill extends javax.swing.JPanel {
 
         pnl_XuatHoaDon.setPreferredSize(new java.awt.Dimension(10, 70));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Xuất Hóa Đơn");
-        jButton1.setPreferredSize(new java.awt.Dimension(600, 50));
-        pnl_XuatHoaDon.add(jButton1);
+        btn_InHD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_InHD.setText("Xuất Hóa Đơn");
+        btn_InHD.setPreferredSize(new java.awt.Dimension(600, 50));
+        btn_InHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_InHDActionPerformed(evt);
+            }
+        });
+        pnl_XuatHoaDon.add(btn_InHD);
+
+        btn_XemChiTiet.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_XemChiTiet.setText("Xem ChiTieets");
+        btn_XemChiTiet.setPreferredSize(new java.awt.Dimension(600, 50));
+        btn_XemChiTiet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_XemChiTietMouseClicked(evt);
+            }
+        });
+        pnl_XuatHoaDon.add(btn_XemChiTiet);
 
         pnl_center.add(pnl_XuatHoaDon, java.awt.BorderLayout.PAGE_END);
 
@@ -283,12 +309,47 @@ public class Panel_bill extends javax.swing.JPanel {
         add(jTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void table_DSHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_DSHDMouseClicked
+        // TODO add your handling code here:
+        
+        int r = table_DSHD.getSelectedRow();
+
+        if(r >= 0) {
+            txt_MaHD.setText(table_DSHD.getValueAt(r, 0).toString());
+
+            txt_NhanVien.setText(table_DSHD.getValueAt(r, 1) == null ? "" 
+                                                : table_DSHD.getValueAt(r, 1).toString());
+            txt_KhachHang.setText(table_DSHD.getValueAt(r, 2) == null ? ""
+                                                : table_DSHD.getValueAt(r, 2).toString());
+
+
+            try {
+                SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date = dtf.parse(table_DSHD.getValueAt(r, 3).toString().substring(0, 10));
+                date_NgayTao.setDate(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_table_DSHDMouseClicked
+
+    private void btn_InHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InHDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_InHDActionPerformed
+
+    private void btn_XemChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XemChiTietMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btn_XemChiTietMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_InHD;
     private javax.swing.JButton btn_TimKiem;
+    private javax.swing.JButton btn_XemChiTiet;
     private com.toedter.calendar.JDateChooser date_LocTheoNgay;
     private com.toedter.calendar.JDateChooser date_NgayTao;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
