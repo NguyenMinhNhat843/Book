@@ -4,6 +4,12 @@
  */
 package GUI;
 
+
+import dao.SanPham_DAO;
+import entity.SanPham;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Asus
@@ -26,105 +32,478 @@ public class Panel_Product extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pnl_sanPham = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        pnl_Top = new javax.swing.JPanel();
+        pnl_info = new javax.swing.JPanel();
+        pnl_info1 = new javax.swing.JPanel();
+        pnl_maSP = new javax.swing.JPanel();
+        lbl_masp = new javax.swing.JLabel();
+        maSP_field = new javax.swing.JTextField();
+        pnl_NCC = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lbl_NCC = new javax.swing.JLabel();
+        cbo_NCC_field = new javax.swing.JComboBox<>();
+        pnl_TonKho = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        tonKho_field = new javax.swing.JTextField();
+        pnl_info2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        tenSP_field = new javax.swing.JTextField();
+        giaNhap_field = new javax.swing.JTextField();
+        khuyenMai_field = new javax.swing.JTextField();
+        pnl_info3 = new javax.swing.JPanel();
+        lbl_loai = new javax.swing.JLabel();
+        lbl_giaBan = new javax.swing.JLabel();
+        cbo_loaiSP_field = new javax.swing.JComboBox<>();
+        giaBan_field = new javax.swing.JTextField();
+        pnl_btn = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        btn_themMoi = new javax.swing.JButton();
+        btn_xoaTrang = new javax.swing.JButton();
+        btn_capNhat = new javax.swing.JButton();
+        pnl_TimKiem = new javax.swing.JPanel();
+        maSP_TimKiem = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        pnl_Center = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        lbl_locTheoGia = new javax.swing.JLabel();
+        lbl_locTheoSP = new javax.swing.JLabel();
+        lbl_locTheoNCC = new javax.swing.JLabel();
+        cbo_locTheoGia = new javax.swing.JComboBox<>();
+        cbo_loc_theoSP = new javax.swing.JComboBox<>();
+        cbo_locTheoNCC = new javax.swing.JComboBox<>();
+        jPanel12 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_sanPham = new javax.swing.JTable();
 
         setLayout(new java.awt.BorderLayout());
 
         pnl_sanPham.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(200, 400));
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        pnl_Top.setPreferredSize(new java.awt.Dimension(0, 320));
+        pnl_Top.setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_info.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_info.setPreferredSize(new java.awt.Dimension(0, 150));
+        pnl_info.setLayout(new java.awt.GridLayout(1, 1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        pnl_info1.setLayout(new java.awt.GridLayout(3, 1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(905, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(108, Short.MAX_VALUE))
-        );
+        pnl_maSP.setPreferredSize(new java.awt.Dimension(370, 45));
+        pnl_maSP.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+        lbl_masp.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_masp.setText("Mã SP: ");
+        pnl_maSP.add(lbl_masp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 30));
 
-        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
+        maSP_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maSP_fieldActionPerformed(evt);
+            }
+        });
+        pnl_maSP.add(maSP_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 200, 40));
 
-        jLabel3.setText("Lọc sản phẩm ");
-        jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        pnl_info1.add(pnl_maSP);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(267, 267, 267)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(442, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
-        );
+        pnl_NCC.setPreferredSize(new java.awt.Dimension(370, 45));
+        pnl_NCC.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnl_NCC.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jPanel1.add(jPanel4, java.awt.BorderLayout.SOUTH);
+        lbl_NCC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_NCC.setText("Nhà cung cấp: ");
+        pnl_NCC.add(lbl_NCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        pnl_sanPham.add(jPanel1, java.awt.BorderLayout.NORTH);
+        cbo_NCC_field.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cbo_NCC_field.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NCC Gò Vấp", "NCC Tân Bình", "NCC Thủ Đức", "NCC Bình Thạnh" }));
+        cbo_NCC_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_NCC_fieldActionPerformed(evt);
+            }
+        });
+        pnl_NCC.add(cbo_NCC_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 200, 40));
+
+        pnl_info1.add(pnl_NCC);
+
+        pnl_TonKho.setPreferredSize(new java.awt.Dimension(370, 45));
+        pnl_TonKho.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Tồn kho:");
+        pnl_TonKho.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 30));
+
+        tonKho_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tonKho_fieldActionPerformed(evt);
+            }
+        });
+        pnl_TonKho.add(tonKho_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 200, 40));
+
+        pnl_info1.add(pnl_TonKho);
+
+        pnl_info.add(pnl_info1);
+
+        pnl_info2.setLayout(new java.awt.GridLayout(1, 0));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Tên SP:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 80, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Giá nhập:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 90, 30));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("Khuyến mãi:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 110, 20));
+
+        tenSP_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tenSP_fieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(tenSP_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 220, 40));
+
+        giaNhap_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                giaNhap_fieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(giaNhap_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 220, 40));
+        jPanel1.add(khuyenMai_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 220, 40));
+
+        pnl_info2.add(jPanel1);
+
+        pnl_info.add(pnl_info2);
+
+        pnl_info3.setPreferredSize(new java.awt.Dimension(350, 150));
+        pnl_info3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_loai.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_loai.setText("Loại:");
+        pnl_info3.add(lbl_loai, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        lbl_giaBan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_giaBan.setText("Giá bán:");
+        pnl_info3.add(lbl_giaBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+
+        cbo_loaiSP_field.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cbo_loaiSP_field.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SGK", "Truyện", "Tiểu thuyết", "Văn phòng phẩm", "Dụng cụ học tập" }));
+        pnl_info3.add(cbo_loaiSP_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 230, 50));
+        pnl_info3.add(giaBan_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 230, 40));
+
+        pnl_info.add(pnl_info3);
+
+        pnl_Top.add(pnl_info, java.awt.BorderLayout.NORTH);
+
+        pnl_btn.setPreferredSize(new java.awt.Dimension(1112, 50));
+        pnl_btn.setLayout(new java.awt.GridLayout(1, 0));
+
+        jPanel2.setPreferredSize(new java.awt.Dimension(1020, 50));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btn_themMoi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_themMoi.setText("Thêm mới");
+        btn_themMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themMoiActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_themMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 130, 60));
+
+        btn_xoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_xoaTrang.setText("Xóa trắng");
+        btn_xoaTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaTrangActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_xoaTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 130, 60));
+
+        btn_capNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_capNhat.setText("Cập nhật");
+        btn_capNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_capNhatActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_capNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 30, 120, 60));
+
+        pnl_TimKiem.setPreferredSize(new java.awt.Dimension(1112, 60));
+        pnl_TimKiem.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        maSP_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        maSP_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maSP_TimKiemActionPerformed(evt);
+            }
+        });
+        pnl_TimKiem.add(maSP_TimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 980, 60));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setText("Tìm kiếm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        pnl_TimKiem.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, -1, 50));
+
+        jPanel2.add(pnl_TimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, 60));
+
+        pnl_btn.add(jPanel2);
+
+        pnl_Top.add(pnl_btn, java.awt.BorderLayout.CENTER);
+
+        pnl_sanPham.add(pnl_Top, java.awt.BorderLayout.NORTH);
+
+        pnl_Center.setLayout(new java.awt.BorderLayout());
+        pnl_sanPham.add(pnl_Center, java.awt.BorderLayout.CENTER);
+
+        add(pnl_sanPham, java.awt.BorderLayout.PAGE_START);
 
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        jPanel8.setLayout(new java.awt.BorderLayout());
+
+        jPanel10.setPreferredSize(new java.awt.Dimension(940, 100));
+        jPanel10.setLayout(new java.awt.BorderLayout());
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jPanel9.setPreferredSize(new java.awt.Dimension(940, 300));
+        jPanel9.setLayout(new java.awt.BorderLayout());
+
+        jPanel11.setPreferredSize(new java.awt.Dimension(940, 100));
+        jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbl_locTheoGia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_locTheoGia.setText("Lọc theo giá");
+        jPanel11.add(lbl_locTheoGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 140, 30));
+
+        lbl_locTheoSP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_locTheoSP.setText("Lọc theo lọai sản phẩm");
+        jPanel11.add(lbl_locTheoSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
+
+        lbl_locTheoNCC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_locTheoNCC.setText("Lọc theo nhà cung cấp");
+        jPanel11.add(lbl_locTheoNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 10, 200, 30));
+
+        cbo_locTheoGia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cbo_locTheoGia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10000-1000000", "20000-5000000" }));
+        jPanel11.add(cbo_locTheoGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 220, 40));
+
+        cbo_loc_theoSP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cbo_loc_theoSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SGK", "Truyện", "Tiểu thuyết", "Văn phòng phẩm", "Dụng cụ học tập" }));
+        cbo_loc_theoSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_loc_theoSPActionPerformed(evt);
+            }
+        });
+        jPanel11.add(cbo_loc_theoSP, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 270, 40));
+
+        cbo_locTheoNCC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        cbo_locTheoNCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NCC Gò Vấp", "NCC Tân Bình", "NCC Thủ Đức", "NCC Bình Thạnh" }));
+        jPanel11.add(cbo_locTheoNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 250, 40));
+
+        jPanel9.add(jPanel11, java.awt.BorderLayout.NORTH);
+
+        jPanel12.setPreferredSize(new java.awt.Dimension(940, 200));
+        jPanel12.setLayout(new java.awt.BorderLayout());
+
+        tbl_sanPham.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tbl_sanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"SP001", "NCC001", "Sách tiếng việt", "56000", "65000", "10/05/2023", "500", "200", "300"},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Mã NCC", "Tên SP", " giá bán", "giá nhập", "ngày nhập", "Số lượng nhập", "số lượng bày bán", "số lượng tồn kho"
+                "Mã SP", "Tên SP", "Loại SP", "Giá Nhập", "Giá Bán", "Tồn kho", "Nhà Cung Cấp", "Khuyến Mãi"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_sanPham);
 
-        jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanel12.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        pnl_sanPham.add(jPanel3, java.awt.BorderLayout.CENTER);
+        jPanel9.add(jPanel12, java.awt.BorderLayout.CENTER);
 
-        add(pnl_sanPham, java.awt.BorderLayout.PAGE_START);
+        jPanel5.add(jPanel9, java.awt.BorderLayout.CENTER);
+
+        jPanel10.add(jPanel5, java.awt.BorderLayout.CENTER);
+
+        jPanel8.add(jPanel10, java.awt.BorderLayout.CENTER);
+
+        jPanel7.add(jPanel8, java.awt.BorderLayout.CENTER);
+
+        jPanel6.add(jPanel7, java.awt.BorderLayout.CENTER);
+
+        jPanel4.add(jPanel6, java.awt.BorderLayout.CENTER);
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        add(jPanel3, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void maSP_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maSP_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maSP_fieldActionPerformed
+
+    private void cbo_NCC_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_NCC_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbo_NCC_fieldActionPerformed
+
+    private void giaNhap_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giaNhap_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_giaNhap_fieldActionPerformed
+
+    private void tenSP_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenSP_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tenSP_fieldActionPerformed
+
+    private void btn_capNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capNhatActionPerformed
+        // TODO add your handling code here:
+        String maSP = maSP_field.getText();
+        String tenSP = tenSP_field.getText();
+        String loaiSP = String.valueOf(cbo_loaiSP_field.getSelectedItem());
+        String NCC = String.valueOf(cbo_NCC_field.getSelectedItem());
+        String giaNhap = giaNhap_field.getText();
+        String giaBan = giaBan_field.getText();
+        String tonKho = tonKho_field.getText();
+        
+        
+    }//GEN-LAST:event_btn_capNhatActionPerformed
+
+    private void cbo_loc_theoSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_loc_theoSPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbo_loc_theoSPActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        SanPham_DAO sanPham_dao = new SanPham_DAO();
+        String maSP_tim = maSP_TimKiem.getText();
+        SanPham sp_tim = sanPham_dao.getSP_TheoMa(maSP_tim);
+        if(sp_tim != null){
+            JOptionPane.showMessageDialog(this, "Đã tìm thấy sản phẩm!");
+        }else{
+            JOptionPane.showMessageDialog(this, "Sản phẩm không tồn tại!");
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tonKho_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tonKho_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tonKho_fieldActionPerformed
+
+    private void maSP_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maSP_TimKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maSP_TimKiemActionPerformed
+
+    private void btn_themMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themMoiActionPerformed
+        // TODO add your handling code here:
+        String maSP = maSP_field.getText();
+        String tenSP = tenSP_field.getText();
+        String cbo_loaiSP = String.valueOf(cbo_loaiSP_field.getSelectedItem());
+        String giaNhap = giaNhap_field.getText();
+        String giaBan = giaBan_field.getText();
+        String tonKho = tonKho_field.getText();
+        String cbo_NCC = String.valueOf(cbo_NCC_field.getSelectedItem());
+        String khuyenMai = khuyenMai_field.getText();
+        if(!maSP.isEmpty() && !tenSP.isEmpty() && !giaNhap.isEmpty() && !giaBan.isEmpty() && !tonKho.isEmpty()){
+            Object obj[] = {maSP, tenSP, cbo_loaiSP, giaNhap, giaBan, tonKho, cbo_NCC, khuyenMai};
+            DefaultTableModel model_DSSP = (DefaultTableModel)tbl_sanPham.getModel();
+            model_DSSP.addRow(obj);
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!");
+        }
+    }//GEN-LAST:event_btn_themMoiActionPerformed
+
+    private void btn_xoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaTrangActionPerformed
+        // TODO add your handling code here:
+        maSP_field.setText("");
+        tenSP_field.setText("");
+        giaNhap_field.setText("");
+        giaBan_field.setText("");
+        tonKho_field.setText("");
+        khuyenMai_field.setText("");
+    }//GEN-LAST:event_btn_xoaTrangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_capNhat;
+    private javax.swing.JButton btn_themMoi;
+    private javax.swing.JButton btn_xoaTrang;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbo_NCC_field;
+    private javax.swing.JComboBox<String> cbo_loaiSP_field;
+    private javax.swing.JComboBox<String> cbo_locTheoGia;
+    private javax.swing.JComboBox<String> cbo_locTheoNCC;
+    private javax.swing.JComboBox<String> cbo_loc_theoSP;
+    private javax.swing.JTextField giaBan_field;
+    private javax.swing.JTextField giaNhap_field;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField khuyenMai_field;
+    private javax.swing.JLabel lbl_NCC;
+    private javax.swing.JLabel lbl_giaBan;
+    private javax.swing.JLabel lbl_loai;
+    private javax.swing.JLabel lbl_locTheoGia;
+    private javax.swing.JLabel lbl_locTheoNCC;
+    private javax.swing.JLabel lbl_locTheoSP;
+    private javax.swing.JLabel lbl_masp;
+    private javax.swing.JTextField maSP_TimKiem;
+    private javax.swing.JTextField maSP_field;
+    private javax.swing.JPanel pnl_Center;
+    private javax.swing.JPanel pnl_NCC;
+    private javax.swing.JPanel pnl_TimKiem;
+    private javax.swing.JPanel pnl_TonKho;
+    private javax.swing.JPanel pnl_Top;
+    private javax.swing.JPanel pnl_btn;
+    private javax.swing.JPanel pnl_info;
+    private javax.swing.JPanel pnl_info1;
+    private javax.swing.JPanel pnl_info2;
+    private javax.swing.JPanel pnl_info3;
+    private javax.swing.JPanel pnl_maSP;
     private javax.swing.JPanel pnl_sanPham;
+    private javax.swing.JTable tbl_sanPham;
+    private javax.swing.JTextField tenSP_field;
+    private javax.swing.JTextField tonKho_field;
     // End of variables declaration//GEN-END:variables
 }

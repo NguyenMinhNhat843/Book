@@ -66,7 +66,49 @@ public class SanPham_DAO implements SanPhamService{
         
         return result;
     }
+    
+    
+    public SanPham update_SP_TheoMa(String maSP_tim) {
+        SanPham result = null;
+        connectDB.getInstance();
+        Connection conn = connectDB.getConnect();
+        PreparedStatement stmt = null;
+        
+        try {
+            String sql  = "update * \n" +
+                            "from SanPham sp join LoaiSanPham lsp\n" +
+                            "on sp.loaiSP = lsp.maLoaiSP"
+                            + " where sp.maSP = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, maSP_tim);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            //
+            while(rs.next()) {
+                String maSP = rs.getString("maSP");
+                String maKM = rs.getString("maKhuyenMai");
+//                System.out.println("dao.SanPham_DAO.getSP_TheoMa() " + maKM);
+                
+                String maNCC = rs.getString("maNCC");
+                String tenSP = rs.getString("tenSP");
+                String loaiSP = rs.getString("loaiSP");
+                String tenLoai = rs.getString("tenLoai");
+                double giaNhapHang = rs.getDouble("giaNhapHang");
+                double giaBan = rs.getDouble("giaBan");
+                int soLuongBayBan = rs.getInt("soLuongBayBan");
+                int soLuongTonKho = rs.getInt("soLuongTonKho");
 
+                result = new SanPham(maSP, new KhuyenMai(maKM), new NhaCungCap(maNCC), tenSP, tenLoai, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }   
+        
+        return result;
+    }
+    
     @Override
     public ArrayList<SanPham> getDSSP() {
         ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
