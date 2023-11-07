@@ -16,6 +16,10 @@ public class Panel_anylist extends javax.swing.JPanel {
     public Panel_anylist() {
         initComponents();
     }
+    
+    public void DoculieuLenTable() {
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -95,7 +99,7 @@ public class Panel_anylist extends javax.swing.JPanel {
         pnl_top.setPreferredSize(new java.awt.Dimension(0, 170));
         pnl_top.setLayout(new java.awt.BorderLayout());
 
-        pnl_TKDT_info.setPreferredSize(new java.awt.Dimension(0, 70));
+        pnl_TKDT_info.setPreferredSize(new java.awt.Dimension(0, 80));
         pnl_TKDT_info.setLayout(new java.awt.GridLayout(1, 3));
 
         lbl_LoaiThoiGian.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -129,7 +133,7 @@ public class Panel_anylist extends javax.swing.JPanel {
 
         pnl_top.add(pnl_TKDT_info, java.awt.BorderLayout.NORTH);
 
-        pnl_btn_TimKiem.setPreferredSize(new java.awt.Dimension(1068, 80));
+        pnl_btn_TimKiem.setPreferredSize(new java.awt.Dimension(1068, 70));
 
         btn_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_TimKiem.setText("Tìm kiếm");
@@ -255,13 +259,10 @@ public class Panel_anylist extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"HD001", "30/10/2023", "10.000", "200.000", "5.00.000", "300.000"},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Mã HD", "Ngày Tạo", "Thuế  VAT", "Tiền vốn", "Doanh Thu", "Lợi Nhuận"
+                "Mã HD", "Ngày Tạo", "Tiền vốn", "Doanh Thu", "Lợi Nhuận"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

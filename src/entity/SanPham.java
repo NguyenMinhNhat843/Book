@@ -20,6 +20,7 @@ public class SanPham {
     private double giaBan;
     private int soLuongBayBan;
     private int soLuongTonKho;
+    private double VAT;
 
     public SanPham(String maSP, KhuyenMai kM, NhaCungCap nCC, String tenSP, String loaiSP, double giaNhapHang, double giaBan, int soLuongBayBan, int soLuongTonKho) {
         this.maSP = maSP;
@@ -31,6 +32,14 @@ public class SanPham {
         this.giaBan = giaBan;
         this.soLuongBayBan = soLuongBayBan;
         this.soLuongTonKho = soLuongTonKho;
+    }
+    
+    public SanPham(String maSP, String tenSP, String loaiSP, double giaBan, double VAT) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.loaiSP = loaiSP;
+        this.giaBan = giaBan;
+        this.VAT = VAT;
     }
     
     public SanPham(String maSP) {

@@ -4,8 +4,14 @@
  */
 package GUI;
 
+import dao.ChiTietHoaDon_DAO;
 import dao.HoaDon_DAO;
+import dao.KhachHang_DAO;
+import entity.ChiTietHoaDon;
 import entity.HoaDon;
+import entity.KhachHang;
+import entity.SanPham;
+import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.time.*;
@@ -13,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.text.*;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -20,11 +27,20 @@ import javax.swing.JOptionPane;
  */
 public class Panel_bill extends javax.swing.JPanel {
     private HoaDon_DAO hd_dao = new HoaDon_DAO();
+    private CardLayout _this_card;
+    private JPanel _this_pnl_card_parent;
+    private String _this_maNV;
+    private ChiTietHoaDon_DAO cthd_dao = new ChiTietHoaDon_DAO();
+    private KhachHang_DAO kh_dao = new KhachHang_DAO();
     /**
      * Creates new form Panel_bill
      */
-    public Panel_bill() {
+    public Panel_bill(CardLayout card_main, JPanel pnl_card_parent, String maNV) {
         initComponents();
+        
+        _this_card = card_main;
+        _this_pnl_card_parent = pnl_card_parent;
+        _this_maNV = maNV;
         
         LoadDuLieuLenTable();
     }
@@ -36,7 +52,7 @@ public class Panel_bill extends javax.swing.JPanel {
         DefaultTableModel model_dsHD = (DefaultTableModel) table_DSHD.getModel();
         
         for(HoaDon hd : dsHD) {
-            Object[] obj = {hd.getMaHD(), hd.getNv().getTenNV(), hd.getKh().getTenKH(), hd.getNgayTao(), hd.getTongTien()};
+            Object[] obj = {hd.getMaHD(), hd.getNv().getTenNV(), hd.getKh(), hd.getNgayTao(), hd.getTongTien()};
             
             model_dsHD.addRow(obj);
         }
@@ -340,6 +356,21 @@ public class Panel_bill extends javax.swing.JPanel {
 
     private void btn_XemChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XemChiTietMouseClicked
         // TODO add your handling code here:
+        int r = table_DSHD.getSelectedRow();
+        
+        if(r >= 0) {
+            ArrayList<ChiTietHoaDon> dsCTHD = cthd_dao.getDSSP_TheoMaHD(table_DSHD.getValueAt(r, 0).toString());
+            System.out.println("GUI.Panel_bill.btn_XemChiTietMouseClicked() " + table_DSHD.getValueAt(r, 2));
+//            KhachHang kh = kh_dao.getKH_TheoMa((KhachHang) table_DSHD.getValueAt(r, 2));
+            
+            JPanel pnl_cart = new Panel_cart(_this_maNV, dsCTHD, null);
+            _this_pnl_card_parent.add(pnl_cart, "cart");
+
+            _this_card.show(_this_pnl_card_parent, "cart");
+        }
+        
+        
+        
         
     }//GEN-LAST:event_btn_XemChiTietMouseClicked
 

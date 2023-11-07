@@ -129,6 +129,11 @@ public class KhachHang {
         final KhachHang other = (KhachHang) obj;
         return Objects.equals(this.maKH, other.maKH);
     }
+
+    @Override
+    public String toString() {
+        return tenKH;
+    }
     
     
 }

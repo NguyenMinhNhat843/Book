@@ -31,7 +31,7 @@ public class HoaDon_DAO implements HoaDonService{
         ResultSet rs = null;
         
         try {
-            String sql = "select maHD, maNV, tenNV, maKH, tenKH, ngayTao, tienKhachDua, tongTien\n" +
+            String sql = "select *\n" +
                             "from HoaDon hd left join NhanVien nv\n" +
                             "on hd.maNhanVien = nv.maNV\n" +
                             "left join KhachHang kh\n" +

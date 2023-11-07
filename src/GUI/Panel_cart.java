@@ -17,6 +17,7 @@ import java.awt.Component;
 import java.awt.FlowLayout;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JTextField;
 import javax.swing.*;
@@ -39,16 +40,51 @@ public class Panel_cart extends javax.swing.JPanel {
     private DefaultTableModel model_DSSP;
     private double tongTienThanhToan = 0;
     private String _this_maNV;
+    private ArrayList<ChiTietHoaDon> dsCTHD;
+    private KhachHang kh;
     /**
      * Creates new form Panel_product
      */
-    public Panel_cart(String maNV) {
+    public Panel_cart(String maNV, ArrayList<ChiTietHoaDon> dsCTHD, KhachHang kh) {
         sp_dao = new SanPham_DAO();
         hd_dao = new HoaDon_DAO();
+        this.dsCTHD = dsCTHD;
+        this.kh = kh;
         _this_maNV = maNV;
         initComponents();
         
+        if(dsCTHD != null) {
+            DocChiTietHoaDonLenTable();
+        }
+        
+        if(kh != null) {
+            DocDuLieuKH();
+        }
+        
         setTxt_MaHD_TuPhatSinh();
+    }
+    
+    public void DocChiTietHoaDonLenTable() {
+        double tongTien = 0;
+        DefaultTableModel temp = (DefaultTableModel) table_DanhSachSP.getModel();
+        
+        for(ChiTietHoaDon cthd : dsCTHD) {
+            tongTien += cthd.getSanPham().getGiaBan() * cthd.getSoLuong();
+            Object[] obj = {cthd.getSanPham().getMaSP(), cthd.getSanPham().getTenSP(), cthd.getSanPham().getLoaiSP(), 
+                            cthd.getSoLuong(), cthd.getSanPham().getGiaBan(), cthd.getSanPham().getGiaBan() * cthd.getSoLuong()};
+            
+            temp.addRow(obj);
+        }
+        
+        txt_ThanhToan.setText(tongTien + "");
+    }
+    
+    public void DocDuLieuKH() {
+        txt_TenKH.setText(kh.getTenKH());
+        txt_Rank.setText(kh.getRank().toString());
+        txt_DiemTichLuy.setText(kh.getTichDiem() + "");
+        txt_MaKH.setText(kh.getMaKH());
+        txt_Email.setText(kh.getEmail());
     }
     
     public void setTxt_MaHD_TuPhatSinh() {
@@ -512,7 +548,6 @@ public class Panel_cart extends javax.swing.JPanel {
         // TODO add your handling code here:
         String maHD = txt_MaHD.getText();
         String maNV = _this_maNV;
-//        System.out.println("GUI.Panel_cart.btn_ThanhToanMouseClicked() " + maNV);
         String maKH = "";
         if(!txt_MaKH.getText().equals("")) {
             maKH = txt_MaKH.getText();
@@ -529,13 +564,12 @@ public class Panel_cart extends javax.swing.JPanel {
                     tienKhachDua, Double.parseDouble(txt_ThanhToan.getText()));
         }
         
-//        System.out.println("GUI.Panel_cart.btn_ThanhToanMouseClicked() " + hd.getTongTien());
-        
         if(txt_TienNhan.getText().compareTo("") == 0) {
             JOptionPane.showMessageDialog(this, "Chưa nhận tiền của khách!!!");
         } else if(txt_TienThoi.getText().compareTo("") == 0  || Double.parseDouble(txt_TienThoi.getText()) < 0) {
             JOptionPane.showMessageDialog(this, "Chưa đủ tiền thanh toán !!!");
         } else {
+            // Them hoa don thanh cong
             if(hd_dao.themHD(hd)) {
                 JOptionPane.showMessageDialog(this, "Lưu hóa đơn thành công!!!");
                 

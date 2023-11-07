@@ -7,10 +7,13 @@ package GUI;
 import entity.TaiKhoan;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.Desktop;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.event.*;
+import java.io.File;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -311,7 +314,7 @@ public class Panel_Main extends javax.swing.JFrame {
 
         pnl_bill.setBackground(new java.awt.Color(255, 255, 255));
         pnl_bill.setLayout(new java.awt.BorderLayout());
-        pnl_bill = new Panel_bill();
+        //pnl_bill = new Panel_bill(card, pnl_main);
         pnl_main.add(pnl_bill, "bill");
 
         pnl_inventory.setLayout(new java.awt.BorderLayout());
@@ -323,7 +326,7 @@ public class Panel_Main extends javax.swing.JFrame {
         pnl_main.add(pnl_anylist, "anylist");
 
         pnl_cart.setLayout(new java.awt.BorderLayout());
-        pnl_cart = new Panel_cart(_this_tk.getMaNV().getMaNV());
+        pnl_cart = new Panel_cart(_this_tk.getMaNV().getMaNV(), null, null);
         pnl_main.add(pnl_cart, "cart");
 
         pnl_customer.setLayout(new java.awt.BorderLayout());
@@ -372,7 +375,7 @@ public class Panel_Main extends javax.swing.JFrame {
 
     private void btn_billMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_billMouseClicked
         // TODO add your handling code here:
-        pnl_bill = new Panel_bill();
+        pnl_bill = new Panel_bill(card, pnl_main, _this_tk.getMaNV().getMaNV());
         pnl_main.add(pnl_bill, "bill");
         card.show(pnl_main, "bill");
     }//GEN-LAST:event_btn_billMouseClicked
@@ -404,6 +407,13 @@ public class Panel_Main extends javax.swing.JFrame {
 
     private void btn_helpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_helpMouseClicked
         // TODO add your handling code here:
+        String path = System.getProperty("user.dir") + "/HuongDanSuDung/HDSD.pdf";
+        File file = new File(path);
+        try {
+            Desktop.getDesktop().open(file);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_btn_helpMouseClicked
 
     /**
