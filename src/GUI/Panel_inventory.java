@@ -4,17 +4,89 @@
  */
 package GUI;
 
+import dao.NhaCungCap_DAO;
+import entity.NhaCungCap;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Asus
  */
 public class Panel_inventory extends javax.swing.JPanel {
-
+    private NhaCungCap_DAO ncc_dao = new NhaCungCap_DAO();
     /**
      * Creates new form Panel_inventory
      */
     public Panel_inventory() {
         initComponents();
+        
+        DocDuLieuLenTableNCC();
+    }
+    
+    public boolean valiData_NCC() {
+        String maNCC = txt_MaNCC.getText().toString().trim();
+        String tenNCC = txt_TenNCC.getText().toString().trim();
+        String email = txt_Email.getText().toString().trim();
+        String sDT = txt_SDT.getText().toString().trim();
+        String diaChi = txt_DiaChi.getText().toString().trim();
+        
+        if(maNCC.isEmpty() || (!maNCC.matches("^NCC\\d{3}$"))) {
+            JOptionPane.showMessageDialog(this, "Mã NCC phải theo mẫu NCC001");
+            return false;
+        }
+        
+        if(tenNCC.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên NCC không được rỗng!!!");
+            return false;
+        }
+        
+        if(email.isEmpty() || !email.matches("[a-zA-Z0-9]+@gmail.com")) {
+            JOptionPane.showMessageDialog(this, "Email theo mẫu abc123@gmail.com");
+            return false;
+        }
+        
+        if(sDT.isEmpty() || !sDT.matches("0\\d{9}")) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại phải có 10 số");
+            return false;
+        }
+        
+        if(diaChi.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Địa chỉ khoogn được rỗng!!!");
+            return false;
+        }
+                
+        
+        return true;
+    }
+    
+    public void DocDuLieuLenTableNCC() {
+        ArrayList<NhaCungCap> dsNCC = ncc_dao.getAllNCC();
+        DefaultTableModel temp = (DefaultTableModel) table_NCC.getModel();
+        
+        for(NhaCungCap ncc : dsNCC) {
+            Object[] obj = {ncc.getMaNCC(), ncc.getTenNCC(), ncc.getDiaChi(), ncc.getEmail(), ncc.getSDT()};
+            
+            temp.addRow(obj);
+        }
+    }
+    
+    public void XoaDuLieuTableNCC() {
+        DefaultTableModel temp = (DefaultTableModel) table_NCC.getModel();
+        temp.getDataVector().removeAllElements();
+    }
+    
+    public NhaCungCap createNCC() {
+        String maNCC = txt_MaNCC.getText().toString();
+        String tenNCC = txt_TenNCC.getText().toString();
+        String email = txt_Email.getText().toString();
+        String sDT = txt_SDT.getText().toString();
+        String diaChi = txt_DiaChi.getText().toString();
+        
+        NhaCungCap ncc = new NhaCungCap(maNCC, tenNCC, diaChi, sDT, email);
+        
+        return ncc;
     }
 
     /**
@@ -287,14 +359,29 @@ public class Panel_inventory extends javax.swing.JPanel {
 
         btn_CapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_CapNhat.setText("Cập nhật");
+        btn_CapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_CapNhatMouseClicked(evt);
+            }
+        });
         pnl_ThongTin.add(btn_CapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 130, 130, -1));
 
         btn_ThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_ThemMoi.setText("Thêm mới");
+        btn_ThemMoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_ThemMoiMouseClicked(evt);
+            }
+        });
         pnl_ThongTin.add(btn_ThemMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, -1));
 
         btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_XoaTrang.setText("Xóa trắng");
+        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_XoaTrangMouseClicked(evt);
+            }
+        });
         pnl_ThongTin.add(btn_XoaTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 140, -1));
 
         txt_SDT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -304,6 +391,7 @@ public class Panel_inventory extends javax.swing.JPanel {
         pnl_ThongTin.add(txt_DiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 780, 40));
 
         txt_MaNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_MaNCC.setEnabled(false);
         pnl_ThongTin.add(txt_MaNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 310, 40));
 
         txt_TenNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -320,6 +408,11 @@ public class Panel_inventory extends javax.swing.JPanel {
 
         btn_TimKiem_NCC.setText("Tìm Kiếm");
         btn_TimKiem_NCC.setPreferredSize(new java.awt.Dimension(150, 150));
+        btn_TimKiem_NCC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_TimKiem_NCCMouseClicked(evt);
+            }
+        });
         pnl_TimKiem_NCC.add(btn_TimKiem_NCC, java.awt.BorderLayout.EAST);
 
         pnl_NCC_ThongTin.add(pnl_TimKiem_NCC, java.awt.BorderLayout.SOUTH);
@@ -330,12 +423,17 @@ public class Panel_inventory extends javax.swing.JPanel {
 
         table_NCC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"NCC001", "NCC 1", "abc, Gò Vấp", "abc@gmail.com", "052364198"}
+
             },
             new String [] {
                 "Mã NCC", "Tên NCC", "Địa chỉ", "Email", "SĐT"
             }
         ));
+        table_NCC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_NCCMouseClicked(evt);
+            }
+        });
         scroll_NCC.setViewportView(table_NCC);
 
         pnl_NCC_Table.add(scroll_NCC, java.awt.BorderLayout.CENTER);
@@ -346,6 +444,102 @@ public class Panel_inventory extends javax.swing.JPanel {
 
         add(Tabbed_NhapHang, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void table_NCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_NCCMouseClicked
+        // TODO add your handling code here:
+        int r = table_NCC.getSelectedRow();
+        
+        if(r >= 0) {
+            txt_MaNCC.setText(table_NCC.getValueAt(r, 0).toString());
+            txt_TenNCC.setText(table_NCC.getValueAt(r, 1).toString());
+            txt_SDT.setText(table_NCC.getValueAt(r, 4).toString());
+            txt_Email.setText(table_NCC.getValueAt(r, 3).toString());
+            txt_DiaChi.setText(table_NCC.getValueAt(r, 2).toString());
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hàng muốn thao tác!!!");
+        }
+    }//GEN-LAST:event_table_NCCMouseClicked
+
+    private void btn_ThemMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMoiMouseClicked
+        // TODO add your handling code here:
+        if(valiData_NCC()) {
+            NhaCungCap ncc = createNCC();
+            ArrayList<NhaCungCap> dsNCC = ncc_dao.getAllNCC();
+
+            if(true) {
+                if(ncc_dao.ThemNCC(ncc)) {
+                    XoaDuLieuTableNCC();
+                    DocDuLieuLenTableNCC();
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!!!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm thất bai!!! Có lỗi xảy ra!!!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Nhà cung cấp đã tồn tai!!!");
+            }
+        }
+    }//GEN-LAST:event_btn_ThemMoiMouseClicked
+
+    private void btn_TimKiem_NCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiem_NCCMouseClicked
+        // TODO add your handling code here:
+        String maNCC_searched = txt_TimKiem_NCC.getText().toString();
+        
+        if(!maNCC_searched.trim().equals("")) {
+            XoaDuLieuTableNCC();
+            
+            NhaCungCap ncc = ncc_dao.getNCC_TheoMa(maNCC_searched);
+            
+            DefaultTableModel temp = (DefaultTableModel) table_NCC.getModel();
+            Object[] obj = {ncc.getMaNCC(), ncc.getTenNCC(), ncc.getDiaChi(), ncc.getEmail(), ncc.getSDT()};
+            temp.addRow(obj);
+        } else {
+            XoaDuLieuTableNCC();
+            DocDuLieuLenTableNCC();
+        }
+    }//GEN-LAST:event_btn_TimKiem_NCCMouseClicked
+
+    private void btn_CapNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseClicked
+        // TODO add your handling code here:
+        
+        
+        int r = table_NCC.getSelectedRow();
+        if(r < 0) {
+            JOptionPane.showMessageDialog(this, "Chọn NCC cần cập nhật!!!");
+        } 
+        
+        if(valiData_NCC()) {
+            String maNCC = txt_MaNCC.getText().toString();
+            String tenNCC = txt_TenNCC.getText().toString();
+            String email = txt_Email.getText().toString();
+            String sDT = txt_SDT.getText().toString();
+            String diaChi = txt_DiaChi.getText().toString();
+
+            NhaCungCap ncc = new NhaCungCap(maNCC, tenNCC, diaChi, sDT, email);
+            
+            if(ncc_dao.CapNhatNCC(ncc)) {
+                DefaultTableModel temp = (DefaultTableModel)table_NCC.getModel();
+                temp.removeRow(r);
+                Object[] obj = {ncc.getMaNCC(), ncc.getTenNCC(), ncc.getDiaChi(), ncc.getEmail(), ncc.getSDT()};
+                temp.insertRow(r, obj);
+                
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công NCC có mã = " + maNCC);
+            } else {
+                JOptionPane.showMessageDialog(this, "Cập nhật thất bai!!! Có lỗi xảy ra!!!");
+            }
+        }
+        
+    }//GEN-LAST:event_btn_CapNhatMouseClicked
+
+    private void btn_XoaTrangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseClicked
+        // TODO add your handling code here:
+        txt_MaNCC.setText("");
+        txt_TenNCC.setText("");
+        txt_DiaChi.setText("");
+        txt_Email.setText("");
+        txt_SDT.setText("");
+        
+        txt_MaNCC.setFocusable(true);
+    }//GEN-LAST:event_btn_XoaTrangMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

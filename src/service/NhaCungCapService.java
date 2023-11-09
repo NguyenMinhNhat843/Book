@@ -12,8 +12,9 @@ import java.util.ArrayList;
  * @author Asus
  */
 public interface NhaCungCapService {
+    public String tuPhatSinhMa();
     public ArrayList<NhaCungCap> getAllNCC();
     public NhaCungCap getNCC_TheoMa(String maNCC);
-    public void ThemNCC(NhaCungCap ncc);
-    public void CapNhatNCC(NhaCungCap ncc_old, NhaCungCap ncc_new);
+    public boolean ThemNCC(NhaCungCap ncc);
+    public boolean CapNhatNCC(NhaCungCap ncc_new);
 }

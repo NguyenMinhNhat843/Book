@@ -17,4 +17,5 @@ public interface HoaDonService {
     public HoaDon getHD_TheoMa(String maHD);
     public boolean themHD(HoaDon hd);
     public void CapNhatHD(HoaDon hd_old, HoaDon hd_new);
+//    public 
 }
