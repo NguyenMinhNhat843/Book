@@ -4,10 +4,10 @@
  */
 package GUI;
 
-/**
- *
- * @author Asus
- */
+import dao.NhanVien_DAO;
+import entity.NhanVien;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 public class Panel_staff extends javax.swing.JPanel {
 
     /**
@@ -92,7 +92,7 @@ public class Panel_staff extends javax.swing.JPanel {
         cb_LocGT = new javax.swing.JComboBox<>();
         pnl_tabel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_nhanVien = new javax.swing.JTable();
         pnl_TaiKhoan = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -221,6 +221,11 @@ public class Panel_staff extends javax.swing.JPanel {
         btn_Them.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_Them.setText("Thêm Mới");
         btn_Them.setPreferredSize(new java.awt.Dimension(150, 40));
+        btn_Them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemActionPerformed(evt);
+            }
+        });
         pnl_list_btn.add(btn_Them);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(100, 40));
@@ -241,6 +246,11 @@ public class Panel_staff extends javax.swing.JPanel {
         btn_XoáTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_XoáTrang.setText("Xóa Trắng");
         btn_XoáTrang.setPreferredSize(new java.awt.Dimension(150, 40));
+        btn_XoáTrang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoáTrangActionPerformed(evt);
+            }
+        });
         pnl_list_btn.add(btn_XoáTrang);
 
         jPanel2.setPreferredSize(new java.awt.Dimension(100, 40));
@@ -286,6 +296,11 @@ public class Panel_staff extends javax.swing.JPanel {
         btn_Xoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_Xoa.setText("Xóa");
         btn_Xoa.setPreferredSize(new java.awt.Dimension(150, 40));
+        btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaActionPerformed(evt);
+            }
+        });
         pnl_list_btn.add(btn_Xoa);
 
         pnl_top.add(pnl_list_btn, java.awt.BorderLayout.CENTER);
@@ -380,7 +395,7 @@ public class Panel_staff extends javax.swing.JPanel {
 
         pnl_tabel.setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_nhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"NV001", "Nguyễn Văn A", "Nhân Viên Bán Hàng", "Nữ", "Gò Vấp", "abc@gmail.com", "18/10/2003", "053698742", "5698741"},
                 {null, null, null, null, null, null, null, null, null},
@@ -391,9 +406,9 @@ public class Panel_staff extends javax.swing.JPanel {
                 "Mã NV", "Tên NV", "Chức Vụ", "Giới TÍnh", "Địa Chỉ", "Email", "Ngày Sinh", "SĐT", "CMND"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbl_nhanVien);
 
-        pnl_tabel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        pnl_tabel.add(jScrollPane1, java.awt.BorderLayout.PAGE_START);
 
         pnl_center.add(pnl_tabel, java.awt.BorderLayout.CENTER);
 
@@ -424,12 +439,58 @@ public class Panel_staff extends javax.swing.JPanel {
 
         add(jTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-
+        
+    
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
         // TODO add your handling code here:
+         String maNV = txt_MaNV.getText();
+        String tenNV = txt_TenNV.getText();
+        String gioiTinh = String.valueOf(cb_GioiTinh.getSelectedItem());
+        String ngaySinh = String.valueOf(date_NS.getDate());
+        String sDT = txt_SDT.getText();
+        String cMND = txt_CMND.getText();
+        String email = txt_Email.getText();
+        String diaChi = txt_DiaChi.getText();
+        
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
+    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+        // TODO add your handling code here:
+        String maNV = txt_MaNV.getText();
+        String tenNV = txt_TenNV.getText();
+        String diaChi = txt_DiaChi.getText();
+        String sDT = txt_SDT.getText();  
+        String email = txt_Email.getText();
+        String cMND=txt_CMND.getText();
+//        String chucVu = ;
+        String cb_gioiTinh = String.valueOf(this.cb_GioiTinh.getSelectedItem());
+        String cb_ngaySinh = String.valueOf(this.date_NS.getDate());
+        
+        if(!maNV.isEmpty() && !tenNV.isEmpty() && !diaChi.isEmpty() && !sDT.isEmpty() && !email.isEmpty()){
+            Object obj[] = {maNV, tenNV, /*chucVu*/ cb_gioiTinh, diaChi, email, cb_ngaySinh, sDT, cMND};
+            DefaultTableModel model_DSNV = (DefaultTableModel)tbl_nhanVien.getModel();
+            model_DSNV.addRow(obj);
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!");
+        }
+    }//GEN-LAST:event_btn_ThemActionPerformed
 
+    private void btn_XoáTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoáTrangActionPerformed
+        // TODO add your handling code here:
+        txt_MaNV.setText("");
+        txt_TenNV.setText("");
+        txt_DiaChi.setText("");
+        txt_SDT.setText("");
+        txt_Email.setText("");
+        txt_CMND.setText("");
+    }//GEN-LAST:event_btn_XoáTrangActionPerformed
+
+    private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_XoaActionPerformed
+
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bl_LocGT;
     private javax.swing.JButton btn_CapNhat;
@@ -454,7 +515,6 @@ public class Panel_staff extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_CMND;
     private javax.swing.JLabel lbl_DiaChi;
     private javax.swing.JLabel lbl_Email;
@@ -493,6 +553,7 @@ public class Panel_staff extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_list_btn;
     private javax.swing.JPanel pnl_tabel;
     private javax.swing.JPanel pnl_top;
+    private javax.swing.JTable tbl_nhanVien;
     private javax.swing.JTextField txt_CMND;
     private javax.swing.JTextField txt_DiaChi;
     private javax.swing.JTextField txt_Email;
