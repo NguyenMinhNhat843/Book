@@ -6,7 +6,10 @@ package GUI;
 
 
 import dao.SanPham_DAO;
+import entity.KhuyenMai;
+import entity.NhaCungCap;
 import entity.SanPham;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,14 +18,81 @@ import javax.swing.table.DefaultTableModel;
  * @author Asus
  */
 public class Panel_Product extends javax.swing.JPanel {
-
+    private SanPham_DAO sp_dao = new SanPham_DAO();
     /**
      * Creates new form Panel_Product
      */
     public Panel_Product() {
         initComponents();
+        DocLieuLenTableSanPham();
     }
-
+    
+    public boolean validData_SanPham(){
+        String maSP = maSP_field.getText().toString().trim();
+        String tenSP = tenSP_field.getText().toString().trim();
+        String giaNhap = giaNhap_field.getText().toString().trim();
+        String giaBan = giaBan_field.getText().toString().trim();
+        String tonKho = tonKho_field.getText().toString().trim();
+        String khuyenMai = khuyenMai_field.getText().toString().trim();
+        String bayBan = bayban_field.getText().toString().trim();
+        
+        if(maSP.isEmpty() || (!maSP.matches("^SP\\d{3}$"))){
+            JOptionPane.showMessageDialog(this, "Mã sản phẩm phải theo mẫu SP001");
+            return false;
+        }
+        if(tenSP.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Tên sản phẩm không được rỗng!");
+            return false;
+        }
+        double giaNhapHang = Double.parseDouble(giaNhap);
+        if(giaNhapHang <= 0 || giaNhap.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Gía nhập hàng phải lớn hơn 0");
+        }
+        double giaBanHang = Double.parseDouble(giaBan);
+        if(giaBanHang <= 0  || giaBan.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Gía bán hàng phải lớn hơn 0");
+        }
+        int slBayBan = Integer.parseInt(bayBan);
+        if(slBayBan <= 0){
+            JOptionPane.showMessageDialog(this, "Số lượng bày bán phải lớn hơn 0");
+            return false;
+        }
+        int slTonKho = Integer.parseInt(tonKho);
+        if(slTonKho <= 0){
+            JOptionPane.showMessageDialog(this, "Số lượng tồn kho phải lớn hơn 0");
+            return false;
+        }
+        return true;
+    }
+    public void DocLieuLenTableSanPham(){
+        ArrayList<SanPham> dsSP = sp_dao.getDSSP();
+        DefaultTableModel temp = (DefaultTableModel) tbl_sanPham.getModel();
+        
+        for(SanPham sp : dsSP){
+            Object[] obj = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), sp.getGiaNhapHang(), sp.getGiaBan(), sp.getSoLuongTonKho(), sp.getnCC().getMaNCC(), sp.getkM().getMaKM(), sp.getSoLuongBayBan()};
+            temp.addRow(obj);
+        }         
+    }
+    
+    public void XoaDuLieuTableSP(){
+        DefaultTableModel temp = (DefaultTableModel) tbl_sanPham.getModel();
+        temp.getDataVector().removeAllElements();
+    }
+    
+    public SanPham createSP(){
+        String maSP = maSP_field.getText();
+        String tenSP = tenSP_field.getText();
+        String cbo_loaiSP = String.valueOf(cbo_loaiSP_field.getSelectedItem());
+        double giaNhap = Double.parseDouble(giaNhap_field.getText());
+        double giaBan = Double.parseDouble(giaBan_field.getText());
+        int tonKho = Integer.parseInt(tonKho_field.getText());
+        String cbo_NCC = String.valueOf(cbo_NCC_field.getSelectedItem());
+        String khuyenMai = khuyenMai_field.getText();
+        int bayBan = Integer.parseInt(bayban_field.getText());
+        
+        SanPham sp = new SanPham(maSP, new KhuyenMai(khuyenMai), new NhaCungCap(cbo_NCC), tenSP, cbo_loaiSP,giaNhap, giaBan, bayBan, tonKho);
+        return sp;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,14 +130,16 @@ public class Panel_Product extends javax.swing.JPanel {
         lbl_giaBan = new javax.swing.JLabel();
         cbo_loaiSP_field = new javax.swing.JComboBox<>();
         giaBan_field = new javax.swing.JTextField();
+        lbl_Bayban = new javax.swing.JLabel();
+        bayban_field = new javax.swing.JTextField();
         pnl_btn = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         btn_themMoi = new javax.swing.JButton();
         btn_xoaTrang = new javax.swing.JButton();
         btn_capNhat = new javax.swing.JButton();
         pnl_TimKiem = new javax.swing.JPanel();
-        maSP_TimKiem = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        maSP_txt = new javax.swing.JTextField();
+        btn_timKiem = new javax.swing.JButton();
         pnl_Center = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -108,6 +180,7 @@ public class Panel_Product extends javax.swing.JPanel {
         lbl_masp.setText("Mã SP: ");
         pnl_maSP.add(lbl_masp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 100, 30));
 
+        maSP_field.setEnabled(false);
         maSP_field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 maSP_fieldActionPerformed(evt);
@@ -194,16 +267,33 @@ public class Panel_Product extends javax.swing.JPanel {
 
         lbl_loai.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbl_loai.setText("Loại:");
-        pnl_info3.add(lbl_loai, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+        pnl_info3.add(lbl_loai, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         lbl_giaBan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbl_giaBan.setText("Giá bán:");
-        pnl_info3.add(lbl_giaBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        pnl_info3.add(lbl_giaBan, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         cbo_loaiSP_field.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         cbo_loaiSP_field.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SGK", "Truyện", "Tiểu thuyết", "Văn phòng phẩm", "Dụng cụ học tập" }));
-        pnl_info3.add(cbo_loaiSP_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 230, 50));
-        pnl_info3.add(giaBan_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 230, 40));
+        pnl_info3.add(cbo_loaiSP_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 230, 40));
+
+        giaBan_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                giaBan_fieldActionPerformed(evt);
+            }
+        });
+        pnl_info3.add(giaBan_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 230, 40));
+
+        lbl_Bayban.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_Bayban.setText("Bày bán:");
+        pnl_info3.add(lbl_Bayban, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+
+        bayban_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bayban_fieldActionPerformed(evt);
+            }
+        });
+        pnl_info3.add(bayban_field, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 230, 40));
 
         pnl_info.add(pnl_info3);
 
@@ -217,6 +307,11 @@ public class Panel_Product extends javax.swing.JPanel {
 
         btn_themMoi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_themMoi.setText("Thêm mới");
+        btn_themMoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_themMoiMouseClicked(evt);
+            }
+        });
         btn_themMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_themMoiActionPerformed(evt);
@@ -235,6 +330,11 @@ public class Panel_Product extends javax.swing.JPanel {
 
         btn_capNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_capNhat.setText("Cập nhật");
+        btn_capNhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_capNhatMouseClicked(evt);
+            }
+        });
         btn_capNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_capNhatActionPerformed(evt);
@@ -245,22 +345,27 @@ public class Panel_Product extends javax.swing.JPanel {
         pnl_TimKiem.setPreferredSize(new java.awt.Dimension(1112, 60));
         pnl_TimKiem.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        maSP_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        maSP_TimKiem.addActionListener(new java.awt.event.ActionListener() {
+        maSP_txt.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        maSP_txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maSP_TimKiemActionPerformed(evt);
+                maSP_txtActionPerformed(evt);
             }
         });
-        pnl_TimKiem.add(maSP_TimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 980, 60));
+        pnl_TimKiem.add(maSP_txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 980, 60));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setText("Tìm kiếm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        btn_timKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_timKiem.setText("Tìm kiếm");
+        btn_timKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_timKiemMouseClicked(evt);
             }
         });
-        pnl_TimKiem.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, -1, 50));
+        btn_timKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timKiemActionPerformed(evt);
+            }
+        });
+        pnl_TimKiem.add(btn_timKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 3, -1, 50));
 
         jPanel2.add(pnl_TimKiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, 60));
 
@@ -333,15 +438,20 @@ public class Panel_Product extends javax.swing.JPanel {
         tbl_sanPham.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbl_sanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên SP", "Loại SP", "Giá Nhập", "Giá Bán", "Tồn kho", "Nhà Cung Cấp", "Khuyến Mãi"
+                "Mã SP", "Tên SP", "Loại SP", "Giá Nhập", "Giá Bán", "Tồn kho", "Nhà Cung Cấp", "Khuyến Mãi", "Bày bán"
             }
         ));
+        tbl_sanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_sanPhamMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_sanPham);
 
         jPanel12.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -382,60 +492,27 @@ public class Panel_Product extends javax.swing.JPanel {
     }//GEN-LAST:event_tenSP_fieldActionPerformed
 
     private void btn_capNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capNhatActionPerformed
-        // TODO add your handling code here:
-        String maSP = maSP_field.getText();
-        String tenSP = tenSP_field.getText();
-        String loaiSP = String.valueOf(cbo_loaiSP_field.getSelectedItem());
-        String NCC = String.valueOf(cbo_NCC_field.getSelectedItem());
-        String giaNhap = giaNhap_field.getText();
-        String giaBan = giaBan_field.getText();
-        String tonKho = tonKho_field.getText();
-        
-        
+        // TODO add your handling code here:    
     }//GEN-LAST:event_btn_capNhatActionPerformed
 
     private void cbo_loc_theoSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_loc_theoSPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbo_loc_theoSPActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timKiemActionPerformed
         // TODO add your handling code here:
-        SanPham_DAO sanPham_dao = new SanPham_DAO();
-        String maSP_tim = maSP_TimKiem.getText();
-        SanPham sp_tim = sanPham_dao.getSP_TheoMa(maSP_tim);
-        if(sp_tim != null){
-            JOptionPane.showMessageDialog(this, "Đã tìm thấy sản phẩm!");
-        }else{
-            JOptionPane.showMessageDialog(this, "Sản phẩm không tồn tại!");
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_timKiemActionPerformed
 
     private void tonKho_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tonKho_fieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tonKho_fieldActionPerformed
 
-    private void maSP_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maSP_TimKiemActionPerformed
+    private void maSP_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maSP_txtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_maSP_TimKiemActionPerformed
+    }//GEN-LAST:event_maSP_txtActionPerformed
 
     private void btn_themMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themMoiActionPerformed
         // TODO add your handling code here:
-        String maSP = maSP_field.getText();
-        String tenSP = tenSP_field.getText();
-        String cbo_loaiSP = String.valueOf(cbo_loaiSP_field.getSelectedItem());
-        String giaNhap = giaNhap_field.getText();
-        String giaBan = giaBan_field.getText();
-        String tonKho = tonKho_field.getText();
-        String cbo_NCC = String.valueOf(cbo_NCC_field.getSelectedItem());
-        String khuyenMai = khuyenMai_field.getText();
-        if(!maSP.isEmpty() && !tenSP.isEmpty() && !giaNhap.isEmpty() && !giaBan.isEmpty() && !tonKho.isEmpty()){
-            Object obj[] = {maSP, tenSP, cbo_loaiSP, giaNhap, giaBan, tonKho, cbo_NCC, khuyenMai};
-            DefaultTableModel model_DSSP = (DefaultTableModel)tbl_sanPham.getModel();
-            model_DSSP.addRow(obj);
-        }else{
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!");
-        }
     }//GEN-LAST:event_btn_themMoiActionPerformed
 
     private void btn_xoaTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaTrangActionPerformed
@@ -446,12 +523,115 @@ public class Panel_Product extends javax.swing.JPanel {
         giaBan_field.setText("");
         tonKho_field.setText("");
         khuyenMai_field.setText("");
+        bayban_field.setText("");
     }//GEN-LAST:event_btn_xoaTrangActionPerformed
+
+    private void bayban_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bayban_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bayban_fieldActionPerformed
+
+    private void giaBan_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giaBan_fieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_giaBan_fieldActionPerformed
+
+    private void tbl_sanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_sanPhamMouseClicked
+        // TODO add your handling code here:
+        int r = tbl_sanPham.getSelectedRow();
+        
+        if(r >= 0){
+            maSP_field.setText(tbl_sanPham.getValueAt(r, 0).toString());
+            tenSP_field.setText(tbl_sanPham.getValueAt(r, 1).toString());
+            giaNhap_field.setText(tbl_sanPham.getValueAt(r, 3).toString());
+            giaBan_field.setText(tbl_sanPham.getValueAt(r, 4).toString());
+            tonKho_field.setText(tbl_sanPham.getValueAt(r, 5).toString());
+            khuyenMai_field.setText(tbl_sanPham.getValueAt(r, 7).toString());
+            bayban_field.setText(tbl_sanPham.getValueAt(r, 8).toString());
+            cbo_NCC_field.addItem(tbl_sanPham.getValueAt(r, 6).toString());
+            cbo_loaiSP_field.addItem(tbl_sanPham.getValueAt(r, 2).toString());
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hàng muốn thao tác!");
+        }
+    }//GEN-LAST:event_tbl_sanPhamMouseClicked
+
+    private void btn_themMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_themMoiMouseClicked
+        // TODO add your handling code here:
+        if(validData_SanPham()){
+            SanPham sp = createSP();
+            ArrayList<SanPham> dsSP = sp_dao.getDSSP();
+            
+            if(true){
+                if(sp_dao.themSanPham(sp)){
+                    XoaDuLieuTableSP();
+                    DocLieuLenTableSanPham();
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Thêm thất bại! Có lỗi xảy ra");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Sản phẩm đã tồn tại! Vui lòng kiểm tra lại");
+            }
+        }
+    }//GEN-LAST:event_btn_themMoiMouseClicked
+
+    private void btn_timKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_timKiemMouseClicked
+        // TODO add your handling code here:
+        String maSP_searched = maSP_txt.getText().toString();
+        
+        if(!maSP_searched.trim().equals("")){
+            XoaDuLieuTableSP();
+            
+            SanPham sp = sp_dao.getSP_TheoMa(maSP_searched);
+            DefaultTableModel temp = (DefaultTableModel) tbl_sanPham.getModel();
+            
+            Object[] obj = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), sp.getGiaNhapHang(), sp.getGiaBan(), sp.getSoLuongTonKho(), sp.getnCC().getMaNCC(), sp.getkM().getMaKM(), sp.getSoLuongBayBan()};
+            temp.addRow(obj);
+        }else{
+            XoaDuLieuTableSP();
+            DocLieuLenTableSanPham();
+        }
+            
+    }//GEN-LAST:event_btn_timKiemMouseClicked
+
+    private void btn_capNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_capNhatMouseClicked
+        // TODO add your handling code here:
+        
+        
+        int r = tbl_sanPham.getSelectedRow();
+        if(r < 0){
+            JOptionPane.showMessageDialog(this, "Cần chọn sản phẩm cần cập nhật!");
+        }
+        
+        if(validData_SanPham()){
+            String maSP = maSP_field.getText();
+            String tenSP = tenSP_field.getText();
+            String cbo_loaiSP = String.valueOf(cbo_loaiSP_field.getSelectedItem());
+            double giaNhap = Double.parseDouble(giaNhap_field.getText());
+            double giaBan = Double.parseDouble(giaBan_field.getText());
+            int tonKho = Integer.parseInt(tonKho_field.getText());
+            String cbo_NCC = String.valueOf(cbo_NCC_field.getSelectedItem());
+            String khuyenMai = khuyenMai_field.getText();
+            int bayBan = Integer.parseInt(bayban_field.getText());
+
+            SanPham sp = new SanPham(maSP, new KhuyenMai(khuyenMai), new NhaCungCap(cbo_NCC), tenSP, cbo_loaiSP,giaNhap, giaBan, bayBan, tonKho);
+            
+            if(sp_dao.updateSP(sp)){
+                DefaultTableModel temp = (DefaultTableModel) tbl_sanPham.getModel();
+                temp.removeRow(r);
+                Object[] obj = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), sp.getGiaNhapHang(), sp.getGiaBan(), sp.getSoLuongTonKho(), sp.getnCC().getMaNCC(), sp.getkM().getMaKM(), sp.getSoLuongBayBan()};
+                temp.insertRow(r, obj);
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công sản phẩm có mã" + maSP);
+            }else{
+                JOptionPane.showMessageDialog(this, "Cập nhật thất bại!!Có lỗi xảy ra!!");
+            }
+        }
+    }//GEN-LAST:event_btn_capNhatMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField bayban_field;
     private javax.swing.JButton btn_capNhat;
     private javax.swing.JButton btn_themMoi;
+    private javax.swing.JButton btn_timKiem;
     private javax.swing.JButton btn_xoaTrang;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbo_NCC_field;
@@ -461,7 +641,6 @@ public class Panel_Product extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbo_loc_theoSP;
     private javax.swing.JTextField giaBan_field;
     private javax.swing.JTextField giaNhap_field;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -481,6 +660,7 @@ public class Panel_Product extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField khuyenMai_field;
+    private javax.swing.JLabel lbl_Bayban;
     private javax.swing.JLabel lbl_NCC;
     private javax.swing.JLabel lbl_giaBan;
     private javax.swing.JLabel lbl_loai;
@@ -488,8 +668,8 @@ public class Panel_Product extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_locTheoNCC;
     private javax.swing.JLabel lbl_locTheoSP;
     private javax.swing.JLabel lbl_masp;
-    private javax.swing.JTextField maSP_TimKiem;
     private javax.swing.JTextField maSP_field;
+    private javax.swing.JTextField maSP_txt;
     private javax.swing.JPanel pnl_Center;
     private javax.swing.JPanel pnl_NCC;
     private javax.swing.JPanel pnl_TimKiem;

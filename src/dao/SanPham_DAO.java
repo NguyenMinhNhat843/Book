@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -22,7 +23,12 @@ public class SanPham_DAO implements SanPhamService{
 
     @Override
     public String phatSinhMaTuDong() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<SanPham> dsSP = getDSSP();
+        int soLuong = dsSP.size() + 1;
+        
+        return soLuong < 10 ? "SP00" + soLuong 
+                : soLuong < 100 ? "SP0" + soLuong
+                : "SP" + soLuong;
     }
 
     @Override
@@ -51,13 +57,12 @@ public class SanPham_DAO implements SanPhamService{
                 String maNCC = rs.getString("maNCC");
                 String tenSP = rs.getString("tenSP");
                 String loaiSP = rs.getString("loaiSP");
-                String tenLoai = rs.getString("tenLoai");
                 double giaNhapHang = rs.getDouble("giaNhapHang");
                 double giaBan = rs.getDouble("giaBan");
                 int soLuongBayBan = rs.getInt("soLuongBayBan");
                 int soLuongTonKho = rs.getInt("soLuongTonKho");
 
-                result = new SanPham(maSP, new KhuyenMai(maKM), new NhaCungCap(maNCC), tenSP, tenLoai, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho);
+                result = new SanPham(maSP, new KhuyenMai(maKM), new NhaCungCap(maNCC), tenSP, loaiSP, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho);
             }
             
         } catch (Exception e) {
@@ -68,67 +73,109 @@ public class SanPham_DAO implements SanPhamService{
     }
     
     
-    public SanPham update_SP_TheoMa(String maSP_tim) {
-        SanPham result = null;
+    public boolean updateSP(SanPham sp_new) {
         connectDB.getInstance();
         Connection conn = connectDB.getConnect();
         PreparedStatement stmt = null;
         
+        int n = 0;
         try {
-            String sql  = "update * \n" +
-                            "from SanPham sp join LoaiSanPham lsp\n" +
-                            "on sp.loaiSP = lsp.maLoaiSP"
-                            + " where sp.maSP = ?";
+            String sql  = "update SanPham set maKhuyenMai = ?, maNCC = ?, tenSP = ?, loaiSP = ? , giaNhapHang = ?, giaBan = ? , soLuongBayBan = ?, soLuongTonKho = ? where maSP = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, maSP_tim);
-            
-            ResultSet rs = stmt.executeQuery();
-            
+                    
             //
-            while(rs.next()) {
-                String maSP = rs.getString("maSP");
-                String maKM = rs.getString("maKhuyenMai");
-//                System.out.println("dao.SanPham_DAO.getSP_TheoMa() " + maKM);
-                
-                String maNCC = rs.getString("maNCC");
-                String tenSP = rs.getString("tenSP");
-                String loaiSP = rs.getString("loaiSP");
-                String tenLoai = rs.getString("tenLoai");
-                double giaNhapHang = rs.getDouble("giaNhapHang");
-                double giaBan = rs.getDouble("giaBan");
-                int soLuongBayBan = rs.getInt("soLuongBayBan");
-                int soLuongTonKho = rs.getInt("soLuongTonKho");
-
-                result = new SanPham(maSP, new KhuyenMai(maKM), new NhaCungCap(maNCC), tenSP, tenLoai, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho);
-            }
+            stmt.setString(1, sp_new.getkM().getMaKM());
+            stmt.setString(2, sp_new.getnCC().getMaNCC());
+            stmt.setString(3, sp_new.getTenSP());
+            stmt.setString(4, sp_new.getLoaiSP());
+            stmt.setDouble(5, sp_new.getGiaNhapHang());
+            stmt.setDouble(6, sp_new.getGiaBan());
+            stmt.setInt(7, sp_new.getSoLuongBayBan());
+            stmt.setInt(8, sp_new.getSoLuongTonKho());
+            stmt.setString(9, sp_new.getMaSP());
             
+            n = stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        }   
+        }finally{
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         
-        return result;
+        return n > 0;
+    }
+    
+    public boolean themSanPham(SanPham sp){
+        int n = 0;
+        connectDB.getInstance();
+        Connection con = connectDB.getConnect();
+        PreparedStatement stmt = null;
+        try {
+            String sql = "insert into SanPham(maSP, maKhuyenMai, maNCC, tenSP, loaiSP, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho)" 
+                    + "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, phatSinhMaTuDong());
+            stmt.setString(2, sp.getkM().getMaKM());
+            stmt.setString(3, sp.getnCC().getMaNCC());
+            stmt.setString(4, sp.getTenSP());
+            stmt.setString(5, sp.getLoaiSP());
+            stmt.setDouble(6, sp.getGiaNhapHang());
+            stmt.setDouble(7, sp.getGiaBan());
+            stmt.setInt(8, sp.getSoLuongBayBan());
+            stmt.setInt(9, sp.getSoLuongTonKho());
+            
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                stmt.close();;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return n > 0;
     }
     
     @Override
     public ArrayList<SanPham> getDSSP() {
         ArrayList<SanPham> dsSP = new ArrayList<SanPham>();
         
+        connectDB.getInstance();
+        Connection con = connectDB.getConnect();
+        
+        Statement stm = null;
+        ResultSet rs = null;
         try {
-            connectDB.getInstance();
-            Connection con = connectDB.getConnect();
-            
+              
             String sql = "Select * from SanPham";
-            Statement stm = con.createStatement();
+            stm = con.createStatement();
             
-            ResultSet rs = stm.executeQuery(sql);
+            rs = stm.executeQuery(sql);
             
             while(rs.next()) {
+               String maSP = rs.getString("maSP");
+                String maKM = rs.getString("maKhuyenMai");
+//                System.out.println("dao.SanPham_DAO.getSP_TheoMa() " + maKM);
                 
+                String maNCC = rs.getString("maNCC");
+                String tenSP = rs.getString("tenSP");
+                String loaiSP = rs.getString("loaiSP");
+                double giaNhapHang = rs.getDouble("giaNhapHang");
+                double giaBan = rs.getDouble("giaBan");
+                int soLuongBayBan = rs.getInt("soLuongBayBan");
+                int soLuongTonKho = rs.getInt("soLuongTonKho");
+
+                SanPham sp = new SanPham(maSP, new KhuyenMai(maKM), new NhaCungCap(maNCC), tenSP, loaiSP, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho);
+                dsSP.add(sp);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return dsSP;
     }
     
 }

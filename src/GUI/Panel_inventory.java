@@ -392,6 +392,11 @@ public class Panel_inventory extends javax.swing.JPanel {
 
         txt_MaNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txt_MaNCC.setEnabled(false);
+        txt_MaNCC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_MaNCCActionPerformed(evt);
+            }
+        });
         pnl_ThongTin.add(txt_MaNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 310, 40));
 
         txt_TenNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -540,6 +545,10 @@ public class Panel_inventory extends javax.swing.JPanel {
         
         txt_MaNCC.setFocusable(true);
     }//GEN-LAST:event_btn_XoaTrangMouseClicked
+
+    private void txt_MaNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_MaNCCActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_MaNCCActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

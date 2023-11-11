@@ -130,6 +130,7 @@ public class NhaCungCap_DAO implements NhaCungCapService{
         try {
             String sql = "update NhaCungCap set tenNCC = ?, diaChi = ?, sDT = ?, email = ? where maNCC = ?";
             stmt = con.prepareStatement(sql);
+            
             stmt.setString(1, ncc_new.getTenNCC());
             stmt.setString(2, ncc_new.getDiaChi());
             stmt.setString(3, ncc_new.getSDT());
