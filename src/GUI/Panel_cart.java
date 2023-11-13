@@ -42,6 +42,9 @@ public class Panel_cart extends javax.swing.JPanel {
     private String _this_maNV;
     private ArrayList<ChiTietHoaDon> dsCTHD;
     private KhachHang kh;
+    private double tienVon = 0;
+    private double tongThue = 0;
+    private double tongKM = 0;
     /**
      * Creates new form Panel_product
      */
@@ -418,7 +421,13 @@ public class Panel_cart extends javax.swing.JPanel {
         String maSP = txt_TimSP.getText();
         SanPham sp = sp_dao.getSP_TheoMa(maSP);
         
+        
         if(maSP.compareTo("") != 0 && sp != null) {
+            tienVon += sp.getGiaNhapHang();
+            tongKM += sp.getkM().getLoaiKM().equals("LKM001") 
+                        ? sp.getGiaBan() * sp.getkM().getGiaTriKhuyenMai()
+                        : sp.getGiaBan() - sp.getkM().getGiaTriKhuyenMai();
+            tongThue += sp.getThue();
             
             // Nhập số lượng sản phẩm
             int soLuong = Integer.parseInt(JOptionPane.showInputDialog(null, "Nhập số lượng", 0));
@@ -544,16 +553,18 @@ public class Panel_cart extends javax.swing.JPanel {
         LocalDateTime ngayTao = LocalDateTime.now();
         double tienKhachDua = txt_TienNhan.getText().equals("") ? 0 : Double.parseDouble(txt_TienNhan.getText());
         
-        double suDungTichDiem = Double.parseDouble(txt_SudungTichDiem.getText());
-//        double 
+        double suDungTichDiem = !txt_SudungTichDiem.getText().equals("") 
+                ? Double.parseDouble(txt_SudungTichDiem.getText())
+                : 0;
         
+//      Tao Hoa Don
         HoaDon hd = null;
         if(maKH.equals("")) {
             hd = new HoaDon(maHD, new NhanVien(maNV),null, ngayTao, tienKhachDua, 
-                    Double.parseDouble(txt_ThanhToan.getText()), suDungTichDiem, 0, 0);
+                    Double.parseDouble(txt_ThanhToan.getText()), suDungTichDiem, tongKM, tongThue, tienVon);
         } else {
             hd = new HoaDon(maHD, new NhanVien(maNV),new KhachHang(maKH), ngayTao, 
-                    tienKhachDua, Double.parseDouble(txt_ThanhToan.getText()), suDungTichDiem, 0, 0);
+                    tienKhachDua, Double.parseDouble(txt_ThanhToan.getText()), suDungTichDiem, tongKM, tongThue, tienVon);
         }
         
         if(txt_TienNhan.getText().compareTo("") == 0) {

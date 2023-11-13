@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import service.SanPhamService;
 import java.sql.*;
+//import java.time.LocalDate;
+import java.time.*;
+import java.time.format.*;
 import sql.connectDB;
 
 /**
@@ -40,9 +43,11 @@ public class SanPham_DAO implements SanPhamService{
         
         try {
             String sql  = "select * \n" +
-                            "from SanPham sp join LoaiSanPham lsp\n" +
-                            "on sp.loaiSP = lsp.maLoaiSP"
-                            + " where sp.maSP = ?";
+                        "from SanPham sp join LoaiSanPham lsp\n" +
+                        "on sp.loaiSP = lsp.maLoaiSP\n" +
+                        "join KhuyenMai km\n" +
+                        "on km.maKM = sp.maKhuyenMai"
+                        + " where maSP = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, maSP_tim);
             
@@ -51,7 +56,20 @@ public class SanPham_DAO implements SanPhamService{
             //
             while(rs.next()) {
                 String maSP = rs.getString("maSP");
+                
+                // Tao Doi Tuong Khuyen mai
                 String maKM = rs.getString("maKhuyenMai");
+                String loaiKM = rs.getString("loaiKM");
+                double giaTriKM = rs.getDouble("giaTriKhuyenMai");
+//                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss.0");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime ngayBatDau = LocalDateTime.parse(rs.getString("ngayBatDau").substring(0, 19), dtf);
+                LocalDateTime ngayKetThuc = LocalDateTime.parse(rs.getString("ngayKetThuc").substring(0, 19), dtf);
+                double giaTriHoaDonBatDauKM = rs.getDouble("giaTriHoaDonBatDauKhuyenMai");
+                
+                KhuyenMai km = !maKM.equals("null") 
+                        ? new KhuyenMai(maKM, loaiKM, giaTriKM, ngayBatDau, ngayKetThuc, giaTriHoaDonBatDauKM)
+                        : new KhuyenMai(null, "loi", 0, null, null, 0);
 //                System.out.println("dao.SanPham_DAO.getSP_TheoMa() " + maKM);
                 
                 String maNCC = rs.getString("maNCC");
@@ -63,7 +81,7 @@ public class SanPham_DAO implements SanPhamService{
                 int soLuongTonKho = rs.getInt("soLuongTonKho");
                 double thue = rs.getDouble("VAT");
 
-                result = new SanPham(maSP, new KhuyenMai(maKM), new NhaCungCap(maNCC), tenSP, 
+                result = new SanPham(maSP, km, new NhaCungCap(maNCC), tenSP, 
                                 loaiSP, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho, thue);
             }
             

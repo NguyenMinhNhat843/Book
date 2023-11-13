@@ -55,8 +55,10 @@ public class HoaDon_DAO implements HoaDonService{
                 double sdtd = rs.getDouble("suDungTichDiem");
                 double tongKM = rs.getDouble("tongKM");
                 double tongThue = rs.getDouble("tongThue");
+                double tienVon = rs.getDouble("tienVon");
                 
-                HoaDon hd = new HoaDon(maHD, new NhanVien(maNV, tenNV), new KhachHang(maKH, tenKH), ngayTao_lcd, tienKhachDua, tongTien, sdtd, tongKM, tongThue);
+                HoaDon hd = new HoaDon(maHD, new NhanVien(maNV, tenNV), new KhachHang(maKH, tenKH), 
+                            ngayTao_lcd, tienKhachDua, tongTien, sdtd, tongKM, tongThue, tienVon);
                 
                 dsHD.add(hd);
             }
@@ -92,8 +94,10 @@ public class HoaDon_DAO implements HoaDonService{
                 double suDungTichDiem = rs.getDouble("suDungTichDiem");
                 double tongKM = rs.getDouble("tongKM");
                 double tongThue = rs.getDouble("tongThue");
+                double tienVon = rs.getDouble("tienVon");
                 
-                hd = new HoaDon(maHD_1, null, null, null, tienNhan, tongTien, suDungTichDiem, tongKM, tongThue);
+                hd = new HoaDon(maHD_1, null, null, null, 
+                        tienNhan, tongTien, suDungTichDiem, tongKM, tongThue, tienVon);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,8 +121,9 @@ public class HoaDon_DAO implements HoaDonService{
         int n = 0;
         
         try {
-            prstmt = con.prepareStatement("insert into HoaDon(maHD, maNhanVien,maKhachHang , ngayTao, tienKhachDua, tongTien)"
-                                        + "values(?, ?, ?, ?, ?, ?)");
+            prstmt = con.prepareStatement("insert into HoaDon(maHD, maNhanVien, maKhachHang , ngayTao, tienKhachDua, suDungTichDiem,"
+                    + "tongTien, tongKM, tongThue, tienVon)"
+                                        + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             prstmt.setString(1, hd.getMaHD());
             prstmt.setString(2, hd.getNv().getMaNV());
             
@@ -132,7 +137,11 @@ public class HoaDon_DAO implements HoaDonService{
             prstmt.setString(4, dtf.format(hd.getNgayTao()));
             
             prstmt.setDouble(5, hd.getTienKhachDua());
-            prstmt.setDouble(6, hd.getTongTien());
+            prstmt.setDouble(6, hd.getSuDungTichDiem());
+            prstmt.setDouble(7, hd.getTongTien());
+            prstmt.setDouble(8, hd.getTongKM());
+            prstmt.setDouble(9, hd.getTongThue());
+            prstmt.setDouble(10, hd.getTienVon());
             
             n = prstmt.executeUpdate();
             

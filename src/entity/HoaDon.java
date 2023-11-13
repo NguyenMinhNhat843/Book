@@ -24,7 +24,8 @@ public class HoaDon {
     private double tienVon;
     
 
-    public HoaDon(String maHD, NhanVien nv, KhachHang kh, LocalDateTime ngayTao, double tienKhachDua, double TongTien, double sdtd, double tongKM, double tongThue) {
+    public HoaDon(String maHD, NhanVien nv, KhachHang kh, LocalDateTime ngayTao, double tienKhachDua, 
+                    double TongTien, double sdtd, double tongKM, double tongThue, double tienVon) {
         this.maHD = maHD;
         this.nv = nv;
         this.kh = kh;
@@ -34,6 +35,7 @@ public class HoaDon {
         this.suDungTichDiem = sdtd;
         this.tongKM = tongKM;
         this.tongThue = tongThue;
+        this.tienVon = tienVon;
     }
     
     public HoaDon(String maHoaDon) {
@@ -79,6 +81,10 @@ public class HoaDon {
         return tongThue;
     }
 
+    public double getTienVon() {
+        return tienVon;
+    }
+    
     public void setSuDungTichDiem(double suDungTichDiem) {
         this.suDungTichDiem = suDungTichDiem;
     }
