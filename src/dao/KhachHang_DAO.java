@@ -49,7 +49,14 @@ public class KhachHang_DAO implements KhachHangService{
         
         return result;
     }
-
+    public String phatSinhMaTuDong() {
+        ArrayList<KhachHang> dsKH = getDSKH();
+        int soLuong = dsKH.size() + 1;
+        
+        return soLuong < 10 ? "KH00" + soLuong 
+                : soLuong < 100 ? "KH0" + soLuong
+                : "KH" + soLuong;
+    }
     @Override
     public KhachHang getKH_TheoMa(String maKH_searched) {
         KhachHang result = null;
@@ -89,15 +96,78 @@ public class KhachHang_DAO implements KhachHangService{
         
         return result;
     }
+   
+    public ArrayList<KhachHang> getDSKH() {
+        ArrayList<KhachHang> dsKH = new ArrayList<KhachHang>();
+        
+        connectDB.getInstance();
+        Connection con = connectDB.getConnect();
+        
+        Statement stm = null;
+        ResultSet rs = null;
+        try {
+              
+            String sql = "Select * from KhachHang";
+            stm = con.createStatement();
+            
+            rs = stm.executeQuery(sql);
+            
+            while(rs.next()) {
+               String maKH = rs.getString("maKH");
+                String tenKH = rs.getString("tenKH");
+                String sDT = rs.getString("sDT");
+                String email = rs.getString("email");
+                String diaChi = rs.getString("diaChi");
+                double tieuPhiTichLuy = rs.getDouble("tieuPhiTichLuy");
+                String rank = rs.getString("rank");
+                double tichDiem = rs.getDouble("tichDiem");
+                
+                KhachHang kh = new KhachHang(maKH, tenKH, sDT, email, diaChi, tieuPhiTichLuy, new Rank(rank), tichDiem);
+                dsKH.add(kh);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsKH;
+    }
 
     @Override
     public void Xoa_KH(String maKH) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public void Them_KH(KhachHang kh_new) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+   
+    public boolean Them_KH(KhachHang kh_new) {
+        int n = 0;
+        connectDB.getInstance();
+        Connection con = connectDB.getConnect();
+        PreparedStatement stmt = null;
+        try {
+            String sql = "insert into KhachHang(maKH,tenKH, sDT,email,diaChi,tieuPhiTichLuy,rank,tichDiem)" 
+                    + "values(?, ?, ?, ?, ?, ?, ?, ?)";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, phatSinhMaTuDong());
+            stmt.setString(2, kh_new.getTenKH());
+            stmt.setString(3, kh_new.getSDT());
+            stmt.setString(4, kh_new.getEmail());
+            stmt.setString(5, kh_new.getDiaChi());
+            stmt.setDouble(6, kh_new.getTieuPhiTichLuy());
+            stmt.setString(7, kh_new.getRank().getMaRank());
+            stmt.setDouble(8, kh_new.getTichDiem());
+            
+           
+            
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                stmt.close();;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return n > 0;
     }
 
     @Override

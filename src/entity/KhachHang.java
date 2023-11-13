@@ -52,7 +52,7 @@ public class KhachHang {
         return tenKH;
     }
 
-    public String getsDT() {
+    public String getSDT() {
         return sDT;
     }
 
