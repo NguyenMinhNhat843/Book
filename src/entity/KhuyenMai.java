@@ -14,13 +14,13 @@ import java.lang.Exception;
  */
 public class KhuyenMai {
     private String maKM;
-    private Enum_class.LoaiKM loaiKM;
+    private String loaiKM;
     private double giaTriKhuyenMai;
     private LocalDateTime ngayBatDau;
     private LocalDateTime ngayKetThuc;
     private double giaTriHoaDonBatDauKM;
 
-    public KhuyenMai(String maKM, Enum_class.LoaiKM loaiKM, double giaTriKhuyenMai, LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc, double giaTriHoaDonBatDauKM) {
+    public KhuyenMai(String maKM, String loaiKM, double giaTriKhuyenMai, LocalDateTime ngayBatDau, LocalDateTime ngayKetThuc, double giaTriHoaDonBatDauKM) {
         this.maKM = maKM;
         this.loaiKM = loaiKM;
         this.giaTriKhuyenMai = giaTriKhuyenMai;
@@ -40,7 +40,7 @@ public class KhuyenMai {
         return maKM;
     }
 
-    public Enum_class.LoaiKM getLoaiKM() {
+    public String getLoaiKM() {
         return loaiKM;
     }
 
@@ -67,7 +67,7 @@ public class KhuyenMai {
             this.maKM = maKM;
     }
 
-    public void setLoaiKM(Enum_class.LoaiKM loaiKM) {
+    public void setLoaiKM(String loaiKM) {
         this.loaiKM = loaiKM;
     }
 

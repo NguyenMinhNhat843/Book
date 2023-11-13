@@ -20,9 +20,10 @@ public class SanPham {
     private double giaBan;
     private int soLuongBayBan;
     private int soLuongTonKho;
-    private double VAT;
+    private double thue;
 
-    public SanPham(String maSP, KhuyenMai kM, NhaCungCap nCC, String tenSP, String loaiSP, double giaNhapHang, double giaBan, int soLuongBayBan, int soLuongTonKho) {
+    public SanPham(String maSP, KhuyenMai kM, NhaCungCap nCC, String tenSP, String loaiSP, double giaNhapHang, double giaBan, 
+                                int soLuongBayBan, int soLuongTonKho, double thue) {
         this.maSP = maSP;
         this.kM = kM;
         this.nCC = nCC;
@@ -32,14 +33,16 @@ public class SanPham {
         this.giaBan = giaBan;
         this.soLuongBayBan = soLuongBayBan;
         this.soLuongTonKho = soLuongTonKho;
+        this.thue = thue;
     }
     
-    public SanPham(String maSP, String tenSP, String loaiSP, double giaBan, double VAT) {
+    public SanPham(String maSP, String tenSP, String loaiSP, double giaBan, double VAT, KhuyenMai km) {
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.loaiSP = loaiSP;
         this.giaBan = giaBan;
-        this.VAT = VAT;
+        this.thue = VAT;
+        this.kM = km;
     }
     
     public SanPham(String maSP) {
@@ -87,6 +90,10 @@ public class SanPham {
         return soLuongTonKho;
     }
 
+    public double getThue() {
+        return thue;
+    }
+    
     public void setMaSP(String maSP) {
         this.maSP = maSP;
     }
@@ -124,6 +131,10 @@ public class SanPham {
         this.soLuongTonKho = soLuongTonKho;
     }
 
+    public void setThue(double thue) {
+        this.thue = thue;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;

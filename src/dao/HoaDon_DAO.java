@@ -48,16 +48,17 @@ public class HoaDon_DAO implements HoaDonService{
                 
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String ngayTao = rs.getString("ngayTao").substring(0, 19);
-//                System.out.println("dao.HoaDon_DAO.getAllHD() " + ngayTao);
                 LocalDateTime ngayTao_lcd = LocalDateTime.parse(ngayTao, dtf);
-                
-//                System.out.println("dao.HoaDon_DAO.getAllHD() " + ngayTao + " " +  ngayTao_lcd);
                 
                 double tienKhachDua = rs.getDouble("tienKhachDua");
                 double tongTien = rs.getDouble("tongTien");
+                double sdtd = rs.getDouble("suDungTichDiem");
+                double tongKM = rs.getDouble("tongKM");
+                double tongThue = rs.getDouble("tongThue");
+                double tienVon = rs.getDouble("tienVon");
                 
                 HoaDon hd = new HoaDon(maHD, new NhanVien(maNV, tenNV), new KhachHang(maKH, tenKH), 
-                        ngayTao_lcd, tienKhachDua, tongTien);
+                            ngayTao_lcd, tienKhachDua, tongTien, sdtd, tongKM, tongThue, tienVon);
                 
                 dsHD.add(hd);
             }
@@ -71,7 +72,44 @@ public class HoaDon_DAO implements HoaDonService{
 
     @Override
     public HoaDon getHD_TheoMa(String maHD) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        connectDB.getInstance();
+        java.sql.Connection con = connectDB.getConnect();
+        
+        java.sql.PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        HoaDon hd = null;
+        
+        try {
+            String sql = "select * from HoaDon where maHD = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, maHD);
+            
+            rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                String maHD_1 = rs.getString("maHD");
+                double tienNhan = rs.getDouble("tienKhachDua");
+                double tongTien = rs.getDouble("tongTien");
+                double suDungTichDiem = rs.getDouble("suDungTichDiem");
+                double tongKM = rs.getDouble("tongKM");
+                double tongThue = rs.getDouble("tongThue");
+                double tienVon = rs.getDouble("tienVon");
+                
+                hd = new HoaDon(maHD_1, null, null, null, 
+                        tienNhan, tongTien, suDungTichDiem, tongKM, tongThue, tienVon);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return hd;
     }
 
     @Override
@@ -83,8 +121,9 @@ public class HoaDon_DAO implements HoaDonService{
         int n = 0;
         
         try {
-            prstmt = con.prepareStatement("insert into HoaDon(maHD, maNhanVien,maKhachHang , ngayTao, tienKhachDua, tongTien)"
-                                        + "values(?, ?, ?, ?, ?, ?)");
+            prstmt = con.prepareStatement("insert into HoaDon(maHD, maNhanVien, maKhachHang , ngayTao, tienKhachDua, suDungTichDiem,"
+                    + "tongTien, tongKM, tongThue, tienVon)"
+                                        + "values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             prstmt.setString(1, hd.getMaHD());
             prstmt.setString(2, hd.getNv().getMaNV());
             
@@ -98,7 +137,11 @@ public class HoaDon_DAO implements HoaDonService{
             prstmt.setString(4, dtf.format(hd.getNgayTao()));
             
             prstmt.setDouble(5, hd.getTienKhachDua());
-            prstmt.setDouble(6, hd.getTongTien());
+            prstmt.setDouble(6, hd.getSuDungTichDiem());
+            prstmt.setDouble(7, hd.getTongTien());
+            prstmt.setDouble(8, hd.getTongKM());
+            prstmt.setDouble(9, hd.getTongThue());
+            prstmt.setDouble(10, hd.getTienVon());
             
             n = prstmt.executeUpdate();
             

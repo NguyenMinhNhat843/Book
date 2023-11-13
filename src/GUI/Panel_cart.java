@@ -42,6 +42,9 @@ public class Panel_cart extends javax.swing.JPanel {
     private String _this_maNV;
     private ArrayList<ChiTietHoaDon> dsCTHD;
     private KhachHang kh;
+    private double tienVon = 0;
+    private double tongThue = 0;
+    private double tongKM = 0;
     /**
      * Creates new form Panel_product
      */
@@ -133,9 +136,8 @@ public class Panel_cart extends javax.swing.JPanel {
         lb_TongThuCa2 = new javax.swing.JLabel();
         pnl_center = new javax.swing.JPanel();
         pnl_TimSP = new javax.swing.JPanel();
-        scroll_TimSP = new javax.swing.JScrollPane();
-        table_TimSP = new javax.swing.JTable();
         btn_Them = new javax.swing.JButton();
+        txt_TimSP = new javax.swing.JTextField();
         pnl_DanhSachSP = new javax.swing.JPanel();
         scroll_DanhSachSP = new javax.swing.JScrollPane();
         table_DanhSachSP = new javax.swing.JTable();
@@ -300,21 +302,6 @@ public class Panel_cart extends javax.swing.JPanel {
 
         pnl_TimSP.setLayout(new java.awt.BorderLayout());
 
-        scroll_TimSP.setPreferredSize(new java.awt.Dimension(456, 70));
-
-        table_TimSP.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"SP001", null, null, null, null}
-            },
-            new String [] {
-                "Mã SP", "Tên mặt hàng", "Loại ", "Số lượng", " Đơn giá (có thuế)"
-            }
-        ));
-        table_TimSP.setRowHeight(40);
-        scroll_TimSP.setViewportView(table_TimSP);
-
-        pnl_TimSP.add(scroll_TimSP, java.awt.BorderLayout.CENTER);
-
         btn_Them.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_Them.setText("Thêm");
         btn_Them.setPreferredSize(new java.awt.Dimension(150, 43));
@@ -324,6 +311,10 @@ public class Panel_cart extends javax.swing.JPanel {
             }
         });
         pnl_TimSP.add(btn_Them, java.awt.BorderLayout.EAST);
+
+        txt_TimSP.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_TimSP.setPreferredSize(new java.awt.Dimension(80, 50));
+        pnl_TimSP.add(txt_TimSP, java.awt.BorderLayout.CENTER);
 
         pnl_center.add(pnl_TimSP, java.awt.BorderLayout.NORTH);
 
@@ -337,7 +328,7 @@ public class Panel_cart extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã SP", "Tên mặt hàng", "Loại", "Số lượng", "Đơn giá (có thuế)", "Thành tiền"
+                "Mã SP", "Tên mặt hàng", "Loại", "Số lượng", "Thuế", "KM", "Đơn giá (có thuế)", "Thành tiền"
             }
         ));
         scroll_DanhSachSP.setViewportView(table_DanhSachSP);
@@ -427,10 +418,16 @@ public class Panel_cart extends javax.swing.JPanel {
 
     private void btn_ThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseClicked
         // TODO add your handling code here:
-        String maSP = table_TimSP.getModel().getValueAt(0, 0).toString();
+        String maSP = txt_TimSP.getText();
         SanPham sp = sp_dao.getSP_TheoMa(maSP);
         
+        
         if(maSP.compareTo("") != 0 && sp != null) {
+            tienVon += sp.getGiaNhapHang();
+            tongKM += sp.getkM().getLoaiKM().equals("LKM001") 
+                        ? sp.getGiaBan() * sp.getkM().getGiaTriKhuyenMai()
+                        : sp.getGiaBan() - sp.getkM().getGiaTriKhuyenMai();
+            tongThue += sp.getThue();
             
             // Nhập số lượng sản phẩm
             int soLuong = Integer.parseInt(JOptionPane.showInputDialog(null, "Nhập số lượng", 0));
@@ -455,7 +452,8 @@ public class Panel_cart extends javax.swing.JPanel {
             }
             
             // Them sp vao giao hang
-            Object obj[] = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), soLuong, sp.getGiaBan() ,sp.getGiaBan() * soLuong};
+            Object obj[] = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), soLuong, sp.getThue(), sp.getkM().getGiaTriKhuyenMai(), 
+                                    sp.getGiaBan() ,sp.getGiaBan() * soLuong};
             model_DSSP = (DefaultTableModel)table_DanhSachSP.getModel();
             model_DSSP.addRow(obj);
         } else {
@@ -555,13 +553,18 @@ public class Panel_cart extends javax.swing.JPanel {
         LocalDateTime ngayTao = LocalDateTime.now();
         double tienKhachDua = txt_TienNhan.getText().equals("") ? 0 : Double.parseDouble(txt_TienNhan.getText());
         
+        double suDungTichDiem = !txt_SudungTichDiem.getText().equals("") 
+                ? Double.parseDouble(txt_SudungTichDiem.getText())
+                : 0;
+        
+//      Tao Hoa Don
         HoaDon hd = null;
         if(maKH.equals("")) {
             hd = new HoaDon(maHD, new NhanVien(maNV),null, ngayTao, tienKhachDua, 
-                    Double.parseDouble(txt_ThanhToan.getText()));
+                    Double.parseDouble(txt_ThanhToan.getText()), suDungTichDiem, tongKM, tongThue, tienVon);
         } else {
             hd = new HoaDon(maHD, new NhanVien(maNV),new KhachHang(maKH), ngayTao, 
-                    tienKhachDua, Double.parseDouble(txt_ThanhToan.getText()));
+                    tienKhachDua, Double.parseDouble(txt_ThanhToan.getText()), suDungTichDiem, tongKM, tongThue, tienVon);
         }
         
         if(txt_TienNhan.getText().compareTo("") == 0) {
@@ -619,9 +622,7 @@ public class Panel_cart extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_thongTin_KH;
     private javax.swing.JPanel pnl_timKH;
     private javax.swing.JScrollPane scroll_DanhSachSP;
-    private javax.swing.JScrollPane scroll_TimSP;
     private javax.swing.JTable table_DanhSachSP;
-    private javax.swing.JTable table_TimSP;
     private javax.swing.JTextField txt_Ca;
     private javax.swing.JTextField txt_DiemTichLuy;
     private javax.swing.JTextField txt_Email;
@@ -634,6 +635,7 @@ public class Panel_cart extends javax.swing.JPanel {
     private javax.swing.JTextField txt_TienNhan;
     private javax.swing.JTextField txt_TienThoi;
     private javax.swing.JTextField txt_TimKH;
+    private javax.swing.JTextField txt_TimSP;
     private javax.swing.JTextField txt_TongThuCa;
     // End of variables declaration//GEN-END:variables
 }

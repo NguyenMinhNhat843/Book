@@ -357,21 +357,15 @@ public class Panel_bill extends javax.swing.JPanel {
     private void btn_XemChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XemChiTietMouseClicked
         // TODO add your handling code here:
         int r = table_DSHD.getSelectedRow();
-        
+
         if(r >= 0) {
             ArrayList<ChiTietHoaDon> dsCTHD = cthd_dao.getDSSP_TheoMaHD(table_DSHD.getValueAt(r, 0).toString());
-            System.out.println("GUI.Panel_bill.btn_XemChiTietMouseClicked() " + table_DSHD.getValueAt(r, 2));
-//            KhachHang kh = kh_dao.getKH_TheoMa((KhachHang) table_DSHD.getValueAt(r, 2));
+            HoaDon hd = hd_dao.getHD_TheoMa(table_DSHD.getValueAt(r, 0).toString());
+//            System.out.println("GUI.Panel_bill.btn_XemChiTietMouseClicked() " + hd.getMaHD());
+            new DiaLog_DSSP_HD(hd, dsCTHD).setVisible(true);
             
-            JPanel pnl_cart = new Panel_cart(_this_maNV, dsCTHD, null);
-            _this_pnl_card_parent.add(pnl_cart, "cart");
-
-            _this_card.show(_this_pnl_card_parent, "cart");
         }
-        
-        
-        
-        
+
     }//GEN-LAST:event_btn_XemChiTietMouseClicked
 
 

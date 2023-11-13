@@ -17,16 +17,25 @@ public class HoaDon {
     private KhachHang kh;
     private LocalDateTime ngayTao;
     private double tienKhachDua;
-    private Double TongTien;
+    private double suDungTichDiem;
+    private double TongTien;
+    private double tongKM;
+    private double tongThue;
+    private double tienVon;
     
 
-    public HoaDon(String maHD, NhanVien nv, KhachHang kh, LocalDateTime ngayTao, double tienKhachDua, double TongTien) {
+    public HoaDon(String maHD, NhanVien nv, KhachHang kh, LocalDateTime ngayTao, double tienKhachDua, 
+                    double TongTien, double sdtd, double tongKM, double tongThue, double tienVon) {
         this.maHD = maHD;
         this.nv = nv;
         this.kh = kh;
         this.ngayTao = ngayTao;
         this.tienKhachDua = tienKhachDua;
         this.TongTien = TongTien;
+        this.suDungTichDiem = sdtd;
+        this.tongKM = tongKM;
+        this.tongThue = tongThue;
+        this.tienVon = tienVon;
     }
     
     public HoaDon(String maHoaDon) {
@@ -59,6 +68,39 @@ public class HoaDon {
     public Double getTongTien() {
         return TongTien;
     }
+    
+    public Double getSuDungTichDiem() {
+        return suDungTichDiem;
+    }
+    
+    public Double getTongKM() {
+        return tongKM;
+    }
+    
+    public Double getTongThue() {
+        return tongThue;
+    }
+
+    public double getTienVon() {
+        return tienVon;
+    }
+    
+    public void setSuDungTichDiem(double suDungTichDiem) {
+        this.suDungTichDiem = suDungTichDiem;
+    }
+
+    public void setTongTien(double TongTien) {
+        this.TongTien = TongTien;
+    }
+
+    public void setTongKM(double tongKM) {
+        this.tongKM = tongKM;
+    }
+
+    public void setTongThue(double tongThue) {
+        this.tongThue = tongThue;
+    }
+    
     
     public void setMaHD(String maHD) {
         this.maHD = maHD;

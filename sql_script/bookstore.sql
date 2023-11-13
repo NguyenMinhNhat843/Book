@@ -143,7 +143,11 @@ create table HoaDon (
 		on update cascade,
 	ngayTao smalldatetime not null,
 	tienKhachDua float not null,
+	suDungTichDiem float,
 	tongTien float,
+	tongKM float,
+	tongThue float,
+	tienVon float,
 )
 
 -- table ChiTietHoaDon --
@@ -245,6 +249,25 @@ VALUES
   ('LKM003', 'Mua 1 tặng 1');
 
 -- KhuyenMai --
+insert into KhuyenMai(maKM, loaiKM, giaTriKhuyenMai, ngayBatDau, ngayKetThuc, giaTriHoaDonBatDauKhuyenMai)
+values 
+	('KM001', 'LKM001', 0.1, '2023-11-13', '2023-11-17', 0),
+	('KM002', 'LKM001', 0.05, '2023-11-13', '2023-11-17', 0),
+	('KM003', 'LKM002', 10000, '2023-11-13', '2023-11-17', 0),
+	('KM004', 'LKM002', 15000, '2023-11-13', '2023-11-17', 0);
+
+-- HoaDon --
+insert into HoaDon (maHD, maNhanVien, maKhachHang, ngayTao, tienKhachDua, 
+					suDungTichDiem, tongTien, tongKM, tongThue, tienVon)
+values
+	('HD001', 'NV001', 'KH001', '2023-11-13', 500000, 5000, 225000, 0, 0, 100000),
+	('HD002', 'NV001', 'KH002', '2023-11-13', 200000, 0, 67000, 0, 0, 40000),
+	('HD003', 'NV001', 'KH003', '2023-11-13', 130000, 0, 117000, 0, 0, 100000),
+	('HD004', 'NV001', 'KH004', '2023-11-13', 50000, 2000, 42000, 0, 0, 20000),
+	('HD005', 'NV001', NULL, '2023-11-13', 70000, 0, 50000, 0, 0, 30000),
+	('HD006', 'NV001', NULL, '2023-11-13', 100000, 0, 74000, 0, 0, 50000),
+	('HD007', 'NV001', 'KH002', '2023-11-13', 68000, 0, 68000, 0, 0, 40000);
+
 
 
 -- Nha CUng Cap --
@@ -270,23 +293,23 @@ values
 -- San Pham --
 INSERT INTO SanPham (maSP, maKhuyenMai, maNCC, tenSP, loaiSP, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho)
 VALUES
-  ('SP001', NULL, 'NCC003', N'Sản phẩm 1', 'LSP001', 100.0, 150.0, 50, 100),
-  ('SP002', NULL, 'NCC003', N'Sản phẩm 2', 'LSP003', 120.0, 180.0, 60, 90),
-  ('SP003', NULL, 'NCC003', N'Sản phẩm 3', 'LSP001', 80.0, 130.0, 40, 120),
-  ('SP004', NULL, 'NCC003', N'Sản phẩm 4', 'LSP005', 150.0, 220.0, 75, 80),
-  ('SP005', NULL, 'NCC003', N'Sản phẩm 5', 'LSP004', 110.0, 160.0, 55, 110),
-  ('SP006', NULL, 'NCC003', N'Sản phẩm 6', 'LSP004', 130.0, 190.0, 65, 95),
-  ('SP007', NULL, 'NCC003', N'Sản phẩm 7', 'LSP003', 90.0, 140.0, 45, 105),
-  ('SP008', NULL, 'NCC003', N'Sản phẩm 8', 'LSP002', 160.0, 230.0, 80, 70),
+  ('SP001', 'KM001', 'NCC003', N'Sản phẩm 1', 'LSP001', 100.0, 150.0, 50, 100),
+  ('SP002', 'KM001', 'NCC003', N'Sản phẩm 2', 'LSP003', 120.0, 180.0, 60, 90),
+  ('SP003', 'KM002', 'NCC003', N'Sản phẩm 3', 'LSP001', 80.0, 130.0, 40, 120),
+  ('SP004', 'KM001', 'NCC003', N'Sản phẩm 4', 'LSP005', 150.0, 220.0, 75, 80),
+  ('SP005', 'KM003', 'NCC003', N'Sản phẩm 5', 'LSP004', 110.0, 160.0, 55, 110),
+  ('SP006', 'KM002', 'NCC003', N'Sản phẩm 6', 'LSP004', 130.0, 190.0, 65, 95),
+  ('SP007', 'KM004', 'NCC003', N'Sản phẩm 7', 'LSP003', 90.0, 140.0, 45, 105),
+  ('SP008', 'KM001', 'NCC003', N'Sản phẩm 8', 'LSP002', 160.0, 230.0, 80, 70),
   ('SP009', NULL, 'NCC003', N'Sản phẩm 9', 'LSP005', 120.0, 170.0, 60, 120),
   ('SP010', NULL, 'NCC003', N'Sản phẩm 10', 'LSP001', 140.0, 200.0, 70, 90),
   ('SP011', NULL, 'NCC003', N'Sản phẩm 11', 'LSP002', 100.0, 150.0, 50, 100),
-  ('SP012', NULL, 'NCC003', N'Sản phẩm 12', 'LSP002', 170.0, 240.0, 85, 70),
+  ('SP012', 'KM004', 'NCC003', N'Sản phẩm 12', 'LSP002', 170.0, 240.0, 85, 70),
   ('SP013', NULL, 'NCC003', N'Sản phẩm 13', 'LSP002', 130.0, 180.0, 65, 110),
   ('SP014', NULL, 'NCC003', N'Sản phẩm 14', 'LSP003', 150.0, 210.0, 75, 90),
   ('SP015', NULL, 'NCC003', N'Sản phẩm 15', 'LSP005', 110.0, 160.0, 55, 105),
   ('SP016', NULL, 'NCC003', N'Sản phẩm 16', 'LSP001', 180.0, 250.0, 90, 65),
-  ('SP017', NULL, 'NCC003', N'Sản phẩm 17', 'LSP002', 140.0, 190.0, 70, 100),
+  ('SP017', 'KM002', 'NCC003', N'Sản phẩm 17', 'LSP002', 140.0, 190.0, 70, 100),
   ('SP018', NULL, 'NCC003', N'Sản phẩm 18', 'LSP005', 160.0, 220.0, 80, 85),
   ('SP019', NULL, 'NCC003', N'Sản phẩm 19', 'LSP004', 120.0, 170.0, 60, 120),
   ('SP020', NULL, 'NCC003', N'Sản phẩm 20', 'LSP002', 190.0, 260.0, 95, 60);
