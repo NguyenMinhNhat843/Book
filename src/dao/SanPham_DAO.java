@@ -61,8 +61,10 @@ public class SanPham_DAO implements SanPhamService{
                 double giaBan = rs.getDouble("giaBan");
                 int soLuongBayBan = rs.getInt("soLuongBayBan");
                 int soLuongTonKho = rs.getInt("soLuongTonKho");
+                double thue = rs.getDouble("VAT");
 
-                result = new SanPham(maSP, new KhuyenMai(maKM), new NhaCungCap(maNCC), tenSP, loaiSP, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho);
+                result = new SanPham(maSP, new KhuyenMai(maKM), new NhaCungCap(maNCC), tenSP, 
+                                loaiSP, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho, thue);
             }
             
         } catch (Exception e) {
@@ -168,8 +170,10 @@ public class SanPham_DAO implements SanPhamService{
                 double giaBan = rs.getDouble("giaBan");
                 int soLuongBayBan = rs.getInt("soLuongBayBan");
                 int soLuongTonKho = rs.getInt("soLuongTonKho");
+                double thue = rs.getDouble("VAT");
 
-                SanPham sp = new SanPham(maSP, new KhuyenMai(maKM), new NhaCungCap(maNCC), tenSP, loaiSP, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho);
+                SanPham sp = new SanPham(maSP, new KhuyenMai(maKM), new NhaCungCap(maNCC), tenSP, 
+                                loaiSP, giaNhapHang, giaBan, soLuongBayBan, soLuongTonKho, thue);
                 dsSP.add(sp);
             }
         } catch (Exception e) {

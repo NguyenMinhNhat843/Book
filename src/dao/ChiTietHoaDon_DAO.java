@@ -6,6 +6,7 @@ package dao;
 
 import entity.ChiTietHoaDon;
 import entity.HoaDon;
+import entity.KhuyenMai;
 import entity.SanPham;
 import service.ChiTietHoaDonService;
 import sql.connectDB;
@@ -79,9 +80,9 @@ public class ChiTietHoaDon_DAO implements ChiTietHoaDonService{
                         : "Văn phòng phẩm";
                 double giaBan = rs.getDouble("giaBan");
                 double vAT = rs.getDouble("VAT");
-//                System.out.println("dao.ChiTietHoaDon_DAO.getDSSP_TheoMaHD() " + vAT);
+                String maKM = rs.getString("maKhuyenMai");
                 
-                SanPham sp = new SanPham(maSP, tenSP, loaiSP, giaBan, vAT);
+                SanPham sp = new SanPham(maSP, tenSP, loaiSP, giaBan, vAT, new KhuyenMai(maKM));
                 
                 int soLuong = rs.getInt("soLuong");
                 

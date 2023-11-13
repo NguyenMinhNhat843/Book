@@ -48,16 +48,15 @@ public class HoaDon_DAO implements HoaDonService{
                 
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 String ngayTao = rs.getString("ngayTao").substring(0, 19);
-//                System.out.println("dao.HoaDon_DAO.getAllHD() " + ngayTao);
                 LocalDateTime ngayTao_lcd = LocalDateTime.parse(ngayTao, dtf);
-                
-//                System.out.println("dao.HoaDon_DAO.getAllHD() " + ngayTao + " " +  ngayTao_lcd);
                 
                 double tienKhachDua = rs.getDouble("tienKhachDua");
                 double tongTien = rs.getDouble("tongTien");
+                double sdtd = rs.getDouble("suDungTichDiem");
+                double tongKM = rs.getDouble("tongKM");
+                double tongThue = rs.getDouble("tongThue");
                 
-                HoaDon hd = new HoaDon(maHD, new NhanVien(maNV, tenNV), new KhachHang(maKH, tenKH), 
-                        ngayTao_lcd, tienKhachDua, tongTien);
+                HoaDon hd = new HoaDon(maHD, new NhanVien(maNV, tenNV), new KhachHang(maKH, tenKH), ngayTao_lcd, tienKhachDua, tongTien, sdtd, tongKM, tongThue);
                 
                 dsHD.add(hd);
             }
@@ -71,7 +70,42 @@ public class HoaDon_DAO implements HoaDonService{
 
     @Override
     public HoaDon getHD_TheoMa(String maHD) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        connectDB.getInstance();
+        java.sql.Connection con = connectDB.getConnect();
+        
+        java.sql.PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        HoaDon hd = null;
+        
+        try {
+            String sql = "select * from HoaDon where maHD = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, maHD);
+            
+            rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                String maHD_1 = rs.getString("maHD");
+                double tienNhan = rs.getDouble("tienKhachDua");
+                double tongTien = rs.getDouble("tongTien");
+                double suDungTichDiem = rs.getDouble("suDungTichDiem");
+                double tongKM = rs.getDouble("tongKM");
+                double tongThue = rs.getDouble("tongThue");
+                
+                hd = new HoaDon(maHD_1, null, null, null, tienNhan, tongTien, suDungTichDiem, tongKM, tongThue);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return hd;
     }
 
     @Override

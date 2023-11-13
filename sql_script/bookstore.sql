@@ -143,7 +143,11 @@ create table HoaDon (
 		on update cascade,
 	ngayTao smalldatetime not null,
 	tienKhachDua float not null,
+	suDungTichDiem float,
 	tongTien float,
+	tongKM float,
+	tongThue float,
+	tienVon float,
 )
 
 -- table ChiTietHoaDon --
@@ -245,6 +249,20 @@ VALUES
   ('LKM003', 'Mua 1 tặng 1');
 
 -- KhuyenMai --
+
+
+-- HoaDon --
+insert into HoaDon (maHD, maNhanVien, maKhachHang, ngayTao, tienKhachDua, 
+					suDungTichDiem, tongTien, tongKM, tongThue, tienVon)
+values
+	('HD001', 'NV001', 'KH001', '2023-11-13', 500000, 5000, 225000, 0, 0, 100000),
+	('HD002', 'NV001', 'KH002', '2023-11-13', 200000, 0, 67000, 0, 0, 40000),
+	('HD003', 'NV001', 'KH003', '2023-11-13', 130000, 0, 117000, 0, 0, 100000),
+	('HD004', 'NV001', 'KH004', '2023-11-13', 50000, 2000, 42000, 0, 0, 20000),
+	('HD005', 'NV001', NULL, '2023-11-13', 70000, 0, 50000, 0, 0, 30000),
+	('HD006', 'NV001', NULL, '2023-11-13', 100000, 0, 74000, 0, 0, 50000),
+	('HD007', 'NV001', 'KH002', '2023-11-13', 68000, 0, 68000, 0, 0, 40000);
+
 
 
 -- Nha CUng Cap --

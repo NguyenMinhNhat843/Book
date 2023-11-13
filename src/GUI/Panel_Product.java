@@ -90,7 +90,7 @@ public class Panel_Product extends javax.swing.JPanel {
         String khuyenMai = khuyenMai_field.getText();
         int bayBan = Integer.parseInt(bayban_field.getText());
         
-        SanPham sp = new SanPham(maSP, new KhuyenMai(khuyenMai), new NhaCungCap(cbo_NCC), tenSP, cbo_loaiSP,giaNhap, giaBan, bayBan, tonKho);
+        SanPham sp = new SanPham(maSP, new KhuyenMai(khuyenMai), new NhaCungCap(cbo_NCC), tenSP, cbo_loaiSP,giaNhap, giaBan, bayBan, tonKho, 0);
         return sp;
     }
     /**
@@ -612,7 +612,8 @@ public class Panel_Product extends javax.swing.JPanel {
             String khuyenMai = khuyenMai_field.getText();
             int bayBan = Integer.parseInt(bayban_field.getText());
 
-            SanPham sp = new SanPham(maSP, new KhuyenMai(khuyenMai), new NhaCungCap(cbo_NCC), tenSP, cbo_loaiSP,giaNhap, giaBan, bayBan, tonKho);
+            SanPham sp = new SanPham(maSP, new KhuyenMai(khuyenMai), new NhaCungCap(cbo_NCC), tenSP, 
+                                    cbo_loaiSP,giaNhap, giaBan, bayBan, tonKho, 0);
             
             if(sp_dao.updateSP(sp)){
                 DefaultTableModel temp = (DefaultTableModel) tbl_sanPham.getModel();
