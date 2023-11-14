@@ -670,7 +670,7 @@ public class Panel_cart extends javax.swing.JPanel {
                     cthd_dao.ThemCTHDVaoCSDL(cthd);
                 }
                 
-                inHoaDon();
+//                inHoaDon();
                 
                 XoaTable_DSSP();
                 txt_TienNhan.setText("");

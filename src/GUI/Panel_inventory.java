@@ -4,8 +4,15 @@
  */
 package GUI;
 
+import dao.CTHD_NhapHang_DAO;
+import dao.HoaDon_NCC_DAO;
 import dao.NhaCungCap_DAO;
+import dao.SanPham_DAO;
+import entity.ChiTietHD_NCC;
+import entity.HoaDonNCC;
 import entity.NhaCungCap;
+import entity.SanPham;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +23,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Panel_inventory extends javax.swing.JPanel {
     private NhaCungCap_DAO ncc_dao = new NhaCungCap_DAO();
+    private SanPham_DAO sp_dao = new SanPham_DAO();
+    private HoaDon_NCC_DAO hdnh_dao = new HoaDon_NCC_DAO();
+    private CTHD_NhapHang_DAO cthd_nh_dao = new CTHD_NhapHang_DAO();
+    private double tongTien = 0;
     /**
      * Creates new form Panel_inventory
      */
@@ -23,6 +34,15 @@ public class Panel_inventory extends javax.swing.JPanel {
         initComponents();
         
         DocDuLieuLenTableNCC();
+        DocDuLieuLenComBoBox_DSNCC();
+    }
+    
+    public void DocDuLieuLenComBoBox_DSNCC() {
+        ArrayList<NhaCungCap> dsNCC = ncc_dao.getAllNCC();
+        
+        for(NhaCungCap ncc : dsNCC) {
+            cbo_DSNCC.addItem(ncc);
+        }
     }
     
     public boolean valiData_NCC() {
@@ -105,18 +125,18 @@ public class Panel_inventory extends javax.swing.JPanel {
         table_DanhSachSP = new javax.swing.JTable();
         pnl_ThongTinNCC = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbo_DSNCC = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        area_ghiChu = new javax.swing.JTextArea();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        txt_TongTien = new javax.swing.JTextField();
+        btn_TaoHoaDonNCC = new javax.swing.JButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         pnl_TimKiem = new javax.swing.JPanel();
         txt_TimKiem = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btn_TimSP = new javax.swing.JButton();
         pnl_HoaDonNhapHang = new javax.swing.JPanel();
         pnl_Top = new javax.swing.JPanel();
         pnl_HDNH_TimKiem = new javax.swing.JPanel();
@@ -168,9 +188,7 @@ public class Panel_inventory extends javax.swing.JPanel {
 
         table_DanhSachSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"SP001", "Sách vật lý", "200", "40.000", "8.000.000"},
-                {"SP003", "Sách tiếng anh", "100", "50.000", "5.000.000"},
-                {"SP016", "Giấy ghi chú", "60", "10.000", "600.000"}
+
             },
             new String [] {
                 "Mã SP", "Tên sản phẩm", "Số lượng nhập", "Đơn giá nhập", "Thành tiền"
@@ -190,18 +208,17 @@ public class Panel_inventory extends javax.swing.JPanel {
         jLabel1.setText("Tổng tiền:");
         pnl_ThongTinNCC.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NCC 1", "NCC 2", "NCC 3", "NCC 4" }));
-        pnl_ThongTinNCC.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 260, 40));
+        cbo_DSNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        pnl_ThongTinNCC.add(cbo_DSNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 260, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nhà cung cấp:");
         pnl_ThongTinNCC.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        area_ghiChu.setColumns(20);
+        area_ghiChu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        area_ghiChu.setRows(5);
+        jScrollPane1.setViewportView(area_ghiChu);
 
         pnl_ThongTinNCC.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 260, 110));
 
@@ -209,13 +226,18 @@ public class Panel_inventory extends javax.swing.JPanel {
         jLabel3.setText("Ghi chú:");
         pnl_ThongTinNCC.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField1.setText("13.600.000");
-        pnl_ThongTinNCC.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 260, 50));
+        txt_TongTien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_TongTien.setText("13.600.000");
+        pnl_ThongTinNCC.add(txt_TongTien, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 260, 50));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Tạo yêu cầu nhập hàng");
-        pnl_ThongTinNCC.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 340, 70));
+        btn_TaoHoaDonNCC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_TaoHoaDonNCC.setText("Tạo yêu cầu nhập hàng");
+        btn_TaoHoaDonNCC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_TaoHoaDonNCCMouseClicked(evt);
+            }
+        });
+        pnl_ThongTinNCC.add(btn_TaoHoaDonNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 340, 70));
 
         jRadioButton1.setText("Đã nhận");
         pnl_ThongTinNCC.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
@@ -232,10 +254,15 @@ public class Panel_inventory extends javax.swing.JPanel {
         txt_TimKiem.setText("Nhập mã SP...");
         pnl_TimKiem.add(txt_TimKiem, java.awt.BorderLayout.CENTER);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton1.setText("Tìm kiếm");
-        jButton1.setPreferredSize(new java.awt.Dimension(150, 27));
-        pnl_TimKiem.add(jButton1, java.awt.BorderLayout.EAST);
+        btn_TimSP.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_TimSP.setText("Tìm kiếm");
+        btn_TimSP.setPreferredSize(new java.awt.Dimension(150, 27));
+        btn_TimSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_TimSPMouseClicked(evt);
+            }
+        });
+        pnl_TimKiem.add(btn_TimSP, java.awt.BorderLayout.EAST);
 
         pnl_TaoPhieuNhap.add(pnl_TimKiem, java.awt.BorderLayout.NORTH);
 
@@ -309,9 +336,7 @@ public class Panel_inventory extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"PN001", "23/10/2023", "Nhân vIen 1", "NCC 1", "chưa nhận", "2.000.000", "IN"},
-                {"PN002I", "24/10/2023", "Nhân Viên 3", "NCC 1", "đã nhận", "1.560.000", "IN"},
-                {"PN003", "27/10/2023", " Nhân Viên 3", " NCC 2 ", " chưa nhận ", "2.300.000", "IN"}
+
             },
             new String [] {
                 "Phiếu nhập", "Ngày nhập", "Người nhập", "Nhà cung cấp", "Trạng thái", "Tổng tiền", "In phiếu nhập"
@@ -550,17 +575,117 @@ public class Panel_inventory extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_MaNCCActionPerformed
 
+    private void btn_TimSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimSPMouseClicked
+        // TODO add your handling code here:
+        String maSP = txt_TimKiem.getText();
+        SanPham sp = sp_dao.getSP_TheoMa(maSP);
+        
+        
+        if(maSP.compareTo("") != 0 && sp != null) {
+//            tmp.add(sp);
+//            tienVon += sp.getGiaNhapHang();
+//            tongKM += sp.getkM().getLoaiKM().equals("LKM001") 
+//                        ? sp.getGiaBan() * sp.getkM().getGiaTriKhuyenMai()
+//                        : sp.getkM().getGiaTriKhuyenMai();
+//            tongThue += sp.getThue();
+            
+            // Nhập số lượng sản phẩm
+            int soLuong = Integer.parseInt(JOptionPane.showInputDialog(null, "Nhập số lượng", 0));
+            
+            // Tính tổng tiền thanh toán
+            tongTien += sp.getGiaNhapHang()* soLuong;
+            txt_TongTien.setText(tongTien + "");
+            
+            // Lấy số lượng hàng đang có
+            int n = table_DanhSachSP.getModel().getRowCount();
+            
+            // Kiểm tra sản phẩm trùng lặp: cộng dồn số lượng và thành tiền
+            for(int i = 0; i < n; ++i) {
+                String maSP_Cheked = table_DanhSachSP.getModel().getValueAt(i, 0).toString();
+                if(maSP_Cheked.compareTo(maSP) == 0) {
+                    int soLuongHienTai = Integer.parseInt(table_DanhSachSP.getModel().getValueAt(i, 2).toString());
+                    int soLuongMoi = soLuongHienTai + soLuong;
+                    table_DanhSachSP.getModel().setValueAt(soLuongMoi, i, 2);
+                    
+                    
+                    table_DanhSachSP.getModel().setValueAt(
+                            Double.parseDouble(table_DanhSachSP.getValueAt(i, 3).toString()) * soLuongMoi, i, 4);
+                    return;
+                }
+            }
+            
+            // Them sp vao giao hang
+//            Object[] obj;
+//                double donGia = sp.getGiaBan() * (1 - sp.getkM().getGiaTriKhuyenMai() + sp.getThue());
+               Object[] obj = {sp.getMaSP(), sp.getTenSP(),  soLuong, 
+                                        sp.getGiaNhapHang() ,sp.getGiaNhapHang() * soLuong};
+               DefaultTableModel model_DSSP = (DefaultTableModel)table_DanhSachSP.getModel();
+                model_DSSP.addRow(obj);
+//            if(sp.getkM().getLoaiKM().equals("LKM001")) {
+//            } else {
+//                double donGia = sp.getGiaBan() * (1 - sp.getThue()) - sp.getkM().getGiaTriKhuyenMai();
+//                Object[] obj = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), soLuong, sp.getThue(), sp.getkM().getGiaTriKhuyenMai(), 
+//                                        donGia ,donGia * soLuong};
+//                model_DSSP = (DefaultTableModel)table_DanhSachSP.getModel();
+//                model_DSSP.addRow(obj);
+//            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm");
+        }
+    }//GEN-LAST:event_btn_TimSPMouseClicked
+
+    public void XoaHetDuLieuSP_HDNH() {
+        DefaultTableModel temp = (DefaultTableModel) table_DanhSachSP.getModel();
+        temp.getDataVector().removeAllElements();
+    }
+    
+    private void btn_TaoHoaDonNCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TaoHoaDonNCCMouseClicked
+        // TODO add your handling code here:
+        
+        // Luu hoa don nhap hang
+        String maHDNH = hdnh_dao.TuPhatSinhMa();
+        int n = cbo_DSNCC.getSelectedIndex() + 1;
+        String maNCC = n < 10 ? "NCC00" +  n
+                : n < 100 ? "NCC0" + n
+                : "NCC" + n;
+        LocalDateTime ngayNhap = LocalDateTime.now();
+        String ghiChu = area_ghiChu.getText();
+        boolean isThanhToan = false;
+        
+        HoaDonNCC hdnh = new HoaDonNCC(maHDNH, new NhaCungCap(maNCC), ngayNhap, ghiChu, isThanhToan);
+        if(hdnh_dao.ThemHDNCCVaoCSDL(hdnh)) {
+            JOptionPane.showMessageDialog(this, "Lưu hóa đơn thành công!");
+            
+            // Luu chi tiet hoa don
+            int soLuongSp = table_DanhSachSP.getRowCount();
+            for(int i = 0; i < soLuongSp ; i++) {
+                String maSP = table_DanhSachSP.getValueAt(i, 0).toString();
+                String maHDNH_1 = maHDNH;
+                int soLuong = Integer.parseInt(table_DanhSachSP.getValueAt(i, 2).toString());
+                
+                ChiTietHD_NCC temp = new ChiTietHD_NCC(new SanPham(maSP), new HoaDonNCC(maHDNH), soLuong);
+                cthd_nh_dao.ThemVaoCSDL(temp);
+            }
+            
+            area_ghiChu.setText("");
+            cbo_DSNCC.setSelectedIndex(0);
+            XoaHetDuLieuSP_HDNH();
+        }
+        
+    }//GEN-LAST:event_btn_TaoHoaDonNCCMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane Tabbed_NhapHang;
+    private javax.swing.JTextArea area_ghiChu;
     private javax.swing.JButton btn_CapNhat;
+    private javax.swing.JButton btn_TaoHoaDonNCC;
     private javax.swing.JButton btn_ThemMoi;
     private javax.swing.JButton btn_TimKiem_NCC;
+    private javax.swing.JButton btn_TimSP;
     private javax.swing.JButton btn_XoaTrang;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<NhaCungCap> cbo_DSNCC;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
@@ -576,8 +701,6 @@ public class Panel_inventory extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lb_DiaChi;
@@ -613,5 +736,6 @@ public class Panel_inventory extends javax.swing.JPanel {
     private javax.swing.JTextField txt_TenNCC;
     private javax.swing.JTextField txt_TimKiem;
     private javax.swing.JTextField txt_TimKiem_NCC;
+    private javax.swing.JTextField txt_TongTien;
     // End of variables declaration//GEN-END:variables
 }

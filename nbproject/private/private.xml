@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/N14_BookStore/Book/src/dao/SanPham_DAO.java</file>
-            <file>file:/D:/N14_BookStore/Book/src/GUI/Panel_customer.java</file>
+            <file>file:/D:/N14_BookStore/Book/src/GUI/Panel_inventory.java</file>
+            <file>file:/D:/N14_BookStore/Book/src/GUI/Panel_cart.java</file>
+            <file>file:/D:/N14_BookStore/Book/src/dao/NhaCungCap_DAO.java</file>
             <file>file:/D:/N14_BookStore/Book/src/GUI/MainView.java</file>
-            <file>file:/D:/N14_BookStore/Book/src/GUI/Panel_staff.java</file>
         </group>
     </open-files>
 </project-private>

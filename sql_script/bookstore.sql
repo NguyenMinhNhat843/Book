@@ -187,7 +187,7 @@ create table ChiTietHoaDonNhapHang (
 		on update cascade,
 	maHDNH nvarchar(10) references HoaDonNhapHang(maHDNH),
 	soLuongNhap int not null,
-	thue float,
+	--thue float,
 )
 
 -- table HoaDonDoiTra --

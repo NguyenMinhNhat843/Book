@@ -60,32 +60,12 @@
                     <Component class="javax.swing.JTable" name="table_DanhSachSP">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="5" rowCount="3">
-                            <Column editable="true" title="M&#xe3; SP" type="java.lang.Object">
-                              <Data value="SP001"/>
-                              <Data value="SP003"/>
-                              <Data value="SP016"/>
-                            </Column>
-                            <Column editable="true" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.Object">
-                              <Data value="S&#xe1;ch v&#x1ead;t l&#xfd;"/>
-                              <Data value="S&#xe1;ch ti&#x1ebf;ng anh"/>
-                              <Data value="Gi&#x1ea5;y ghi ch&#xfa;"/>
-                            </Column>
-                            <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng nh&#x1ead;p" type="java.lang.Object">
-                              <Data value="200"/>
-                              <Data value="100"/>
-                              <Data value="60"/>
-                            </Column>
-                            <Column editable="true" title="&#x110;&#x1a1;n gi&#xe1; nh&#x1ead;p" type="java.lang.Object">
-                              <Data value="40.000"/>
-                              <Data value="50.000"/>
-                              <Data value="10.000"/>
-                            </Column>
-                            <Column editable="true" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object">
-                              <Data value="8.000.000"/>
-                              <Data value="5.000.000"/>
-                              <Data value="600.000"/>
-                            </Column>
+                          <Table columnCount="5" rowCount="0">
+                            <Column editable="true" title="M&#xe3; SP" type="java.lang.Object"/>
+                            <Column editable="true" title="T&#xea;n s&#x1ea3;n ph&#x1ea9;m" type="java.lang.Object"/>
+                            <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng nh&#x1ead;p" type="java.lang.Object"/>
+                            <Column editable="true" title="&#x110;&#x1a1;n gi&#xe1; nh&#x1ead;p" type="java.lang.Object"/>
+                            <Column editable="true" title="Th&#xe0;nh ti&#x1ec1;n" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -160,22 +140,17 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="cbo_DSNCC">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="NCC 1"/>
-                        <StringItem index="1" value="NCC 2"/>
-                        <StringItem index="2" value="NCC 3"/>
-                        <StringItem index="3" value="NCC 4"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;NhaCungCap&gt;"/>
                   </AuxValues>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -208,7 +183,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTextArea" name="jTextArea1">
+                    <Component class="javax.swing.JTextArea" name="area_ghiChu">
                       <Properties>
                         <Property name="columns" type="int" value="20"/>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -232,7 +207,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField1">
+                <Component class="javax.swing.JTextField" name="txt_TongTien">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
@@ -245,13 +220,16 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="btn_TaoHoaDonNCC">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="T&#x1ea1;o y&#xea;u c&#x1ea7;u nh&#x1ead;p h&#xe0;ng"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_TaoHoaDonNCCMouseClicked"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                       <AbsoluteConstraints x="40" y="370" width="340" height="70"/>
@@ -307,7 +285,7 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="btn_TimSP">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="24" style="1"/>
@@ -317,6 +295,9 @@
                       <Dimension value="[150, 27]"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_TimSPMouseClicked"/>
+                  </Events>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                       <BorderConstraints direction="East"/>
@@ -564,42 +545,14 @@
                     <Component class="javax.swing.JTable" name="jTable1">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="7" rowCount="3">
-                            <Column editable="true" title="Phi&#x1ebf;u nh&#x1ead;p" type="java.lang.Object">
-                              <Data value="PN001"/>
-                              <Data value="PN002I"/>
-                              <Data value="PN003"/>
-                            </Column>
-                            <Column editable="true" title="Ng&#xe0;y nh&#x1ead;p" type="java.lang.Object">
-                              <Data value="23/10/2023"/>
-                              <Data value="24/10/2023"/>
-                              <Data value="27/10/2023"/>
-                            </Column>
-                            <Column editable="true" title="Ng&#x1b0;&#x1edd;i nh&#x1ead;p" type="java.lang.Object">
-                              <Data value="Nh&#xe2;n vIen 1"/>
-                              <Data value="Nh&#xe2;n Vi&#xea;n 3"/>
-                              <Data value=" Nh&#xe2;n Vi&#xea;n 3"/>
-                            </Column>
-                            <Column editable="true" title="Nh&#xe0; cung c&#x1ea5;p" type="java.lang.Object">
-                              <Data value="NCC 1"/>
-                              <Data value="NCC 1"/>
-                              <Data value=" NCC 2 "/>
-                            </Column>
-                            <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object">
-                              <Data value="ch&#x1b0;a nh&#x1ead;n"/>
-                              <Data value="&#x111;&#xe3; nh&#x1ead;n"/>
-                              <Data value=" ch&#x1b0;a nh&#x1ead;n "/>
-                            </Column>
-                            <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n" type="java.lang.Object">
-                              <Data value="2.000.000"/>
-                              <Data value="1.560.000"/>
-                              <Data value="2.300.000"/>
-                            </Column>
-                            <Column editable="true" title="In phi&#x1ebf;u nh&#x1ead;p" type="java.lang.Object">
-                              <Data value="IN"/>
-                              <Data value="IN"/>
-                              <Data value="IN"/>
-                            </Column>
+                          <Table columnCount="7" rowCount="0">
+                            <Column editable="true" title="Phi&#x1ebf;u nh&#x1ead;p" type="java.lang.Object"/>
+                            <Column editable="true" title="Ng&#xe0;y nh&#x1ead;p" type="java.lang.Object"/>
+                            <Column editable="true" title="Ng&#x1b0;&#x1edd;i nh&#x1ead;p" type="java.lang.Object"/>
+                            <Column editable="true" title="Nh&#xe0; cung c&#x1ea5;p" type="java.lang.Object"/>
+                            <Column editable="true" title="Tr&#x1ea1;ng th&#xe1;i" type="java.lang.Object"/>
+                            <Column editable="true" title="T&#x1ed5;ng ti&#x1ec1;n" type="java.lang.Object"/>
+                            <Column editable="true" title="In phi&#x1ebf;u nh&#x1ead;p" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
