@@ -138,7 +138,7 @@ public class SanPham_DAO implements SanPhamService{
                     + "values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, phatSinhMaTuDong());
-            stmt.setString(2, sp.getkM().getMaKM());
+            stmt.setString(2, sp.getkM() == null ? null : sp.getkM().getMaKM());
             stmt.setString(3, sp.getnCC().getMaNCC());
             stmt.setString(4, sp.getTenSP());
             stmt.setString(5, sp.getLoaiSP());

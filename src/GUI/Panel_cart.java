@@ -15,6 +15,10 @@ import entity.KhachHang;
 import entity.NhanVien;
 import java.awt.Component;
 import java.awt.FlowLayout;
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -45,6 +49,7 @@ public class Panel_cart extends javax.swing.JPanel {
     private double tienVon = 0;
     private double tongThue = 0;
     private double tongKM = 0;
+    private static ArrayList<SanPham> tmp = new ArrayList<>();
     /**
      * Creates new form Panel_product
      */
@@ -66,6 +71,72 @@ public class Panel_cart extends javax.swing.JPanel {
         
         setTxt_MaHD_TuPhatSinh();
     }
+    
+    public void inHoaDon() {
+        PrinterJob printerJob = PrinterJob.getPrinterJob();
+        
+        if(printerJob.printDialog()) {
+            try {
+                printerJob.setPrintable((graphics, pageFormat, pageIndex) -> {
+                    if (pageIndex > 0) {
+                        return NO_SUCH_PAGE;
+                    }
+
+                    // Vẽ nội dung hóa đơn
+                    StringBuilder content = new StringBuilder("Hóa đơn\n\n");
+
+                    // Thêm thông tin về từng sản phẩm vào hóa đơn
+                    for (SanPham sp : tmp) {
+                        content.append(sp.getTenSP()).append("\t\t").append(sp.getGiaBan()).append("\n");
+                    }
+
+                    graphics.drawString(content.toString(), 100, 100);
+
+                    return PAGE_EXISTS;
+                });
+                
+                 printerJob.print();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Lỗi khi in hóa đơn: " + e.getMessage());
+            }
+        }
+    }
+    
+//    public void inHoaDon() {
+//        // Tạo một công việc in
+//        PrinterJob printerJob = PrinterJob.getPrinterJob();
+//
+//        // Kiểm tra xem người dùng đã chọn máy in chưa
+//        if (printerJob.printDialog()) {
+//            try {
+//                // Đặt nội dung cần in
+//                printerJob.setPrintable((graphics, pageFormat, pageIndex) -> {
+//                    if (pageIndex > 0) {
+//                        return NO_SUCH_PAGE;
+//                    }
+//
+//                    // Vẽ nội dung hóa đơn
+//                    StringBuilder content = new StringBuilder("Hóa đơn\n\n");
+//
+//                    // Thêm thông tin về từng sản phẩm vào hóa đơn
+//                    for (SanPham sp : tmp) {
+//                        content.append(sp.getTenSP()).append("\t\t").append(sp.getGiaBan()).append("\n");
+//                    }
+//
+//                    graphics.drawString(content.toString(), 100, 100);
+//
+//                    return PAGE_EXISTS;
+//                });
+//
+//                // In hóa đơn
+//                printerJob.print();
+//            } catch (PrinterException e) {
+//                JOptionPane.showMessageDialog(null, "Lỗi khi in hóa đơn: " + e.getMessage());
+//            }
+//        }
+//    }
+//}
+  
     
     public void DocChiTietHoaDonLenTable() {
         double tongTien = 0;
@@ -98,8 +169,6 @@ public class Panel_cart extends javax.swing.JPanel {
         DefaultTableModel temp = (DefaultTableModel) table_DanhSachSP.getModel();
         temp.getDataVector().removeAllElements();
     }
-    
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -423,6 +492,7 @@ public class Panel_cart extends javax.swing.JPanel {
         
         
         if(maSP.compareTo("") != 0 && sp != null) {
+            tmp.add(sp);
             tienVon += sp.getGiaNhapHang();
             tongKM += sp.getkM().getLoaiKM().equals("LKM001") 
                         ? sp.getGiaBan() * sp.getkM().getGiaTriKhuyenMai()
@@ -600,6 +670,8 @@ public class Panel_cart extends javax.swing.JPanel {
                     cthd_dao.ThemCTHDVaoCSDL(cthd);
                 }
                 
+                inHoaDon();
+                
                 XoaTable_DSSP();
                 txt_TienNhan.setText("");
                 txt_TienThoi.setText("");
@@ -613,7 +685,6 @@ public class Panel_cart extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Có lỗi xảy ra, vui lòng thử lại!!!");
             }
         }
-        
     }//GEN-LAST:event_btn_ThanhToanMouseClicked
 
 

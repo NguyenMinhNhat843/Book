@@ -50,6 +50,9 @@ create table NhanVien (
 	--maTaiKhoan nvarchar(10) not null references TaiKhoan(maTaiKhoan)
 	--	on delete cascade
 	--	on update cascade,
+	chucVu nvarchar(50),
+	gioiTinh nvarchar(20),
+	ngaySinh datetime,
 	tenNV nvarchar(50) not null,
 	sDT nvarchar(12) not null,
 	email nvarchar(30) not null,

@@ -177,7 +177,7 @@ public class KhachHang_DAO implements KhachHangService{
     }
 
     @Override
-    public void Them_KH(KhachHang kh_new) {
+    public boolean Them_KH(KhachHang kh_new) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
         

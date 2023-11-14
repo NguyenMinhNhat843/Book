@@ -93,17 +93,15 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_DiaChi = new javax.swing.JPanel();
         lbl_DiaChi = new javax.swing.JLabel();
         txt_DiaChi = new javax.swing.JTextField();
-        pnl_list_btn = new javax.swing.JPanel();
-        btn_ThemMoi = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        pnl_List_btn = new javax.swing.JPanel();
         btn_XoaTrang = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        btn_CapNhat = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         btn_Xoa = new javax.swing.JButton();
-        pnl_TimKiem = new javax.swing.JPanel();
-        btn_TimKiem = new javax.swing.JButton();
-        txt_TimKiem = new javax.swing.JTextField();
+        btn_Them = new javax.swing.JButton();
+        btn_CapNhat = new javax.swing.JButton();
+        pnl_Tim = new javax.swing.JPanel();
+        txt_Tim = new javax.swing.JTextField();
+        btn_Tim = new javax.swing.JButton();
         pnl_center = new javax.swing.JPanel();
         pnl_BoLoc = new javax.swing.JPanel();
         pnl_LocTheoChucVu_wrap = new javax.swing.JPanel();
@@ -128,14 +126,32 @@ public class Panel_staff extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_nhanVien = new javax.swing.JTable();
         pnl_TaiKhoan = new javax.swing.JPanel();
+        pnl_dsTK = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        pnl_thongTK = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
 
         pnl_NhanVien.setLayout(new java.awt.BorderLayout());
 
         pnl_top.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin nhân viên"));
-        pnl_top.setPreferredSize(new java.awt.Dimension(0, 320));
+        pnl_top.setPreferredSize(new java.awt.Dimension(0, 270));
         pnl_top.setLayout(new java.awt.BorderLayout());
 
         pnl_info_NV.setPreferredSize(new java.awt.Dimension(0, 150));
@@ -150,7 +166,7 @@ public class Panel_staff extends javax.swing.JPanel {
 
         txt_MaNV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txt_MaNV.setEnabled(false);
-        txt_MaNV.setPreferredSize(new java.awt.Dimension(200, 35));
+        txt_MaNV.setPreferredSize(new java.awt.Dimension(300, 40));
         pnl_MaNV.add(txt_MaNV);
 
         pnl_info_1.add(pnl_MaNV);
@@ -161,7 +177,7 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_TenNV.add(lbl_TenNV);
 
         txt_TenNV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_TenNV.setPreferredSize(new java.awt.Dimension(200, 35));
+        txt_TenNV.setPreferredSize(new java.awt.Dimension(300, 40));
         pnl_TenNV.add(txt_TenNV);
 
         pnl_info_1.add(pnl_TenNV);
@@ -171,7 +187,7 @@ public class Panel_staff extends javax.swing.JPanel {
         lbl_NS.setPreferredSize(new java.awt.Dimension(100, 25));
         pnl_NS.add(lbl_NS);
 
-        date_NS.setPreferredSize(new java.awt.Dimension(200, 35));
+        date_NS.setPreferredSize(new java.awt.Dimension(300, 40));
         pnl_NS.add(date_NS);
 
         pnl_info_1.add(pnl_NS);
@@ -187,7 +203,7 @@ public class Panel_staff extends javax.swing.JPanel {
 
         cb_GioiTinh.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cb_GioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
-        cb_GioiTinh.setPreferredSize(new java.awt.Dimension(230, 35));
+        cb_GioiTinh.setPreferredSize(new java.awt.Dimension(300, 40));
         pnl_GioiTinh.add(cb_GioiTinh);
 
         pnl_info_2.add(pnl_GioiTinh);
@@ -198,7 +214,7 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_SDT.add(lbl_SDT);
 
         txt_SDT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_SDT.setPreferredSize(new java.awt.Dimension(230, 35));
+        txt_SDT.setPreferredSize(new java.awt.Dimension(300, 40));
         pnl_SDT.add(txt_SDT);
 
         pnl_info_2.add(pnl_SDT);
@@ -210,7 +226,7 @@ public class Panel_staff extends javax.swing.JPanel {
 
         cb_ChucVu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cb_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên bán hàng", "Quản lý" }));
-        cb_ChucVu.setPreferredSize(new java.awt.Dimension(230, 35));
+        cb_ChucVu.setPreferredSize(new java.awt.Dimension(300, 40));
         cb_ChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_ChucVuActionPerformed(evt);
@@ -230,7 +246,7 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_Email.add(lbl_Email);
 
         txt_Email.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_Email.setPreferredSize(new java.awt.Dimension(230, 35));
+        txt_Email.setPreferredSize(new java.awt.Dimension(300, 40));
         pnl_Email.add(txt_Email);
 
         pnl_info_3.add(pnl_Email);
@@ -241,7 +257,7 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_DiaChi.add(lbl_DiaChi);
 
         txt_DiaChi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_DiaChi.setPreferredSize(new java.awt.Dimension(230, 35));
+        txt_DiaChi.setPreferredSize(new java.awt.Dimension(300, 40));
         pnl_DiaChi.add(txt_DiaChi);
 
         pnl_info_3.add(pnl_DiaChi);
@@ -250,111 +266,57 @@ public class Panel_staff extends javax.swing.JPanel {
 
         pnl_top.add(pnl_info_NV, java.awt.BorderLayout.NORTH);
 
-        btn_ThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_ThemMoi.setText("Thêm Mới");
-        btn_ThemMoi.setPreferredSize(new java.awt.Dimension(150, 40));
-        btn_ThemMoi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_ThemMoiMouseClicked(evt);
-            }
-        });
-        pnl_list_btn.add(btn_ThemMoi);
-
-        jPanel1.setPreferredSize(new java.awt.Dimension(100, 40));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
-        pnl_list_btn.add(jPanel1);
+        jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 1, 1, 1));
+        jPanel5.setLayout(new java.awt.GridLayout(1, 2));
 
         btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_XoaTrang.setText("Xóa Trắng");
-        btn_XoaTrang.setPreferredSize(new java.awt.Dimension(150, 40));
-        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_XoaTrangMouseClicked(evt);
-            }
-        });
-        pnl_list_btn.add(btn_XoaTrang);
-
-        jPanel2.setPreferredSize(new java.awt.Dimension(100, 40));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
-        pnl_list_btn.add(jPanel2);
-
-        btn_CapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_CapNhat.setText("Cập Nhật");
-        btn_CapNhat.setPreferredSize(new java.awt.Dimension(150, 40));
-        btn_CapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_CapNhatMouseClicked(evt);
-            }
-        });
-        pnl_list_btn.add(btn_CapNhat);
-
-        jPanel3.setPreferredSize(new java.awt.Dimension(100, 40));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
-        pnl_list_btn.add(jPanel3);
+        btn_XoaTrang.setText("Xóa trắng");
+        btn_XoaTrang.setPreferredSize(new java.awt.Dimension(130, 50));
+        pnl_List_btn.add(btn_XoaTrang);
 
         btn_Xoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_Xoa.setText("Xóa");
-        btn_Xoa.setPreferredSize(new java.awt.Dimension(150, 40));
-        btn_Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_XoaMouseClicked(evt);
+        btn_Xoa.setText("Sửa");
+        btn_Xoa.setPreferredSize(new java.awt.Dimension(130, 50));
+        pnl_List_btn.add(btn_Xoa);
+
+        btn_Them.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_Them.setText("Thêm mới");
+        btn_Them.setPreferredSize(new java.awt.Dimension(130, 50));
+        btn_Them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemActionPerformed(evt);
             }
         });
-        pnl_list_btn.add(btn_Xoa);
+        pnl_List_btn.add(btn_Them);
 
-        pnl_top.add(pnl_list_btn, java.awt.BorderLayout.CENTER);
+        btn_CapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_CapNhat.setText("Xóa");
+        btn_CapNhat.setPreferredSize(new java.awt.Dimension(130, 50));
+        pnl_List_btn.add(btn_CapNhat);
 
-        pnl_TimKiem.setPreferredSize(new java.awt.Dimension(1017, 60));
-        pnl_TimKiem.setLayout(new java.awt.BorderLayout());
+        jPanel5.add(pnl_List_btn);
 
-        btn_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_TimKiem.setText("Tìm Kiếm");
-        btn_TimKiem.setPreferredSize(new java.awt.Dimension(150, 36));
-        pnl_TimKiem.add(btn_TimKiem, java.awt.BorderLayout.WEST);
+        pnl_Tim.setLayout(new java.awt.BorderLayout());
 
-        txt_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pnl_TimKiem.add(txt_TimKiem, java.awt.BorderLayout.CENTER);
+        txt_Tim.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_Tim.setText("jTextField1");
+        pnl_Tim.add(txt_Tim, java.awt.BorderLayout.CENTER);
 
-        pnl_top.add(pnl_TimKiem, java.awt.BorderLayout.SOUTH);
+        btn_Tim.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_Tim.setText("jButton5");
+        btn_Tim.setPreferredSize(new java.awt.Dimension(150, 36));
+        pnl_Tim.add(btn_Tim, java.awt.BorderLayout.EAST);
+
+        jPanel5.add(pnl_Tim);
+
+        pnl_top.add(jPanel5, java.awt.BorderLayout.CENTER);
 
         pnl_NhanVien.add(pnl_top, java.awt.BorderLayout.NORTH);
 
         pnl_center.setLayout(new java.awt.BorderLayout());
 
-        pnl_BoLoc.setPreferredSize(new java.awt.Dimension(0, 150));
+        pnl_BoLoc.setBorder(javax.swing.BorderFactory.createTitledBorder("Lọc"));
+        pnl_BoLoc.setPreferredSize(new java.awt.Dimension(0, 170));
         pnl_BoLoc.setLayout(new java.awt.GridLayout(1, 3));
 
         pnl_LocTheoChucVu_wrap.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 40, 10, 40));
@@ -437,7 +399,7 @@ public class Panel_staff extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tbl_nhanVien);
 
-        pnl_tabel.add(jScrollPane1, java.awt.BorderLayout.PAGE_START);
+        pnl_tabel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         pnl_center.add(pnl_tabel, java.awt.BorderLayout.CENTER);
 
@@ -445,24 +407,87 @@ public class Panel_staff extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Nhân viên", pnl_NhanVien);
 
-        jLabel2.setText("ádalskjdlaskjlkdjasldjlasd");
+        pnl_TaiKhoan.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout pnl_TaiKhoanLayout = new javax.swing.GroupLayout(pnl_TaiKhoan);
-        pnl_TaiKhoan.setLayout(pnl_TaiKhoanLayout);
-        pnl_TaiKhoanLayout.setHorizontalGroup(
-            pnl_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_TaiKhoanLayout.createSequentialGroup()
-                .addGap(310, 310, 310)
-                .addComponent(jLabel2)
-                .addContainerGap(1157, Short.MAX_VALUE))
-        );
-        pnl_TaiKhoanLayout.setVerticalGroup(
-            pnl_TaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_TaiKhoanLayout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(jLabel2)
-                .addContainerGap(585, Short.MAX_VALUE))
-        );
+        pnl_dsTK.setPreferredSize(new java.awt.Dimension(1000, 765));
+        pnl_dsTK.setLayout(new java.awt.BorderLayout());
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Mã NV", "Tên NV", "Username ", "pass", "Chức vụ"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        pnl_dsTK.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        pnl_TaiKhoan.add(pnl_dsTK, java.awt.BorderLayout.CENTER);
+
+        pnl_thongTK.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông tin tài khoản"));
+        pnl_thongTK.setPreferredSize(new java.awt.Dimension(500, 765));
+        pnl_thongTK.setLayout(new java.awt.GridLayout(10, 1));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Mã NV:");
+        jLabel1.setPreferredSize(new java.awt.Dimension(90, 25));
+        jPanel1.add(jLabel1);
+
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jTextField1.setPreferredSize(new java.awt.Dimension(350, 40));
+        jPanel1.add(jTextField1);
+
+        pnl_thongTK.add(jPanel1);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Tên NV:");
+        jLabel2.setPreferredSize(new java.awt.Dimension(90, 25));
+        jPanel2.add(jLabel2);
+
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jTextField2.setPreferredSize(new java.awt.Dimension(350, 40));
+        jPanel2.add(jTextField2);
+
+        pnl_thongTK.add(jPanel2);
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Username:");
+        jPanel3.add(jLabel3);
+
+        jTextField3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jTextField3.setPreferredSize(new java.awt.Dimension(350, 40));
+        jPanel3.add(jTextField3);
+
+        pnl_thongTK.add(jPanel3);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Pass:");
+        jLabel4.setPreferredSize(new java.awt.Dimension(90, 25));
+        jPanel6.add(jLabel4);
+
+        jTextField4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jTextField4.setPreferredSize(new java.awt.Dimension(350, 40));
+        jPanel6.add(jTextField4);
+
+        pnl_thongTK.add(jPanel6);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("Chức vụ:");
+        jLabel5.setPreferredSize(new java.awt.Dimension(90, 25));
+        jPanel12.add(jLabel5);
+
+        jTextField5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jTextField5.setPreferredSize(new java.awt.Dimension(350, 40));
+        jPanel12.add(jTextField5);
+
+        pnl_thongTK.add(jPanel12);
+
+        pnl_TaiKhoan.add(pnl_thongTK, java.awt.BorderLayout.EAST);
 
         jTabbedPane1.addTab("Quản Lý Tài Khoản", pnl_TaiKhoan);
 
@@ -487,37 +512,9 @@ public class Panel_staff extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_ChucVuActionPerformed
 
-    private void btn_ThemMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMoiMouseClicked
+    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
         // TODO add your handling code here:
-        if(validData_NV()) {
-            NhanVien nv = createNV();
-            ArrayList<NhanVien> dsNCC = nv_dao.getAllNV();
-
-            if(true) {
-                if(nv_dao.ThemNV(nv)) {
-                    XoaDuLieuTableNV();
-                    DocDuLieuLenTableNhanVien();
-                    JOptionPane.showMessageDialog(this, "Thêm thành công!!!");
-                } else {
-                    JOptionPane.showMessageDialog(this, "Thêm thất bai!!! Có lỗi xảy ra!!!");
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "Nhân viên đã tồn tai!!!");
-            }
-        }
-    }//GEN-LAST:event_btn_ThemMoiMouseClicked
-
-    private void btn_XoaTrangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_XoaTrangMouseClicked
-
-    private void btn_CapNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_CapNhatMouseClicked
-
-    private void btn_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_XoaMouseClicked
+    }//GEN-LAST:event_btn_ThemActionPerformed
 public NhanVien createNV() {
         String maNV = txt_MaNV.getText().toString();
         String tenNV = txt_TenNV.getText().toString();
@@ -536,8 +533,8 @@ public NhanVien createNV() {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bl_LocGT;
     private javax.swing.JButton btn_CapNhat;
-    private javax.swing.JButton btn_ThemMoi;
-    private javax.swing.JButton btn_TimKiem;
+    private javax.swing.JButton btn_Them;
+    private javax.swing.JButton btn_Tim;
     private javax.swing.JButton btn_Xoa;
     private javax.swing.JButton btn_XoaTrang;
     private javax.swing.JComboBox<String> cb_ChucVu;
@@ -546,18 +543,32 @@ public NhanVien createNV() {
     private javax.swing.JComboBox<String> cb_LocTheoCV;
     private com.toedter.calendar.JYearChooser date_LocTheoNS;
     private com.toedter.calendar.JDateChooser date_NS;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lbl_ChucVu;
     private javax.swing.JLabel lbl_DiaChi;
     private javax.swing.JLabel lbl_Email;
@@ -573,6 +584,7 @@ public NhanVien createNV() {
     private javax.swing.JPanel pnl_DiaChi;
     private javax.swing.JPanel pnl_Email;
     private javax.swing.JPanel pnl_GioiTinh;
+    private javax.swing.JPanel pnl_List_btn;
     private javax.swing.JPanel pnl_LocTheoChucVu;
     private javax.swing.JPanel pnl_LocTheoChucVu_wrap;
     private javax.swing.JPanel pnl_LocTheoGT;
@@ -585,14 +597,15 @@ public NhanVien createNV() {
     private javax.swing.JPanel pnl_SDT;
     private javax.swing.JPanel pnl_TaiKhoan;
     private javax.swing.JPanel pnl_TenNV;
-    private javax.swing.JPanel pnl_TimKiem;
+    private javax.swing.JPanel pnl_Tim;
     private javax.swing.JPanel pnl_center;
+    private javax.swing.JPanel pnl_dsTK;
     private javax.swing.JPanel pnl_info_1;
     private javax.swing.JPanel pnl_info_2;
     private javax.swing.JPanel pnl_info_3;
     private javax.swing.JPanel pnl_info_NV;
-    private javax.swing.JPanel pnl_list_btn;
     private javax.swing.JPanel pnl_tabel;
+    private javax.swing.JPanel pnl_thongTK;
     private javax.swing.JPanel pnl_top;
     private javax.swing.JTable tbl_nhanVien;
     private javax.swing.JTextField txt_DiaChi;
@@ -600,6 +613,6 @@ public NhanVien createNV() {
     private javax.swing.JTextField txt_MaNV;
     private javax.swing.JTextField txt_SDT;
     private javax.swing.JTextField txt_TenNV;
-    private javax.swing.JTextField txt_TimKiem;
+    private javax.swing.JTextField txt_Tim;
     // End of variables declaration//GEN-END:variables
 }
