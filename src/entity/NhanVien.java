@@ -4,96 +4,130 @@
  */
 package entity;
 
+
+import java.util.Date;
+import java.util.Objects;
+
 /**
  *
  * @author Asus
  */
 public class NhanVien {
     private String maNV;
-    private TaiKhoan taiKhoan;
     private String tenNV;
-    private String sDT;
-    private String email;
+    private String chucVu;
+    private String gioiTinh;
     private String diaChi;
-    private boolean trangThai;
+    private String email;
+    private Date ngaySinh;
+    private String sDT;
 
-    public NhanVien(String maNV, TaiKhoan taiKhoan, String tenNV, String sDT, String email, String diaChi, boolean trangThai) {
+    public NhanVien(String maNV, String tenNV, String chucVu, String gioiTinh, String diaChi, String email, Date ngaySinh, String sDT) {
         this.maNV = maNV;
-        this.taiKhoan = taiKhoan;
         this.tenNV = tenNV;
-        this.sDT = sDT;
-        this.email = email;
+        this.chucVu = chucVu;
+        this.gioiTinh = gioiTinh;
         this.diaChi = diaChi;
-        this.trangThai = trangThai;
+        this.email = email;
+        this.ngaySinh = ngaySinh;
+        this.sDT = sDT;
     }
-    
+
     public NhanVien(String maNV) {
         this.maNV = maNV;
     }
-    
+
     public NhanVien(String maNV, String tenNV) {
         this.maNV = maNV;
         this.tenNV = tenNV;
-    }
-
-    public NhanVien() {
     }
 
     public String getMaNV() {
         return maNV;
     }
 
-    public TaiKhoan getTaiKhoan() {
-        return taiKhoan;
+    public void setMaNV(String maNV) {
+        this.maNV = maNV;
     }
 
     public String getTenNV() {
         return tenNV;
     }
 
-    public String getsDT() {
-        return sDT;
+    public void setTenNV(String tenNV) {
+        this.tenNV = tenNV;
     }
 
-    public String getEmail() {
-        return email;
+    public String getChucVu() {
+        return chucVu;
+    }
+
+    public void setChucVu(String chucVu) {
+        this.chucVu = chucVu;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
     public String getDiaChi() {
         return diaChi;
     }
 
-    public boolean isTrangThai() {
-        return trangThai;
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
 
-    public void setMaNV(String maNV) {
-        this.maNV = maNV;
-    }
-
-    public void setTaiKhoan(TaiKhoan taiKhoan) {
-        this.taiKhoan = taiKhoan;
-    }
-
-    public void setTenNV(String tenNV) {
-        this.tenNV = tenNV;
-    }
-
-    public void setsDT(String sDT) {
-        this.sDT = sDT;
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
+    public Date getNgaySinh() {
+        return ngaySinh;
     }
 
-    public void setTrangThai(boolean trangThai) {
-        this.trangThai = trangThai;
+    public void setNgaySinh(Date ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public String getsDT() {
+        return sDT;
+    }
+
+    public void setsDT(String sDT) {
+        this.sDT = sDT;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.maNV);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final NhanVien other = (NhanVien) obj;
+        return Objects.equals(this.maNV, other.maNV);
     }
     
+
     
 }
