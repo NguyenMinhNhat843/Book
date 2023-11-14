@@ -12,12 +12,24 @@ public class ChiTietHoaDon {
     private HoaDon hoaDon;
     private SanPham sanPham;
     private int soLuong;
+    private double thanhTien;
+    private double tongDoanhThu;
 //    private double vAT;
-
-    public ChiTietHoaDon(HoaDon hoaDon, SanPham sanPham, int soLuong) {
+    
+    public ChiTietHoaDon(HoaDon hoaDon, SanPham sanPham, int soLuong, double thanhTien, double tongDoanhThu) {
         this.hoaDon = hoaDon;
         this.sanPham = sanPham;
         this.soLuong = soLuong;
+        this.thanhTien = thanhTien;
+        this.tongDoanhThu = tongDoanhThu;
+//        this.vAT = vAT;
+    }
+
+    public ChiTietHoaDon(HoaDon hoaDon, SanPham sanPham, int soLuong, double thanhTien) {
+        this.hoaDon = hoaDon;
+        this.sanPham = sanPham;
+        this.soLuong = soLuong;
+        this.thanhTien = thanhTien;
 //        this.vAT = vAT;
     }
 
@@ -34,6 +46,10 @@ public class ChiTietHoaDon {
 
     public int getSoLuong() {
         return soLuong;
+    }
+    
+    public double getThanhTien() {
+        return thanhTien;
     }
 
 //    public double getvAT() {

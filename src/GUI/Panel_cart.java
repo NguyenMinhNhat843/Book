@@ -426,7 +426,7 @@ public class Panel_cart extends javax.swing.JPanel {
             tienVon += sp.getGiaNhapHang();
             tongKM += sp.getkM().getLoaiKM().equals("LKM001") 
                         ? sp.getGiaBan() * sp.getkM().getGiaTriKhuyenMai()
-                        : sp.getGiaBan() - sp.getkM().getGiaTriKhuyenMai();
+                        : sp.getkM().getGiaTriKhuyenMai();
             tongThue += sp.getThue();
             
             // Nhập số lượng sản phẩm
@@ -446,16 +446,29 @@ public class Panel_cart extends javax.swing.JPanel {
                     int soLuongHienTai = Integer.parseInt(table_DanhSachSP.getModel().getValueAt(i, 3).toString());
                     int soLuongMoi = soLuongHienTai + soLuong;
                     table_DanhSachSP.getModel().setValueAt(soLuongMoi, i, 3);
-                    table_DanhSachSP.getModel().setValueAt(sp.getGiaBan() * soLuongMoi, i, 5);
+                    
+                    
+                    table_DanhSachSP.getModel().setValueAt(
+                            Double.parseDouble(table_DanhSachSP.getValueAt(i, 6).toString()) * soLuongMoi, i, 7);
                     return;
                 }
             }
             
             // Them sp vao giao hang
-            Object obj[] = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), soLuong, sp.getThue(), sp.getkM().getGiaTriKhuyenMai(), 
-                                    sp.getGiaBan() ,sp.getGiaBan() * soLuong};
-            model_DSSP = (DefaultTableModel)table_DanhSachSP.getModel();
-            model_DSSP.addRow(obj);
+//            Object[] obj;
+            if(sp.getkM().getLoaiKM().equals("LKM001")) {
+                double donGia = sp.getGiaBan() * (1 - sp.getkM().getGiaTriKhuyenMai() + sp.getThue());
+               Object[] obj = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), soLuong, sp.getThue(), sp.getkM().getGiaTriKhuyenMai() * 100 + "%", 
+                                        donGia ,donGia * soLuong};
+                model_DSSP = (DefaultTableModel)table_DanhSachSP.getModel();
+                model_DSSP.addRow(obj);
+            } else {
+                double donGia = sp.getGiaBan() * (1 - sp.getThue()) - sp.getkM().getGiaTriKhuyenMai();
+                Object[] obj = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), soLuong, sp.getThue(), sp.getkM().getGiaTriKhuyenMai(), 
+                                        donGia ,donGia * soLuong};
+                model_DSSP = (DefaultTableModel)table_DanhSachSP.getModel();
+                model_DSSP.addRow(obj);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm");
         }
@@ -581,12 +594,21 @@ public class Panel_cart extends javax.swing.JPanel {
                     String maHD_CTHD = txt_MaHD.getText();
                     String maSP_CTHD = table_DanhSachSP.getValueAt(i, 0).toString();
                     int soLuong = Integer.parseInt(table_DanhSachSP.getValueAt(i, 3).toString());
+                    double thanhTien = Double.parseDouble(table_DanhSachSP.getValueAt(i, 7).toString());
                     
-                    ChiTietHoaDon cthd = new ChiTietHoaDon(new HoaDon(maHD_CTHD), new SanPham(maSP_CTHD), soLuong);
+                    ChiTietHoaDon cthd = new ChiTietHoaDon(new HoaDon(maHD_CTHD), new SanPham(maSP_CTHD), soLuong, thanhTien);
                     cthd_dao.ThemCTHDVaoCSDL(cthd);
                 }
                 
                 XoaTable_DSSP();
+                txt_TienNhan.setText("");
+                txt_TienThoi.setText("");
+                txt_ThanhToan.setText("");
+                txt_SudungTichDiem.setText("");
+                txt_TimSP.setText("");
+                tongThue = 0;
+                tongKM = 0;
+                tongTienThanhToan = 0;
             } else {
                 JOptionPane.showMessageDialog(this, "Có lỗi xảy ra, vui lòng thử lại!!!");
             }

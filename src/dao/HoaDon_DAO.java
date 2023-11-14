@@ -185,5 +185,47 @@ public class HoaDon_DAO implements HoaDonService{
         return soLuong < 10 ? "HD00" + soLuong : soLuong < 100 ? "HD0" + soLuong : "HD" + soLuong; 
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public ArrayList<HoaDon> TimHoaDonTheoThoiGian(String ngayBatDau, String ngayKetThuc) {
+        ArrayList<HoaDon> dsHD = new ArrayList<HoaDon>();
+        connectDB.getInstance();
+        java.sql.Connection con = connectDB.getConnect();
+        
+        java.sql.PreparedStatement prstmt = null;
+        
+        try {
+            String sql = "select * \n" +
+                    "from HoaDon\n" +
+                    "where ngayTao between ? and ?";
+            prstmt = con.prepareStatement(sql);
+            
+//            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            prstmt.setString(1, ngayBatDau);
+            prstmt.setString(2, ngayKetThuc);
+            
+            ResultSet rs = prstmt.executeQuery();
+            while(rs.next()) {
+                String maHD = rs.getString("maHD");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime ngayTao = LocalDateTime.parse(rs.getString("ngayTao").substring(0, 19), dtf);
+                double tienVon = rs.getDouble("tienVon");
+                double tongTien = rs.getDouble("tongTien");
+                
+                HoaDon hd = new HoaDon(maHD, ngayTao, tienVon, tongTien);
+                dsHD.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prstmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return dsHD;
+    }
     
 }

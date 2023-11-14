@@ -29,6 +29,8 @@ public class DiaLog_DSSP_HD extends javax.swing.JFrame {
         setSize(1200, 600);
    
         DocDSSPLenTable();
+        DocDuLieuHoaDon();
+//        System.out.println("GUI.DiaLog_DSSP_HD.<init>() " + hd.getMaHD());
     }
     
     public void DocDSSPLenTable() {
@@ -37,7 +39,7 @@ public class DiaLog_DSSP_HD extends javax.swing.JFrame {
         for(ChiTietHoaDon cthd : dsSP) {
             SanPham sp = cthd.getSanPham();
             Object[] obj = {sp.getMaSP(), sp.getTenSP(), cthd.getSoLuong(), sp.getThue(), 
-                sp.getkM(), sp.getGiaBan() * cthd.getSoLuong() * (1 - sp.getThue() / 100)};
+                sp.getkM().getGiaTriKhuyenMai(), sp.getGiaBan() * cthd.getSoLuong() * (1 - sp.getThue() / 100)};
             
            temp.addRow(obj);
         }
@@ -50,7 +52,7 @@ public class DiaLog_DSSP_HD extends javax.swing.JFrame {
         txt_TongThue.setText(hd.getTongThue() + "");
         txt_TongKM.setText(hd.getTongKM() + "");
         txt_ThanhTien.setText(hd.getTongTien() + "");
-        txt_TienThoi.setText(hd.getTongTien() - hd.getTienKhachDua() - hd.getSuDungTichDiem() + "");
+        txt_TienThoi.setText(- hd.getTongTien() + hd.getTienKhachDua() + hd.getSuDungTichDiem() + "");
     }
 
     /**

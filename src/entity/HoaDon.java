@@ -38,6 +38,13 @@ public class HoaDon {
         this.tienVon = tienVon;
     }
     
+    public HoaDon(String maHD, LocalDateTime ngayTao, double tienVon, double tongTien) {
+        this.maHD = maHD;
+        this.ngayTao = ngayTao;
+        this.tienVon = tienVon;
+        this.TongTien = tongTien;
+    }
+    
     public HoaDon(String maHoaDon) {
         this.maHD = maHoaDon;
     }

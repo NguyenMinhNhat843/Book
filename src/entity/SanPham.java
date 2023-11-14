@@ -45,6 +45,12 @@ public class SanPham {
         this.kM = km;
     }
     
+    public SanPham(String maSP, String tenSP, double giaNhap) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.giaNhapHang = giaNhap;
+    }
+    
     public SanPham(String maSP) {
         this.maSP = maSP;
     }

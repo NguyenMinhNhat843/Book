@@ -361,9 +361,7 @@ public class Panel_bill extends javax.swing.JPanel {
         if(r >= 0) {
             ArrayList<ChiTietHoaDon> dsCTHD = cthd_dao.getDSSP_TheoMaHD(table_DSHD.getValueAt(r, 0).toString());
             HoaDon hd = hd_dao.getHD_TheoMa(table_DSHD.getValueAt(r, 0).toString());
-//            System.out.println("GUI.Panel_bill.btn_XemChiTietMouseClicked() " + hd.getMaHD());
             new DiaLog_DSSP_HD(hd, dsCTHD).setVisible(true);
-            
         }
 
     }//GEN-LAST:event_btn_XemChiTietMouseClicked

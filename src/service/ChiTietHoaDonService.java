@@ -14,4 +14,5 @@ import java.util.ArrayList;
 public interface ChiTietHoaDonService {
     public boolean ThemCTHDVaoCSDL(ChiTietHoaDon cthd);
     public ArrayList<ChiTietHoaDon> getDSSP_TheoMaHD(String maHD);
+    public ArrayList<ChiTietHoaDon> ThongKe_SP_BanChay(); 
 }

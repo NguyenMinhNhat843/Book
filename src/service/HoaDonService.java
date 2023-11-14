@@ -5,6 +5,8 @@
 package service;
 
 import entity.HoaDon;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -17,5 +19,6 @@ public interface HoaDonService {
     public HoaDon getHD_TheoMa(String maHD);
     public boolean themHD(HoaDon hd);
     public void CapNhatHD(HoaDon hd_old, HoaDon hd_new);
+    public ArrayList<HoaDon> TimHoaDonTheoThoiGian(String ngayBatDau, String ngayKetThuc);
 //    public 
 }

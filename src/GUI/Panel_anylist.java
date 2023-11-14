@@ -4,21 +4,68 @@
  */
 package GUI;
 
+import dao.ChiTietHoaDon_DAO;
+import dao.HoaDon_DAO;
+import entity.ChiTietHoaDon;
+import entity.HoaDon;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Asus
  */
 public class Panel_anylist extends javax.swing.JPanel {
-
+    private HoaDon_DAO hd_dao = new HoaDon_DAO();
+    private ChiTietHoaDon_DAO cthd_dao = new ChiTietHoaDon_DAO();
     /**
      * Creates new form Panel_anylist
      */
     public Panel_anylist() {
         initComponents();
+        
+        DoculieuLenTable_TKDT();
+        DocuLieuLenTable_SPBC();
     }
     
-    public void DoculieuLenTable() {
+    public void DocuLieuLenTable_SPBC() {
+        ArrayList<ChiTietHoaDon> dsCTHD = cthd_dao.ThongKe_SP_BanChay();
+        DefaultTableModel temp = (DefaultTableModel) table_SP_BanChay.getModel();
         
+        for(ChiTietHoaDon cthd : dsCTHD) {
+            Object[] obj = {cthd.getSanPham().getMaSP(), cthd.getSanPham().getTenSP(), 
+                cthd.getSoLuong(), cthd.getThanhTien() ,cthd.getSanPham().getGiaNhapHang(), 
+                cthd.getThanhTien() - cthd.getSanPham().getGiaNhapHang() };
+            
+            temp.addRow(obj);
+        }
+    }
+    
+    public void DoculieuLenTable_TKDT() {
+        double tongDoanhThu = 0;
+        double tongVon = 0;
+        
+        ArrayList<HoaDon> dsHD = hd_dao.getAllHD();
+        DefaultTableModel temp = (DefaultTableModel) table_DSHD.getModel();
+        
+        for(HoaDon hd : dsHD) {
+            Object[] obj = {hd.getMaHD(), hd.getNgayTao(), hd.getTienVon(), hd.getTongTien(), hd.getTongTien() - hd.getTienVon()};
+            temp.addRow(obj);
+            tongDoanhThu += hd.getTongTien();
+            tongVon += hd.getTienVon();
+        }
+        
+        lbl_TongHD.setText(dsHD.size() + "");
+        lbl_DoanhThu.setText(tongDoanhThu + "");
+        lbl_TongVon.setText(tongVon + "");
+        lbl_LoiNhuan.setText(tongDoanhThu - tongVon + "");
+    }
+    
+    public void XoaHetDuLieu() {
+        DefaultTableModel temp = (DefaultTableModel) table_DSHD.getModel();
+        temp.getDataVector().removeAllElements();
     }
 
     /**
@@ -34,9 +81,6 @@ public class Panel_anylist extends javax.swing.JPanel {
         pnl_ThongKeDoanhThu = new javax.swing.JPanel();
         pnl_top = new javax.swing.JPanel();
         pnl_TKDT_info = new javax.swing.JPanel();
-        pnl_LoaiThoiGian = new javax.swing.JPanel();
-        lbl_LoaiThoiGian = new javax.swing.JLabel();
-        cb_LoaiThoiGian = new javax.swing.JComboBox<>();
         pnl_NgayBatDau = new javax.swing.JPanel();
         lbl_NgayBatDau = new javax.swing.JLabel();
         date_NgayBatDau = new com.toedter.calendar.JDateChooser();
@@ -69,7 +113,7 @@ public class Panel_anylist extends javax.swing.JPanel {
         lbl_LoiNhuan = new javax.swing.JLabel();
         pnl_tabel_TKDT = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_DSHD = new javax.swing.JTable();
         pnl_ThongKeSanPham = new javax.swing.JPanel();
         pnl_top1 = new javax.swing.JPanel();
         pnl_TKDT_info1 = new javax.swing.JPanel();
@@ -89,29 +133,18 @@ public class Panel_anylist extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         pnl_tabel_TKDT1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        table_SP_BanChay = new javax.swing.JTable();
 
         setLayout(new java.awt.BorderLayout());
 
         pnl_ThongKeDoanhThu.setLayout(new java.awt.BorderLayout());
 
         pnl_top.setBorder(javax.swing.BorderFactory.createTitledBorder("Bộ lọc"));
-        pnl_top.setPreferredSize(new java.awt.Dimension(0, 170));
+        pnl_top.setPreferredSize(new java.awt.Dimension(0, 180));
         pnl_top.setLayout(new java.awt.BorderLayout());
 
         pnl_TKDT_info.setPreferredSize(new java.awt.Dimension(0, 80));
         pnl_TKDT_info.setLayout(new java.awt.GridLayout(1, 3));
-
-        lbl_LoaiThoiGian.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbl_LoaiThoiGian.setText("Loại Thời Gian:");
-        pnl_LoaiThoiGian.add(lbl_LoaiThoiGian);
-
-        cb_LoaiThoiGian.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cb_LoaiThoiGian.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Báo cáo theo ngày", "Báo cáo theo tháng", "Báo cáo theo năm" }));
-        cb_LoaiThoiGian.setPreferredSize(new java.awt.Dimension(220, 40));
-        pnl_LoaiThoiGian.add(cb_LoaiThoiGian);
-
-        pnl_TKDT_info.add(pnl_LoaiThoiGian);
 
         lbl_NgayBatDau.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbl_NgayBatDau.setText("Ngày bắt đầu:");
@@ -133,11 +166,16 @@ public class Panel_anylist extends javax.swing.JPanel {
 
         pnl_top.add(pnl_TKDT_info, java.awt.BorderLayout.NORTH);
 
-        pnl_btn_TimKiem.setPreferredSize(new java.awt.Dimension(1068, 70));
+        pnl_btn_TimKiem.setPreferredSize(new java.awt.Dimension(1068, 80));
 
         btn_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_TimKiem.setText("Tìm kiếm");
         btn_TimKiem.setPreferredSize(new java.awt.Dimension(500, 50));
+        btn_TimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseClicked(evt);
+            }
+        });
         pnl_btn_TimKiem.add(btn_TimKiem);
 
         pnl_top.add(pnl_btn_TimKiem, java.awt.BorderLayout.CENTER);
@@ -257,7 +295,7 @@ public class Panel_anylist extends javax.swing.JPanel {
 
         pnl_tabel_TKDT.setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_DSHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -265,7 +303,7 @@ public class Panel_anylist extends javax.swing.JPanel {
                 "Mã HD", "Ngày Tạo", "Tiền vốn", "Doanh Thu", "Lợi Nhuận"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table_DSHD);
 
         pnl_tabel_TKDT.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
@@ -278,10 +316,10 @@ public class Panel_anylist extends javax.swing.JPanel {
         pnl_ThongKeSanPham.setLayout(new java.awt.BorderLayout());
 
         pnl_top1.setBorder(javax.swing.BorderFactory.createTitledBorder("Bộ lọc"));
-        pnl_top1.setPreferredSize(new java.awt.Dimension(0, 170));
+        pnl_top1.setPreferredSize(new java.awt.Dimension(0, 180));
         pnl_top1.setLayout(new java.awt.BorderLayout());
 
-        pnl_TKDT_info1.setPreferredSize(new java.awt.Dimension(0, 70));
+        pnl_TKDT_info1.setPreferredSize(new java.awt.Dimension(0, 80));
         pnl_TKDT_info1.setLayout(new java.awt.GridLayout(1, 3));
 
         lbl_LoaiThoiGian1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -340,18 +378,15 @@ public class Panel_anylist extends javax.swing.JPanel {
 
         pnl_tabel_TKDT1.setLayout(new java.awt.BorderLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        table_SP_BanChay.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"SP001", "Sách tiếng viêt", "200", "20.000", "4.000.000", "2.000.000", " 2.000.000"},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Mã SP", "Tên Sản Phẩm", "Đã bán", "Đơn giá", "Tổng doanh thu", "Tiền Vốn", "Lợi Nhuận"
+                "Mã SP", "Tên Sản Phẩm", "Đã bán", "Tổng doanh thu", "Tiền Vốn", "Lợi Nhuận"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(table_SP_BanChay);
 
         pnl_tabel_TKDT1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -364,11 +399,34 @@ public class Panel_anylist extends javax.swing.JPanel {
         add(jTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_TimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseClicked
+        // TODO add your handling code here:
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String ngayBatDau = df.format(date_NgayBatDau.getDate());
+        String ngayKetThuc = df.format(date_NgayKetThuc.getDate());
+        
+        XoaHetDuLieu();
+        
+        ArrayList<HoaDon> dsHD = hd_dao.TimHoaDonTheoThoiGian(ngayBatDau, ngayKetThuc);
+        double tongDoanhThu = 0;
+        double tongVon = 0;
+        DefaultTableModel temp = (DefaultTableModel) table_DSHD.getModel();
+        for(HoaDon hd : dsHD) {
+            Object[] obj = {hd.getMaHD(), hd.getNgayTao(), hd.getTienVon(), hd.getTongTien(), hd.getTongTien() - hd.getTienVon()};
+            temp.addRow(obj);
+            tongDoanhThu += hd.getTongTien();
+            tongVon += hd.getTienVon();
+        }
+        lbl_TongHD.setText(dsHD.size() + "");
+        lbl_DoanhThu.setText(tongDoanhThu + "");
+        lbl_TongVon.setText(tongVon + "");
+        lbl_LoiNhuan.setText(tongDoanhThu - tongVon + "");
+    }//GEN-LAST:event_btn_TimKiemMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_TimKiem;
     private javax.swing.JButton btn_TimKiem1;
-    private javax.swing.JComboBox<String> cb_LoaiThoiGian;
     private javax.swing.JComboBox<String> cb_LoaiThoiGian1;
     private com.toedter.calendar.JDateChooser date_NgayBatDau;
     private com.toedter.calendar.JDateChooser date_NgayBatDau1;
@@ -386,11 +444,8 @@ public class Panel_anylist extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lbl_DoanhThu;
     private javax.swing.JLabel lbl_DoanhThu_title1;
-    private javax.swing.JLabel lbl_LoaiThoiGian;
     private javax.swing.JLabel lbl_LoaiThoiGian1;
     private javax.swing.JLabel lbl_LoiNhuan;
     private javax.swing.JLabel lbl_LoiNhuan_title;
@@ -403,7 +458,6 @@ public class Panel_anylist extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_TongVon;
     private javax.swing.JLabel lbl_TongVon_title;
     private javax.swing.JPanel pnl_DoanhThu;
-    private javax.swing.JPanel pnl_LoaiThoiGian;
     private javax.swing.JPanel pnl_LoaiThoiGian1;
     private javax.swing.JPanel pnl_LoiNhuan;
     private javax.swing.JPanel pnl_NgayBatDau;
@@ -426,5 +480,7 @@ public class Panel_anylist extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_title;
     private javax.swing.JPanel pnl_top;
     private javax.swing.JPanel pnl_top1;
+    private javax.swing.JTable table_DSHD;
+    private javax.swing.JTable table_SP_BanChay;
     // End of variables declaration//GEN-END:variables
 }
