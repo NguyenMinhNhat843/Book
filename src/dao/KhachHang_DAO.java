@@ -137,41 +137,47 @@ public class KhachHang_DAO implements KhachHangService{
     }
 
    
-    public boolean Them_KH(KhachHang kh_new) {
-        int n = 0;
-        connectDB.getInstance();
-        Connection con = connectDB.getConnect();
-        PreparedStatement stmt = null;
-        try {
-            String sql = "insert into KhachHang(maKH,tenKH, sDT,email,diaChi,tieuPhiTichLuy,rank,tichDiem)" 
-                    + "values(?, ?, ?, ?, ?, ?, ?, ?)";
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, phatSinhMaTuDong());
-            stmt.setString(2, kh_new.getTenKH());
-            stmt.setString(3, kh_new.getSDT());
-            stmt.setString(4, kh_new.getEmail());
-            stmt.setString(5, kh_new.getDiaChi());
-            stmt.setDouble(6, kh_new.getTieuPhiTichLuy());
-            stmt.setString(7, kh_new.getRank().getMaRank());
-            stmt.setDouble(8, kh_new.getTichDiem());
-            
-           
-            
-            n = stmt.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally{
-            try {
-                stmt.close();;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return n > 0;
-    }
+   
+//    public boolean Them_KH(KhachHang kh_new) {
+//        int n = 0;
+//        connectDB.getInstance();
+//        Connection con = connectDB.getConnect();
+//        PreparedStatement stmt = null;
+//        try {
+//            String sql = "insert into KhachHang(maKH,tenKH, sDT,email,diaChi,tieuPhiTichLuy,rank,tichDiem)" 
+//                    + "values(?, ?, ?, ?, ?, ?, ?, ?)";
+//            stmt = con.prepareStatement(sql);
+//            stmt.setString(1, phatSinhMaTuDong());
+//            stmt.setString(2, kh_new.getTenKH());
+//            stmt.setString(3, kh_new.getSDT());
+//            stmt.setString(4, kh_new.getEmail());
+//            stmt.setString(5, kh_new.getDiaChi());
+//            stmt.setDouble(6, kh_new.getTieuPhiTichLuy());
+//            stmt.setString(7, kh_new.getRank().getMaRank());
+//            stmt.setDouble(8, kh_new.getTichDiem());
+//            
+//           
+//            
+//            n = stmt.executeUpdate();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }finally{
+//            try {
+//                stmt.close();;
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return n > 0;
+//    }
 
     @Override
     public void Sua_KH(KhachHang kh_new) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void Them_KH(KhachHang kh_new) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
         

@@ -6,17 +6,53 @@ package GUI;
 
 import dao.NhanVien_DAO;
 import entity.NhanVien;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class Panel_staff extends javax.swing.JPanel {
-
+ private NhanVien_DAO nv_dao = new NhanVien_DAO();
     /**
      * Creates new form Panel_staff
      */
     public Panel_staff() {
         initComponents();
+        DocDuLieuLenTableNhanVien();
     }
 
+    public boolean validData_NV() {
+        String maNV = txt_MaNV.getText().toString().trim();
+        String tenNV = txt_TenNV.getText().toString().trim();
+        String email = txt_Email.getText().toString().trim();
+        String sDT = txt_SDT.getText().toString().trim();
+        String diaChi = txt_DiaChi.getText().toString().trim();
+        
+        
+       
+        
+        if(tenNV.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên NV không được rỗng!!!");
+            return false;
+        }
+        
+        if(email.isEmpty() || !email.matches("[a-zA-Z0-9]+@gmail.com")) {
+            JOptionPane.showMessageDialog(this, "Email theo mẫu abc123@gmail.com");
+            return false;
+        }
+        
+        if(sDT.isEmpty() || !sDT.matches("0\\d{9}")) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại phải có 10 số");
+            return false;
+        }
+        
+        if(diaChi.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Địa chỉ không được rỗng!!!");
+            return false;
+        }
+                
+        
+        return true;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,8 +66,6 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_NhanVien = new javax.swing.JPanel();
         pnl_top = new javax.swing.JPanel();
         pnl_info_NV = new javax.swing.JPanel();
-        pnl_image_NV = new javax.swing.JPanel();
-        llbl_add_user = new javax.swing.JLabel();
         pnl_info_1 = new javax.swing.JPanel();
         pnl_MaNV = new javax.swing.JPanel();
         lbl_MaNV = new javax.swing.JLabel();
@@ -49,9 +83,9 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_SDT = new javax.swing.JPanel();
         lbl_SDT = new javax.swing.JLabel();
         txt_SDT = new javax.swing.JTextField();
-        pnl_CMND = new javax.swing.JPanel();
-        lbl_CMND = new javax.swing.JLabel();
-        txt_CMND = new javax.swing.JTextField();
+        pnl_ChucVu = new javax.swing.JPanel();
+        lbl_ChucVu = new javax.swing.JLabel();
+        cb_ChucVu = new javax.swing.JComboBox<>();
         pnl_info_3 = new javax.swing.JPanel();
         pnl_Email = new javax.swing.JPanel();
         lbl_Email = new javax.swing.JLabel();
@@ -60,9 +94,9 @@ public class Panel_staff extends javax.swing.JPanel {
         lbl_DiaChi = new javax.swing.JLabel();
         txt_DiaChi = new javax.swing.JTextField();
         pnl_list_btn = new javax.swing.JPanel();
-        btn_Them = new javax.swing.JButton();
+        btn_ThemMoi = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        btn_XoáTrang = new javax.swing.JButton();
+        btn_XoaTrang = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btn_CapNhat = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -107,15 +141,6 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_info_NV.setPreferredSize(new java.awt.Dimension(0, 150));
         pnl_info_NV.setLayout(new java.awt.GridLayout(1, 4));
 
-        pnl_image_NV.setLayout(new java.awt.BorderLayout());
-
-        llbl_add_user.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        llbl_add_user.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-user.png"))); // NOI18N
-        llbl_add_user.setPreferredSize(new java.awt.Dimension(100, 128));
-        pnl_image_NV.add(llbl_add_user, java.awt.BorderLayout.CENTER);
-
-        pnl_info_NV.add(pnl_image_NV);
-
         pnl_info_1.setLayout(new java.awt.GridLayout(3, 1));
 
         lbl_MaNV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -124,6 +149,7 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_MaNV.add(lbl_MaNV);
 
         txt_MaNV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_MaNV.setEnabled(false);
         txt_MaNV.setPreferredSize(new java.awt.Dimension(200, 35));
         pnl_MaNV.add(txt_MaNV);
 
@@ -177,16 +203,22 @@ public class Panel_staff extends javax.swing.JPanel {
 
         pnl_info_2.add(pnl_SDT);
 
-        lbl_CMND.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbl_CMND.setText("CMND:");
-        lbl_CMND.setPreferredSize(new java.awt.Dimension(80, 25));
-        pnl_CMND.add(lbl_CMND);
+        lbl_ChucVu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbl_ChucVu.setText("Chức vụ: ");
+        lbl_ChucVu.setPreferredSize(new java.awt.Dimension(80, 25));
+        pnl_ChucVu.add(lbl_ChucVu);
 
-        txt_CMND.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_CMND.setPreferredSize(new java.awt.Dimension(230, 35));
-        pnl_CMND.add(txt_CMND);
+        cb_ChucVu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cb_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên bán hàng", "Quản lý" }));
+        cb_ChucVu.setPreferredSize(new java.awt.Dimension(230, 35));
+        cb_ChucVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_ChucVuActionPerformed(evt);
+            }
+        });
+        pnl_ChucVu.add(cb_ChucVu);
 
-        pnl_info_2.add(pnl_CMND);
+        pnl_info_2.add(pnl_ChucVu);
 
         pnl_info_NV.add(pnl_info_2);
 
@@ -194,7 +226,7 @@ public class Panel_staff extends javax.swing.JPanel {
 
         lbl_Email.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbl_Email.setText("Email:");
-        lbl_Email.setPreferredSize(new java.awt.Dimension(70, 25));
+        lbl_Email.setPreferredSize(new java.awt.Dimension(80, 25));
         pnl_Email.add(lbl_Email);
 
         txt_Email.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -205,7 +237,7 @@ public class Panel_staff extends javax.swing.JPanel {
 
         lbl_DiaChi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbl_DiaChi.setText("Địa chỉ:");
-        lbl_DiaChi.setPreferredSize(new java.awt.Dimension(70, 25));
+        lbl_DiaChi.setPreferredSize(new java.awt.Dimension(80, 25));
         pnl_DiaChi.add(lbl_DiaChi);
 
         txt_DiaChi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -218,15 +250,15 @@ public class Panel_staff extends javax.swing.JPanel {
 
         pnl_top.add(pnl_info_NV, java.awt.BorderLayout.NORTH);
 
-        btn_Them.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_Them.setText("Thêm Mới");
-        btn_Them.setPreferredSize(new java.awt.Dimension(150, 40));
-        btn_Them.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ThemActionPerformed(evt);
+        btn_ThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_ThemMoi.setText("Thêm Mới");
+        btn_ThemMoi.setPreferredSize(new java.awt.Dimension(150, 40));
+        btn_ThemMoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_ThemMoiMouseClicked(evt);
             }
         });
-        pnl_list_btn.add(btn_Them);
+        pnl_list_btn.add(btn_ThemMoi);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(100, 40));
 
@@ -243,15 +275,15 @@ public class Panel_staff extends javax.swing.JPanel {
 
         pnl_list_btn.add(jPanel1);
 
-        btn_XoáTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_XoáTrang.setText("Xóa Trắng");
-        btn_XoáTrang.setPreferredSize(new java.awt.Dimension(150, 40));
-        btn_XoáTrang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_XoáTrangActionPerformed(evt);
+        btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_XoaTrang.setText("Xóa Trắng");
+        btn_XoaTrang.setPreferredSize(new java.awt.Dimension(150, 40));
+        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_XoaTrangMouseClicked(evt);
             }
         });
-        pnl_list_btn.add(btn_XoáTrang);
+        pnl_list_btn.add(btn_XoaTrang);
 
         jPanel2.setPreferredSize(new java.awt.Dimension(100, 40));
 
@@ -271,9 +303,9 @@ public class Panel_staff extends javax.swing.JPanel {
         btn_CapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_CapNhat.setText("Cập Nhật");
         btn_CapNhat.setPreferredSize(new java.awt.Dimension(150, 40));
-        btn_CapNhat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_CapNhatActionPerformed(evt);
+        btn_CapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_CapNhatMouseClicked(evt);
             }
         });
         pnl_list_btn.add(btn_CapNhat);
@@ -296,9 +328,9 @@ public class Panel_staff extends javax.swing.JPanel {
         btn_Xoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_Xoa.setText("Xóa");
         btn_Xoa.setPreferredSize(new java.awt.Dimension(150, 40));
-        btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_XoaActionPerformed(evt);
+        btn_Xoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_XoaMouseClicked(evt);
             }
         });
         pnl_list_btn.add(btn_Xoa);
@@ -397,13 +429,10 @@ public class Panel_staff extends javax.swing.JPanel {
 
         tbl_nhanVien.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"NV001", "Nguyễn Văn A", "Nhân Viên Bán Hàng", "Nữ", "Gò Vấp", "abc@gmail.com", "18/10/2003", "053698742", "5698741"},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Mã NV", "Tên NV", "Chức Vụ", "Giới TÍnh", "Địa Chỉ", "Email", "Ngày Sinh", "SĐT", "CMND"
+                "Mã NV", "Tên NV", "Chức Vụ", "Giới Tính", "Địa Chỉ", "Email", "Ngày Sinh", "SĐT"
             }
         ));
         jScrollPane1.setViewportView(tbl_nhanVien);
@@ -441,63 +470,77 @@ public class Panel_staff extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
         
     
-    private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
-        // TODO add your handling code here:
-         String maNV = txt_MaNV.getText();
-        String tenNV = txt_TenNV.getText();
-        String gioiTinh = String.valueOf(cb_GioiTinh.getSelectedItem());
-        String ngaySinh = String.valueOf(date_NS.getDate());
-        String sDT = txt_SDT.getText();
-        String cMND = txt_CMND.getText();
-        String email = txt_Email.getText();
-        String diaChi = txt_DiaChi.getText();
+    public void DocDuLieuLenTableNhanVien(){
+        ArrayList<NhanVien> dsNV = nv_dao.getAllNV();
+        DefaultTableModel temp = (DefaultTableModel) tbl_nhanVien.getModel();
         
-    }//GEN-LAST:event_btn_CapNhatActionPerformed
+        for(NhanVien nv : dsNV){
+            Object[] obj = {nv.getMaNV(),nv.getTenNV(), nv.getChucVu(), nv.getGioiTinh(),nv.getDiaChi(),nv.getEmail(), nv.getNgaySinh(),nv.getsDT()};
+            temp.addRow(obj);
+        }         
+    }
+     public void XoaDuLieuTableNV(){
+        DefaultTableModel temp = (DefaultTableModel) tbl_nhanVien.getModel();
+        temp.getDataVector().removeAllElements();
+    }
+    private void cb_ChucVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ChucVuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_ChucVuActionPerformed
 
-    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+    private void btn_ThemMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMoiMouseClicked
         // TODO add your handling code here:
-        String maNV = txt_MaNV.getText();
-        String tenNV = txt_TenNV.getText();
-        String diaChi = txt_DiaChi.getText();
-        String sDT = txt_SDT.getText();  
-        String email = txt_Email.getText();
-        String cMND=txt_CMND.getText();
-//        String chucVu = ;
-        String cb_gioiTinh = String.valueOf(this.cb_GioiTinh.getSelectedItem());
-        String cb_ngaySinh = String.valueOf(this.date_NS.getDate());
-        
-        if(!maNV.isEmpty() && !tenNV.isEmpty() && !diaChi.isEmpty() && !sDT.isEmpty() && !email.isEmpty()){
-            Object obj[] = {maNV, tenNV, /*chucVu*/ cb_gioiTinh, diaChi, email, cb_ngaySinh, sDT, cMND};
-            DefaultTableModel model_DSNV = (DefaultTableModel)tbl_nhanVien.getModel();
-            model_DSNV.addRow(obj);
-        }else{
-            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin!");
+        if(validData_NV()) {
+            NhanVien nv = createNV();
+            ArrayList<NhanVien> dsNCC = nv_dao.getAllNV();
+
+            if(true) {
+                if(nv_dao.ThemNV(nv)) {
+                    XoaDuLieuTableNV();
+                    DocDuLieuLenTableNhanVien();
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!!!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm thất bai!!! Có lỗi xảy ra!!!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Nhân viên đã tồn tai!!!");
+            }
         }
-    }//GEN-LAST:event_btn_ThemActionPerformed
+    }//GEN-LAST:event_btn_ThemMoiMouseClicked
 
-    private void btn_XoáTrangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoáTrangActionPerformed
+    private void btn_XoaTrangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseClicked
         // TODO add your handling code here:
-        txt_MaNV.setText("");
-        txt_TenNV.setText("");
-        txt_DiaChi.setText("");
-        txt_SDT.setText("");
-        txt_Email.setText("");
-        txt_CMND.setText("");
-    }//GEN-LAST:event_btn_XoáTrangActionPerformed
+    }//GEN-LAST:event_btn_XoaTrangMouseClicked
 
-    private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
+    private void btn_CapNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_CapNhatMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_XoaActionPerformed
+    }//GEN-LAST:event_btn_CapNhatMouseClicked
 
+    private void btn_XoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_XoaMouseClicked
+public NhanVien createNV() {
+        String maNV = txt_MaNV.getText().toString();
+        String tenNV = txt_TenNV.getText().toString();
+        String chucVu= cb_ChucVu.getName().toString();
+        String gioiTinh = cb_GioiTinh.getName().toString();
+        String diaChi = txt_DiaChi.getText().toString();
+        String email = txt_Email.getText().toString();
+        Date ngaySinh = date_NS.getDate();
+        String sDT = txt_SDT.getText().toString();
+        NhanVien nv = new NhanVien(maNV, tenNV, chucVu, gioiTinh, diaChi, email, ngaySinh, sDT);
+        
+         return nv;
+    }
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bl_LocGT;
     private javax.swing.JButton btn_CapNhat;
-    private javax.swing.JButton btn_Them;
+    private javax.swing.JButton btn_ThemMoi;
     private javax.swing.JButton btn_TimKiem;
     private javax.swing.JButton btn_Xoa;
-    private javax.swing.JButton btn_XoáTrang;
+    private javax.swing.JButton btn_XoaTrang;
+    private javax.swing.JComboBox<String> cb_ChucVu;
     private javax.swing.JComboBox<String> cb_GioiTinh;
     private javax.swing.JComboBox<String> cb_LocGT;
     private javax.swing.JComboBox<String> cb_LocTheoCV;
@@ -515,7 +558,7 @@ public class Panel_staff extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lbl_CMND;
+    private javax.swing.JLabel lbl_ChucVu;
     private javax.swing.JLabel lbl_DiaChi;
     private javax.swing.JLabel lbl_Email;
     private javax.swing.JLabel lbl_GT;
@@ -525,9 +568,8 @@ public class Panel_staff extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_NS;
     private javax.swing.JLabel lbl_SDT;
     private javax.swing.JLabel lbl_TenNV;
-    private javax.swing.JLabel llbl_add_user;
     private javax.swing.JPanel pnl_BoLoc;
-    private javax.swing.JPanel pnl_CMND;
+    private javax.swing.JPanel pnl_ChucVu;
     private javax.swing.JPanel pnl_DiaChi;
     private javax.swing.JPanel pnl_Email;
     private javax.swing.JPanel pnl_GioiTinh;
@@ -545,7 +587,6 @@ public class Panel_staff extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_TenNV;
     private javax.swing.JPanel pnl_TimKiem;
     private javax.swing.JPanel pnl_center;
-    private javax.swing.JPanel pnl_image_NV;
     private javax.swing.JPanel pnl_info_1;
     private javax.swing.JPanel pnl_info_2;
     private javax.swing.JPanel pnl_info_3;
@@ -554,7 +595,6 @@ public class Panel_staff extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_tabel;
     private javax.swing.JPanel pnl_top;
     private javax.swing.JTable tbl_nhanVien;
-    private javax.swing.JTextField txt_CMND;
     private javax.swing.JTextField txt_DiaChi;
     private javax.swing.JTextField txt_Email;
     private javax.swing.JTextField txt_MaNV;
