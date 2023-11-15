@@ -18,6 +18,7 @@ public class Panel_staff extends javax.swing.JPanel {
     public Panel_staff() {
         initComponents();
         DocDuLieuLenTableNhanVien();
+
     }
 
     public boolean validData_NV() {
@@ -29,7 +30,10 @@ public class Panel_staff extends javax.swing.JPanel {
         
         
        
-        
+        if(maNV.isEmpty() || (!maNV.matches("^NV\\d{3}$"))){
+            JOptionPane.showMessageDialog(this, "Mã nhân viên phải theo mẫu NV001");
+            return false;
+        }
         if(tenNV.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tên NV không được rỗng!!!");
             return false;
@@ -272,6 +276,11 @@ public class Panel_staff extends javax.swing.JPanel {
         btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_XoaTrang.setText("Xóa trắng");
         btn_XoaTrang.setPreferredSize(new java.awt.Dimension(130, 50));
+        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_XoaTrangMouseClicked(evt);
+            }
+        });
         pnl_List_btn.add(btn_XoaTrang);
 
         btn_Xoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -282,9 +291,9 @@ public class Panel_staff extends javax.swing.JPanel {
         btn_Them.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_Them.setText("Thêm mới");
         btn_Them.setPreferredSize(new java.awt.Dimension(130, 50));
-        btn_Them.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_ThemActionPerformed(evt);
+        btn_Them.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_ThemMouseClicked(evt);
             }
         });
         pnl_List_btn.add(btn_Them);
@@ -299,12 +308,21 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_Tim.setLayout(new java.awt.BorderLayout());
 
         txt_Tim.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_Tim.setText("jTextField1");
+        txt_Tim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_TimActionPerformed(evt);
+            }
+        });
         pnl_Tim.add(txt_Tim, java.awt.BorderLayout.CENTER);
 
         btn_Tim.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_Tim.setText("jButton5");
+        btn_Tim.setText("Tìm Kiếm");
         btn_Tim.setPreferredSize(new java.awt.Dimension(150, 36));
+        btn_Tim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_TimMouseClicked(evt);
+            }
+        });
         pnl_Tim.add(btn_Tim, java.awt.BorderLayout.EAST);
 
         jPanel5.add(pnl_Tim);
@@ -397,6 +415,11 @@ public class Panel_staff extends javax.swing.JPanel {
                 "Mã NV", "Tên NV", "Chức Vụ", "Giới Tính", "Địa Chỉ", "Email", "Ngày Sinh", "SĐT"
             }
         ));
+        tbl_nhanVien.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_nhanVienMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_nhanVien);
 
         pnl_tabel.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -512,19 +535,85 @@ public class Panel_staff extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_ChucVuActionPerformed
 
-    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+    private void txt_TimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_TimActionPerformed
+        
+    }//GEN-LAST:event_txt_TimActionPerformed
+
+    private void btn_ThemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMouseClicked
+
+        if(validData_NV()) {
+            NhanVien nv = createNV();
+            ArrayList<NhanVien> dsNCC = nv_dao.getAllNV();
+
+            if(true) {
+                if(nv_dao.ThemNV(nv)) {
+                    XoaDuLieuTableNV();
+                    DocDuLieuLenTableNhanVien();
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!!!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm thất bai!!! Có lỗi xảy ra!!!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Nhân viên đã tồn tai!!!");
+            }
+            }
+    }//GEN-LAST:event_btn_ThemMouseClicked
+
+    private void btn_TimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimMouseClicked
+         String maNV = txt_MaNV.getText().toString();
+        
+        if(!maNV.trim().equals("")){
+            XoaDuLieuTableNV();
+            
+            NhanVien nv = nv_dao.getNV_TheoMa(maNV);
+            DefaultTableModel temp = (DefaultTableModel) tbl_nhanVien.getModel();
+            
+            Object[] obj = {nv.getMaNV(), nv.getTenNV(), nv.getChucVu(), nv.getGioiTinh(), nv.getDiaChi(), nv.getEmail(), nv.getNgaySinh(), nv.getsDT()};
+            temp.addRow(obj);
+        }else{
+            XoaDuLieuTableNV();
+            DocDuLieuLenTableNhanVien();
+        }
+            
+    }//GEN-LAST:event_btn_TimMouseClicked
+
+    private void tbl_nhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_nhanVienMouseClicked
+        int r = tbl_nhanVien.getSelectedRow();
+        
+        if(r >= 0){
+            txt_MaNV.setText(tbl_nhanVien.getValueAt(r, 0).toString());
+            txt_TenNV.setText(tbl_nhanVien.getValueAt(r, 1).toString());
+            txt_DiaChi.setText(tbl_nhanVien.getValueAt(r, 4).toString());
+            txt_Email.setText(tbl_nhanVien.getValueAt(r, 5).toString());
+            date_NS.setDateFormatString(tbl_nhanVien.getValueAt(r, 6).toString());
+//            cbo_NCC_field.setSelectedIndex(
+//                    Integer.parseInt(tbl_sanPham.getValueAt(r, 6).toString().substring(3, 6)) - 1);
+            txt_SDT.setText(tbl_nhanVien.getValueAt(r, 7).toString());
+            cb_ChucVu.addItem(tbl_nhanVien.getValueAt(r, 2).toString());
+            cb_GioiTinh.addItem(tbl_nhanVien.getValueAt(r, 3).toString());
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hàng muốn thao tác!");
+        }
+    }//GEN-LAST:event_tbl_nhanVienMouseClicked
+
+    private void btn_XoaTrangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XoaTrangMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_ThemActionPerformed
+        txt_MaNV.setText("");
+        txt_TenNV.setText("");
+        txt_DiaChi.setText("");
+        txt_Email.setText("");
+        txt_SDT.setText("");
+    }//GEN-LAST:event_btn_XoaTrangMouseClicked
 public NhanVien createNV() {
         String maNV = txt_MaNV.getText().toString();
         String tenNV = txt_TenNV.getText().toString();
-        String chucVu= cb_ChucVu.getName().toString();
-        String gioiTinh = cb_GioiTinh.getName().toString();
+        String cb_ChucVu = String.valueOf(this.cb_ChucVu.getSelectedItem());
+        String cbo_GioiTinh = String.valueOf(cb_GioiTinh.getSelectedItem());
         String diaChi = txt_DiaChi.getText().toString();
         String email = txt_Email.getText().toString();
         Date ngaySinh = date_NS.getDate();
         String sDT = txt_SDT.getText().toString();
-        NhanVien nv = new NhanVien(maNV, tenNV, chucVu, gioiTinh, diaChi, email, ngaySinh, sDT);
+        NhanVien nv = new NhanVien(maNV, tenNV, cb_ChucVu, cbo_GioiTinh, diaChi, email, ngaySinh, sDT);
         
          return nv;
     }
