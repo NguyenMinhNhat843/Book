@@ -5,11 +5,16 @@
 package GUI;
 import dao.TaiKhoan_DAO;
 import entity.TaiKhoan;
+import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import sql.connectDB;
@@ -28,6 +33,8 @@ public class Panel_Login extends javax.swing.JPanel {
         connect();
         initComponents();
         
+        tao_txt_underline();
+        
         txt_username.setText("nhatminh");
         txt_password.setText("nhatminhpass");
         
@@ -36,6 +43,37 @@ public class Panel_Login extends javax.swing.JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    public void tao_txt_underline() {
+        JLabel underlineLabel = new JLabel("<html><u>Quên mật khẩu</u></html>");
+        underlineLabel.setForeground(Color.BLUE); // Đặt màu sắc nếu cần
+        
+        jPanel1.add(underlineLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 270, 40));
+        
+        underlineLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                underlineLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                super.mouseEntered(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                underlineLabel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+                super.mouseExited(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            }
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                String sdt = JOptionPane.showInputDialog("Nhập số điện thoại của bạn để khôi phục mật khẩu");
+                
+                super.mouseClicked(e); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            }
+            
+            
+            
+        });
     }
     
     public void connect() {
@@ -78,7 +116,7 @@ public class Panel_Login extends javax.swing.JPanel {
         setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 153));
-        jPanel1.setPreferredSize(new java.awt.Dimension(430, 250));
+        jPanel1.setPreferredSize(new java.awt.Dimension(430, 270));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -105,7 +143,7 @@ public class Panel_Login extends javax.swing.JPanel {
                 btn_closeMouseClicked(evt);
             }
         });
-        jPanel1.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 110, 40));
+        jPanel1.add(btn_close, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 110, 40));
 
         btn_login.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_login.setText("Login");
@@ -114,7 +152,7 @@ public class Panel_Login extends javax.swing.JPanel {
                 btn_loginMouseClicked(evt);
             }
         });
-        jPanel1.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 110, 40));
+        jPanel1.add(btn_login, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 110, 40));
 
         add(jPanel1, new java.awt.GridBagConstraints());
     }// </editor-fold>//GEN-END:initComponents

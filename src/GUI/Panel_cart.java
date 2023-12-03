@@ -102,42 +102,6 @@ public class Panel_cart extends javax.swing.JPanel {
         }
     }
     
-//    public void inHoaDon() {
-//        // Tạo một công việc in
-//        PrinterJob printerJob = PrinterJob.getPrinterJob();
-//
-//        // Kiểm tra xem người dùng đã chọn máy in chưa
-//        if (printerJob.printDialog()) {
-//            try {
-//                // Đặt nội dung cần in
-//                printerJob.setPrintable((graphics, pageFormat, pageIndex) -> {
-//                    if (pageIndex > 0) {
-//                        return NO_SUCH_PAGE;
-//                    }
-//
-//                    // Vẽ nội dung hóa đơn
-//                    StringBuilder content = new StringBuilder("Hóa đơn\n\n");
-//
-//                    // Thêm thông tin về từng sản phẩm vào hóa đơn
-//                    for (SanPham sp : tmp) {
-//                        content.append(sp.getTenSP()).append("\t\t").append(sp.getGiaBan()).append("\n");
-//                    }
-//
-//                    graphics.drawString(content.toString(), 100, 100);
-//
-//                    return PAGE_EXISTS;
-//                });
-//
-//                // In hóa đơn
-//                printerJob.print();
-//            } catch (PrinterException e) {
-//                JOptionPane.showMessageDialog(null, "Lỗi khi in hóa đơn: " + e.getMessage());
-//            }
-//        }
-//    }
-//}
-  
-    
     public void DocChiTietHoaDonLenTable() {
         double tongTien = 0;
         DefaultTableModel temp = (DefaultTableModel) table_DanhSachSP.getModel();
@@ -214,12 +178,15 @@ public class Panel_cart extends javax.swing.JPanel {
         lb_TongThuCa1 = new javax.swing.JLabel();
         lb_TongThuCa3 = new javax.swing.JLabel();
         txt_ThanhToan = new javax.swing.JTextField();
-        txt_TienThoi = new javax.swing.JTextField();
+        txt_TongKM = new javax.swing.JTextField();
         btn_ThanhToan = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        lbl_TienNhan = new javax.swing.JLabel();
+        lbl_TongThue = new javax.swing.JLabel();
         txt_SudungTichDiem = new javax.swing.JTextField();
+        txt_TongThue = new javax.swing.JTextField();
+        lbl_TienNhan1 = new javax.swing.JLabel();
         txt_TienNhan = new javax.swing.JTextField();
+        lb_TongThuCa4 = new javax.swing.JLabel();
+        txt_TienThoi = new javax.swing.JTextField();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -400,6 +367,11 @@ public class Panel_cart extends javax.swing.JPanel {
                 "Mã SP", "Tên mặt hàng", "Loại", "Số lượng", "Thuế", "KM", "Đơn giá (có thuế)", "Thành tiền"
             }
         ));
+        table_DanhSachSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_DanhSachSPMouseClicked(evt);
+            }
+        });
         scroll_DanhSachSP.setViewportView(table_DanhSachSP);
 
         pnl_DanhSachSP.add(scroll_DanhSachSP, java.awt.BorderLayout.CENTER);
@@ -408,8 +380,8 @@ public class Panel_cart extends javax.swing.JPanel {
         pnl_thanhToan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lb_TongThuCa1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lb_TongThuCa1.setText("Tiền thối:");
-        pnl_thanhToan.add(lb_TongThuCa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 30, 70, 20));
+        lb_TongThuCa1.setText("Tổng KM:");
+        pnl_thanhToan.add(lb_TongThuCa1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 100, 70, 20));
 
         lb_TongThuCa3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lb_TongThuCa3.setText("Sử dụng tích điểm:");
@@ -420,9 +392,9 @@ public class Panel_cart extends javax.swing.JPanel {
         txt_ThanhToan.setText("0");
         pnl_thanhToan.add(txt_ThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 390, 60));
 
-        txt_TienThoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_TienThoi.setText("0.00");
-        pnl_thanhToan.add(txt_TienThoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 20, 230, 40));
+        txt_TongKM.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_TongKM.setText("0.00");
+        pnl_thanhToan.add(txt_TongKM, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 90, 230, 40));
 
         btn_ThanhToan.setBackground(new java.awt.Color(255, 51, 51));
         btn_ThanhToan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -434,13 +406,9 @@ public class Panel_cart extends javax.swing.JPanel {
         });
         pnl_thanhToan.add(btn_ThanhToan, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 170, 60));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("Tạo thẻ thành viên");
-        pnl_thanhToan.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, 660, 60));
-
-        lbl_TienNhan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbl_TienNhan.setText("Tiền nhận: ");
-        pnl_thanhToan.add(lbl_TienNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 80, 20));
+        lbl_TongThue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_TongThue.setText("Tổng thuế:");
+        pnl_thanhToan.add(lbl_TongThue, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 80, 20));
 
         txt_SudungTichDiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txt_SudungTichDiem.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -450,6 +418,18 @@ public class Panel_cart extends javax.swing.JPanel {
         });
         pnl_thanhToan.add(txt_SudungTichDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 390, 40));
 
+        txt_TongThue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_TongThue.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_TongThueKeyReleased(evt);
+            }
+        });
+        pnl_thanhToan.add(txt_TongThue, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 90, 230, 40));
+
+        lbl_TienNhan1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_TienNhan1.setText("Tiền nhận: ");
+        pnl_thanhToan.add(lbl_TienNhan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 80, 20));
+
         txt_TienNhan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txt_TienNhan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -457,6 +437,14 @@ public class Panel_cart extends javax.swing.JPanel {
             }
         });
         pnl_thanhToan.add(txt_TienNhan, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 230, 40));
+
+        lb_TongThuCa4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_TongThuCa4.setText("Tiền thối:");
+        pnl_thanhToan.add(lb_TongThuCa4, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 30, 70, 20));
+
+        txt_TienThoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_TienThoi.setText("0.00");
+        pnl_thanhToan.add(txt_TienThoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 20, 230, 40));
 
         pnl_DanhSachSP.add(pnl_thanhToan, java.awt.BorderLayout.PAGE_END);
 
@@ -493,14 +481,19 @@ public class Panel_cart extends javax.swing.JPanel {
         
         if(maSP.compareTo("") != 0 && sp != null) {
             tmp.add(sp);
-            tienVon += sp.getGiaNhapHang();
-            tongKM += sp.getkM().getLoaiKM().equals("LKM001") 
-                        ? sp.getGiaBan() * sp.getkM().getGiaTriKhuyenMai()
-                        : sp.getkM().getGiaTriKhuyenMai();
-            tongThue += sp.getThue();
             
             // Nhập số lượng sản phẩm
             int soLuong = Integer.parseInt(JOptionPane.showInputDialog(null, "Nhập số lượng", 0));
+            
+            // set text tongthue tongKM
+            tienVon += sp.getGiaNhapHang() * soLuong;
+            tongKM += sp.getkM().getLoaiKM().equals("LKM001") 
+                        ? sp.getGiaBan() * sp.getkM().getGiaTriKhuyenMai() * soLuong
+                        : sp.getkM().getGiaTriKhuyenMai() * soLuong;
+            tongThue += sp.getThue() * soLuong;
+            
+            txt_TongThue.setText(tongThue + "");
+            txt_TongKM.setText(tongKM + "");
             
             // Tính tổng tiền thanh toán
             tongTienThanhToan += sp.getGiaBan() * soLuong;
@@ -545,21 +538,9 @@ public class Panel_cart extends javax.swing.JPanel {
          
     }//GEN-LAST:event_btn_ThemMouseClicked
 
-    private void txt_TienNhanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TienNhanKeyReleased
-        // TODO add your handling code here:
-        double tienNhan = txt_TienNhan.getText().equals("") ? 0 : Double.parseDouble(txt_TienNhan.getText());
-        double tienThanhToan = Double.parseDouble(txt_ThanhToan.getText());
+    private void txt_TongThueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TongThueKeyReleased
         
-        double suDungTichDiem = 0;
-        if(txt_SudungTichDiem.getText().compareTo("") != 0)
-        {
-            suDungTichDiem = Double.parseDouble(txt_SudungTichDiem.getText());
-        }
-        
-        double tienThoi = tienNhan + suDungTichDiem - tienThanhToan;
-        
-        txt_TienThoi.setText(tienThoi + "");
-    }//GEN-LAST:event_txt_TienNhanKeyReleased
+    }//GEN-LAST:event_txt_TongThueKeyReleased
 
     private void lb_TimKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_TimKHMouseClicked
         // TODO add your handling code here:
@@ -611,7 +592,7 @@ public class Panel_cart extends javax.swing.JPanel {
 
     private void txt_SudungTichDiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SudungTichDiemKeyReleased
         // TODO add your handling code here:
-        double tienNhan = Double.parseDouble(txt_TienNhan.getText());
+        double tienNhan = Double.parseDouble(txt_TongThue.getText());
         double tienThanhToan = Double.parseDouble(txt_ThanhToan.getText());
         
         double suDungTichDiem = 0;
@@ -620,9 +601,11 @@ public class Panel_cart extends javax.swing.JPanel {
             suDungTichDiem = Double.parseDouble(txt_SudungTichDiem.getText());
         }
         
+//        txt_ThanhToan.setText(tienThanhToan - suDungTichDiem + "");
+        
         double tienThoi = tienNhan + suDungTichDiem - tienThanhToan;
         
-        txt_TienThoi.setText(tienThoi + "");
+        txt_TongKM.setText(tienThoi + "");
     }//GEN-LAST:event_txt_SudungTichDiemKeyReleased
 
     private void btn_ThanhToanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThanhToanMouseClicked
@@ -634,7 +617,7 @@ public class Panel_cart extends javax.swing.JPanel {
             maKH = txt_MaKH.getText();
         }
         LocalDateTime ngayTao = LocalDateTime.now();
-        double tienKhachDua = txt_TienNhan.getText().equals("") ? 0 : Double.parseDouble(txt_TienNhan.getText());
+        double tienKhachDua = txt_TongThue.getText().equals("") ? 0 : Double.parseDouble(txt_TongThue.getText());
         
         double suDungTichDiem = !txt_SudungTichDiem.getText().equals("") 
                 ? Double.parseDouble(txt_SudungTichDiem.getText())
@@ -650,9 +633,9 @@ public class Panel_cart extends javax.swing.JPanel {
                     tienKhachDua, Double.parseDouble(txt_ThanhToan.getText()), suDungTichDiem, tongKM, tongThue, tienVon);
         }
         
-        if(txt_TienNhan.getText().compareTo("") == 0) {
+        if(txt_TongThue.getText().compareTo("") == 0) {
             JOptionPane.showMessageDialog(this, "Chưa nhận tiền của khách!!!");
-        } else if(txt_TienThoi.getText().compareTo("") == 0  || Double.parseDouble(txt_TienThoi.getText()) < 0) {
+        } else if(txt_TongKM.getText().compareTo("") == 0  || Double.parseDouble(txt_TongKM.getText()) < 0) {
             JOptionPane.showMessageDialog(this, "Chưa đủ tiền thanh toán !!!");
         } else {
             // Them hoa don thanh cong
@@ -670,29 +653,54 @@ public class Panel_cart extends javax.swing.JPanel {
                     cthd_dao.ThemCTHDVaoCSDL(cthd);
                 }
                 
-//                inHoaDon();
-                
                 XoaTable_DSSP();
-                txt_TienNhan.setText("");
-                txt_TienThoi.setText("");
+                txt_TongThue.setText("");
+                txt_TongKM.setText("");
                 txt_ThanhToan.setText("");
                 txt_SudungTichDiem.setText("");
                 txt_TimSP.setText("");
                 tongThue = 0;
                 tongKM = 0;
                 tongTienThanhToan = 0;
+                
+                ArrayList<ChiTietHoaDon> tmp = cthd_dao.getDSSP_TheoMaHD(hd.getMaHD());
+                new DiaLog_DSSP_HD(hd, tmp).setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Có lỗi xảy ra, vui lòng thử lại!!!");
             }
         }
     }//GEN-LAST:event_btn_ThanhToanMouseClicked
 
+    private void table_DanhSachSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_DanhSachSPMouseClicked
+        // TODO add your handling code here:
+        int r = table_DanhSachSP.getSelectedRow();
+        
+        if(r >= 0) {
+            txt_TimSP.setText(table_DanhSachSP.getValueAt(r, 0).toString());
+        }
+    }//GEN-LAST:event_table_DanhSachSPMouseClicked
+
+    private void txt_TienNhanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TienNhanKeyReleased
+        // TODO add your handling code here:
+        double tienNhan = txt_TienNhan.getText().equals("") ? 0 : Double.parseDouble(txt_TienNhan.getText());
+        double tienThanhToan = Double.parseDouble(txt_ThanhToan.getText());
+        
+        double suDungTichDiem = 0;
+        if(txt_SudungTichDiem.getText().compareTo("") != 0)
+        {
+            suDungTichDiem = Double.parseDouble(txt_SudungTichDiem.getText());
+        }
+        
+        double tienThoi = tienNhan + suDungTichDiem - tienThanhToan;
+        
+        txt_TienThoi.setText(tienThoi + "");
+    }//GEN-LAST:event_txt_TienNhanKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_ThanhToan;
     private javax.swing.JButton btn_Them;
     private javax.swing.JButton btn_TimKiem;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel lb_Ca;
     private javax.swing.JLabel lb_DiaChi;
     private javax.swing.JLabel lb_DiemTichLuy;
@@ -704,7 +712,9 @@ public class Panel_cart extends javax.swing.JPanel {
     private javax.swing.JLabel lb_TongThuCa1;
     private javax.swing.JLabel lb_TongThuCa2;
     private javax.swing.JLabel lb_TongThuCa3;
-    private javax.swing.JLabel lbl_TienNhan;
+    private javax.swing.JLabel lb_TongThuCa4;
+    private javax.swing.JLabel lbl_TienNhan1;
+    private javax.swing.JLabel lbl_TongThue;
     private javax.swing.JPanel pnl_DanhSachSP;
     private javax.swing.JPanel pnl_ThongTin_HD;
     private javax.swing.JPanel pnl_TimKH_row1;
@@ -729,6 +739,8 @@ public class Panel_cart extends javax.swing.JPanel {
     private javax.swing.JTextField txt_TienThoi;
     private javax.swing.JTextField txt_TimKH;
     private javax.swing.JTextField txt_TimSP;
+    private javax.swing.JTextField txt_TongKM;
     private javax.swing.JTextField txt_TongThuCa;
+    private javax.swing.JTextField txt_TongThue;
     // End of variables declaration//GEN-END:variables
 }

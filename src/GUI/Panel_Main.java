@@ -141,7 +141,7 @@ public class Panel_Main extends javax.swing.JFrame {
 
         btn_cart.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_cart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trolley.png"))); // NOI18N
-        btn_cart.setText("Mua sắm");
+        btn_cart.setText("Thanh Toán");
         btn_cart.setIconTextGap(8);
         btn_cart.setMargin(new java.awt.Insets(10, 14, 10, 14));
         btn_cart.setMaximumSize(new java.awt.Dimension(200, 50));

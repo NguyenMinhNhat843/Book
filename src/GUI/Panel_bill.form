@@ -589,7 +589,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Segoe UI" size="18" style="1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Xem ChiTieets"/>
+                        <Property name="text" type="java.lang.String" value="Xem chi ti&#x1ebf;t"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[600, 50]"/>
                         </Property>

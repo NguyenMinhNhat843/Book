@@ -16,5 +16,5 @@ public interface SanPhamService {
     public String phatSinhMaTuDong();
     public ArrayList<SanPham> getDSSP();
     public SanPham getSP_TheoMa(String maSP);
-    
+//    public ArralyList
 }

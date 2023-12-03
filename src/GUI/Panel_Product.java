@@ -21,6 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class Panel_Product extends javax.swing.JPanel {
     private SanPham_DAO sp_dao = new SanPham_DAO();
     private NhaCungCap_DAO ncc_dao = new NhaCungCap_DAO();
+    private ArrayList<SanPham> dsSP = sp_dao.getDSSP();
     /**
      * Creates new form Panel_Product
      */
@@ -28,6 +29,7 @@ public class Panel_Product extends javax.swing.JPanel {
         initComponents();
         DocLieuLenTableSanPham();
         DocDuLieuLenCBoBoxNCC();
+
     }
     
     public void DocDuLieuLenCBoBoxNCC() {
@@ -35,10 +37,60 @@ public class Panel_Product extends javax.swing.JPanel {
         
         for(NhaCungCap ncc : dsNCC) {
             cbo_NCC_field.addItem(ncc);
+            cbo_LocTheoNCC.addItem(ncc.getTenNCC());
         }
     }
     
-   
+    public void LocTheoLSP() {
+        int lsp_selected = cbo_LocTheoLoai.getSelectedIndex();
+        ArrayList<SanPham> locTheoLSP = new ArrayList<>();
+        
+         for(SanPham sp : dsSP) {
+           if(Integer.parseInt(sp.getLoaiSP().charAt(sp.getLoaiSP().length() - 1) + "") == lsp_selected) {
+               locTheoLSP.add(sp);
+           }
+        }
+         
+         XoaDuLieuTableSP();
+         DefaultTableModel temp = (DefaultTableModel) tbl_sanPham.getModel();
+        for(SanPham sp : locTheoLSP){
+            Object[] obj = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), sp.getGiaNhapHang(), sp.getGiaBan(), sp.getSoLuongTonKho(), sp.getnCC().getMaNCC(), sp.getkM().getMaKM(), sp.getSoLuongBayBan()};
+            temp.addRow(obj);
+        }      
+    }
+    
+    public void LocTheoNCC() {
+        int ncc_selected = cbo_LocTheoNCC.getSelectedIndex();
+        ArrayList<SanPham> locTheoNCC = new ArrayList<>();
+        
+        for(SanPham sp : dsSP) {
+           if(Integer.parseInt(sp.getnCC().getMaNCC().charAt(sp.getnCC().getMaNCC().length() - 1) + "") == ncc_selected) {
+               locTheoNCC.add(sp);
+           }
+        }
+        
+        
+        
+        XoaDuLieuTableSP();
+        
+        if(locTheoNCC.size() != 0) {
+            DefaultTableModel temp = (DefaultTableModel) tbl_sanPham.getModel();
+            for(SanPham sp : locTheoNCC){
+                Object[] obj = {sp.getMaSP(), sp.getTenSP(), sp.getLoaiSP(), sp.getGiaNhapHang(), sp.getGiaBan(), sp.getSoLuongTonKho(), sp.getnCC().getMaNCC(), sp.getkM().getMaKM(), sp.getSoLuongBayBan()};
+                temp.addRow(obj);
+            }       
+        } else {
+            System.out.println("GUI.Panel_Product.LocTheoNCC()");
+        }
+    }
+    
+    public void DocDuLieuLenCBoBoxLoaiSP() {
+        ArrayList<SanPham> dsSP = sp_dao.getDSSP();
+        
+        for(SanPham sp : dsSP) {
+            cbo_loaiSP_field.addItem(sp.getLoaiSP());
+        }
+    }
     
     public boolean validData_SanPham(){
         String maSP = maSP_field.getText().toString().trim();
@@ -60,12 +112,14 @@ public class Panel_Product extends javax.swing.JPanel {
         double giaNhapHang = Double.parseDouble(giaNhap);
         if(giaNhapHang <= 0 || giaNhap.isEmpty()){
             JOptionPane.showMessageDialog(this, "Gía nhập hàng phải lớn hơn 0");
+            return false;
         }
         double giaBanHang = Double.parseDouble(giaBan);
         if(giaBanHang <= 0  || giaBan.isEmpty()){
             JOptionPane.showMessageDialog(this, "Gía bán hàng phải lớn hơn 0");
+            return false;
         }
-        int slBayBan = Integer.parseInt(bayBan);
+        int slBayBan = bayBan.length() == 0 ? 0 : Integer.parseInt(bayBan);
         if(slBayBan <= 0){
             JOptionPane.showMessageDialog(this, "Số lượng bày bán phải lớn hơn 0");
             return false;
@@ -78,7 +132,7 @@ public class Panel_Product extends javax.swing.JPanel {
         return true;
     }
     public void DocLieuLenTableSanPham(){
-        ArrayList<SanPham> dsSP = sp_dao.getDSSP();
+        dsSP = sp_dao.getDSSP();
         DefaultTableModel temp = (DefaultTableModel) tbl_sanPham.getModel();
         
         for(SanPham sp : dsSP){
@@ -95,12 +149,13 @@ public class Panel_Product extends javax.swing.JPanel {
     public SanPham createSP(){
         String maSP = maSP_field.getText();
         String tenSP = tenSP_field.getText();
-        String cbo_loaiSP = String.valueOf(cbo_loaiSP_field.getSelectedItem());
+//        String cbo_loaiSP = String.valueOf(cbo_loaiSP_field.getSelectedItem());
+        String cbo_loaiSP = "LSP00" + (cbo_loaiSP_field.getSelectedIndex() + 1);
         double giaNhap = Double.parseDouble(giaNhap_field.getText());
         double giaBan = Double.parseDouble(giaBan_field.getText());
         int tonKho = Integer.parseInt(tonKho_field.getText());
-        String cbo_NCC = String.valueOf(cbo_NCC_field.getSelectedItem());
-//        String cbo_NCC = cbo_NCC_field.getSelectedItem();
+//        String cbo_NCC = String.valueOf(cbo_NCC_field.getSelectedItem());
+        String cbo_NCC = "NCC00" + (cbo_NCC_field.getSelectedIndex() + 1);
         String khuyenMai = khuyenMai_field.getText();
         int bayBan = Integer.parseInt(bayban_field.getText());
         
@@ -166,10 +221,6 @@ public class Panel_Product extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
-        pnl_LocTheoGia = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        lbl_locTheoGia = new javax.swing.JLabel();
-        cbo_locTheoGia = new javax.swing.JComboBox<>();
         pn_LocTheNCC = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         lbl_LocTheoNCC = new javax.swing.JLabel();
@@ -447,26 +498,6 @@ public class Panel_Product extends javax.swing.JPanel {
         jPanel11.setPreferredSize(new java.awt.Dimension(940, 150));
         jPanel11.setLayout(new java.awt.GridLayout(1, 3));
 
-        pnl_LocTheoGia.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 20, 10, 30));
-        pnl_LocTheoGia.setLayout(new java.awt.BorderLayout());
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel4.setLayout(new java.awt.GridLayout(2, 1));
-
-        lbl_locTheoGia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbl_locTheoGia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_locTheoGia.setText("Lọc theo giá");
-        jPanel4.add(lbl_locTheoGia);
-
-        cbo_locTheoGia.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbo_locTheoGia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10000-1000000", "20000-5000000" }));
-        cbo_locTheoGia.setPreferredSize(new java.awt.Dimension(150, 35));
-        jPanel4.add(cbo_locTheoGia);
-
-        pnl_LocTheoGia.add(jPanel4, java.awt.BorderLayout.CENTER);
-
-        jPanel11.add(pnl_LocTheoGia);
-
         pn_LocTheNCC.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 20, 10, 30));
         pn_LocTheNCC.setLayout(new java.awt.BorderLayout());
 
@@ -479,8 +510,18 @@ public class Panel_Product extends javax.swing.JPanel {
         jPanel5.add(lbl_LocTheoNCC);
 
         cbo_LocTheoNCC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbo_LocTheoNCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10000-1000000", "20000-5000000" }));
+        cbo_LocTheoNCC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Chọn NCC --" }));
         cbo_LocTheoNCC.setPreferredSize(new java.awt.Dimension(150, 35));
+        cbo_LocTheoNCC.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbo_LocTheoNCCItemStateChanged(evt);
+            }
+        });
+        cbo_LocTheoNCC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_LocTheoNCCActionPerformed(evt);
+            }
+        });
         jPanel5.add(cbo_LocTheoNCC);
 
         pn_LocTheNCC.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -499,8 +540,13 @@ public class Panel_Product extends javax.swing.JPanel {
         jPanel6.add(lbl_LocTheoLoai);
 
         cbo_LocTheoLoai.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbo_LocTheoLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10000-1000000", "20000-5000000" }));
+        cbo_LocTheoLoai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Chọn loại sản phẩm --", "SGK", "Truyện", "Tiểu thuyết", "Văn phòng phẩm", "Dụng cụ học tập" }));
         cbo_LocTheoLoai.setPreferredSize(new java.awt.Dimension(150, 35));
+        cbo_LocTheoLoai.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbo_LocTheoLoaiItemStateChanged(evt);
+            }
+        });
         jPanel6.add(cbo_LocTheoLoai);
 
         pnl_LocTheoLoai.add(jPanel6, java.awt.BorderLayout.CENTER);
@@ -607,7 +653,8 @@ public class Panel_Product extends javax.swing.JPanel {
             bayban_field.setText(tbl_sanPham.getValueAt(r, 8).toString());
             cbo_NCC_field.setSelectedIndex(
                     Integer.parseInt(tbl_sanPham.getValueAt(r, 6).toString().substring(3, 6)) - 1);
-            cbo_loaiSP_field.addItem(tbl_sanPham.getValueAt(r, 2).toString());
+            cbo_loaiSP_field.setSelectedIndex(
+                    Integer.parseInt(tbl_sanPham.getValueAt(r, 2).toString().substring(3, 6)) - 1);
         }else{
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hàng muốn thao tác!");
         }
@@ -664,11 +711,11 @@ public class Panel_Product extends javax.swing.JPanel {
         if(validData_SanPham()){
             String maSP = maSP_field.getText();
             String tenSP = tenSP_field.getText();
-            String cbo_loaiSP = String.valueOf(cbo_loaiSP_field.getSelectedItem());
+            String cbo_loaiSP = "LSP00" + (cbo_loaiSP_field.getSelectedIndex() + 1);
             double giaNhap = Double.parseDouble(giaNhap_field.getText());
             double giaBan = Double.parseDouble(giaBan_field.getText());
             int tonKho = Integer.parseInt(tonKho_field.getText());
-            String cbo_NCC = String.valueOf(cbo_NCC_field.getSelectedItem());
+            String cbo_NCC = "NCC00" + (cbo_NCC_field.getSelectedIndex() + 1);
             String khuyenMai = khuyenMai_field.getText();
             int bayBan = Integer.parseInt(bayban_field.getText());
 
@@ -687,6 +734,24 @@ public class Panel_Product extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_capNhatMouseClicked
 
+    private void cbo_LocTheoNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_LocTheoNCCActionPerformed
+        // TODO add your handling code here:
+//        LocTheoNCC();
+//System.out.println("GUI.Panel_Product.cbo_LocTheoNCCActionPerformed()");
+    }//GEN-LAST:event_cbo_LocTheoNCCActionPerformed
+
+    private void cbo_LocTheoNCCItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_LocTheoNCCItemStateChanged
+        // TODO add your handling code here:
+        if(cbo_LocTheoNCC.getSelectedIndex() != 0) {
+            LocTheoNCC();
+        }
+    }//GEN-LAST:event_cbo_LocTheoNCCItemStateChanged
+
+    private void cbo_LocTheoLoaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_LocTheoLoaiItemStateChanged
+        // TODO add your handling code here:
+        LocTheoLSP();
+    }//GEN-LAST:event_cbo_LocTheoLoaiItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField bayban_field;
@@ -699,7 +764,6 @@ public class Panel_Product extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbo_LocTheoNCC;
     private javax.swing.JComboBox<NhaCungCap> cbo_NCC_field;
     private javax.swing.JComboBox<String> cbo_loaiSP_field;
-    private javax.swing.JComboBox<String> cbo_locTheoGia;
     private javax.swing.JTextField giaBan_field;
     private javax.swing.JTextField giaNhap_field;
     private javax.swing.JLabel jLabel1;
@@ -715,7 +779,6 @@ public class Panel_Product extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -729,13 +792,11 @@ public class Panel_Product extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_NCC;
     private javax.swing.JLabel lbl_giaBan;
     private javax.swing.JLabel lbl_loai;
-    private javax.swing.JLabel lbl_locTheoGia;
     private javax.swing.JLabel lbl_masp;
     private javax.swing.JTextField maSP_field;
     private javax.swing.JTextField maSP_txt;
     private javax.swing.JPanel pn_LocTheNCC;
     private javax.swing.JPanel pnl_Center;
-    private javax.swing.JPanel pnl_LocTheoGia;
     private javax.swing.JPanel pnl_LocTheoLoai;
     private javax.swing.JPanel pnl_NCC;
     private javax.swing.JPanel pnl_Tim;

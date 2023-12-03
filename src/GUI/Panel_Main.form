@@ -88,7 +88,7 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/images/trolley.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Mua s&#x1eaf;m"/>
+            <Property name="text" type="java.lang.String" value="Thanh To&#xe1;n"/>
             <Property name="iconTextGap" type="int" value="8"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[10, 14, 10, 14]"/>

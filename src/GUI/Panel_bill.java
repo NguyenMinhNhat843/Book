@@ -306,7 +306,7 @@ public class Panel_bill extends javax.swing.JPanel {
         pnl_XuatHoaDon.add(btn_InHD);
 
         btn_XemChiTiet.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_XemChiTiet.setText("Xem ChiTieets");
+        btn_XemChiTiet.setText("Xem chi tiết");
         btn_XemChiTiet.setPreferredSize(new java.awt.Dimension(600, 50));
         btn_XemChiTiet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

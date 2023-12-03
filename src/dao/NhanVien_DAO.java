@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import service.NhanVienService;
 import sql.connectDB;
@@ -122,6 +124,8 @@ public class NhanVien_DAO implements NhanVienService{
             stmt.setString(5, nv.getDiaChi());
             stmt.setString(6, nv.getEmail());
             stmt.setDate(7, (Date) nv.getNgaySinh());
+//            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//            stmt.setString(7, dtf.format(nv.getNgaySinh()));
             stmt.setString(8, nv.getsDT());
             
             
