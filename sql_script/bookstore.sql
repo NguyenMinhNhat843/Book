@@ -195,9 +195,12 @@ create table ChiTietHoaDonNhapHang (
 
 ------------------ add data ---------------
 -- NhanVien --
-insert into NhanVien(maNV, tenNV, sDT, email, diaChi, trangThai)
+insert into NhanVien(maNV, tenNV, sDT, email, diaChi, trangThai, gioiTinh, ngaySinh, chucVu)
 values 
-	('NV001', N'Nguyễn Minh Nhật', '0235136987', 'nhat@gmail.com', N'abc, Gò Vấp', 'true')
+	('NV001', N'Nguyễn Minh Nhật', '0235136987', 'nhat@gmail.com', N'abc, Gò Vấp', 'true', 'Nam', '2003-12-11', N'Quản Lý'),
+	('NV002', N'Trần Bảo Xuyên', '0523617895', 'xuyen@gmail.com', N'abc, Bình Thạnh', 'true', 'Nam', '2003-09-08', 'Nhân Viên'),
+	('NV003', N'Nguyễn Thanh Tùng', '0523147845', 'tung@gmail.com', N'abc, Quận 1', 'true', N'Nữ', '2003-05-04', 'Nhân Viên'),
+	('NV004', N'Vũ Quốc Huy', '0953214867', 'huy@gmail.com', N'abc, Gò Vấp', 'true', N'Nữ', '2003-12-11', 'Nhân Viên');
 
 -- LoaiTK --
 insert into LoaiTK(maLoaiTK, tenLoaiTK)

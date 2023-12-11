@@ -5,6 +5,8 @@
 package entity;
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -19,10 +21,10 @@ public class NhanVien {
     private String gioiTinh;
     private String diaChi;
     private String email;
-    private Date ngaySinh;
+    private LocalDateTime ngaySinh;
     private String sDT;
 
-    public NhanVien(String maNV, String tenNV, String chucVu, String gioiTinh, String diaChi, String email, Date ngaySinh, String sDT) {
+    public NhanVien(String maNV, String tenNV, String chucVu, String gioiTinh, String diaChi, String email, LocalDateTime ngaySinh, String sDT) {
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.chucVu = chucVu;
@@ -90,11 +92,11 @@ public class NhanVien {
         this.email = email;
     }
 
-    public Date getNgaySinh() {
+    public LocalDateTime getNgaySinh() {
         return ngaySinh;
     }
 
-    public void setNgaySinh(Date ngaySinh) {
+    public void setNgaySinh(LocalDateTime ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
 

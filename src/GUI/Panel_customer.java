@@ -21,7 +21,11 @@ public class Panel_customer extends javax.swing.JPanel {
      */
     public Panel_customer() {
         initComponents();
+        
+        DocuLieuLenTable();
     }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,7 +61,7 @@ public class Panel_customer extends javax.swing.JPanel {
         thongTin3 = new javax.swing.JPanel();
         panel_rank = new javax.swing.JPanel();
         label_rank = new javax.swing.JLabel();
-        cb_rank = new javax.swing.JComboBox<>();
+        txt_Rank = new javax.swing.JTextField();
         panel_tichDiem = new javax.swing.JPanel();
         label_tichDiem = new javax.swing.JLabel();
         text_tichDiem = new javax.swing.JTextField();
@@ -80,11 +84,17 @@ public class Panel_customer extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         label_locTichDiem = new javax.swing.JLabel();
-        cbb_locTichDiem = new javax.swing.JComboBox<>();
+        jPanel10 = new javax.swing.JPanel();
+        txt_TDBD = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txt_TDKT = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         label_locTieuPhi = new javax.swing.JLabel();
-        cbb_locTieuPhi = new javax.swing.JComboBox<>();
+        jPanel9 = new javax.swing.JPanel();
+        txt_DiemBD = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txt_DienKT = new javax.swing.JTextField();
         panel_bangThongTin = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         table_kh = new javax.swing.JTable();
@@ -109,6 +119,7 @@ public class Panel_customer extends javax.swing.JPanel {
 
         text_maKH.setEditable(false);
         text_maKH.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        text_maKH.setEnabled(false);
         text_maKH.setPreferredSize(new java.awt.Dimension(300, 40));
         text_maKH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,15 +207,10 @@ public class Panel_customer extends javax.swing.JPanel {
         label_rank.setPreferredSize(new java.awt.Dimension(117, 25));
         panel_rank.add(label_rank);
 
-        cb_rank.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cb_rank.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đồng", "Bạc", "Vàng", "Kim Cương", " " }));
-        cb_rank.setPreferredSize(new java.awt.Dimension(300, 40));
-        cb_rank.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_rankActionPerformed(evt);
-            }
-        });
-        panel_rank.add(cb_rank);
+        txt_Rank.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_Rank.setEnabled(false);
+        txt_Rank.setPreferredSize(new java.awt.Dimension(300, 40));
+        panel_rank.add(txt_Rank);
 
         thongTin3.add(panel_rank);
 
@@ -236,6 +242,11 @@ public class Panel_customer extends javax.swing.JPanel {
         btn_capNhat.setText("Cập Nhật");
         btn_capNhat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_capNhat.setPreferredSize(new java.awt.Dimension(150, 50));
+        btn_capNhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_capNhatMouseClicked(evt);
+            }
+        });
         pnl_list_btn.add(btn_capNhat);
 
         jPanel4.setPreferredSize(new java.awt.Dimension(70, 70));
@@ -256,6 +267,11 @@ public class Panel_customer extends javax.swing.JPanel {
         btn_xoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_xoaTrang.setText("Xóa Trắng");
         btn_xoaTrang.setPreferredSize(new java.awt.Dimension(150, 50));
+        btn_xoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_xoaTrangMouseClicked(evt);
+            }
+        });
         pnl_list_btn.add(btn_xoaTrang);
 
         jPanel5.setPreferredSize(new java.awt.Dimension(70, 70));
@@ -276,6 +292,11 @@ public class Panel_customer extends javax.swing.JPanel {
         btn_ThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_ThemMoi.setText("Thêm mới");
         btn_ThemMoi.setPreferredSize(new java.awt.Dimension(150, 50));
+        btn_ThemMoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_ThemMoiMouseClicked(evt);
+            }
+        });
         pnl_list_btn.add(btn_ThemMoi);
 
         panel_btn.add(pnl_list_btn);
@@ -283,12 +304,18 @@ public class Panel_customer extends javax.swing.JPanel {
         pnl_tim.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
         pnl_tim.setLayout(new java.awt.BorderLayout());
 
+        text_timKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         text_timKiem.setPreferredSize(new java.awt.Dimension(100, 22));
         pnl_tim.add(text_timKiem, java.awt.BorderLayout.CENTER);
 
         btn_timKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_timKiem.setText("Tìm Kiếm");
         btn_timKiem.setPreferredSize(new java.awt.Dimension(150, 36));
+        btn_timKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_timKiemMouseClicked(evt);
+            }
+        });
         pnl_tim.add(btn_timKiem, java.awt.BorderLayout.EAST);
 
         panel_btn.add(pnl_tim);
@@ -315,8 +342,20 @@ public class Panel_customer extends javax.swing.JPanel {
         jPanel6.add(label_locTheoRank);
 
         cbb_locTheoRank.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbb_locTheoRank.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đồng", "Bạc", "Vàng", "Kim Cương" }));
+        cbb_locTheoRank.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Chọn Rank --", "Đồng", "Bạc", "Vàng", "Kim Cương" }));
         cbb_locTheoRank.setPreferredSize(new java.awt.Dimension(140, 35));
+        cbb_locTheoRank.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbb_locTheoRankItemStateChanged(evt);
+            }
+        });
+        cbb_locTheoRank.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                cbb_locTheoRankCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
         jPanel6.add(cbb_locTheoRank);
 
         jPanel1.add(jPanel6, java.awt.BorderLayout.CENTER);
@@ -334,9 +373,29 @@ public class Panel_customer extends javax.swing.JPanel {
         label_locTichDiem.setText("Lọc Tích Điểm");
         jPanel7.add(label_locTichDiem);
 
-        cbb_locTichDiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbb_locTichDiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1-100", "100-1000", "1000-10000", "10000+" }));
-        jPanel7.add(cbb_locTichDiem);
+        txt_TDBD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_TDBD.setPreferredSize(new java.awt.Dimension(130, 50));
+        txt_TDBD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_TDBDKeyReleased(evt);
+            }
+        });
+        jPanel10.add(txt_TDBD);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setText("   -   ");
+        jPanel10.add(jLabel2);
+
+        txt_TDKT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_TDKT.setPreferredSize(new java.awt.Dimension(130, 50));
+        txt_TDKT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_TDKTKeyReleased(evt);
+            }
+        });
+        jPanel10.add(txt_TDKT);
+
+        jPanel7.add(jPanel10);
 
         jPanel2.add(jPanel7, java.awt.BorderLayout.CENTER);
 
@@ -353,9 +412,34 @@ public class Panel_customer extends javax.swing.JPanel {
         label_locTieuPhi.setText("Lọc Theo Tiêu Phí");
         jPanel8.add(label_locTieuPhi);
 
-        cbb_locTieuPhi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cbb_locTieuPhi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "100000-10000000", "110000000-10000000" }));
-        jPanel8.add(cbb_locTieuPhi);
+        txt_DiemBD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_DiemBD.setPreferredSize(new java.awt.Dimension(130, 50));
+        txt_DiemBD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_DiemBDKeyReleased(evt);
+            }
+        });
+        jPanel9.add(txt_DiemBD);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("   -   ");
+        jPanel9.add(jLabel1);
+
+        txt_DienKT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_DienKT.setPreferredSize(new java.awt.Dimension(130, 50));
+        txt_DienKT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_DienKTActionPerformed(evt);
+            }
+        });
+        txt_DienKT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_DienKTKeyReleased(evt);
+            }
+        });
+        jPanel9.add(txt_DienKT);
+
+        jPanel8.add(jPanel9);
 
         jPanel3.add(jPanel8, java.awt.BorderLayout.CENTER);
 
@@ -368,15 +452,17 @@ public class Panel_customer extends javax.swing.JPanel {
 
         table_kh.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Mã KH", "Tên KH", "Địa Chỉ", "SĐT", "Email", "Tiêu Phí", "Rank", "Điển tích Lũy"
             }
         ));
+        table_kh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_khMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(table_kh);
 
         panel_bangThongTin.add(jScrollPane2, java.awt.BorderLayout.CENTER);
@@ -394,10 +480,6 @@ public class Panel_customer extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_text_emailActionPerformed
 
-    private void cb_rankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_rankActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_rankActionPerformed
-
     private void text_tieuPhiTichLuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_tieuPhiTichLuyActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_text_tieuPhiTichLuyActionPerformed
@@ -405,7 +487,33 @@ public class Panel_customer extends javax.swing.JPanel {
     private void text_tichDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_tichDiemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_text_tichDiemActionPerformed
-private void btn_xoaTrangActionPerformed(java.awt.event.ActionEvent evt) {                                            
+
+    private void txt_DienKTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_DienKTActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_DienKTActionPerformed
+
+    private void table_khMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_khMouseClicked
+        // TODO add your handling code here:
+        int r = table_kh.getSelectedRow();
+        
+        if(r >= 0){
+            text_maKH.setText(table_kh.getValueAt(r, 0).toString());
+            text_diaChi.setText(table_kh.getValueAt(r, 2) == null ? "" : table_kh.getValueAt(r, 2).toString());
+            text_tenKH.setText(table_kh.getValueAt(r, 1).toString());
+            text_sĐT.setText(table_kh.getValueAt(r, 3).toString());
+            text_email.setText(table_kh.getValueAt(r, 4).toString());
+            text_tieuPhiTichLuy.setText(table_kh.getValueAt(r, 5) == null 
+                    ? "" : table_kh.getValueAt(r, 5).toString());
+            txt_Rank.setText(table_kh.getValueAt(r, 6).toString());
+            text_tichDiem.setText(table_kh.getValueAt(r, 7).toString());
+        }else{
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn hàng muốn thao tác!");
+        }
+        
+        
+    }//GEN-LAST:event_table_khMouseClicked
+
+    private void btn_xoaTrangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_xoaTrangMouseClicked
         // TODO add your handling code here:
         text_maKH.setText("");
         text_tenKH.setText("");
@@ -414,38 +522,261 @@ private void btn_xoaTrangActionPerformed(java.awt.event.ActionEvent evt) {
         text_sĐT.setText("");
         text_tieuPhiTichLuy.setText("");
         text_tichDiem.setText("");
-    } 
-private void btn_timKiemActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    }//GEN-LAST:event_btn_xoaTrangMouseClicked
+
+    private void btn_timKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_timKiemMouseClicked
         // TODO add your handling code here:
-       KhachHang_DAO khachHang_DAO = new KhachHang_DAO();
-        String maKH_tim = text_timKiem.getText();
-        KhachHang kh_tim = khachHang_DAO.getKH_TheoMa(maKH_tim);
-        if(kh_tim != null){
-            JOptionPane.showMessageDialog(this, "Đã tìm thấy sản phẩm!");
-        }else{
-            JOptionPane.showMessageDialog(this, "Sản phẩm không tồn tại!");
+        if(text_timKiem.getText().trim().equals("")) {
+            XoaDuLieuTableSP();
+            DocuLieuLenTable();
+        } else {
+            KhachHang_DAO khachHang_DAO = new KhachHang_DAO();
+            String maKH_tim = text_timKiem.getText();
+            KhachHang kh = khachHang_DAO.getKH_TheoMa(maKH_tim);
+            if(kh != null){
+    //            JOptionPane.showMessageDialog(this, "Đã tìm thấy khách hàng!");
+                XoaDuLieuTableSP();
+                DefaultTableModel tmp = (DefaultTableModel) table_kh.getModel();
+                Object[] obj = {kh.getMaKH(), kh.getTenKH(), kh.getDiaChi() ,kh.getSDT(), kh.getEmail(),
+                                kh.getTieuPhiTichLuy(), kh.getRank(), kh.getTichDiem()};
+
+                tmp.addRow(obj);
+            }else{
+                JOptionPane.showMessageDialog(this, "Sản phẩm không tồn tại!");
+            }
         }
-    } 
-public void XoaDuLieuTableSP(){
-        DefaultTableModel temp = (DefaultTableModel) table_kh.getModel();
-        temp.getDataVector().removeAllElements();
-    }
-public void DocLieuLenTableSanPham(){
-        ArrayList<KhachHang> dsKH = kh_dao.getDSKH();
-        DefaultTableModel temp = (DefaultTableModel) table_kh.getModel();
+    }//GEN-LAST:event_btn_timKiemMouseClicked
+
+    private void btn_ThemMoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThemMoiMouseClicked
+        // TODO add your handling code here:
+        if(validData_KhachHang()){
+            KhachHang kh = createKH();
+            ArrayList<KhachHang> dsKH = kh_dao.getAllKH();
+            
+            if(true){
+                if(kh_dao.Them_KH(kh)){
+                    XoaDuLieuTableSP();
+                    DocuLieuLenTable();
+                    JOptionPane.showMessageDialog(this, "Thêm thành công!");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Thêm thất bại! Có lỗi xảy ra");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Sản phẩm đã tồn tại! Vui lòng kiểm tra lại");
+            }
+        }
+    }//GEN-LAST:event_btn_ThemMoiMouseClicked
+
+    private void btn_capNhatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_capNhatMouseClicked
+        // TODO add your handling code here:
+        int r = table_kh.getSelectedRow();
+        if(r < 0){
+            JOptionPane.showMessageDialog(this, "Cần chọn sản phẩm cần cập nhật!");
+        }
         
-        for(KhachHang kh : dsKH){
-            Object[] obj = {kh.getMaKH(), kh.getTenKH(), kh.getRank(), kh.getTieuPhiTichLuy(), kh.getEmail(), kh.getSDT()};
-            temp.addRow(obj);
-        }         
+        if(validData_KhachHang()){
+            KhachHang kh = createKH();
+            
+            if(kh_dao.Sua_KH(kh)){
+                DefaultTableModel temp = (DefaultTableModel) table_kh.getModel();
+                temp.removeRow(r);
+                Object[] obj = {kh.getMaKH(), kh.getTenKH(), kh.getDiaChi() ,kh.getSDT(), kh.getEmail(),
+                                kh.getTieuPhiTichLuy(), kh.getRank(), kh.getTichDiem()};
+                temp.insertRow(r, obj);
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công!!!");
+            }else{
+                JOptionPane.showMessageDialog(this, "Cập nhật thất bại!!Có lỗi xảy ra!!");
+            }
+        }
+    }//GEN-LAST:event_btn_capNhatMouseClicked
+
+    private void cbb_locTheoRankCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_cbb_locTheoRankCaretPositionChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbb_locTheoRankCaretPositionChanged
+
+    private void cbb_locTheoRankItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbb_locTheoRankItemStateChanged
+        // TODO add your handling code here:
+        int n = cbb_locTheoRank.getSelectedIndex();
+        
+        if(n != 0) {
+            String maRank = n == 1 ? "R001" 
+                    : n == 2 ? "R002"
+                    : n == 3 ? "R003"
+                    : "R004";
+
+            ArrayList<KhachHang> dsKH_TheoRnk = kh_dao.getKH_TheoRank(maRank);
+
+            XoaDuLieuTableSP();
+
+            DefaultTableModel tmp = (DefaultTableModel) table_kh.getModel();
+            for(KhachHang kh : dsKH_TheoRnk) {
+                String a = kh.getRank().getMaRank();
+                 String Rank = a.equals("R001") ? "Đồng"
+                        : a.equals("R002") ? "Bạc"
+                        : a.equals("R003") ? "Vàng"
+                        : "Kim Cương";
+
+                Object[] obj = {kh.getMaKH(), kh.getTenKH(), kh.getDiaChi() ,kh.getSDT(), kh.getEmail(),
+                                kh.getTieuPhiTichLuy(), Rank, kh.getTichDiem()};
+
+                tmp.addRow(obj);
+            }
+        } else {
+            XoaDuLieuTableSP();
+            DocuLieuLenTable();
+        }
+    }//GEN-LAST:event_cbb_locTheoRankItemStateChanged
+
+    private void txt_TDBDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TDBDKeyReleased
+        // TODO add your handling code here:
+        if(!txt_TDKT.getText().equals("")) {
+            ArrayList<KhachHang> locTheoTD = new ArrayList<>();
+            double batdau = txt_TDBD.getText().equals("") ? 0 : Double.parseDouble(txt_TDBD.getText());
+            double ketthuc = txt_TDKT.getText().equals("") ? 0 : Double.parseDouble(txt_TDKT.getText());
+            locTheoTD = kh_dao.LocTheoTichDiem(batdau, ketthuc);
+            
+            XoaDuLieuTableSP();
+
+            DefaultTableModel tmp = (DefaultTableModel) table_kh.getModel();
+            for(KhachHang kh : locTheoTD) {
+                String a = kh.getRank().getMaRank();
+                 String Rank = a.equals("R001") ? "Đồng"
+                        : a.equals("R002") ? "Bạc"
+                        : a.equals("R003") ? "Vàng"
+                        : "Kim Cương";
+
+                Object[] obj = {kh.getMaKH(), kh.getTenKH(), kh.getDiaChi() ,kh.getSDT(), kh.getEmail(),
+                                kh.getTieuPhiTichLuy(), Rank, kh.getTichDiem()};
+
+                tmp.addRow(obj);
+            }
+        } else if(txt_TDBD.getText().equals("")) {
+            XoaDuLieuTableSP();
+            DocuLieuLenTable();
+        }
+        
+    }//GEN-LAST:event_txt_TDBDKeyReleased
+
+    private void txt_TDKTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_TDKTKeyReleased
+        // TODO add your handling code here:
+        if(!txt_TDBD.getText().equals("")) {
+            ArrayList<KhachHang> locTheoTD = new ArrayList<>();
+            double batdau = txt_TDBD.getText().equals("") ? 0 : Double.parseDouble(txt_TDBD.getText());
+            double ketthuc = txt_TDKT.getText().equals("") ? 0 : Double.parseDouble(txt_TDKT.getText());
+            locTheoTD = kh_dao.LocTheoTichDiem(batdau, ketthuc);
+            
+            XoaDuLieuTableSP();
+
+            DefaultTableModel tmp = (DefaultTableModel) table_kh.getModel();
+            for(KhachHang kh : locTheoTD) {
+                String a = kh.getRank().getMaRank();
+                 String Rank = a.equals("R001") ? "Đồng"
+                        : a.equals("R002") ? "Bạc"
+                        : a.equals("R003") ? "Vàng"
+                        : "Kim Cương";
+
+                Object[] obj = {kh.getMaKH(), kh.getTenKH(), kh.getDiaChi() ,kh.getSDT(), kh.getEmail(),
+                                kh.getTieuPhiTichLuy(), Rank, kh.getTichDiem()};
+
+                tmp.addRow(obj);
+            }
+        } else if(txt_TDKT.getText().equals("")) {
+            XoaDuLieuTableSP();
+            DocuLieuLenTable();
+        }
+    }//GEN-LAST:event_txt_TDKTKeyReleased
+
+    private void txt_DiemBDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_DiemBDKeyReleased
+        // TODO add your handling code here:
+         if(!txt_DienKT.getText().equals("")) {
+            ArrayList<KhachHang> locTheoTD = new ArrayList<>();
+            double batdau = txt_DiemBD.getText().equals("") ? 0 : Double.parseDouble(txt_DiemBD.getText());
+            double ketthuc = txt_DienKT.getText().equals("") ? 0 : Double.parseDouble(txt_DienKT.getText());
+            locTheoTD = kh_dao.LocTheoTieuPhi(batdau, ketthuc);
+            
+            XoaDuLieuTableSP();
+
+            DefaultTableModel tmp = (DefaultTableModel) table_kh.getModel();
+            for(KhachHang kh : locTheoTD) {
+                String a = kh.getRank().getMaRank();
+                 String Rank = a.equals("R001") ? "Đồng"
+                        : a.equals("R002") ? "Bạc"
+                        : a.equals("R003") ? "Vàng"
+                        : "Kim Cương";
+
+                Object[] obj = {kh.getMaKH(), kh.getTenKH(), kh.getDiaChi() ,kh.getSDT(), kh.getEmail(),
+                                kh.getTieuPhiTichLuy(), Rank, kh.getTichDiem()};
+
+                tmp.addRow(obj);
+            }
+        } else if(txt_DiemBD.getText().equals("")) {
+            XoaDuLieuTableSP();
+            DocuLieuLenTable();
+        }
+    }//GEN-LAST:event_txt_DiemBDKeyReleased
+
+    private void txt_DienKTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_DienKTKeyReleased
+        // TODO add your handling code here:
+         if(!txt_DiemBD.getText().equals("")) {
+            ArrayList<KhachHang> locTheoTD = new ArrayList<>();
+            double batdau = txt_DiemBD.getText().equals("") ? 0 : Double.parseDouble(txt_DiemBD.getText());
+            double ketthuc = txt_DienKT.getText().equals("") ? 0 : Double.parseDouble(txt_DienKT.getText());
+            locTheoTD = kh_dao.LocTheoTieuPhi(batdau, ketthuc);
+            
+            XoaDuLieuTableSP();
+
+            DefaultTableModel tmp = (DefaultTableModel) table_kh.getModel();
+            for(KhachHang kh : locTheoTD) {
+                String a = kh.getRank().getMaRank();
+                 String Rank = a.equals("R001") ? "Đồng"
+                        : a.equals("R002") ? "Bạc"
+                        : a.equals("R003") ? "Vàng"
+                        : "Kim Cương";
+
+                Object[] obj = {kh.getMaKH(), kh.getTenKH(), kh.getDiaChi() ,kh.getSDT(), kh.getEmail(),
+                                kh.getTieuPhiTichLuy(), Rank, kh.getTichDiem()};
+
+                tmp.addRow(obj);
+            }
+        } else if(txt_DienKT.getText().equals("")) {
+            XoaDuLieuTableSP();
+            DocuLieuLenTable();
+        }
+    }//GEN-LAST:event_txt_DienKTKeyReleased
+
+    public void DocuLieuLenTable() {
+        ArrayList<KhachHang> dsKH = kh_dao.getAllKH();
+        
+        
+
+
+        DefaultTableModel tmp = (DefaultTableModel) table_kh.getModel();
+        for(KhachHang kh : dsKH) {
+            String a = kh.getRank().getMaRank();
+            String Rank = a.equals("R001") ? "Đồng"
+                    : a.equals("R002") ? "Bạc"
+                    : a.equals("R003") ? "Vàng"
+                    : "Kim Cương";
+            
+            Object[] obj = {kh.getMaKH(), kh.getTenKH(), kh.getDiaChi() ,kh.getSDT(), kh.getEmail(),
+                            kh.getTieuPhiTichLuy(), Rank, kh.getTichDiem()};
+
+            tmp.addRow(obj);
+        }
     }
-public boolean validData_KhachHang(){
+    
+    public void XoaDuLieuTableSP(){
+            DefaultTableModel temp = (DefaultTableModel) table_kh.getModel();
+            temp.getDataVector().removeAllElements();
+    }
+
+    public boolean validData_KhachHang(){
         String maKH = text_maKH.getText().toString().trim();
         String tenKH = text_tenKH.getText().toString().trim();
         String diaChi = text_diaChi.getText().toString().trim();
         String email = text_email.getText().toString().trim();
         String sDT = text_sĐT.getText().toString().trim();
-         String tieuPhi = text_tieuPhiTichLuy.getText().toString().trim();
+        String tieuPhi = text_tieuPhiTichLuy.getText().toString().trim();
         String đTL = text_tichDiem.getText().toString().trim();
         if(maKH.isEmpty() || (!maKH.matches("^KH\\d{3}$"))){
             JOptionPane.showMessageDialog(this, "Mã khách hàng phải theo mẫu KH001");
@@ -455,7 +786,7 @@ public boolean validData_KhachHang(){
             JOptionPane.showMessageDialog(this, "Tên khách hàng không được rỗng!");
             return false;
         }
-        
+
         if(diaChi.isEmpty()){
             JOptionPane.showMessageDialog(this, "Địa  chỉ không được rỗng!");
             return false;
@@ -471,26 +802,27 @@ public boolean validData_KhachHang(){
         double tichDiem = Double.parseDouble(đTL);
         if(tichDiem <= 0 || đTL.isEmpty()){
             JOptionPane.showMessageDialog(this, "Điểm tích lũy phải lớn hơn 0");
+            return false;
         }
         double tieuPhiTichLuy = Double.parseDouble(tieuPhi);
         if(tieuPhiTichLuy <= 0 || tieuPhi.isEmpty()){
             JOptionPane.showMessageDialog(this, "Điểm tích lũy phải lớn hơn 0");
+            return false;
         }
-        
-        
 
-        
         return true;
     }
-public KhachHang createKH(){
+    
+    public KhachHang createKH(){
         String maKH = text_maKH.getText();
         String tenKH = text_tenKH.getText();
         String diaChi = text_diaChi.getText();
         String sDT = text_sĐT.getText();
         String email = text_email.getText();
         double tieuPhiTichLuy = Double.parseDouble(text_tieuPhiTichLuy.getText());
-        String cb_rank = String.valueOf(this.cb_rank.getSelectedItem());
+        String cb_rank = "R001";
         double tichDiem = Double.parseDouble(text_tichDiem.getText());
+        
         KhachHang kh = new KhachHang(maKH, tenKH, sDT, email, diaChi, tieuPhiTichLuy, new Rank(cb_rank), tichDiem);
         return kh;
     }
@@ -500,11 +832,11 @@ public KhachHang createKH(){
     private javax.swing.JButton btn_capNhat;
     private javax.swing.JButton btn_timKiem;
     private javax.swing.JButton btn_xoaTrang;
-    private javax.swing.JComboBox<String> cb_rank;
     private javax.swing.JComboBox<String> cbb_locTheoRank;
-    private javax.swing.JComboBox<String> cbb_locTichDiem;
-    private javax.swing.JComboBox<String> cbb_locTieuPhi;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -512,6 +844,7 @@ public KhachHang createKH(){
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel label_diaChi;
     private javax.swing.JLabel label_email;
@@ -551,5 +884,10 @@ public KhachHang createKH(){
     private javax.swing.JPanel thongTin1;
     private javax.swing.JPanel thongTin2;
     private javax.swing.JPanel thongTin3;
+    private javax.swing.JTextField txt_DiemBD;
+    private javax.swing.JTextField txt_DienKT;
+    private javax.swing.JTextField txt_Rank;
+    private javax.swing.JTextField txt_TDBD;
+    private javax.swing.JTextField txt_TDKT;
     // End of variables declaration//GEN-END:variables
 }

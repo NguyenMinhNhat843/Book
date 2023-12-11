@@ -69,6 +69,8 @@ public class HoaDon_DAO implements HoaDonService{
         
         return dsHD;
     }
+    
+//    public HoaDon getHD_TheoNgay()
 
     @Override
     public HoaDon getHD_TheoMa(String maHD) {
@@ -81,7 +83,11 @@ public class HoaDon_DAO implements HoaDonService{
         HoaDon hd = null;
         
         try {
-            String sql = "select * from HoaDon where maHD = ?";
+            String sql = "select * from HoaDon hd \n" +
+                        "join NhanVien nv\n" +
+                        "on hd.maNhanVien = nv.maNV\n" +
+                        "join KhachHang kh\n" +
+                        "on kh.maKH = hd.maKhachHang where maHD = ?";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, maHD);
             
@@ -89,6 +95,16 @@ public class HoaDon_DAO implements HoaDonService{
             
             while(rs.next()) {
                 String maHD_1 = rs.getString("maHD");
+                
+                String maNV = rs.getString("maNV");
+                String tenNV = rs.getString("tenNV");
+                String maKH = rs.getString("maKhachHang");
+                String tenKH = rs.getString("tenKH");
+                
+                String ngayTao = rs.getString("ngayTao").substring(0, 19);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime ngayTao_ldt = LocalDateTime.parse(ngayTao, dtf);
+                
                 double tienNhan = rs.getDouble("tienKhachDua");
                 double tongTien = rs.getDouble("tongTien");
                 double suDungTichDiem = rs.getDouble("suDungTichDiem");
@@ -96,7 +112,7 @@ public class HoaDon_DAO implements HoaDonService{
                 double tongThue = rs.getDouble("tongThue");
                 double tienVon = rs.getDouble("tienVon");
                 
-                hd = new HoaDon(maHD_1, null, null, null, 
+                hd = new HoaDon(maHD_1, new NhanVien(maNV, tenNV),new KhachHang(maKH, tenKH), ngayTao_ldt, 
                         tienNhan, tongTien, suDungTichDiem, tongKM, tongThue, tienVon);
             }
         } catch (Exception e) {
@@ -195,9 +211,12 @@ public class HoaDon_DAO implements HoaDonService{
         java.sql.PreparedStatement prstmt = null;
         
         try {
-            String sql = "select * \n" +
-                    "from HoaDon\n" +
-                    "where ngayTao between ? and ?";
+            String sql = "select * from HoaDon hd \n" +
+                        "join NhanVien nv\n" +
+                        "on hd.maNhanVien = nv.maNV\n" +
+                        "join KhachHang kh\n" +
+                        "on kh.maKH = hd.maKhachHang "
+                    + "where ngayTao between ? and ?";
             prstmt = con.prepareStatement(sql);
             
 //            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -206,13 +225,26 @@ public class HoaDon_DAO implements HoaDonService{
             
             ResultSet rs = prstmt.executeQuery();
             while(rs.next()) {
-                String maHD = rs.getString("maHD");
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                LocalDateTime ngayTao = LocalDateTime.parse(rs.getString("ngayTao").substring(0, 19), dtf);
-                double tienVon = rs.getDouble("tienVon");
-                double tongTien = rs.getDouble("tongTien");
+                String maHD_1 = rs.getString("maHD");
                 
-                HoaDon hd = new HoaDon(maHD, ngayTao, tienVon, tongTien);
+                String maNV = rs.getString("maNV");
+                String tenNV = rs.getString("tenNV");
+                String maKH = rs.getString("maKhachHang");
+                String tenKH = rs.getString("tenKH");
+                
+                String ngayTao = rs.getString("ngayTao").substring(0, 19);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime ngayTao_ldt = LocalDateTime.parse(ngayTao, dtf);
+                
+                double tienNhan = rs.getDouble("tienKhachDua");
+                double tongTien = rs.getDouble("tongTien");
+                double suDungTichDiem = rs.getDouble("suDungTichDiem");
+                double tongKM = rs.getDouble("tongKM");
+                double tongThue = rs.getDouble("tongThue");
+                double tienVon = rs.getDouble("tienVon");
+                
+                HoaDon hd = new HoaDon(maHD_1, new NhanVien(maNV, tenNV),new KhachHang(maKH, tenKH), ngayTao_ldt, 
+                        tienNhan, tongTien, suDungTichDiem, tongKM, tongThue, tienVon);
                 dsHD.add(hd);
             }
         } catch (Exception e) {
@@ -228,4 +260,58 @@ public class HoaDon_DAO implements HoaDonService{
         return dsHD;
     }
     
+    public ArrayList<HoaDon> LocTheoKH(String sdt) {
+        ArrayList<HoaDon> dsHD = new ArrayList<>();
+        connectDB.getInstance();
+        java.sql.Connection con = connectDB.getConnect();
+        PreparedStatement stmt = null;
+        
+        try {
+            String sql = "select * from HoaDon hd \n" +
+                        "join NhanVien nv\n" +
+                        "on hd.maNhanVien = nv.maNV\n" +
+                        "join KhachHang kh\n" +
+                        "on kh.maKH = hd.maKhachHang where kh.sDT = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, sdt);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                String maHD_1 = rs.getString("maHD");
+                
+                String maNV = rs.getString("maNV");
+                String tenNV = rs.getString("tenNV");
+                String maKH = rs.getString("maKhachHang");
+                String tenKH = rs.getString("tenKH");
+                
+                String ngayTao = rs.getString("ngayTao").substring(0, 19);
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime ngayTao_ldt = LocalDateTime.parse(ngayTao, dtf);
+                
+                double tienNhan = rs.getDouble("tienKhachDua");
+                double tongTien = rs.getDouble("tongTien");
+                double suDungTichDiem = rs.getDouble("suDungTichDiem");
+                double tongKM = rs.getDouble("tongKM");
+                double tongThue = rs.getDouble("tongThue");
+                double tienVon = rs.getDouble("tienVon");
+                
+                HoaDon hd = new HoaDon(maHD_1, new NhanVien(maNV, tenNV),new KhachHang(maKH, tenKH), ngayTao_ldt, 
+                        tienNhan, tongTien, suDungTichDiem, tongKM, tongThue, tienVon);
+                
+                dsHD.add(hd);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return dsHD;
+    }
 }

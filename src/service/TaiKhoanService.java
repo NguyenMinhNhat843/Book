@@ -12,10 +12,10 @@ import java.util.ArrayList;
  * @author Asus
  */
 public interface TaiKhoanService {
-    public ArrayList<TaiKhoanService> getAllTK();
+    public ArrayList<TaiKhoan> getAllTK();
     public TaiKhoan getTK_TheoMa(String maTK);
     public TaiKhoan getTK_Theousername(String username); 
-    public void themTKVaoCSDL(TaiKhoanService tk);
-    public void CapNhatTK(String maTK);
-    public void XoaTK(String maTK);
+    public boolean themTKVaoCSDL(TaiKhoan tk);
+    public boolean CapNhatTK(String maTK);
+    public boolean XoaTK(String maTK);
 }

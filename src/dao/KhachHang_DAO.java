@@ -132,53 +132,202 @@ public class KhachHang_DAO implements KhachHangService{
     }
 
     @Override
-    public void Xoa_KH(String maKH) {
+    public boolean Xoa_KH(String maKH) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-   
-   
-//    public boolean Them_KH(KhachHang kh_new) {
-//        int n = 0;
-//        connectDB.getInstance();
-//        Connection con = connectDB.getConnect();
-//        PreparedStatement stmt = null;
-//        try {
-//            String sql = "insert into KhachHang(maKH,tenKH, sDT,email,diaChi,tieuPhiTichLuy,rank,tichDiem)" 
-//                    + "values(?, ?, ?, ?, ?, ?, ?, ?)";
-//            stmt = con.prepareStatement(sql);
-//            stmt.setString(1, phatSinhMaTuDong());
-//            stmt.setString(2, kh_new.getTenKH());
-//            stmt.setString(3, kh_new.getSDT());
-//            stmt.setString(4, kh_new.getEmail());
-//            stmt.setString(5, kh_new.getDiaChi());
-//            stmt.setDouble(6, kh_new.getTieuPhiTichLuy());
-//            stmt.setString(7, kh_new.getRank().getMaRank());
-//            stmt.setDouble(8, kh_new.getTichDiem());
-//            
-//           
-//            
-//            n = stmt.executeUpdate();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }finally{
-//            try {
-//                stmt.close();;
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return n > 0;
-//    }
-
     @Override
-    public void Sua_KH(KhachHang kh_new) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean Sua_KH(KhachHang kh_new) {
+        connectDB.getInstance();
+        Connection conn = connectDB.getConnect();
+        PreparedStatement stmt = null;
+        
+        int n = 0;
+        try {
+             String sql = "update KhachHang set maKH = ?, tenKH = ?, sDT = ?, email = ?, diaChi = ?,"
+                     + "tieuPhiTichLuy = ?, rank = ?, tichDiem = ? where maKH = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, kh_new.getMaKH());
+            stmt.setString(2, kh_new.getTenKH());
+            stmt.setString(3, kh_new.getSDT());
+            stmt.setString(4, kh_new.getEmail());
+            stmt.setString(5, kh_new.getDiaChi());
+            stmt.setDouble(6, kh_new.getTieuPhiTichLuy());
+            stmt.setString(7, kh_new.getRank().getMaRank());
+            stmt.setDouble(8, kh_new.getTichDiem());
+            stmt.setString(9, kh_new.getMaKH());
+            
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return n > 0;
     }
 
     @Override
     public boolean Them_KH(KhachHang kh_new) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int n = 0;
+        connectDB.getInstance();
+        Connection con = connectDB.getConnect();
+        PreparedStatement stmt = null;
+        try {
+            String sql = "insert into KhachHang(maKH,tenKH, sDT,email,diaChi,tieuPhiTichLuy,rank,tichDiem)" 
+                    + "values(?, ?, ?, ?, ?, ?, ?, ?)";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, phatSinhMaTuDong());
+            stmt.setString(2, kh_new.getTenKH());
+            stmt.setString(3, kh_new.getSDT());
+            stmt.setString(4, kh_new.getEmail());
+            stmt.setString(5, kh_new.getDiaChi());
+            stmt.setDouble(6, kh_new.getTieuPhiTichLuy());
+            stmt.setString(7, kh_new.getRank().getMaRank());
+            stmt.setDouble(8, kh_new.getTichDiem());
+            
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                stmt.close();;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return n > 0;
     }
         
+    public ArrayList<KhachHang> getKH_TheoRank(String maRank) {
+        KhachHang result = null;
+        connectDB.getInstance();
+        Connection con = connectDB.getConnect();
+        PreparedStatement stmt = null;
+        
+        ArrayList<KhachHang> dsKH = new ArrayList<>();
+        
+        try {
+            String sql = "select * from KhachHang where rank = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, maRank);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                String maKH = rs.getString("maKH");
+                String tenKH = rs.getString("tenKH");
+                String sDT = rs.getString("sDT");
+                String email = rs.getString("email");
+                String diaChi = rs.getString("diaChi");
+                double tieuPhiTichLuy = rs.getDouble("tieuPhiTichLuy");
+                String rank = rs.getString("rank");
+                double tichDiem = rs.getDouble("tichDiem");
+                
+                result = new KhachHang(maKH, tenKH, sDT, email, diaChi, tieuPhiTichLuy, new Rank(rank), tichDiem);
+                dsKH.add(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return dsKH;
+    }
+    
+    public ArrayList<KhachHang> LocTheoTichDiem(double batdau, double ketthuc) {
+        KhachHang result = null;
+        connectDB.getInstance();
+        Connection con = connectDB.getConnect();
+        PreparedStatement stmt = null;
+        
+        ArrayList<KhachHang> dsKH = new ArrayList<>();
+        
+        try {
+            String sql = "select * from KhachHang where tichDiem >= ? and tichDiem <= ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setDouble(1, batdau);
+            stmt.setDouble(2, ketthuc);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                String maKH = rs.getString("maKH");
+                String tenKH = rs.getString("tenKH");
+                String sDT = rs.getString("sDT");
+                String email = rs.getString("email");
+                String diaChi = rs.getString("diaChi");
+                double tieuPhiTichLuy = rs.getDouble("tieuPhiTichLuy");
+                String rank = rs.getString("rank");
+                double tichDiem = rs.getDouble("tichDiem");
+                
+                result = new KhachHang(maKH, tenKH, sDT, email, diaChi, tieuPhiTichLuy, new Rank(rank), tichDiem);
+                dsKH.add(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return dsKH;
+    }
+    
+    public ArrayList<KhachHang> LocTheoTieuPhi(double batdau, double ketthuc) {
+        KhachHang result = null;
+        connectDB.getInstance();
+        Connection con = connectDB.getConnect();
+        PreparedStatement stmt = null;
+        
+        ArrayList<KhachHang> dsKH = new ArrayList<>();
+        
+        try {
+            String sql = "select * from KhachHang where tieuPhiTichLuy >= ? and tieuPhiTichLuy <= ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setDouble(1, batdau);
+            stmt.setDouble(2, ketthuc);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+                String maKH = rs.getString("maKH");
+                String tenKH = rs.getString("tenKH");
+                String sDT = rs.getString("sDT");
+                String email = rs.getString("email");
+                String diaChi = rs.getString("diaChi");
+                double tieuPhiTichLuy = rs.getDouble("tieuPhiTichLuy");
+                String rank = rs.getString("rank");
+                double tichDiem = rs.getDouble("tichDiem");
+                
+                result = new KhachHang(maKH, tenKH, sDT, email, diaChi, tieuPhiTichLuy, new Rank(rank), tichDiem);
+                dsKH.add(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return dsKH;
+    }
 }

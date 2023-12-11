@@ -43,12 +43,16 @@ public class NhanVien_DAO implements NhanVienService{
                 String gioiTinh = rs.getString("gioiTinh");
                 String diaChi = rs.getString("diaChi");
                 String email = rs.getString("email");
-                Date ngaySinh =rs.getDate("ngaySinh");
+//                Date ngaySinh =rs.getDate("ngaySinh");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String ngayTao = rs.getString("ngaySinh").substring(0, 19);
+                LocalDateTime ngayTao_lcd = LocalDateTime.parse(ngayTao, dtf);
+                
                 String sDT = rs.getString("sDT");
                 
                
 
-                NhanVien nv = new NhanVien(maNV, tenNV, chucVu, gioiTinh, diaChi, email, ngaySinh, sDT);
+                NhanVien nv = new NhanVien(maNV, tenNV, chucVu, gioiTinh, diaChi, email, ngayTao_lcd, sDT);
                 dsNV.add(nv);
             }
         } catch (Exception e) {
@@ -88,9 +92,13 @@ public class NhanVien_DAO implements NhanVienService{
                 String gioiTinh = rs.getString("gioiTinh");
                 String diaChi = rs.getString("diaChi");
                 String email = rs.getString("email");
-                Date ngaySinh =rs.getDate("ngaySinh");
+//                Date ngaySinh =rs.getDate("ngaySinh");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String ngayTao = rs.getString("ngaySinh").substring(0, 19);
+                LocalDateTime ngayTao_lcd = LocalDateTime.parse(ngayTao, dtf);
+                
                 String sDT = rs.getString("sDT");
-                nv = new NhanVien(maNV_1, tenNV, chucVu, gioiTinh, diaChi, email, ngaySinh, sDT);
+                nv = new NhanVien(maNV_1, tenNV, chucVu, gioiTinh, diaChi, email, ngayTao_lcd, sDT);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,6 +112,50 @@ public class NhanVien_DAO implements NhanVienService{
         
         return nv;
     }
+    
+    public ArrayList<NhanVien> getNV_TheoNgaySinh(String ngayBatDau, String ngayKetThuc) {
+        ArrayList<NhanVien> dsNV = new ArrayList<>();
+        connectDB.getInstance();
+        java.sql.Connection con = connectDB.getConnect();
+        
+        java.sql.PreparedStatement prstmt = null;
+        
+        try {
+            String sql  = "select * from NhanVien where ngaySinh between ? and ?";
+            prstmt = con.prepareStatement(sql);
+            
+            prstmt.setString(1, ngayBatDau);
+            prstmt.setString(2, ngayKetThuc);
+            
+            ResultSet rs = prstmt.executeQuery();
+            while(rs.next()) {
+                String maNV_1 = rs.getString("maNV");
+                String tenNV = rs.getString("tenNV");
+                String chucVu = rs.getString("chucVu");
+                String gioiTinh = rs.getString("gioiTinh");
+                String diaChi = rs.getString("diaChi");
+                String email = rs.getString("email");
+//                Date ngaySinh =rs.getDate("ngaySinh");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                String ngayTao = rs.getString("ngaySinh").substring(0, 19);
+                LocalDateTime ngayTao_lcd = LocalDateTime.parse(ngayTao, dtf);
+                
+                String sDT = rs.getString("sDT");
+                NhanVien nv = new NhanVien(maNV_1, tenNV, chucVu, gioiTinh, diaChi, email, ngayTao_lcd, sDT);
+                dsNV.add(nv);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                prstmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return dsNV;
+    }
 
   
     public boolean ThemNV(NhanVien nv) {
@@ -114,8 +166,8 @@ public class NhanVien_DAO implements NhanVienService{
         java.sql.PreparedStatement stmt = null;
         
         try {
-            String sql = "insert into NhanVien(maNV, tenNV, chucVu, gioiTinh, diaChi, email, ngaySinh, sDT)"
-                    + "values (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "insert into NhanVien(maNV, tenNV, chucVu, gioiTinh, diaChi, email, ngaySinh, sDT, trangThai)"
+                    + "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, tuPhatSinhMa());
             stmt.setString(2, nv.getTenNV());
@@ -123,11 +175,13 @@ public class NhanVien_DAO implements NhanVienService{
             stmt.setString(4, nv.getGioiTinh());
             stmt.setString(5, nv.getDiaChi());
             stmt.setString(6, nv.getEmail());
-            stmt.setDate(7, (Date) nv.getNgaySinh());
+//            stmt.setDate(7, (Date) nv.getNgaySinh());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            stmt.setString(7, dtf.format(nv.getNgaySinh()));
 //            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 //            stmt.setString(7, dtf.format(nv.getNgaySinh()));
             stmt.setString(8, nv.getsDT());
-            
+            stmt.setString(9, "true");
             
             
             n = stmt.executeUpdate();
@@ -166,8 +220,11 @@ public class NhanVien_DAO implements NhanVienService{
             stmt.setString(3, nv_new.getGioiTinh());
             stmt.setString(4, nv_new.getDiaChi());
             stmt.setString(5, nv_new.getEmail());
-            stmt.setDate(6, (Date) nv_new.getNgaySinh());
+//            stmt.setDate(6, (Date) nv_new.getNgaySinh());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            stmt.setString(6, dtf.format(nv_new.getNgaySinh()));
             stmt.setString(7, nv_new.getsDT());
+            stmt.setString(8, nv_new.getMaNV());
             
             n = stmt.executeUpdate();
         } catch (Exception e) {

@@ -18,6 +18,7 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.text.*;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -43,6 +44,11 @@ public class Panel_bill extends javax.swing.JPanel {
         _this_maNV = maNV;
         
         LoadDuLieuLenTable();
+    }
+    
+    public void XoaHetDuLieu() {
+        DefaultTableModel tmp = (DefaultTableModel) table_DSHD.getModel();
+        tmp.getDataVector().removeAllElements();
     }
     
     public void LoadDuLieuLenTable() {
@@ -95,23 +101,18 @@ public class Panel_bill extends javax.swing.JPanel {
         lbl_LocTheoNgay_title = new javax.swing.JLabel();
         pnl_Date_LocTheoNgay = new javax.swing.JPanel();
         date_LocTheoNgay = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
         pnl_LocTheoKH_wrap = new javax.swing.JPanel();
         pnl_LocTheoKH = new javax.swing.JPanel();
         pnl_LocTheoKH_title = new javax.swing.JPanel();
         lbl_LocTheoKH_title = new javax.swing.JLabel();
         pnl_txt_LocTheoKH = new javax.swing.JPanel();
         txt_LocTheoKH = new javax.swing.JTextField();
-        pnl_LocTheoNV_wrap = new javax.swing.JPanel();
-        pnl_LocTheoNV = new javax.swing.JPanel();
-        pnl_LocTheoNV_title = new javax.swing.JPanel();
-        lbl_LocTheoNgay_title2 = new javax.swing.JLabel();
-        pnl_txt_LocTheoNV = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        btn_LocTheoKH = new javax.swing.JButton();
         pnl_Tabel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_DSHD = new javax.swing.JTable();
         pnl_XuatHoaDon = new javax.swing.JPanel();
-        btn_InHD = new javax.swing.JButton();
         btn_XemChiTiet = new javax.swing.JButton();
         pnl_DoiTra = new javax.swing.JPanel();
 
@@ -179,6 +180,11 @@ public class Panel_bill extends javax.swing.JPanel {
 
         btn_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         btn_TimKiem.setText("Tìm kiếm");
+        btn_TimKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_TimKiemMouseClicked(evt);
+            }
+        });
         pnl_HD_TimKiem.add(btn_TimKiem, java.awt.BorderLayout.WEST);
 
         txt_TimKiem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -210,7 +216,22 @@ public class Panel_bill extends javax.swing.JPanel {
         pnl_LocTheoNgay.add(pnl_LocTheoNgay_title);
 
         pnl_Date_LocTheoNgay.setLayout(new java.awt.BorderLayout());
+
+        date_LocTheoNgay.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                date_LocTheoNgayPropertyChange(evt);
+            }
+        });
         pnl_Date_LocTheoNgay.add(date_LocTheoNgay, java.awt.BorderLayout.CENTER);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        jButton1.setPreferredSize(new java.awt.Dimension(70, 43));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        pnl_Date_LocTheoNgay.add(jButton1, java.awt.BorderLayout.LINE_END);
 
         pnl_LocTheoNgay.add(pnl_Date_LocTheoNgay);
 
@@ -236,39 +257,23 @@ public class Panel_bill extends javax.swing.JPanel {
         pnl_txt_LocTheoKH.setLayout(new java.awt.BorderLayout());
 
         txt_LocTheoKH.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_LocTheoKH.setText("0123456789");
         pnl_txt_LocTheoKH.add(txt_LocTheoKH, java.awt.BorderLayout.CENTER);
+
+        btn_LocTheoKH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        btn_LocTheoKH.setPreferredSize(new java.awt.Dimension(70, 43));
+        btn_LocTheoKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_LocTheoKHMouseClicked(evt);
+            }
+        });
+        pnl_txt_LocTheoKH.add(btn_LocTheoKH, java.awt.BorderLayout.LINE_END);
 
         pnl_LocTheoKH.add(pnl_txt_LocTheoKH);
 
         pnl_LocTheoKH_wrap.add(pnl_LocTheoKH, java.awt.BorderLayout.CENTER);
 
         pnl_BoLoc.add(pnl_LocTheoKH_wrap);
-
-        pnl_LocTheoNV_wrap.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        pnl_LocTheoNV_wrap.setLayout(new java.awt.BorderLayout());
-
-        pnl_LocTheoNV.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 30, 10, 30));
-        pnl_LocTheoNV.setLayout(new java.awt.GridLayout(2, 1));
-
-        pnl_LocTheoNV_title.setLayout(new java.awt.BorderLayout());
-
-        lbl_LocTheoNgay_title2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbl_LocTheoNgay_title2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_LocTheoNgay_title2.setText("Lọc theo Nhân viên");
-        pnl_LocTheoNV_title.add(lbl_LocTheoNgay_title2, java.awt.BorderLayout.CENTER);
-
-        pnl_LocTheoNV.add(pnl_LocTheoNV_title);
-
-        pnl_txt_LocTheoNV.setLayout(new java.awt.BorderLayout());
-
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        pnl_txt_LocTheoNV.add(jTextField1, java.awt.BorderLayout.CENTER);
-
-        pnl_LocTheoNV.add(pnl_txt_LocTheoNV);
-
-        pnl_LocTheoNV_wrap.add(pnl_LocTheoNV, java.awt.BorderLayout.CENTER);
-
-        pnl_BoLoc.add(pnl_LocTheoNV_wrap);
 
         pnl_center.add(pnl_BoLoc, java.awt.BorderLayout.NORTH);
 
@@ -294,16 +299,6 @@ public class Panel_bill extends javax.swing.JPanel {
         pnl_center.add(pnl_Tabel, java.awt.BorderLayout.CENTER);
 
         pnl_XuatHoaDon.setPreferredSize(new java.awt.Dimension(10, 70));
-
-        btn_InHD.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_InHD.setText("Xuất Hóa Đơn");
-        btn_InHD.setPreferredSize(new java.awt.Dimension(600, 50));
-        btn_InHD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_InHDActionPerformed(evt);
-            }
-        });
-        pnl_XuatHoaDon.add(btn_InHD);
 
         btn_XemChiTiet.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_XemChiTiet.setText("Xem chi tiết");
@@ -350,10 +345,6 @@ public class Panel_bill extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_table_DSHDMouseClicked
 
-    private void btn_InHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InHDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_InHDActionPerformed
-
     private void btn_XemChiTietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_XemChiTietMouseClicked
         // TODO add your handling code here:
         int r = table_DSHD.getSelectedRow();
@@ -366,21 +357,92 @@ public class Panel_bill extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btn_XemChiTietMouseClicked
 
+    private void btn_TimKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimKiemMouseClicked
+        // TODO add your handling code here:
+         String maHD_searched = txt_TimKiem.getText().toString();
+        
+        if(!maHD_searched.trim().equals("")){
+            XoaHetDuLieu();
+            
+            HoaDon hd = hd_dao.getHD_TheoMa(maHD_searched);
+            DefaultTableModel temp = (DefaultTableModel) table_DSHD.getModel();
+            
+            Object[] obj = {hd.getMaHD(), hd.getNv().getTenNV(), hd.getKh().getTenKH(), hd.getNgayTao(), hd.getTongTien()};
+            temp.addRow(obj);
+        }else{
+            XoaHetDuLieu();
+            LoadDuLieuLenTable();
+        }
+    }//GEN-LAST:event_btn_TimKiemMouseClicked
+
+    private void date_LocTheoNgayPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_date_LocTheoNgayPropertyChange
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_date_LocTheoNgayPropertyChange
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String ngayBatDau = df.format(date_LocTheoNgay.getDate());
+         Date currentDate = date_LocTheoNgay.getDate();
+
+        // Chuyển đổi ngày thành lớp Calendar
+        Calendar calendarInstance = Calendar.getInstance();
+        calendarInstance.setTime(currentDate);
+
+        // Thêm một ngày để lấy ngày hôm sau
+        calendarInstance.add(Calendar.DAY_OF_MONTH, 1);
+
+        // Lấy ngày hôm sau
+        Date nextDay = calendarInstance.getTime();
+        String ngayKT = df.format(nextDay);
+        
+        XoaHetDuLieu();
+        
+        ArrayList<HoaDon> dsHD = hd_dao.TimHoaDonTheoThoiGian(ngayBatDau, ngayKT);
+        
+         DefaultTableModel model_dsHD = (DefaultTableModel) table_DSHD.getModel();
+        
+        for(HoaDon hd : dsHD) {
+            Object[] obj = {hd.getMaHD(), hd.getNv().getTenNV(), hd.getKh(), hd.getNgayTao(), hd.getTongTien()};
+            
+            model_dsHD.addRow(obj);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void btn_LocTheoKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LocTheoKHMouseClicked
+        // TODO add your handling code here:
+        if(txt_LocTheoKH.getText().equals("")) {
+            XoaHetDuLieu();
+            LoadDuLieuLenTable();
+        } else {
+            ArrayList<HoaDon> dsHD = hd_dao.LocTheoKH(txt_LocTheoKH.getText());
+
+            XoaHetDuLieu();
+            DefaultTableModel model_dsHD = (DefaultTableModel) table_DSHD.getModel();
+        
+            for(HoaDon hd : dsHD) {
+                Object[] obj = {hd.getMaHD(), hd.getNv().getTenNV(), hd.getKh(), hd.getNgayTao(), hd.getTongTien()};
+
+                model_dsHD.addRow(obj);
+            }
+        }
+    }//GEN-LAST:event_btn_LocTheoKHMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_InHD;
+    private javax.swing.JButton btn_LocTheoKH;
     private javax.swing.JButton btn_TimKiem;
     private javax.swing.JButton btn_XemChiTiet;
     private com.toedter.calendar.JDateChooser date_LocTheoNgay;
     private com.toedter.calendar.JDateChooser date_NgayTao;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_KhachHang;
     private javax.swing.JLabel lbl_LocTheoKH_title;
     private javax.swing.JLabel lbl_LocTheoNgay_title;
-    private javax.swing.JLabel lbl_LocTheoNgay_title2;
     private javax.swing.JLabel lbl_MaHD;
     private javax.swing.JLabel lbl_NgayTao;
     private javax.swing.JLabel lbl_NhanVien;
@@ -394,9 +456,6 @@ public class Panel_bill extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_LocTheoKH;
     private javax.swing.JPanel pnl_LocTheoKH_title;
     private javax.swing.JPanel pnl_LocTheoKH_wrap;
-    private javax.swing.JPanel pnl_LocTheoNV;
-    private javax.swing.JPanel pnl_LocTheoNV_title;
-    private javax.swing.JPanel pnl_LocTheoNV_wrap;
     private javax.swing.JPanel pnl_LocTheoNgay;
     private javax.swing.JPanel pnl_LocTheoNgay_title;
     private javax.swing.JPanel pnl_LocTheoNgay_wrap;
@@ -408,7 +467,6 @@ public class Panel_bill extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_center;
     private javax.swing.JPanel pnl_top;
     private javax.swing.JPanel pnl_txt_LocTheoKH;
-    private javax.swing.JPanel pnl_txt_LocTheoNV;
     private javax.swing.JTable table_DSHD;
     private javax.swing.JTextField txt_KhachHang;
     private javax.swing.JTextField txt_LocTheoKH;

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public interface KhachHangService {
     public ArrayList<KhachHang> getAllKH();
     public KhachHang getKH_TheoMa(String maKH);
-    public void Xoa_KH(String maKH);
+    public boolean Xoa_KH(String maKH);
     public boolean Them_KH(KhachHang kh_new);
-    public void Sua_KH(KhachHang kh_new);
+    public boolean Sua_KH(KhachHang kh_new);
 }

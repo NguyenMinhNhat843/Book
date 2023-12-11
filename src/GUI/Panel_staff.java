@@ -5,20 +5,55 @@
 package GUI;
 
 import dao.NhanVien_DAO;
+import dao.TaiKhoan_DAO;
 import entity.NhanVien;
+import entity.TaiKhoan;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class Panel_staff extends javax.swing.JPanel {
  private NhanVien_DAO nv_dao = new NhanVien_DAO();
+ private TaiKhoan_DAO tk_dao = new TaiKhoan_DAO();
     /**
      * Creates new form Panel_staff
      */
     public Panel_staff() {
         initComponents();
         DocDuLieuLenTableNhanVien();
-
+        DocDuLieuLenTaiKhoan();
+    }
+    // * Tai khoan *
+    public void XoaDuLieuTK() {
+        DefaultTableModel temp = (DefaultTableModel) table_TK.getModel();
+        temp.getDataVector().removeAllElements();
+    }
+    
+    public void DocDuLieuLenTaiKhoan() {
+        ArrayList<TaiKhoan> dsTK = tk_dao.getAllTK();
+        
+        DefaultTableModel temp = (DefaultTableModel) table_TK.getModel();
+        
+        for(TaiKhoan tk : dsTK){
+            Object[] obj = {tk.getMaTK(), tk.getMaNV().getMaNV(), tk.getTenNguoiDung(), tk.getUsername()
+            , tk.getPassword(), tk.getLoaiTK()};
+            temp.addRow(obj);
+        }         
+    }
+    
+    public void ThemTaiKhoan(NhanVien nv) {
+        TaiKhoan tk = new TaiKhoan("abc", new NhanVien(nv.getMaNV()), nv.getTenNV(), 
+                nv.getsDT(), "1111", nv.getChucVu().equals("Quản Lý") ? "LTK002" : "LTK001");
+        
+        tk_dao.themTKVaoCSDL(tk);
+        
+        XoaDuLieuTK();
+        DocDuLieuLenTaiKhoan();
     }
 
     public boolean validData_NV() {
@@ -100,9 +135,8 @@ public class Panel_staff extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         pnl_List_btn = new javax.swing.JPanel();
         btn_XoaTrang = new javax.swing.JButton();
-        btn_Xoa = new javax.swing.JButton();
+        btn_Sua = new javax.swing.JButton();
         btn_Them = new javax.swing.JButton();
-        btn_CapNhat = new javax.swing.JButton();
         pnl_Tim = new javax.swing.JPanel();
         txt_Tim = new javax.swing.JTextField();
         btn_Tim = new javax.swing.JButton();
@@ -119,7 +153,8 @@ public class Panel_staff extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         lbl_LocTheoNamSinh = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        date_LocTheoNS = new com.toedter.calendar.JYearChooser();
+        date_NgaySinh = new com.toedter.calendar.JDateChooser();
+        btn_LocTheoNgaySinh = new javax.swing.JButton();
         pnl_LocTheoGT_wrap = new javax.swing.JPanel();
         pnl_LocTheoGT = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
@@ -132,7 +167,7 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_TaiKhoan = new javax.swing.JPanel();
         pnl_dsTK = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table_TK = new javax.swing.JTable();
         pnl_thongTK = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -229,7 +264,7 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_ChucVu.add(lbl_ChucVu);
 
         cb_ChucVu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        cb_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nhân viên bán hàng", "Quản lý" }));
+        cb_ChucVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản Lý", "Nhân Viên Bán Hàng" }));
         cb_ChucVu.setPreferredSize(new java.awt.Dimension(300, 40));
         cb_ChucVu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,10 +318,15 @@ public class Panel_staff extends javax.swing.JPanel {
         });
         pnl_List_btn.add(btn_XoaTrang);
 
-        btn_Xoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_Xoa.setText("Sửa");
-        btn_Xoa.setPreferredSize(new java.awt.Dimension(130, 50));
-        pnl_List_btn.add(btn_Xoa);
+        btn_Sua.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_Sua.setText("Sửa");
+        btn_Sua.setPreferredSize(new java.awt.Dimension(130, 50));
+        btn_Sua.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_SuaMouseClicked(evt);
+            }
+        });
+        pnl_List_btn.add(btn_Sua);
 
         btn_Them.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_Them.setText("Thêm mới");
@@ -297,11 +337,6 @@ public class Panel_staff extends javax.swing.JPanel {
             }
         });
         pnl_List_btn.add(btn_Them);
-
-        btn_CapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_CapNhat.setText("Xóa");
-        btn_CapNhat.setPreferredSize(new java.awt.Dimension(130, 50));
-        pnl_List_btn.add(btn_CapNhat);
 
         jPanel5.add(pnl_List_btn);
 
@@ -349,9 +384,16 @@ public class Panel_staff extends javax.swing.JPanel {
 
         pnl_LocTheoChucVu.add(jPanel4);
 
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
         cb_LocTheoCV.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cb_LocTheoCV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản Lý", "Nhân Viên Bán Hàng" }));
-        jPanel7.add(cb_LocTheoCV);
+        cb_LocTheoCV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Chọn chức vụ --", "Quản Lý", "Nhân Viên Bán Hàng" }));
+        cb_LocTheoCV.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_LocTheoCVItemStateChanged(evt);
+            }
+        });
+        jPanel7.add(cb_LocTheoCV, java.awt.BorderLayout.CENTER);
 
         pnl_LocTheoChucVu.add(jPanel7);
 
@@ -371,8 +413,17 @@ public class Panel_staff extends javax.swing.JPanel {
 
         pnl_LocTheoNamSinh.add(jPanel8);
 
-        date_LocTheoNS.setPreferredSize(new java.awt.Dimension(250, 35));
-        jPanel9.add(date_LocTheoNS);
+        jPanel9.setLayout(new java.awt.BorderLayout());
+        jPanel9.add(date_NgaySinh, java.awt.BorderLayout.CENTER);
+
+        btn_LocTheoNgaySinh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
+        btn_LocTheoNgaySinh.setPreferredSize(new java.awt.Dimension(70, 43));
+        btn_LocTheoNgaySinh.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_LocTheoNgaySinhMouseClicked(evt);
+            }
+        });
+        jPanel9.add(btn_LocTheoNgaySinh, java.awt.BorderLayout.LINE_END);
 
         pnl_LocTheoNamSinh.add(jPanel9);
 
@@ -392,10 +443,17 @@ public class Panel_staff extends javax.swing.JPanel {
 
         pnl_LocTheoGT.add(jPanel10);
 
+        jPanel11.setLayout(new java.awt.BorderLayout());
+
         cb_LocGT.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        cb_LocGT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
+        cb_LocGT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-- Chọn giới tính --", "Nam", "Nữ" }));
         cb_LocGT.setPreferredSize(new java.awt.Dimension(250, 35));
-        jPanel11.add(cb_LocGT);
+        cb_LocGT.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cb_LocGTItemStateChanged(evt);
+            }
+        });
+        jPanel11.add(cb_LocGT, java.awt.BorderLayout.CENTER);
 
         pnl_LocTheoGT.add(jPanel11);
 
@@ -435,18 +493,15 @@ public class Panel_staff extends javax.swing.JPanel {
         pnl_dsTK.setPreferredSize(new java.awt.Dimension(1000, 765));
         pnl_dsTK.setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table_TK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Mã NV", "Tên NV", "Username ", "pass", "Chức vụ"
+                " Mã TK", "Mã NV", "Tên NV", "Username ", "pass", "Chức vụ"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(table_TK);
 
         pnl_dsTK.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -550,6 +605,7 @@ public class Panel_staff extends javax.swing.JPanel {
                     XoaDuLieuTableNV();
                     DocDuLieuLenTableNhanVien();
                     JOptionPane.showMessageDialog(this, "Thêm thành công!!!");
+                    ThemTaiKhoan(nv);
                 } else {
                     JOptionPane.showMessageDialog(this, "Thêm thất bai!!! Có lỗi xảy ra!!!");
                 }
@@ -560,21 +616,25 @@ public class Panel_staff extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_ThemMouseClicked
 
     private void btn_TimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TimMouseClicked
-         String maNV = txt_MaNV.getText().toString();
+         String maNV = txt_Tim.getText().toString();
         
-        if(!maNV.trim().equals("")){
-            XoaDuLieuTableNV();
-            
-            NhanVien nv = nv_dao.getNV_TheoMa(maNV);
-            DefaultTableModel temp = (DefaultTableModel) tbl_nhanVien.getModel();
-            
-            Object[] obj = {nv.getMaNV(), nv.getTenNV(), nv.getChucVu(), nv.getGioiTinh(), nv.getDiaChi(), nv.getEmail(), nv.getNgaySinh(), nv.getsDT()};
-            temp.addRow(obj);
-        }else{
-            XoaDuLieuTableNV();
-            DocDuLieuLenTableNhanVien();
-        }
-            
+         if(maNV.equals("")) {
+             XoaDuLieuTableNV();
+             DocDuLieuLenTableNhanVien();
+         } else {
+            if(!maNV.trim().equals("")){
+                XoaDuLieuTableNV();
+
+                NhanVien nv = nv_dao.getNV_TheoMa(maNV);
+                DefaultTableModel temp = (DefaultTableModel) tbl_nhanVien.getModel();
+
+                Object[] obj = {nv.getMaNV(), nv.getTenNV(), nv.getChucVu(), nv.getGioiTinh(), nv.getDiaChi(), nv.getEmail(), nv.getNgaySinh(), nv.getsDT()};
+                temp.addRow(obj);
+            }else{
+                XoaDuLieuTableNV();
+                DocDuLieuLenTableNhanVien();
+            }
+         }
     }//GEN-LAST:event_btn_TimMouseClicked
 
     private void tbl_nhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_nhanVienMouseClicked
@@ -585,11 +645,18 @@ public class Panel_staff extends javax.swing.JPanel {
             txt_TenNV.setText(tbl_nhanVien.getValueAt(r, 1).toString());
             txt_DiaChi.setText(tbl_nhanVien.getValueAt(r, 4).toString());
             txt_Email.setText(tbl_nhanVien.getValueAt(r, 5).toString());
-            date_NS.setDateFormatString(tbl_nhanVien.getValueAt(r, 6).toString());
-//            cbo_NCC_field.setSelectedIndex(
-//                    Integer.parseInt(tbl_sanPham.getValueAt(r, 6).toString().substring(3, 6)) - 1);
+//            date_NS.setDateFormatString(tbl_nhanVien.getValueAt(r, 6).toString());
+            try {
+                SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
+
+                Date date = dtf.parse(tbl_nhanVien.getValueAt(r, 6).toString().substring(0, 10));
+                date_NS.setDate(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             txt_SDT.setText(tbl_nhanVien.getValueAt(r, 7).toString());
             cb_ChucVu.addItem(tbl_nhanVien.getValueAt(r, 2).toString());
+            cb_ChucVu.setSelectedIndex(tbl_nhanVien.getValueAt(r, 2).toString().equals("Quản Lý") ? 0 : 1);
             cb_GioiTinh.addItem(tbl_nhanVien.getValueAt(r, 3).toString());
         }else{
             JOptionPane.showMessageDialog(this, "Vui lòng chọn hàng muốn thao tác!");
@@ -604,7 +671,141 @@ public class Panel_staff extends javax.swing.JPanel {
         txt_Email.setText("");
         txt_SDT.setText("");
     }//GEN-LAST:event_btn_XoaTrangMouseClicked
-public NhanVien createNV() {
+
+    private void btn_SuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_SuaMouseClicked
+        // TODO add your handling code here:
+        int r = tbl_nhanVien.getSelectedRow();
+        if(r < 0){
+            JOptionPane.showMessageDialog(this, "Cần chọn sản phẩm cần cập nhật!");
+        }
+        
+        if(validData_NV()){
+            String maNV = txt_MaNV.getText().toString();
+            String tenNV = txt_TenNV.getText().toString();
+            String cb_ChucVu = String.valueOf(this.cb_ChucVu.getSelectedItem());
+            String cbo_GioiTinh = String.valueOf(cb_GioiTinh.getSelectedItem());
+            String diaChi = txt_DiaChi.getText().toString();
+            String email = txt_Email.getText().toString();
+            Date ngaySinh = date_NS.getDate();
+    //        System.out.println("GUI.Panel_staff.createNV() " + ngaySinh) ;
+            Instant instant = ngaySinh.toInstant();
+            // Chuyển đổi từ Instant sang LocalDateTime
+            LocalDateTime localDateTime = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
+            String sDT = txt_SDT.getText().toString();
+            NhanVien nv = new NhanVien(maNV, tenNV, cb_ChucVu, cbo_GioiTinh, diaChi, email, localDateTime, sDT);
+        
+            
+            if(nv_dao.CapNhatNV(nv)){
+                DefaultTableModel temp = (DefaultTableModel) tbl_nhanVien.getModel();
+                temp.removeRow(r);
+                Object[] obj = {nv.getMaNV(), nv.getTenNV(), nv.getChucVu(), nv.getGioiTinh(), nv.getDiaChi(), nv.getEmail(), nv.getNgaySinh(), nv.getsDT()};
+                temp.insertRow(r, obj);
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            }else{
+                JOptionPane.showMessageDialog(this, "Cập nhật thất bại!!Có lỗi xảy ra!!");
+            }
+        }
+    }//GEN-LAST:event_btn_SuaMouseClicked
+
+    private void cb_LocTheoCVItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_LocTheoCVItemStateChanged
+        // TODO add your handling code here:
+        int n = cb_LocTheoCV.getSelectedIndex();
+        
+        if(n != 0) {
+            ArrayList<NhanVien> dsNV = nv_dao.getAllNV();
+            ArrayList<NhanVien> dsNV_Loc = new ArrayList<>();
+            if(n == 1) {
+                for(NhanVien nv : dsNV) {
+                    if(nv.getChucVu().equals("Quản Lý")) {
+                        dsNV_Loc.add(nv);
+                    }
+                }
+            } else {
+                for(NhanVien nv : dsNV) {
+                    if(nv.getChucVu().equals("Nhân Viên")) {
+                        dsNV_Loc.add(nv);
+                    }
+                }
+            }
+
+            XoaDuLieuTableNV();
+            DefaultTableModel temp = (DefaultTableModel) tbl_nhanVien.getModel();
+
+            for(NhanVien nv : dsNV_Loc){
+                Object[] obj = {nv.getMaNV(),nv.getTenNV(), nv.getChucVu(), nv.getGioiTinh(),nv.getDiaChi(),nv.getEmail(), nv.getNgaySinh(),nv.getsDT()};
+                temp.addRow(obj);
+            }        
+        } else {
+            XoaDuLieuTableNV();
+            DocDuLieuLenTableNhanVien();
+        }
+        
+    }//GEN-LAST:event_cb_LocTheoCVItemStateChanged
+
+    private void btn_LocTheoNgaySinhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_LocTheoNgaySinhMouseClicked
+        // TODO add your handling code here:
+         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String ngayBatDau = df.format(date_NgaySinh.getDate());
+         Date currentDate = date_NgaySinh.getDate();
+
+        // Chuyển đổi ngày thành lớp Calendar
+        Calendar calendarInstance = Calendar.getInstance();
+        calendarInstance.setTime(currentDate);
+
+        // Thêm một ngày để lấy ngày hôm sau
+        calendarInstance.add(Calendar.DAY_OF_MONTH, 1);
+
+        // Lấy ngày hôm sau
+        Date nextDay = calendarInstance.getTime();
+        String ngayKT = df.format(nextDay);
+        
+        XoaDuLieuTableNV();
+        
+        ArrayList<NhanVien> dsNV = nv_dao.getNV_TheoNgaySinh(ngayBatDau, ngayKT);
+        
+         DefaultTableModel model_dsNV = (DefaultTableModel) tbl_nhanVien.getModel();
+        
+        for(NhanVien nv : dsNV){
+            Object[] obj = {nv.getMaNV(),nv.getTenNV(), nv.getChucVu(), nv.getGioiTinh(),nv.getDiaChi(),nv.getEmail(), nv.getNgaySinh(),nv.getsDT()};
+            model_dsNV.addRow(obj);
+        }        
+    }//GEN-LAST:event_btn_LocTheoNgaySinhMouseClicked
+
+    private void cb_LocGTItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_LocGTItemStateChanged
+        // TODO add your handling code here:
+        int n = cb_LocGT.getSelectedIndex();
+        
+        if(n != 0) {
+            ArrayList<NhanVien> dsNV = nv_dao.getAllNV();
+            ArrayList<NhanVien> dsNV_Loc = new ArrayList<>();
+            if(n == 1) {
+                for(NhanVien nv : dsNV) {
+                    if(nv.getGioiTinh().equals("Nam")) {
+                        dsNV_Loc.add(nv);
+                    }
+                }
+            } else {
+                for(NhanVien nv : dsNV) {
+                    if(nv.getGioiTinh().equals("Nữ")) {
+                        dsNV_Loc.add(nv);
+                    }
+                }
+            }
+
+            XoaDuLieuTableNV();
+            DefaultTableModel temp = (DefaultTableModel) tbl_nhanVien.getModel();
+
+            for(NhanVien nv : dsNV_Loc){
+                Object[] obj = {nv.getMaNV(),nv.getTenNV(), nv.getChucVu(), nv.getGioiTinh(),nv.getDiaChi(),nv.getEmail(), nv.getNgaySinh(),nv.getsDT()};
+                temp.addRow(obj);
+            }        
+        } else {
+            XoaDuLieuTableNV();
+            DocDuLieuLenTableNhanVien();
+        }
+    }//GEN-LAST:event_cb_LocGTItemStateChanged
+    
+    public NhanVien createNV() {
         String maNV = txt_MaNV.getText().toString();
         String tenNV = txt_TenNV.getText().toString();
         String cb_ChucVu = String.valueOf(this.cb_ChucVu.getSelectedItem());
@@ -612,8 +813,12 @@ public NhanVien createNV() {
         String diaChi = txt_DiaChi.getText().toString();
         String email = txt_Email.getText().toString();
         Date ngaySinh = date_NS.getDate();
+//        System.out.println("GUI.Panel_staff.createNV() " + ngaySinh) ;
+        Instant instant = ngaySinh.toInstant();
+        // Chuyển đổi từ Instant sang LocalDateTime
+        LocalDateTime localDateTime = instant.atZone(ZoneId.systemDefault()).toLocalDateTime();
         String sDT = txt_SDT.getText().toString();
-        NhanVien nv = new NhanVien(maNV, tenNV, cb_ChucVu, cbo_GioiTinh, diaChi, email, ngaySinh, sDT);
+        NhanVien nv = new NhanVien(maNV, tenNV, cb_ChucVu, cbo_GioiTinh, diaChi, email, localDateTime, sDT);
         
          return nv;
     }
@@ -621,17 +826,17 @@ public NhanVien createNV() {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel bl_LocGT;
-    private javax.swing.JButton btn_CapNhat;
+    private javax.swing.JButton btn_LocTheoNgaySinh;
+    private javax.swing.JButton btn_Sua;
     private javax.swing.JButton btn_Them;
     private javax.swing.JButton btn_Tim;
-    private javax.swing.JButton btn_Xoa;
     private javax.swing.JButton btn_XoaTrang;
     private javax.swing.JComboBox<String> cb_ChucVu;
     private javax.swing.JComboBox<String> cb_GioiTinh;
     private javax.swing.JComboBox<String> cb_LocGT;
     private javax.swing.JComboBox<String> cb_LocTheoCV;
-    private com.toedter.calendar.JYearChooser date_LocTheoNS;
     private com.toedter.calendar.JDateChooser date_NS;
+    private com.toedter.calendar.JDateChooser date_NgaySinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -652,7 +857,6 @@ public NhanVien createNV() {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -696,6 +900,7 @@ public NhanVien createNV() {
     private javax.swing.JPanel pnl_tabel;
     private javax.swing.JPanel pnl_thongTK;
     private javax.swing.JPanel pnl_top;
+    private javax.swing.JTable table_TK;
     private javax.swing.JTable tbl_nhanVien;
     private javax.swing.JTextField txt_DiaChi;
     private javax.swing.JTextField txt_Email;
