@@ -16,6 +16,6 @@ public interface TaiKhoanService {
     public TaiKhoan getTK_TheoMa(String maTK);
     public TaiKhoan getTK_Theousername(String username); 
     public boolean themTKVaoCSDL(TaiKhoan tk);
-    public boolean CapNhatTK(String maTK);
+    public boolean CapNhatTK(String maTK, String mkMoi);
     public boolean XoaTK(String maTK);
 }

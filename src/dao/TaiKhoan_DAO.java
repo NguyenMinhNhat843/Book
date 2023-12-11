@@ -100,8 +100,32 @@ public class TaiKhoan_DAO implements TaiKhoanService{
     }
 
     @Override
-    public boolean CapNhatTK(String maTK) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean CapNhatTK(String maTK, String mkMoi) {
+        connectDB.getInstance();
+        Connection conn = connectDB.getConnect();
+        PreparedStatement stmt = null;
+        
+        int n = 0;
+        try {
+            String sql  = "update TaiKhoan set password = ? where maTaiKhoan = ?";
+            stmt = conn.prepareStatement(sql);
+                    
+            //
+            stmt.setString(1, mkMoi);
+            stmt.setString(2, maTK);
+            
+            n = stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                stmt.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return n > 0;
     }
 
     @Override

@@ -96,6 +96,7 @@ public class Panel_Main extends javax.swing.JFrame {
         btn_staff = new javax.swing.JButton();
         btn_inventory = new javax.swing.JButton();
         btn_anylist = new javax.swing.JButton();
+        btn_changepassword = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btn_help = new javax.swing.JButton();
         pnl_right = new javax.swing.JPanel();
@@ -236,6 +237,20 @@ public class Panel_Main extends javax.swing.JFrame {
             }
         });
         pnl_menu.add(btn_anylist);
+
+        btn_changepassword.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_changepassword.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/padlock.png"))); // NOI18N
+        btn_changepassword.setText("Đổi mật khẩu");
+        btn_changepassword.setIconTextGap(8);
+        btn_changepassword.setMargin(new java.awt.Insets(10, 14, 10, 14));
+        btn_changepassword.setMaximumSize(new java.awt.Dimension(200, 50));
+        btn_changepassword.setPreferredSize(new java.awt.Dimension(200, 50));
+        btn_changepassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_changepasswordMouseClicked(evt);
+            }
+        });
+        pnl_menu.add(btn_changepassword);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -416,6 +431,14 @@ public class Panel_Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_helpMouseClicked
 
+    private void btn_changepasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_changepasswordMouseClicked
+        // TODO add your handling code here:
+//        System.out.println("GUI.Panel_Main.btn_changepasswordMouseClicked()");
+//        JOptionPane.showMessageDialog(rootPane, "asdasdasd");
+//        new JDialog_DoiMatKhau(_this_tk, null).setVisible(true);
+            new DoiMatKhau(_this_tk, this).setVisible(true);
+    }//GEN-LAST:event_btn_changepasswordMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -462,6 +485,7 @@ public class Panel_Main extends javax.swing.JFrame {
     private javax.swing.JButton btn_anylist;
     private javax.swing.JButton btn_bill;
     private javax.swing.JButton btn_cart;
+    private javax.swing.JButton btn_changepassword;
     private javax.swing.JButton btn_customer;
     private javax.swing.JButton btn_help;
     private javax.swing.JButton btn_home;
