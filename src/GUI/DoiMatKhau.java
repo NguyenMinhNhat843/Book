@@ -65,7 +65,7 @@ public class DoiMatKhau extends javax.swing.JFrame {
         pnl_Center.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Mật khẩu hiện tại:");
+        jLabel2.setText("Mật khẩu mới:");
         pnl_Center.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
