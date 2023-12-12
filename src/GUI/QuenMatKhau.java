@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import dao.TaiKhoan_DAO;
+import entity.TaiKhoan;
 import java.awt.HeadlessException;
 import javax.mail.*;
 import java.util.Properties;
@@ -29,7 +31,7 @@ import javax.swing.JOptionPane;
  * @author Asus
  */
 public class QuenMatKhau extends javax.swing.JFrame {
-
+    private TaiKhoan_DAO tk_dao = new TaiKhoan_DAO();
     /**
      * Creates new form QuenMatKhau
      */
@@ -38,7 +40,7 @@ public class QuenMatKhau extends javax.swing.JFrame {
         
         setLocationRelativeTo(null);
         setDefaultCloseOperation(1);
-        setSize(790, 280);
+        setSize(790, 350);
     }
 
     /**
@@ -54,8 +56,10 @@ public class QuenMatKhau extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         pnl_Center = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txt_Email = new javax.swing.JTextField();
+        txt_username = new javax.swing.JTextField();
         btn_XacNhan = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txt_Email = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,11 +76,10 @@ public class QuenMatKhau extends javax.swing.JFrame {
         getContentPane().add(pnl_top, java.awt.BorderLayout.PAGE_START);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Nhập Email tại đây:");
+        jLabel2.setText("Tên đăng nhập:");
 
-        txt_Email.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_Email.setText("nhatnguyen15062019@gmail.com");
-        txt_Email.setPreferredSize(new java.awt.Dimension(114, 45));
+        txt_username.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_username.setPreferredSize(new java.awt.Dimension(114, 45));
 
         btn_XacNhan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btn_XacNhan.setText("Gửi Mật khẩu mới tới email");
@@ -86,31 +89,48 @@ public class QuenMatKhau extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Nhập Email tại đây:");
+
+        txt_Email.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txt_Email.setText("nhatnguyen15062019@gmail.com");
+        txt_Email.setPreferredSize(new java.awt.Dimension(114, 45));
+
         javax.swing.GroupLayout pnl_CenterLayout = new javax.swing.GroupLayout(pnl_Center);
         pnl_Center.setLayout(pnl_CenterLayout);
         pnl_CenterLayout.setHorizontalGroup(
             pnl_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_CenterLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_XacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(205, 205, 205))
-            .addGroup(pnl_CenterLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addGroup(pnl_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_CenterLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnl_CenterLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_CenterLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btn_XacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(218, 218, 218))
         );
         pnl_CenterLayout.setVerticalGroup(
             pnl_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_CenterLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(11, 11, 11)
                 .addGroup(pnl_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
+                    .addComponent(txt_username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
+                .addGroup(pnl_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
                     .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(btn_XacNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(17, 17, 17))
         );
 
         getContentPane().add(pnl_Center, java.awt.BorderLayout.CENTER);
@@ -224,6 +244,11 @@ public class QuenMatKhau extends javax.swing.JFrame {
 
             Transport.send(message);
             
+            TaiKhoan tk = tk_dao.getTK_Theousername(txt_username.getText());
+            if(tk != null) {
+                tk_dao.CapNhatTK(tk.getMaTK(), "1111");
+            }
+            
             JOptionPane.showMessageDialog(null, "gửi email thành công");
         } catch (MessagingException | HeadlessException e) {
             System.out.println(e);
@@ -278,8 +303,10 @@ public class QuenMatKhau extends javax.swing.JFrame {
     private javax.swing.JButton btn_XacNhan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel pnl_Center;
     private javax.swing.JPanel pnl_top;
     private javax.swing.JTextField txt_Email;
+    private javax.swing.JTextField txt_username;
     // End of variables declaration//GEN-END:variables
 }

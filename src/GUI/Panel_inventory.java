@@ -119,6 +119,28 @@ public class Panel_inventory extends javax.swing.JPanel {
     private void initComponents() {
 
         Tabbed_NhapHang = new javax.swing.JTabbedPane();
+        pnl_DanhSachNCC = new javax.swing.JPanel();
+        pnl_NCC_ThongTin = new javax.swing.JPanel();
+        pnl_ThongTin = new javax.swing.JPanel();
+        lb_DiaChi = new javax.swing.JLabel();
+        txt_Email = new javax.swing.JTextField();
+        lb_Email = new javax.swing.JLabel();
+        lb_SDT = new javax.swing.JLabel();
+        lb_MaNCC = new javax.swing.JLabel();
+        lb_TenNCC = new javax.swing.JLabel();
+        btn_CapNhat = new javax.swing.JButton();
+        btn_ThemMoi = new javax.swing.JButton();
+        btn_XoaTrang = new javax.swing.JButton();
+        txt_SDT = new javax.swing.JTextField();
+        txt_DiaChi = new javax.swing.JTextField();
+        txt_MaNCC = new javax.swing.JTextField();
+        txt_TenNCC = new javax.swing.JTextField();
+        pnl_TimKiem_NCC = new javax.swing.JPanel();
+        txt_TimKiem_NCC = new javax.swing.JTextField();
+        btn_TimKiem_NCC = new javax.swing.JButton();
+        pnl_NCC_Table = new javax.swing.JPanel();
+        scroll_NCC = new javax.swing.JScrollPane();
+        table_NCC = new javax.swing.JTable();
         pnl_TaoPhieuNhap = new javax.swing.JPanel();
         pnl_DanhSachSP = new javax.swing.JPanel();
         scroll_DanhSachSP = new javax.swing.JScrollPane();
@@ -157,30 +179,129 @@ public class Panel_inventory extends javax.swing.JPanel {
         pnl_Center = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        pnl_DanhSachNCC = new javax.swing.JPanel();
-        pnl_NCC_ThongTin = new javax.swing.JPanel();
-        pnl_ThongTin = new javax.swing.JPanel();
-        lb_DiaChi = new javax.swing.JLabel();
-        txt_Email = new javax.swing.JTextField();
-        lb_Email = new javax.swing.JLabel();
-        lb_SDT = new javax.swing.JLabel();
-        lb_MaNCC = new javax.swing.JLabel();
-        lb_TenNCC = new javax.swing.JLabel();
-        btn_CapNhat = new javax.swing.JButton();
-        btn_ThemMoi = new javax.swing.JButton();
-        btn_XoaTrang = new javax.swing.JButton();
-        txt_SDT = new javax.swing.JTextField();
-        txt_DiaChi = new javax.swing.JTextField();
-        txt_MaNCC = new javax.swing.JTextField();
-        txt_TenNCC = new javax.swing.JTextField();
-        pnl_TimKiem_NCC = new javax.swing.JPanel();
-        txt_TimKiem_NCC = new javax.swing.JTextField();
-        btn_TimKiem_NCC = new javax.swing.JButton();
-        pnl_NCC_Table = new javax.swing.JPanel();
-        scroll_NCC = new javax.swing.JScrollPane();
-        table_NCC = new javax.swing.JTable();
 
         setLayout(new java.awt.BorderLayout());
+
+        pnl_DanhSachNCC.setLayout(new java.awt.BorderLayout());
+
+        pnl_NCC_ThongTin.setPreferredSize(new java.awt.Dimension(10, 250));
+        pnl_NCC_ThongTin.setLayout(new java.awt.BorderLayout());
+
+        pnl_ThongTin.setMinimumSize(new java.awt.Dimension(10, 150));
+        pnl_ThongTin.setPreferredSize(new java.awt.Dimension(10, 150));
+        pnl_ThongTin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lb_DiaChi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_DiaChi.setText("Địa chỉ:");
+        pnl_ThongTin.add(lb_DiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, -1, -1));
+
+        txt_Email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        pnl_ThongTin.add(txt_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 310, 40));
+
+        lb_Email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_Email.setText("Email:");
+        pnl_ThongTin.add(lb_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+
+        lb_SDT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_SDT.setText("SĐT:");
+        pnl_ThongTin.add(lb_SDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, -1, -1));
+
+        lb_MaNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_MaNCC.setText("Mã NCC:");
+        pnl_ThongTin.add(lb_MaNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+
+        lb_TenNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lb_TenNCC.setText("Tên NCC:");
+        pnl_ThongTin.add(lb_TenNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
+
+        btn_CapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_CapNhat.setText("Cập nhật");
+        btn_CapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_CapNhatMouseClicked(evt);
+            }
+        });
+        pnl_ThongTin.add(btn_CapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 130, 130, -1));
+
+        btn_ThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_ThemMoi.setText("Thêm mới");
+        btn_ThemMoi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_ThemMoiMouseClicked(evt);
+            }
+        });
+        pnl_ThongTin.add(btn_ThemMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, -1));
+
+        btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btn_XoaTrang.setText("Xóa trắng");
+        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_XoaTrangMouseClicked(evt);
+            }
+        });
+        pnl_ThongTin.add(btn_XoaTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 140, -1));
+
+        txt_SDT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        pnl_ThongTin.add(txt_SDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 10, 310, 40));
+
+        txt_DiaChi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        pnl_ThongTin.add(txt_DiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 780, 40));
+
+        txt_MaNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        txt_MaNCC.setEnabled(false);
+        txt_MaNCC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_MaNCCActionPerformed(evt);
+            }
+        });
+        pnl_ThongTin.add(txt_MaNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 310, 40));
+
+        txt_TenNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        pnl_ThongTin.add(txt_TenNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 330, 40));
+
+        pnl_NCC_ThongTin.add(pnl_ThongTin, java.awt.BorderLayout.CENTER);
+
+        pnl_TimKiem_NCC.setPreferredSize(new java.awt.Dimension(150, 70));
+        pnl_TimKiem_NCC.setLayout(new java.awt.BorderLayout());
+
+        txt_TimKiem_NCC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        pnl_TimKiem_NCC.add(txt_TimKiem_NCC, java.awt.BorderLayout.CENTER);
+
+        btn_TimKiem_NCC.setText("Tìm Kiếm");
+        btn_TimKiem_NCC.setPreferredSize(new java.awt.Dimension(150, 150));
+        btn_TimKiem_NCC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_TimKiem_NCCMouseClicked(evt);
+            }
+        });
+        pnl_TimKiem_NCC.add(btn_TimKiem_NCC, java.awt.BorderLayout.EAST);
+
+        pnl_NCC_ThongTin.add(pnl_TimKiem_NCC, java.awt.BorderLayout.SOUTH);
+
+        pnl_DanhSachNCC.add(pnl_NCC_ThongTin, java.awt.BorderLayout.NORTH);
+
+        pnl_NCC_Table.setLayout(new java.awt.BorderLayout());
+
+        table_NCC.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Mã NCC", "Tên NCC", "Địa chỉ", "Email", "SĐT"
+            }
+        ));
+        table_NCC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_NCCMouseClicked(evt);
+            }
+        });
+        scroll_NCC.setViewportView(table_NCC);
+
+        pnl_NCC_Table.add(scroll_NCC, java.awt.BorderLayout.CENTER);
+
+        pnl_DanhSachNCC.add(pnl_NCC_Table, java.awt.BorderLayout.CENTER);
+
+        Tabbed_NhapHang.addTab("Danh sách NCC", pnl_DanhSachNCC);
 
         pnl_TaoPhieuNhap.setLayout(new java.awt.BorderLayout());
 
@@ -350,129 +471,7 @@ public class Panel_inventory extends javax.swing.JPanel {
 
         Tabbed_NhapHang.addTab("Hóa đơn nhập hàng", pnl_HoaDonNhapHang);
 
-        pnl_DanhSachNCC.setLayout(new java.awt.BorderLayout());
-
-        pnl_NCC_ThongTin.setPreferredSize(new java.awt.Dimension(10, 250));
-        pnl_NCC_ThongTin.setLayout(new java.awt.BorderLayout());
-
-        pnl_ThongTin.setMinimumSize(new java.awt.Dimension(10, 150));
-        pnl_ThongTin.setPreferredSize(new java.awt.Dimension(10, 150));
-        pnl_ThongTin.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lb_DiaChi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lb_DiaChi.setText("Địa chỉ:");
-        pnl_ThongTin.add(lb_DiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, -1, -1));
-
-        txt_Email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        pnl_ThongTin.add(txt_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 310, 40));
-
-        lb_Email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lb_Email.setText("Email:");
-        pnl_ThongTin.add(lb_Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-
-        lb_SDT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lb_SDT.setText("SĐT:");
-        pnl_ThongTin.add(lb_SDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, -1, -1));
-
-        lb_MaNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lb_MaNCC.setText("Mã NCC:");
-        pnl_ThongTin.add(lb_MaNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-
-        lb_TenNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lb_TenNCC.setText("Tên NCC:");
-        pnl_ThongTin.add(lb_TenNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, -1, -1));
-
-        btn_CapNhat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_CapNhat.setText("Cập nhật");
-        btn_CapNhat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_CapNhatMouseClicked(evt);
-            }
-        });
-        pnl_ThongTin.add(btn_CapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 130, 130, -1));
-
-        btn_ThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_ThemMoi.setText("Thêm mới");
-        btn_ThemMoi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_ThemMoiMouseClicked(evt);
-            }
-        });
-        pnl_ThongTin.add(btn_ThemMoi, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, -1));
-
-        btn_XoaTrang.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btn_XoaTrang.setText("Xóa trắng");
-        btn_XoaTrang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_XoaTrangMouseClicked(evt);
-            }
-        });
-        pnl_ThongTin.add(btn_XoaTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 140, -1));
-
-        txt_SDT.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        pnl_ThongTin.add(txt_SDT, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 10, 310, 40));
-
-        txt_DiaChi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        pnl_ThongTin.add(txt_DiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 780, 40));
-
-        txt_MaNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_MaNCC.setEnabled(false);
-        txt_MaNCC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_MaNCCActionPerformed(evt);
-            }
-        });
-        pnl_ThongTin.add(txt_MaNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 310, 40));
-
-        txt_TenNCC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        pnl_ThongTin.add(txt_TenNCC, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 330, 40));
-
-        pnl_NCC_ThongTin.add(pnl_ThongTin, java.awt.BorderLayout.CENTER);
-
-        pnl_TimKiem_NCC.setPreferredSize(new java.awt.Dimension(150, 70));
-        pnl_TimKiem_NCC.setLayout(new java.awt.BorderLayout());
-
-        txt_TimKiem_NCC.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txt_TimKiem_NCC.setText("Nhập SĐT NCC...");
-        pnl_TimKiem_NCC.add(txt_TimKiem_NCC, java.awt.BorderLayout.CENTER);
-
-        btn_TimKiem_NCC.setText("Tìm Kiếm");
-        btn_TimKiem_NCC.setPreferredSize(new java.awt.Dimension(150, 150));
-        btn_TimKiem_NCC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_TimKiem_NCCMouseClicked(evt);
-            }
-        });
-        pnl_TimKiem_NCC.add(btn_TimKiem_NCC, java.awt.BorderLayout.EAST);
-
-        pnl_NCC_ThongTin.add(pnl_TimKiem_NCC, java.awt.BorderLayout.SOUTH);
-
-        pnl_DanhSachNCC.add(pnl_NCC_ThongTin, java.awt.BorderLayout.NORTH);
-
-        pnl_NCC_Table.setLayout(new java.awt.BorderLayout());
-
-        table_NCC.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã NCC", "Tên NCC", "Địa chỉ", "Email", "SĐT"
-            }
-        ));
-        table_NCC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table_NCCMouseClicked(evt);
-            }
-        });
-        scroll_NCC.setViewportView(table_NCC);
-
-        pnl_NCC_Table.add(scroll_NCC, java.awt.BorderLayout.CENTER);
-
-        pnl_DanhSachNCC.add(pnl_NCC_Table, java.awt.BorderLayout.CENTER);
-
-        Tabbed_NhapHang.addTab("Danh sách NCC", pnl_DanhSachNCC);
-
-        add(Tabbed_NhapHang, java.awt.BorderLayout.CENTER);
+        add(Tabbed_NhapHang, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     private void table_NCCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_NCCMouseClicked

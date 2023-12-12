@@ -592,7 +592,7 @@ public class Panel_cart extends javax.swing.JPanel {
 
     private void txt_SudungTichDiemKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SudungTichDiemKeyReleased
         // TODO add your handling code here:
-        double tienNhan = Double.parseDouble(txt_TongThue.getText());
+        double tienNhan = Double.parseDouble(txt_TienNhan.getText());
         double tienThanhToan = Double.parseDouble(txt_ThanhToan.getText());
         
         double suDungTichDiem = 0;
@@ -605,19 +605,22 @@ public class Panel_cart extends javax.swing.JPanel {
         
         double tienThoi = tienNhan + suDungTichDiem - tienThanhToan;
         
-        txt_TongKM.setText(tienThoi + "");
+        txt_TienThoi.setText(tienThoi + "");
     }//GEN-LAST:event_txt_SudungTichDiemKeyReleased
 
     private void btn_ThanhToanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ThanhToanMouseClicked
         // TODO add your handling code here:
         String maHD = txt_MaHD.getText();
         String maNV = _this_maNV;
+//        String tenNV = 
         String maKH = "";
+        String tenKH = "Nguyễn Thanh Tùng";
         if(!txt_MaKH.getText().equals("")) {
             maKH = txt_MaKH.getText();
+            tenKH = txt_TenKH.getText();
         }
         LocalDateTime ngayTao = LocalDateTime.now();
-        double tienKhachDua = txt_TongThue.getText().equals("") ? 0 : Double.parseDouble(txt_TongThue.getText());
+        double tienKhachDua = txt_TienNhan.getText().equals("") ? 0 : Double.parseDouble(txt_TienNhan.getText());
         
         double suDungTichDiem = !txt_SudungTichDiem.getText().equals("") 
                 ? Double.parseDouble(txt_SudungTichDiem.getText())
@@ -626,10 +629,10 @@ public class Panel_cart extends javax.swing.JPanel {
 //      Tao Hoa Don
         HoaDon hd = null;
         if(maKH.equals("")) {
-            hd = new HoaDon(maHD, new NhanVien(maNV),null, ngayTao, tienKhachDua, 
+            hd = new HoaDon(maHD, new NhanVien(maNV, "Nguyễn Minh Nhật"),null, ngayTao, tienKhachDua, 
                     Double.parseDouble(txt_ThanhToan.getText()), suDungTichDiem, tongKM, tongThue, tienVon);
         } else {
-            hd = new HoaDon(maHD, new NhanVien(maNV),new KhachHang(maKH), ngayTao, 
+            hd = new HoaDon(maHD, new NhanVien(maNV, "Nguyễn Minh Nhật"),new KhachHang(maKH, tenKH), ngayTao, 
                     tienKhachDua, Double.parseDouble(txt_ThanhToan.getText()), suDungTichDiem, tongKM, tongThue, tienVon);
         }
         

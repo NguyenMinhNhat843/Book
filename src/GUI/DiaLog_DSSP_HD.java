@@ -50,13 +50,13 @@ public class DiaLog_DSSP_HD extends javax.swing.JFrame {
     }
     
     public void DocThongTinLenHD() {
-        lbl_TenKH.setText(hd.getKh().getTenKH());
+        lbl_TenKH.setText( hd.getKh() == null ? " " : hd.getKh().getTenKH());
         lbl_TenNV.setText(hd.getNv().getTenNV());
         lbl_MaHD.setText(hd.getMaHD());
-        lbl_NgayTao.setText(String.valueOf(hd.getNgayTao()));
+        lbl_NgayTao.setText(String.valueOf(hd.getNgayTao()).substring(0, 11));
         lbl_SDTD1.setText(hd.getSuDungTichDiem() + "");
         lbl_TienNhan1.setText(hd.getTienKhachDua() + "");
-        lbl_TienThoi1.setText(hd.getTongTien() - hd.getTienKhachDua() + "");
+        lbl_TienThoi1.setText(- hd.getTongTien() + hd.getTienKhachDua() + "");
         lbl_TongThue1.setText(hd.getTongThue() + "");
         lbl_TongKM1.setText(hd.getTongKM() + "");
     }

@@ -84,9 +84,9 @@ public class HoaDon_DAO implements HoaDonService{
         
         try {
             String sql = "select * from HoaDon hd \n" +
-                        "join NhanVien nv\n" +
+                        "left join NhanVien nv\n" +
                         "on hd.maNhanVien = nv.maNV\n" +
-                        "join KhachHang kh\n" +
+                        "left join KhachHang kh\n" +
                         "on kh.maKH = hd.maKhachHang where maHD = ?";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, maHD);
